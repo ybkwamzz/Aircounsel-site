@@ -356,7 +356,35 @@
       width: 100%;
       text-align: center; /* FIX: center all hero text */
     }
-    .hero-content .label { margin-bottom: 2.5rem; display: block; }
+    .hero-eyebrow {
+      font-family: var(--ff-body);
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(184,154,90,0.72);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      max-width: 720px;
+      margin: 0 auto 3rem;
+    }
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 52px;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(184,154,90,0.28),
+        transparent
+      );
+      transform: translateY(-1px);
+    }
+    .hero-eyebrow span { transform: translateY(1px); }
     .hero-content h1 {
       color: var(--white);
       margin-bottom: 1.8rem;
@@ -1073,7 +1101,9 @@
 
     <div class="hero-content fade-up">
       <div class="container">
-        <p class="label">UK Immigration · AI Intake Intelligence</p>
+        <span class="hero-eyebrow">
+          <span>UK Immigration · AI Intake Intelligence</span>
+        </span>
         <h1 class="display" id="hero-headline">
           You don't need<br />more enquiries.<br />
           <em>You need fewer,<br />better ones.</em>
