@@ -663,6 +663,53 @@
       .toggle-row { flex-direction: column; }
       .form-wrap { padding: 2.5rem 1rem 4rem; }
     }
+
+    /* ─── LANGUAGE TOGGLE ── */
+    .lang-toggle { display:flex; align-items:center; gap:0.4rem; }
+    .lang-btn {
+      font-family: var(--ff-m); font-size:0.62rem; font-weight:400;
+      letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted);
+      background:transparent; border:1px solid transparent;
+      padding:0.3rem 0.6rem; cursor:pointer; transition:all 0.2s;
+    }
+    .lang-btn:hover { color:var(--text-mid); }
+    .lang-btn.active { color:var(--gold); border-color:var(--border); background:var(--gold-dim); }
+
+    /* ─── AUDIO ── */
+    .audio-bar {
+      display:flex; align-items:center; justify-content:center;
+      gap:0.9rem; margin-top:1.5rem; margin-bottom:-0.5rem;
+    }
+    .mute-btn {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      background:transparent; border:1px solid var(--border-soft);
+      color:var(--text-muted); font-family:var(--ff-m); font-size:0.62rem;
+      letter-spacing:0.12em; text-transform:uppercase;
+      padding:0.4rem 0.9rem; cursor:pointer; transition:all 0.2s;
+    }
+    .mute-btn:hover { border-color:var(--border); color:var(--text-mid); }
+    .mute-btn svg { width:12px; height:12px; stroke:currentColor; fill:none; stroke-width:1.5; }
+    .audio-playing {
+      display:none; align-items:center; gap:0.4rem;
+      font-family:var(--ff-m); font-size:0.6rem;
+      color:rgba(184,154,90,0.5); letter-spacing:0.12em; text-transform:uppercase;
+    }
+    .audio-playing.visible { display:flex; }
+    .audio-wave { display:flex; gap:2px; align-items:flex-end; height:10px; }
+    .audio-wave span {
+      display:block; width:2px; background:var(--gold); opacity:0.5;
+      border-radius:1px; animation:wave 1s ease-in-out infinite;
+    }
+    .audio-wave span:nth-child(1){height:4px;animation-delay:0s}
+    .audio-wave span:nth-child(2){height:8px;animation-delay:.15s}
+    .audio-wave span:nth-child(3){height:6px;animation-delay:.3s}
+    .audio-wave span:nth-child(4){height:10px;animation-delay:.1s}
+    .audio-wave span:nth-child(5){height:5px;animation-delay:.25s}
+    @keyframes wave {
+      0%,100%{transform:scaleY(.5);opacity:.3}
+      50%{transform:scaleY(1);opacity:.7}
+    }
+    @media(max-width:640px){ .lang-toggle{display:none} }
   </style>
 </head>
 <body>
@@ -674,8 +721,16 @@
   <!-- ── HEADER ── -->
   <header class="site-header" role="banner">
     <a href="/" class="logo">Air<span>Counsel</span></a>
-    <a href="index.html" class="logo">Air<span>Counsel</span></a>
-    <span class="header-note">Confidential Intake · GDPR Compliant</span>
+    <div style="display:flex;align-items:center;gap:1.5rem;">
+      <div class="lang-toggle" role="group" aria-label="Select language">
+        <button class="lang-btn active" onclick="setLang(this,'en')" aria-pressed="true">EN</button>
+        <button class="lang-btn" onclick="setLang(this,'fr')" aria-pressed="false">FR</button>
+        <button class="lang-btn" onclick="setLang(this,'ar')" aria-pressed="false">AR</button>
+        <button class="lang-btn" onclick="setLang(this,'ur')" aria-pressed="false">UR</button>
+        <button class="lang-btn" onclick="setLang(this,'zh')" aria-pressed="false">ZH</button>
+      </div>
+      <span class="header-note">Confidential Intake · GDPR Compliant</span>
+    </div>
   </header>
 
   <!-- ── FORM AREA ── -->
@@ -1147,12 +1202,37 @@
           <ol class="next-steps-list" id="next-steps-list"></ol>
         </div>
 
+        <div class="audio-bar" id="audio-bar">
+          <div class="audio-playing" id="audio-playing">
+            <div class="audio-wave" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            Air Counsel
+          </div>
+          <button class="mute-btn" id="mute-btn" onclick="toggleMute()" aria-label="Toggle audio">
+            <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07" id="speaker-waves"/></svg>
+            <span id="mute-label">Mute audio</span>
+          </button>
+        </div>
+
         <div class="result-footer">
-          <p>Your enquiry reference has been sent to <span id="result-email">your email address</span>.</p>
-          <a href="/" class="btn btn-return">← Return to Air Counsel</a>
-          <a href="index.html" class="btn btn-return">← Return to Air Counsel</a>
-          <a href="https://calendly.com/kwamehjuma/30min" class="btn btn-next" target="_blank" rel="noopener" style="margin-left:0.75rem;">Book Walkthrough</a>
-          <a href="skilled-worker.html" class="btn btn-return" style="margin-left:0.75rem;">Read Skilled Worker guide</a>
+          <p id="result-followup">A solicitor will be in touch shortly.</p>
+          <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.3rem;">
+            A copy of your submission has been sent to <span id="result-email">your email address</span>.
+          </p>
+          <div style="display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap;margin-top:1.5rem;">
+            <a href="/" class="btn btn-return">← Return to Air Counsel</a>
+            <a href="https://calendly.com/kwamehjuma/30min"
+               class="btn btn-next"
+               id="cta-book"
+               target="_blank"
+               rel="noopener"
+               style="display:none;">Book Walkthrough</a>
+            <a href="mailto:hello@aircounsel.uk"
+               class="btn btn-return"
+               id="cta-contact"
+               style="display:none;">Speak to our team</a>
+          </div>
         </div>
       </div>
 
@@ -1167,7 +1247,6 @@
   </main>
 
   <footer class="site-footer" role="contentinfo">
-    <p>© 2025 AirCounsel.uk · <a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms</a> · <a href="https://calendly.com/kwamehjuma/30min" target="_blank" rel="noopener">Book Walkthrough</a></p>
     <p>© 2025 AirCounsel.uk · <a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms</a></p>
     <p>GDPR Compliant · SRA Guidance Aligned · No legal advice is provided by this form</p>
   </footer>
@@ -1176,8 +1255,96 @@
 
 <script>
   // ── CONFIGURATION ──────────────────────────────────────────────
-  // Replace with your live webhook URL once deployed via Railway/ngrok
   const WEBHOOK_URL = 'https://YOUR_BACKEND_URL/webhook/law-firm-intake';
+
+  // Audio assets — pre-rendered MP3 per language (presentation layer only)
+  // Vetted script: "Good day. Your enquiry has been received by Air Counsel.
+  //                 A solicitor will be in touch with you shortly. Thank you."
+  const AUDIO_ASSETS = {
+    en: '/audio/confirmation-en.mp3',
+    fr: '/audio/confirmation-fr.mp3',
+    ar: '/audio/confirmation-ar.mp3',
+    ur: '/audio/confirmation-ur.mp3',
+    zh: '/audio/confirmation-zh.mp3'
+  };
+
+  // Presentation language — UI + audio only. NEVER touches scoring pipeline.
+  let presentationLang = 'en';
+  let activeAudio = null;
+  let isMuted = localStorage.getItem('ac_audio_muted') === 'true';
+
+  // ── LANGUAGE TOGGLE (PRESENTATION LAYER ONLY) ──────────────────
+  // Changes UI display language only. All form values are structured data
+  // (numbers, selects, radios) — no language dependency on the pipeline.
+  function setLang(btn, lang) {
+    presentationLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-pressed', 'true');
+    // Phase 2: full string localisation added when pilot clients confirm demand
+  }
+
+  // ── AUDIO ENGINE ───────────────────────────────────────────────
+  function playConfirmationAudio() {
+    if (isMuted) return;
+    const src = AUDIO_ASSETS[presentationLang] || AUDIO_ASSETS.en;
+    const indicator = document.getElementById('audio-playing');
+
+    try {
+      activeAudio = new Audio(src);
+
+      activeAudio.addEventListener('play', () => {
+        indicator && indicator.classList.add('visible');
+      });
+      activeAudio.addEventListener('ended', () => {
+        indicator && indicator.classList.remove('visible');
+      });
+      activeAudio.addEventListener('error', () => {
+        indicator && indicator.classList.remove('visible');
+        console.info('AC Audio: asset not yet uploaded at', src);
+      });
+
+      // 600ms delay — confirmation screen renders first
+      setTimeout(() => {
+        activeAudio.play().catch(() => {
+          // Autoplay blocked by browser — show tap-to-play prompt
+          const bar = document.getElementById('audio-bar');
+          if (bar) {
+            const prompt = document.createElement('button');
+            prompt.className = 'mute-btn';
+            prompt.textContent = '▶ Hear Air Counsel';
+            prompt.onclick = () => { activeAudio.play(); prompt.remove(); };
+            bar.prepend(prompt);
+          }
+        });
+      }, 600);
+
+    } catch(e) {
+      console.info('AC Audio: skipped', e);
+    }
+  }
+
+  function toggleMute() {
+    isMuted = !isMuted;
+    localStorage.setItem('ac_audio_muted', isMuted);
+    const label = document.getElementById('mute-label');
+    const waves = document.getElementById('speaker-waves');
+    const indicator = document.getElementById('audio-playing');
+
+    if (isMuted) {
+      if (activeAudio) { activeAudio.pause(); activeAudio.currentTime = 0; }
+      indicator && indicator.classList.remove('visible');
+      if (label) label.textContent = 'Unmute audio';
+      if (waves) waves.style.opacity = '0.2';
+    } else {
+      if (label) label.textContent = 'Mute audio';
+      if (waves) waves.style.opacity = '1';
+      playConfirmationAudio();
+    }
+  }
 
   // ── STATE ──────────────────────────────────────────────────────
   let currentGate = 0;
@@ -1358,7 +1525,15 @@
       consultation_preference:     val('consultation_preference'),
       visa_expiry_days:            numVal('visa_expiry_days'),
       days_until_deadline:         numVal('days_until_deadline'),
-      message:                     val('message') || val('message-other')
+      message:                     val('message') || val('message-other'),
+
+      // Audit trail metadata — presentation layer flags only
+      presentation_language:       presentationLang,
+      intake_lang_tag:             presentationLang,
+      voice_played:                !isMuted,
+      voice_asset_id:              AUDIO_ASSETS[presentationLang] || AUDIO_ASSETS.en,
+      translation_used:            false,
+      canonical_text_source:       'direct'
     };
   }
 
@@ -1415,10 +1590,28 @@
     document.getElementById('result-desc').textContent = result.desc;
     document.getElementById('result-email').textContent = email || 'your email address';
 
+    // Tier-aware footer copy
+    const followupCopy = {
+      INSTRUCTION_READY: 'A solicitor will be in touch within 1 working day.',
+      NEEDS_DEVELOPMENT:  'Your information is under review. A solicitor will be in touch within 2 working days.',
+      NOT_VIABLE:         'A member of our team will contact you to explain the position and outline any alternatives.'
+    };
+    const followupEl = document.getElementById('result-followup');
+    if (followupEl) followupEl.textContent = followupCopy[tier] || followupCopy.NEEDS_DEVELOPMENT;
+
+    // Tier-aware CTA — NOT_VIABLE never sees the Calendly booking link
+    const ctaBook    = document.getElementById('cta-book');
+    const ctaContact = document.getElementById('cta-contact');
+    if (ctaBook)    ctaBook.style.display    = (tier !== 'NOT_VIABLE') ? 'inline-flex' : 'none';
+    if (ctaContact) ctaContact.style.display = (tier === 'NOT_VIABLE')  ? 'inline-flex' : 'none';
+
     const stepList = document.getElementById('next-steps-list');
     stepList.innerHTML = result.steps.map((s, i) =>
       `<li><span class="step-num">0${i+1}</span><span>${s}</span></li>`
     ).join('');
+
+    // Trigger confirmation audio (presentation layer — pipeline untouched)
+    playConfirmationAudio();
   }
 
   // ── SUBMIT ─────────────────────────────────────────────────────
