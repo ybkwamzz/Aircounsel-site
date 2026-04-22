@@ -3,19 +3,14 @@
   "short_name": "AirCounsel",
   "icons": [
     {
-      "src": "/favicon-192.png",
-      "sizes": "192x192",
+      "src": "/favicon-180.png",
+      "sizes": "180x180",
       "type": "image/png"
     },
     {
       "src": "/favicon-512.png",
       "sizes": "512x512",
       "type": "image/png"
-    },
-    {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
     }
   ],
   "theme_color": "#0D0D0D",
