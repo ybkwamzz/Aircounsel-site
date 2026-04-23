@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AirCounsel — Intake Intelligence</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&display=swap');
+
+  :root {
+    --bg:       #07080d;
+    --panel:    #0d0f18;
+    --border:   #1a1f35;
+    --accent:   #00e5ff;
+    --warn:     #ff6b35;
+    --ok:       #39ff14;
+    --dim:      #3a4060;
+    --text:     #c8d0f0;
+    --mono:     'Share Tech Mono', monospace;
+    --sans:     'Syne', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    overflow-x: hidden;
+  }
+
+  /* ── SCANLINE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,229,255,0.018) 2px,
+      rgba(0,229,255,0.018) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── LAYOUT ── */
+  .shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 32px 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo-mark {
+    width: 36px; height: 36px;
+    border: 2px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    animation: pulse-border 3s ease-in-out infinite;
+  }
+  .logo-mark::before {
+    content: '';
+    width: 10px; height: 10px;
+    background: var(--accent);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  }
+
+  @keyframes pulse-border {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,229,255,0.4); }
+    50%       { box-shadow: 0 0 0 6px rgba(0,229,255,0); }
+  }
+
+  .logo-text {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.15em;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .logo-sub {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--dim);
+    margin-left: auto;
+    text-transform: uppercase;
+  }
+
+  /* ── VOICE STATUS BAR ── */
+  .voice-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-top: none;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--dim);
+    transition: all 0.3s;
+  }
+
+  .voice-bar.active {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .voice-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--dim);
+    transition: background 0.3s;
+    flex-shrink: 0;
+  }
+
+  .voice-bar.active .voice-dot {
+    background: var(--accent);
+    animation: blink 0.6s ease-in-out infinite alternate;
+  }
+
+  @keyframes blink { from { opacity: 1; } to { opacity: 0.2; } }
+
+  .voice-text { flex: 1; }
+
+  .voice-waveform {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .voice-bar.active .voice-waveform { opacity: 1; }
+
+  .voice-waveform span {
+    display: block;
+    width: 2px;
+    background: var(--accent);
+    border-radius: 1px;
+    animation: wave 0.8s ease-in-out infinite alternate;
+  }
+  .voice-waveform span:nth-child(1) { height: 6px;  animation-delay: 0s; }
+  .voice-waveform span:nth-child(2) { height: 12px; animation-delay: 0.1s; }
+  .voice-waveform span:nth-child(3) { height: 8px;  animation-delay: 0.2s; }
+  .voice-waveform span:nth-child(4) { height: 14px; animation-delay: 0.05s; }
+  .voice-waveform span:nth-child(5) { height: 6px;  animation-delay: 0.15s; }
+
+  @keyframes wave {
+    from { transform: scaleY(0.4); }
+    to   { transform: scaleY(1.6); }
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    padding: 36px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  /* ── INTAKE FORM ── */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 28px;
+    position: relative;
+  }
+
+  .panel::before {
+    content: attr(data-label);
+    position: absolute;
+    top: -9px; left: 20px;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    background: var(--panel);
+    padding: 0 8px;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  @media (max-width: 540px) {
+    .form-grid { grid-template-columns: 1fr; }
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .field label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  .field input,
+  .field select {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .field input:focus,
+  .field select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(0,229,255,0.15);
+  }
+
+  .field select option {
+    background: var(--bg);
+  }
+
+  .field-full { grid-column: 1 / -1; }
+
+  /* Toggle row */
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .toggle {
+    width: 38px; height: 20px;
+    background: var(--border);
+    border-radius: 10px;
+    position: relative;
+    transition: background 0.25s;
+    flex-shrink: 0;
+  }
+
+  .toggle::after {
+    content: '';
+    position: absolute;
+    left: 3px; top: 3px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--dim);
+    transition: transform 0.25s, background 0.25s;
+  }
+
+  input[type="checkbox"]:checked + .toggle-row .toggle,
+  .toggle.on {
+    background: rgba(0,229,255,0.2);
+  }
+
+  .toggle.on::after {
+    transform: translateX(18px);
+    background: var(--accent);
+  }
+
+  .toggle-label {
+    font-size: 12px;
+    color: var(--text);
+  }
+
+  /* Risk select — coloured */
+  select.risk-select { color: var(--text); }
+  select.risk-select[data-val="low"]    { border-color: var(--ok);   color: var(--ok); }
+  select.risk-select[data-val="medium"] { border-color: var(--warn); color: var(--warn); }
+  select.risk-select[data-val="high"]   { border-color: #ff2040;     color: #ff2040; }
+
+  /* ── RUN BUTTON ── */
+  .run-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+
+  .run-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    z-index: 0;
+  }
+
+  .run-btn:hover::before { transform: translateX(0); }
+  .run-btn:hover { color: var(--bg); box-shadow: 0 0 24px rgba(0,229,255,0.3); }
+
+  .run-btn span, .run-btn svg { position: relative; z-index: 1; }
+
+  .run-icon {
+    width: 16px; height: 16px;
+    border: 1.5px solid currentColor;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .run-icon::after {
+    content: '';
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 4px 0 4px 7px;
+    border-color: transparent transparent transparent currentColor;
+    margin-left: 1px;
+  }
+
+  /* ── OUTPUT LOG ── */
+  .log-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 0;
+    overflow: hidden;
+    transition: border-color 0.4s;
+  }
+
+  .log-panel.active { border-color: rgba(0,229,255,0.35); }
+
+  .log-header {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--dim);
+    transition: background 0.3s;
+  }
+
+  .log-panel.active .status-dot { background: var(--ok); }
+
+  .log-body {
+    padding: 20px;
+    min-height: 180px;
+    font-size: 12px;
+    line-height: 1.9;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .log-line {
+    display: flex;
+    gap: 14px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+
+  .log-line.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .log-ts {
+    color: var(--dim);
+    flex-shrink: 0;
+    font-size: 11px;
+  }
+
+  .log-msg { color: var(--text); }
+  .log-msg.accent  { color: var(--accent); }
+  .log-msg.ok      { color: var(--ok); }
+  .log-msg.warn    { color: var(--warn); }
+  .log-msg.danger  { color: #ff2040; }
+  .log-msg.muted   { color: var(--dim); }
+
+  /* ── OUTCOME CARD ── */
+  .outcome-card {
+    display: none;
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    margin-top: 4px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s, transform 0.5s;
+    background: var(--panel);
+  }
+
+  .outcome-card.show {
+    display: block;
+  }
+
+  .outcome-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .outcome-card::before {
+    content: 'OUTCOME';
+    position: absolute;
+    top: -9px; left: 20px;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    background: var(--panel);
+    padding: 0 8px;
+    color: var(--dim);
+  }
+
+  .outcome-route {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .outcome-sub {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.12em;
+  }
+
+  .outcome-badges {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    padding: 5px 12px;
+    border: 1px solid;
+    text-transform: uppercase;
+  }
+
+  .badge.ok     { border-color: var(--ok);   color: var(--ok); }
+  .badge.warn   { border-color: var(--warn); color: var(--warn); }
+  .badge.danger { border-color: #ff2040;     color: #ff2040; }
+  .badge.info   { border-color: var(--accent); color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  /* ── CURSOR BLINK ── */
+  .cursor {
+    display: inline-block;
+    width: 8px; height: 14px;
+    background: var(--accent);
+    vertical-align: text-bottom;
+    animation: blink 0.8s step-start infinite;
+    margin-left: 3px;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-track {
+    height: 2px;
+    background: var(--border);
+    margin: 0 20px 20px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.4s ease;
+    box-shadow: 0 0 8px var(--accent);
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-mark"></div>
+    <span class="logo-text">AirCounsel</span>
+    <span class="logo-sub">Intake Intelligence System // v2.4</span>
+  </header>
+
+  <!-- VOICE STATUS BAR -->
+  <div class="voice-bar" id="voiceBar">
+    <div class="voice-dot" id="voiceDot"></div>
+    <span class="voice-text" id="voiceText">VOICE MODULE STANDBY</span>
+    <div class="voice-waveform" id="voiceWave">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- INPUT PANEL -->
+    <div class="panel" data-label="CLIENT PROFILE INPUT">
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Nationality</label>
+          <input type="text" id="f-nationality" placeholder="e.g. Nigeria, Ghana, India" />
+        </div>
+
+        <div class="field">
+          <label>Current Visa Status</label>
+          <select id="f-visaType">
+            <option value="">— Select —</option>
+            <option value="Skilled Worker">Skilled Worker</option>
+            <option value="Student">Student</option>
+            <option value="Visitor">Visitor</option>
+            <option value="Spousal">Spousal / Family</option>
+            <option value="Asylum">Asylum</option>
+            <option value="None">No Current Status</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Risk Level</label>
+          <select id="f-risk" class="risk-select" data-val="" onchange="updateRiskColour(this)">
+            <option value="">— Assess —</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Documentation</label>
+          <select id="f-documents">
+            <option value="complete">Complete</option>
+            <option value="partial">Partial</option>
+            <option value="missing">Missing</option>
+          </select>
+        </div>
+
+        <div class="field field-full">
+          <label>Employment Offer in UK</label>
+          <div class="toggle-row" onclick="toggleJobOffer(this)">
+            <div class="toggle" id="jobToggle"></div>
+            <span class="toggle-label" id="jobLabel">No — client has no job offer</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RUN BUTTON -->
+    <button class="run-btn" onclick="runIntake()" id="runBtn">
+      <div class="run-icon"></div>
+      <span>Initiate Intake Assessment</span>
+    </button>
+
+    <!-- OUTPUT LOG -->
+    <div class="log-panel" id="logPanel">
+      <div class="log-header">
+        <div class="status-dot"></div>
+        <span>System Output Log</span>
+        <span id="logTimer" style="margin-left:auto;"></span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="log-body" id="logBody">
+        <div class="log-line visible">
+          <span class="log-ts">00:00:00</span>
+          <span class="log-msg muted">Awaiting client data input...<span class="cursor"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- OUTCOME CARD -->
+    <div class="outcome-card" id="outcomeCard">
+      <div class="outcome-route" id="outcomeRoute">—</div>
+      <div class="outcome-sub" id="outcomeSub">—</div>
+      <div class="outcome-badges" id="outcomeBadges"></div>
+    </div>
+
+  </main>
+
+  <footer>
+    <span>AirCounsel Systems</span>
+    <span id="footerTime">—</span>
+    <span>Adaptive Engine</span>
+  </footer>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     ADAPTIVE VOICE + INTAKE ENGINE — NO IMPORTS
+     ═══════════════════════════════════════════════ -->
+<script id="aircounsel-core">
+(function () {
+
+  /* ── VOICE ENGINE ── */
+  let _speaking = false;
+  let _lastText  = '';
+  let _voiceReady = false;
+
+  function _getVoice() {
+    const voices = speechSynthesis.getVoices();
+    return (
+      voices.find(v => v.lang === 'en-GB' && v.name.toLowerCase().includes('male')) ||
+      voices.find(v => v.lang === 'en-GB') ||
+      voices.find(v => v.lang.startsWith('en')) ||
+      voices[0]
+    );
+  }
+
+  // Ensure voices are loaded
+  if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = () => { _voiceReady = true; };
+  }
+  setTimeout(() => { _voiceReady = true; }, 400);
+
+  function speak(text, toneOverride) {
+    if (!text || text === _lastText) return;
+
+    speechSynthesis.cancel();
+
+    const msg = new SpeechSynthesisUtterance(text);
+    msg.voice  = _getVoice();
+    msg.volume = 1;
+
+    // ADAPTIVE TONE: adjust rate/pitch by tone tag
+    switch (toneOverride) {
+      case 'alert':
+        msg.rate  = 0.82;
+        msg.pitch = 0.6;
+        break;
+      case 'processing':
+        msg.rate  = 0.9;
+        msg.pitch = 0.78;
+        break;
+      case 'confirm':
+        msg.rate  = 0.85;
+        msg.pitch = 0.85;
+        break;
+      case 'outcome':
+        msg.rate  = 0.78;
+        msg.pitch = 0.7;
+        break;
+      default:
+        msg.rate  = 0.88;
+        msg.pitch = 0.75;
+    }
+
+    _speaking = true;
+    _lastText  = text;
+
+    msg.onstart = () => {
+      document.getElementById('voiceBar').classList.add('active');
+      document.getElementById('voiceText').textContent = text.toUpperCase();
+    };
+    msg.onend = () => {
+      _speaking = false;
+      const bar = document.getElementById('voiceBar');
+      bar.classList.remove('active');
+      document.getElementById('voiceText').textContent = 'VOICE MODULE STANDBY';
+    };
+
+    speechSynthesis.speak(msg);
+  }
+
+  function sequence(lines) {
+    let delay = 0;
+    lines.forEach(l => {
+      delay += l.delay;
+      setTimeout(() => speak(l.text, l.tone), delay);
+    });
+  }
+
+  /* ── LOG ENGINE ── */
+  let _logCount = 0;
+  let _startTime = null;
+
+  function _ts() {
+    if (!_startTime) return '00:00:00';
+    const d = Date.now() - _startTime;
+    const s = Math.floor(d / 1000);
+    const ms = String(Math.floor((d % 1000) / 10)).padStart(2, '0');
+    const ss = String(s % 60).padStart(2, '0');
+    const mm = String(Math.floor(s / 60)).padStart(2, '0');
+    return mm + ':' + ss + ':' + ms;
+  }
+
+  function log(msg, style, delay) {
+    setTimeout(() => {
+      const body = document.getElementById('logBody');
+      const line = document.createElement('div');
+      line.className = 'log-line';
+      line.innerHTML = `<span class="log-ts">${_ts()}</span><span class="log-msg ${style || ''}">${msg}</span>`;
+      body.appendChild(line);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => line.classList.add('visible'));
+      });
+      body.scrollTop = body.scrollHeight;
+      _logCount++;
+
+      // update footer timer
+      document.getElementById('footerTime').textContent = _ts();
+    }, delay || 0);
+  }
+
+  function setProgress(pct, delay) {
+    setTimeout(() => {
+      document.getElementById('progressFill').style.width = pct + '%';
+    }, delay || 0);
+  }
+
+  /* ── HELPERS ── */
+  window.updateRiskColour = function (el) {
+    el.dataset.val = el.value;
+  };
+
+  let _jobOffer = false;
+  window.toggleJobOffer = function (row) {
+    _jobOffer = !_jobOffer;
+    const toggle = document.getElementById('jobToggle');
+    const label  = document.getElementById('jobLabel');
+    toggle.classList.toggle('on', _jobOffer);
+    label.textContent = _jobOffer
+      ? 'Yes — confirmed UK job offer'
+      : 'No — client has no job offer';
+  };
+
+  /* ── PROFILE EVALUATOR ── */
+  function buildVoiceLines(data) {
+    const lines = [];
+    let d = 600;
+
+    lines.push({ text: 'Input received.', delay: d, tone: 'processing' });
+    d += 1600;
+
+    lines.push({ text: 'Analysing immigration profile.', delay: d, tone: 'processing' });
+    d += 2000;
+
+    if (data.nationality && data.nationality.toLowerCase() !== 'uk'
+        && data.nationality.toLowerCase() !== 'british') {
+      lines.push({ text: 'Non UK national detected.', delay: d, tone: 'alert' });
+      d += 2000;
+    }
+
+    if (data.hasJobOffer) {
+      lines.push({ text: 'Valid employment signal confirmed.', delay: d, tone: 'confirm' });
+      d += 2000;
+    } else {
+      lines.push({ text: 'No employment sponsorship identified.', delay: d, tone: 'alert' });
+      d += 2000;
+    }
+
+    if (data.visaType) {
+      lines.push({ text: data.visaType + ' pathway under review.', delay: d, tone: 'processing' });
+      d += 2200;
+    }
+
+    if (data.risk === 'high') {
+      lines.push({ text: 'Elevated risk profile detected.', delay: d, tone: 'alert' });
+      d += 1800;
+      lines.push({ text: 'Cross referencing refusal conditions.', delay: d, tone: 'alert' });
+      d += 2200;
+    } else if (data.risk === 'medium') {
+      lines.push({ text: 'Moderate risk indicators present.', delay: d, tone: 'processing' });
+      d += 2000;
+    } else if (data.risk === 'low') {
+      lines.push({ text: 'Low risk profile.', delay: d, tone: 'confirm' });
+      d += 1800;
+    }
+
+    if (data.documents === 'missing') {
+      lines.push({ text: 'Supporting documentation incomplete.', delay: d, tone: 'alert' });
+      d += 2000;
+    } else if (data.documents === 'partial') {
+      lines.push({ text: 'Partial documentation on file.', delay: d, tone: 'processing' });
+      d += 2000;
+    }
+
+    lines.push({ text: 'Final assessment.', delay: d, tone: 'outcome' });
+    d += 1600;
+
+    // OUTCOME voice line
+    const outcome = determineOutcome(data);
+    lines.push({ text: outcome.voice, delay: d, tone: 'outcome' });
+
+    return lines;
+  }
+
+  function buildLogLines(data) {
+    const entries = [];
+    let d = 300;
+
+    entries.push({ msg: '> Intake session initialised', style: 'accent', d });
+    d += 400;
+    entries.push({ msg: '> Loading eligibility matrix…', style: '', d });
+    d += 600;
+
+    if (data.nationality) {
+      entries.push({ msg: `> Nationality flag: ${data.nationality.toUpperCase()}`, style: '', d });
+      d += 500;
+    }
+
+    entries.push({ msg: '> Checking right-to-work conditions…', style: '', d });
+    d += 700;
+
+    if (data.hasJobOffer) {
+      entries.push({ msg: '> EMPLOYMENT SIGNAL: confirmed', style: 'ok', d });
+    } else {
+      entries.push({ msg: '> EMPLOYMENT SIGNAL: none', style: 'warn', d });
+    }
+    d += 500;
+
+    if (data.visaType) {
+      entries.push({ msg: `> Route under analysis: ${data.visaType}`, style: 'accent', d });
+      d += 600;
+    }
+
+    if (data.risk === 'high') {
+      entries.push({ msg: '> RISK FLAG: HIGH — escalate for review', style: 'danger', d });
+    } else if (data.risk === 'medium') {
+      entries.push({ msg: '> RISK FLAG: MEDIUM — monitor conditions', style: 'warn', d });
+    } else if (data.risk === 'low') {
+      entries.push({ msg: '> RISK FLAG: LOW — proceed', style: 'ok', d });
+    }
+    d += 600;
+
+    entries.push({ msg: `> Documentation status: ${data.documents.toUpperCase()}`, style: data.documents === 'complete' ? 'ok' : data.documents === 'missing' ? 'danger' : 'warn', d });
+    d += 700;
+
+    entries.push({ msg: '> Evaluating eligibility pathways…', style: '', d });
+    d += 900;
+    entries.push({ msg: '> Cross-referencing regulatory conditions…', style: '', d });
+    d += 900;
+    entries.push({ msg: '> Optimal route determined.', style: 'accent', d });
+    d += 400;
+
+    return entries;
+  }
+
+  function determineOutcome(data) {
+    if (data.risk === 'high') {
+      return {
+        route:  'Manual Legal Review Required',
+        sub:    'Profile presents complex risk factors. Senior legal assessment recommended before proceeding.',
+        voice:  'Manual legal review required.',
+        badges: [
+          { label: 'High Risk', cls: 'danger' },
+          { label: 'Escalate', cls: 'warn' }
+        ]
+      };
+    }
+
+    if (data.hasJobOffer && data.visaType === 'Skilled Worker' && data.documents === 'complete') {
+      return {
+        route:  'Skilled Worker Route — Strong Viability',
+        sub:    'Employment sponsorship confirmed. Documentation complete. Pathway clear for application.',
+        voice:  'Skilled worker route viable. Proceed to application.',
+        badges: [
+          { label: 'Clear Pathway', cls: 'ok' },
+          { label: 'Skilled Worker Visa', cls: 'info' },
+          { label: 'Low Risk', cls: 'ok' }
+        ]
+      };
+    }
+
+    if (data.hasJobOffer) {
+      return {
+        route:  'Skilled Worker Route — Conditional',
+        sub:    'Employment signal detected. Further document verification or sponsor check required.',
+        voice:  'Skilled worker pathway identified. Conditional on documentation.',
+        badges: [
+          { label: 'Job Offer Confirmed', cls: 'ok' },
+          { label: 'Documents Required', cls: 'warn' }
+        ]
+      };
+    }
+
+    if (data.visaType === 'Student') {
+      return {
+        route:  'Student Route — Assess Conditions',
+        sub:    'Student pathway under review. Sponsor confirmation and CAS number required.',
+        voice:  'Student route under review. Sponsor confirmation required.',
+        badges: [
+          { label: 'Student Route', cls: 'info' },
+          { label: 'CAS Required', cls: 'warn' }
+        ]
+      };
+    }
+
+    if (data.visaType === 'Asylum') {
+      return {
+        route:  'Protection Pathway — Specialist Assessment',
+        sub:    'Asylum claim indicated. Refer to specialist protection team for full assessment.',
+        voice:  'Protection pathway indicated. Specialist assessment required.',
+        badges: [
+          { label: 'Asylum', cls: 'warn' },
+          { label: 'Specialist Referral', cls: 'danger' }
+        ]
+      };
+    }
+
+    return {
+      route:  'Alternative Pathways Required',
+      sub:    'No direct route identified. Full advisory consultation recommended to assess options.',
+      voice:  'No direct route identified. Advisory consultation recommended.',
+      badges: [
+        { label: 'No Direct Route', cls: 'warn' },
+        { label: 'Consultation Required', cls: 'info' }
+      ]
+    };
+  }
+
+  /* ── TOTAL RUNTIME ── */
+  let _totalSteps = 0;
+
+  /* ── MAIN ENTRY POINT ── */
+  window.runIntake = function () {
+    // Collect form values
+    const data = {
+      nationality: document.getElementById('f-nationality').value.trim() || 'Unspecified',
+      visaType:    document.getElementById('f-visaType').value,
+      risk:        document.getElementById('f-risk').value || 'low',
+      documents:   document.getElementById('f-documents').value || 'complete',
+      hasJobOffer: _jobOffer
+    };
+
+    // Reset UI
+    const logBody = document.getElementById('logBody');
+    logBody.innerHTML = '';
+    _logCount = 0;
+    _startTime = Date.now();
+    _lastText = '';
+
+    document.getElementById('logPanel').classList.add('active');
+    document.getElementById('progressFill').style.width = '0%';
+
+    const outcomeCard = document.getElementById('outcomeCard');
+    outcomeCard.classList.remove('show', 'visible');
+
+    // Disable button during run
+    const btn = document.getElementById('runBtn');
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    btn.style.pointerEvents = 'none';
+
+    // Build voice + log sequences
+    const voiceLines = buildVoiceLines(data);
+    const logLines   = buildLogLines(data);
+    const outcome    = determineOutcome(data);
+
+    // Fire logs
+    logLines.forEach((entry, i) => {
+      log(entry.msg, entry.style, entry.d);
+      setProgress(Math.round(((i + 1) / logLines.length) * 90), entry.d);
+    });
+
+    // Fire voice
+    sequence(voiceLines);
+
+    // Calculate total duration: sum of all voice delays
+    const totalVoiceDelay = voiceLines.reduce((acc, l) => acc + l.delay, 0) + 2000;
+
+    // Show outcome
+    setTimeout(() => {
+      setProgress(100, 0);
+
+      document.getElementById('outcomeRoute').textContent = outcome.route;
+      document.getElementById('outcomeSub').textContent   = outcome.sub;
+
+      const badgesEl = document.getElementById('outcomeBadges');
+      badgesEl.innerHTML = '';
+      outcome.badges.forEach(b => {
+        const span = document.createElement('span');
+        span.className = `badge ${b.cls}`;
+        span.textContent = b.label;
+        badgesEl.appendChild(span);
+      });
+
+      outcomeCard.classList.add('show');
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => outcomeCard.classList.add('visible'));
+      });
+
+      // Re-enable button
+      btn.disabled = false;
+      btn.style.opacity = '';
+      btn.style.pointerEvents = '';
+
+      document.getElementById('logPanel').classList.remove('active');
+
+    }, totalVoiceDelay);
+  };
+
+  // Live footer clock
+  setInterval(() => {
+    if (_startTime) {
+      document.getElementById('footerTime').textContent = _ts();
+    }
+  }, 100);
+
+})();
+</script>
+
+</body>
+</html>
