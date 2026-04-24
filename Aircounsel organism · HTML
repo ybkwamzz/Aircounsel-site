@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AirCounsel — Immigration Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:   #03030a;
+    --ink:    #06060f;
+    --arc:    #0099ff;
+    --gold:   #c8a455;
+    --ember:  #ff6b1a;
+    --white:  #f0f0ff;
+    --dim:    rgba(240,240,255,0.22);
+    --serif:  'Cormorant Garamond', serif;
+    --mono:   'Space Mono', monospace;
+    --display:'Unbounded', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--void);
+    color: var(--white);
+    overflow: hidden;
+    cursor: none;
+    font-family: var(--mono);
+  }
+
+  /* ── CURSOR ── */
+  #cursor {
+    position: fixed; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--arc); pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+    box-shadow: 0 0 10px var(--arc), 0 0 28px rgba(0,153,255,0.25);
+    transition: width 0.25s, height 0.25s, background 0.25s;
+  }
+  #cursor.hover {
+    width: 36px; height: 36px;
+    background: transparent;
+    border: 1px solid rgba(200,164,85,0.5);
+    box-shadow: none;
+  }
+
+  /* ── CANVASES ── */
+  #c-org   { position:fixed; inset:0; z-index:1; }
+  #c-field { position:fixed; inset:0; z-index:2; pointer-events:none; }
+
+  /* ── ATMOSPHERE ── */
+  .vignette {
+    position:fixed; inset:0; z-index:3; pointer-events:none;
+    background: radial-gradient(ellipse at center, transparent 32%, rgba(3,3,10,0.75) 100%);
+  }
+  .scanlines {
+    position:fixed; inset:0; z-index:4; pointer-events:none;
+    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.035) 3px, rgba(0,0,0,0.035) 4px);
+  }
+  .grain {
+    position:fixed; inset:0; z-index:5; pointer-events:none; opacity:0.018;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:180px;
+  }
+
+  /* ── HUD ── */
+  .hud {
+    position:fixed; z-index:30; font-size:8.5px; letter-spacing:0.28em;
+    text-transform:uppercase; color:rgba(0,153,255,0.28); line-height:1.9;
+    opacity:0; transition:opacity 1.6s;
+  }
+  .hud.show { opacity:1; }
+  .hud.tl{top:26px;left:28px} .hud.tr{top:26px;right:28px;text-align:right}
+  .hud.bl{bottom:28px;left:28px} .hud.br{bottom:28px;right:28px;text-align:right}
+  .hud-gold { color:rgba(200,164,85,0.38); }
+
+  /* ── ROUTE RAIL ── */
+  #route-rail {
+    position:fixed; right:28px; top:50%; transform:translateY(-50%);
+    z-index:30; display:flex; flex-direction:column; gap:8px;
+    opacity:0; transition:opacity 1.4s;
+  }
+  #route-rail.show { opacity:1; }
+  .route-item {
+    font-size:8px; letter-spacing:0.22em; text-transform:uppercase;
+    color:rgba(200,164,85,0.28); padding-left:10px;
+    border-left:1px solid rgba(200,164,85,0.12);
+    transition:color 0.7s, border-color 0.7s;
+    cursor:default;
+  }
+  .route-item.lit {
+    color:rgba(200,164,85,0.85);
+    border-color:rgba(200,164,85,0.5);
+  }
+
+  /* ── CENTRE PRESENCE ── */
+  #presence {
+    position:fixed; inset:0; z-index:20;
+    display:flex; flex-direction:column; align-items:center;
+    justify-content:center; pointer-events:none;
+  }
+  .sys-badge {
+    font-size:8px; letter-spacing:0.5em; text-transform:uppercase;
+    color:rgba(200,164,85,0.45); margin-bottom:52px;
+    opacity:0; transition:opacity 1.2s 0.4s;
+  }
+  .sys-badge.show { opacity:1; }
+
+  /* Thought surface */
+  #thought-wrap {
+    height:28px; display:flex; align-items:center;
+    justify-content:center; margin-bottom:20px;
+    font-family:var(--serif); font-style:italic;
+    font-size:clamp(13px,1.7vw,17px);
+    color:rgba(240,240,255,0.42); letter-spacing:0.1em; text-align:center;
+  }
+  #thought {
+    display:inline-block; opacity:0; transform:translateY(7px);
+    transition:opacity 0.9s ease, transform 0.9s ease;
+  }
+  #thought.up   { opacity:1; transform:translateY(0); }
+  #thought.down { opacity:0; transform:translateY(-7px); }
+
+  /* Headline */
+  #headline {
+    text-align:center; margin-bottom:18px;
+    opacity:0; transform:translateY(18px);
+    transition:opacity 1.5s ease, transform 1.5s ease;
+  }
+  #headline.show { opacity:1; transform:translateY(0); }
+  .hl-over {
+    font-family:var(--serif); font-weight:300; font-size:clamp(12px,1.8vw,18px);
+    letter-spacing:0.7em; text-transform:uppercase; color:var(--dim);
+    display:block; margin-bottom:6px;
+  }
+  .hl-main {
+    font-family:var(--display); font-weight:900;
+    font-size:clamp(54px,9.5vw,128px); line-height:0.88;
+    text-transform:uppercase; color:var(--white);
+    display:block; letter-spacing:-0.025em;
+  }
+  .hl-gold { color:var(--gold); }
+  .hl-sub {
+    font-family:var(--serif); font-style:italic;
+    font-size:clamp(13px,1.4vw,16px); color:rgba(240,240,255,0.35);
+    letter-spacing:0.07em; margin-top:18px; display:block;
+  }
+
+  /* CTA */
+  #cta {
+    margin-top:46px; opacity:0; transform:translateY(14px);
+    transition:opacity 1.1s 0.3s ease, transform 1.1s 0.3s ease;
+    pointer-events:none;
+  }
+  #cta.show { opacity:1; transform:translateY(0); pointer-events:all; }
+
+  .cta-shell {
+    display:flex; align-items:center; gap:16px;
+    padding:14px 38px; border:1px solid rgba(200,164,85,0.35);
+    background:transparent; cursor:pointer; position:relative; overflow:hidden;
+    transition:border-color 0.4s;
+  }
+  .cta-shell::before {
+    content:''; position:absolute; inset:0;
+    background:rgba(200,164,85,0.05);
+    transform:translateX(-101%); transition:transform 0.55s ease;
+  }
+  .cta-shell:hover::before { transform:translateX(0); }
+  .cta-shell:hover { border-color:rgba(200,164,85,0.8); }
+  .cta-label {
+    font-family:var(--serif); font-size:15px; font-weight:400;
+    letter-spacing:0.35em; text-transform:uppercase; color:var(--gold);
+  }
+  .cta-line {
+    width:22px; height:1px; background:var(--gold); position:relative; flex-shrink:0;
+  }
+  .cta-line::after {
+    content:''; position:absolute; right:0; top:-3px;
+    width:7px; height:7px;
+    border-right:1px solid var(--gold); border-top:1px solid var(--gold);
+    transform:rotate(45deg);
+  }
+
+  /* ── VOICE STATUS ── */
+  #voice-ui {
+    position:fixed; bottom:52px; left:50%; transform:translateX(-50%);
+    z-index:40; display:flex; flex-direction:column; align-items:center; gap:5px;
+    opacity:0; transition:opacity 0.5s; pointer-events:none;
+  }
+  #voice-ui.on { opacity:1; }
+  .v-caption {
+    font-size:9px; letter-spacing:0.25em; text-transform:uppercase;
+    color:rgba(0,153,255,0.45); max-width:340px; text-align:center;
+  }
+  .v-wave { display:flex; align-items:center; gap:2px; }
+  .v-bar {
+    width:2px; background:var(--arc); border-radius:1px;
+    animation:vw 0.75s ease-in-out infinite alternate;
+  }
+  .v-bar:nth-child(1){height:4px;animation-delay:0s}
+  .v-bar:nth-child(2){height:10px;animation-delay:0.09s}
+  .v-bar:nth-child(3){height:15px;animation-delay:0.18s}
+  .v-bar:nth-child(4){height:10px;animation-delay:0.12s}
+  .v-bar:nth-child(5){height:5px;animation-delay:0.04s}
+  @keyframes vw { from{transform:scaleY(0.35)} to{transform:scaleY(1)} }
+
+  /* ── INTAKE OVERLAY ── */
+  #intake {
+    position:fixed; inset:0; z-index:50;
+    background:rgba(3,3,10,0.94); backdrop-filter:blur(2px);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity 0.8s;
+  }
+  #intake.open { opacity:1; pointer-events:all; }
+
+  .i-panel {
+    width:min(520px,92vw); border:1px solid rgba(200,164,85,0.18);
+    padding:44px 48px; background:rgba(6,6,15,0.97); position:relative;
+  }
+  .i-panel::before {
+    content:'CASE PROFILE INTAKE';
+    position:absolute; top:-8px; left:22px;
+    font-size:7.5px; letter-spacing:0.45em; text-transform:uppercase;
+    background:rgba(6,6,15,0.97); padding:0 10px;
+    color:rgba(200,164,85,0.4);
+  }
+  .i-title {
+    font-family:var(--serif); font-weight:300; font-style:italic;
+    font-size:26px; color:var(--gold); margin-bottom:30px;
+    letter-spacing:0.04em;
+  }
+  .i-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 28px; }
+  .i-field { margin-bottom:22px; }
+  .i-field label {
+    display:block; font-size:8px; letter-spacing:0.32em; text-transform:uppercase;
+    color:rgba(240,240,255,0.28); margin-bottom:8px;
+  }
+  .i-field input, .i-field select {
+    width:100%; background:transparent;
+    border:none; border-bottom:1px solid rgba(200,164,85,0.18);
+    color:var(--white); font-family:var(--mono); font-size:12px;
+    padding:9px 0; outline:none; transition:border-color 0.25s;
+    -webkit-appearance:none; appearance:none;
+  }
+  .i-field input:focus, .i-field select:focus {
+    border-color:rgba(200,164,85,0.65);
+  }
+  .i-field select option { background:#06060f; color:var(--white); }
+
+  .run-btn {
+    margin-top:30px; width:100%; padding:15px;
+    background:transparent; border:1px solid rgba(200,164,85,0.35);
+    color:var(--gold); font-family:var(--mono); font-size:10px;
+    letter-spacing:0.38em; text-transform:uppercase;
+    cursor:pointer; position:relative; overflow:hidden;
+    transition:border-color 0.3s;
+  }
+  .run-btn::before {
+    content:''; position:absolute; inset:0;
+    background:rgba(200,164,85,0.06);
+    transform:translateX(-101%); transition:transform 0.4s;
+  }
+  .run-btn:hover::before { transform:translateX(0); }
+  .run-btn:hover { border-color:rgba(200,164,85,0.8); }
+
+  .i-close {
+    position:absolute; top:18px; right:22px; background:none; border:none;
+    font-size:8.5px; letter-spacing:0.3em; color:rgba(240,240,255,0.18);
+    cursor:pointer; font-family:var(--mono); text-transform:uppercase;
+    transition:color 0.2s;
+  }
+  .i-close:hover { color:rgba(240,240,255,0.45); }
+
+  /* Result */
+  #result {
+    margin-top:26px; padding:18px 20px;
+    border:1px solid rgba(0,153,255,0.14);
+    background:rgba(0,153,255,0.03);
+    display:none; opacity:0; transform:translateY(7px);
+    transition:opacity 0.6s, transform 0.6s;
+  }
+  #result.show { display:block; opacity:1; transform:translateY(0); }
+  .r-route { font-family:var(--serif); font-size:21px; color:var(--white); margin-bottom:5px; }
+  .r-sub { font-size:9.5px; color:rgba(240,240,255,0.38); letter-spacing:0.1em; line-height:1.9; }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<canvas id="c-org"></canvas>
+<canvas id="c-field"></canvas>
+<div class="vignette"></div>
+<div class="scanlines"></div>
+<div class="grain"></div>
+
+<!-- HUD CORNERS -->
+<div class="hud tl" id="hudTL">
+  <div>AirCounsel // Intelligence</div>
+  <div class="hud-gold" id="hudState">DORMANT</div>
+</div>
+<div class="hud tr" id="hudTR">
+  <div id="hudClock">--:--:--</div>
+  <div id="hudSession">SESSION INIT</div>
+</div>
+<div class="hud bl" id="hudBL">
+  <div id="hudRoutes">ROUTES: MAPPING</div>
+  <div>UK IMMIGRATION GRID</div>
+</div>
+<div class="hud br" id="hudBR">
+  <div id="hudVisitor">FIRST CONTACT</div>
+  <div id="hudElapsed">T+00:00</div>
+</div>
+
+<!-- ROUTE RAIL -->
+<div id="route-rail">
+  <div class="route-item" id="r0">Skilled Worker</div>
+  <div class="route-item" id="r1">Graduate Route</div>
+  <div class="route-item" id="r2">Global Talent</div>
+  <div class="route-item" id="r3">Family Visa</div>
+  <div class="route-item" id="r4">Student Route</div>
+  <div class="route-item" id="r5">Innovator Founder</div>
+  <div class="route-item" id="r6">Indefinite Leave</div>
+</div>
+
+<!-- MAIN PRESENCE -->
+<div id="presence">
+  <div class="sys-badge" id="sysBadge">AirCounsel Intelligence System // v3.0</div>
+  <div id="thought-wrap"><span id="thought"></span></div>
+  <div id="headline">
+    <span class="hl-over">Immigration Intelligence</span>
+    <span class="hl-main">KNOW YOUR<br><span class="hl-gold">ROUTE.</span></span>
+    <span class="hl-sub">The pathway exists. The system finds it.</span>
+  </div>
+  <div id="cta">
+    <div class="cta-shell" onclick="openIntake()" id="ctaInner">
+      <span class="cta-label">Begin Case Assessment</span>
+      <div class="cta-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- VOICE UI -->
+<div id="voice-ui">
+  <div class="v-caption" id="vCaption">—</div>
+  <div class="v-wave">
+    <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+    <div class="v-bar"></div><div class="v-bar"></div>
+  </div>
+</div>
+
+<!-- INTAKE OVERLAY -->
+<div id="intake">
+  <div class="i-panel">
+    <button class="i-close" onclick="closeIntake()">✕ Close</button>
+    <div class="i-title">Tell me about your case.</div>
+    <div class="i-grid">
+      <div class="i-field">
+        <label>Nationality</label>
+        <input type="text" id="fNat" placeholder="Country of origin"/>
+      </div>
+      <div class="i-field">
+        <label>Current Status</label>
+        <select id="fVisa">
+          <option value="">— Select —</option>
+          <option value="Skilled Worker">Skilled Worker</option>
+          <option value="Student">Student</option>
+          <option value="Visitor">Visitor</option>
+          <option value="Family">Family / Spousal</option>
+          <option value="Asylum">Asylum</option>
+          <option value="None">No current status</option>
+        </select>
+      </div>
+      <div class="i-field">
+        <label>UK Job Offer</label>
+        <select id="fJob">
+          <option value="yes">Yes — confirmed</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="i-field">
+        <label>Risk Profile</label>
+        <select id="fRisk">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+    </div>
+    <button class="run-btn" onclick="runAnalysis()">Analyse Profile</button>
+    <div id="result">
+      <div class="r-route" id="rRoute">—</div>
+      <div class="r-sub" id="rSub">—</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// AIRCOUNSEL — PROTO-ORGANISM
+// One system: organism + biological audio + adaptive voice
+// Everything reads from a single state. Nothing is independent.
+// ═══════════════════════════════════════════════════════════════════
+
+// ── MASTER STATE ──
+const S = {
+  phase:         'DORMANT',
+  t:             0,
+  energy:        0,
+  targetEnergy:  0,
+  mx:            0.5,  // normalised cursor
+  my:            0.5,
+  idleSecs:      0,
+  sessionStart:  Date.now(),
+  returning:     false,
+  audioReady:    false,
+  speaking:      false,
+};
+
+// ── RETURNING VISITOR ──
+try {
+  S.returning = !!sessionStorage.getItem('ac_v');
+  sessionStorage.setItem('ac_v', '1');
+} catch(e) {}
+
+// ══════════════════════
+// CURSOR
+// ══════════════════════
+const cursorEl = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursorEl.style.left = e.clientX + 'px';
+  cursorEl.style.top  = e.clientY + 'px';
+  S.mx = e.clientX / innerWidth;
+  S.my = e.clientY / innerHeight;
+  S.idleSecs = 0;
+  if (S.phase === 'DORMANT') setPhase('AWAKENING');
+});
+['ctaInner','fNat','fVisa','fJob','fRisk'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener('mouseenter', () => cursorEl.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursorEl.classList.remove('hover'));
+  }
+});
+
+// ══════════════════════
+// ORGANISM CANVAS
+// ══════════════════════
+const orgC   = document.getElementById('c-org');
+const orgCtx = orgC.getContext('2d');
+let OW, OH;
+function resizeOrg() { OW = orgC.width = innerWidth; OH = orgC.height = innerHeight; }
+resizeOrg(); window.addEventListener('resize', resizeOrg);
+
+function drawOrganism() {
+  orgCtx.clearRect(0, 0, OW, OH);
+  const e  = S.energy;
+  const t  = S.t;
+  const ox = OW * 0.5, oy = OH * 0.5;
+
+  // Biological rhythms
+  const breath  = Math.sin(t * 0.00055) * 0.5 + 0.5;   // ~0.18 Hz — slow breath
+  const cardiac = Math.sin(t * 0.0018)  * 0.5 + 0.5;   // ~0.58 Hz — heartbeat
+  const neural  = Math.sin(t * 0.006)   * 0.5 + 0.5;   // ~2 Hz — faster neural
+
+  // ── OUTER FIELD (consciousness aura) ──
+  const auraR = 260 + breath * 28 * e;
+  const aura  = orgCtx.createRadialGradient(ox, oy, 0, ox, oy, auraR);
+  aura.addColorStop(0,   `rgba(0,153,255,${0.06 * e})`);
+  aura.addColorStop(0.45,`rgba(200,164,85,${0.03 * e})`);
+  aura.addColorStop(1,   'transparent');
+  orgCtx.beginPath();
+  orgCtx.arc(ox, oy, auraR, 0, Math.PI*2);
+  orgCtx.fillStyle = aura; orgCtx.fill();
+
+  // ── RINGS (orbital cognition) ──
+  [
+    { r:155, spd:0.00012, alpha:0.10, dash:[] },
+    { r:112, spd:-0.00025,alpha:0.16, dash:[5,9] },
+    { r: 74, spd:0.00042, alpha:0.22, dash:[] },
+  ].forEach(ring => {
+    const r = ring.r + breath * 7 * e;
+    orgCtx.save();
+    orgCtx.translate(ox, oy);
+    orgCtx.rotate(t * ring.spd);
+    orgCtx.beginPath();
+    orgCtx.arc(0, 0, r, 0, Math.PI*2);
+    orgCtx.strokeStyle = `rgba(0,153,255,${ring.alpha * e})`;
+    orgCtx.lineWidth = 0.85;
+    if (ring.dash.length) orgCtx.setLineDash(ring.dash);
+    orgCtx.stroke(); orgCtx.setLineDash([]);
+    orgCtx.restore();
+  });
+
+  // ── CURSOR INFLUENCE (organism leans toward cursor) ──
+  const leanX = (S.mx - 0.5) * 18 * e;
+  const leanY = (S.my - 0.5) * 18 * e;
+
+  // ── THOUGHT TENDRILS (extend when energy > threshold) ──
+  if (e > 0.38) {
+    const n = S.phase === 'PROCESSING' || S.phase === 'SPEAKING' ? 8 : 6;
+    for (let i = 0; i < n; i++) {
+      const base = (i / n) * Math.PI*2 + t * 0.00009;
+      const reach = 44 + neural * 26 * e + (S.phase === 'PROCESSING' ? 18 : 0);
+      const x1 = ox + leanX + Math.cos(base) * 72;
+      const y1 = oy + leanY + Math.sin(base) * 72;
+      const x2 = ox + leanX + Math.cos(base) * (72 + reach);
+      const y2 = oy + leanY + Math.sin(base) * (72 + reach);
+      const a = (0.12 + neural * 0.18) * e;
+      orgCtx.beginPath(); orgCtx.moveTo(x1, y1); orgCtx.lineTo(x2, y2);
+      orgCtx.strokeStyle = `rgba(200,164,85,${a})`; orgCtx.lineWidth = 0.7; orgCtx.stroke();
+      orgCtx.beginPath(); orgCtx.arc(x2, y2, 1.6, 0, Math.PI*2);
+      orgCtx.fillStyle = `rgba(200,164,85,${a*2.2})`; orgCtx.fill();
+    }
+  }
+
+  // ── INNER MEMBRANE ──
+  const memR = 50 + cardiac * 5 * e;
+  orgCtx.beginPath();
+  orgCtx.arc(ox + leanX, oy + leanY, memR, 0, Math.PI*2);
+  orgCtx.strokeStyle = `rgba(200,164,85,${0.22 * e})`;
+  orgCtx.lineWidth = 0.6; orgCtx.stroke();
+
+  // ── CORE (the mind itself) ──
+  const coreR = 26 + breath * 5 * e + (S.speaking ? cardiac * 4 : 0);
+  const core  = orgCtx.createRadialGradient(ox+leanX, oy+leanY, 0, ox+leanX, oy+leanY, coreR);
+  core.addColorStop(0,   `rgba(255,255,255,${0.95 * e})`);
+  core.addColorStop(0.28,`rgba(0,153,255,${0.75 * e})`);
+  core.addColorStop(0.65,`rgba(200,164,85,${0.28 * e})`);
+  core.addColorStop(1,   'transparent');
+  orgCtx.beginPath(); orgCtx.arc(ox+leanX, oy+leanY, coreR, 0, Math.PI*2);
+  orgCtx.fillStyle = core; orgCtx.fill();
+
+  // Core point
+  orgCtx.beginPath(); orgCtx.arc(ox+leanX, oy+leanY, coreR * 0.32, 0, Math.PI*2);
+  orgCtx.fillStyle = `rgba(255,255,255,${e})`; orgCtx.fill();
+}
+
+// ══════════════════════
+// NEURAL FIELD
+// ══════════════════════
+const fldC   = document.getElementById('c-field');
+const fldCtx = fldC.getContext('2d');
+let FW, FH;
+function resizeField() { FW = fldC.width = innerWidth; FH = fldC.height = innerHeight; }
+resizeField(); window.addEventListener('resize', resizeField);
+
+class Particle {
+  constructor() { this.init(true); }
+  init(scatter) {
+    this.x    = scatter ? Math.random()*FW : FW*0.5 + (Math.random()-0.5)*200;
+    this.y    = scatter ? Math.random()*FH : FH*0.5 + (Math.random()-0.5)*200;
+    this.vx   = (Math.random()-0.5)*0.38;
+    this.vy   = (Math.random()-0.5)*0.38;
+    this.life = scatter ? Math.random() : 0;
+    this.max  = 0.5 + Math.random()*0.5;
+    this.sz   = 0.5 + Math.random()*1.3;
+    this.kind = Math.random() > 0.65 ? 'g' : 'b'; // gold / blue
+    this.bright = false; this.brightT = 0;
+  }
+  update() {
+    const cx = S.mx * FW, cy = S.my * FH;
+    const dx = cx - this.x, dy = cy - this.y;
+    const d  = Math.sqrt(dx*dx + dy*dy);
+    if (d < 200 && S.energy > 0.25) {
+      this.vx += (dx/d)*0.018*S.energy;
+      this.vy += (dy/d)*0.018*S.energy;
+    }
+    const sp = Math.sqrt(this.vx*this.vx + this.vy*this.vy);
+    if (sp > 1.3) { this.vx *= 0.83; this.vy *= 0.83; }
+    this.x += this.vx; this.y += this.vy;
+    this.life += 0.0022;
+    if (this.bright) this.brightT--;
+    if (this.brightT <= 0) this.bright = false;
+    if (this.life > this.max || this.x<0 || this.x>FW || this.y<0 || this.y>FH) this.init(false);
+  }
+  draw() {
+    const a = Math.sin((this.life/this.max)*Math.PI) * 0.5 * S.energy;
+    const col = this.bright ? `rgba(255,255,255,${a*3.5})` :
+                this.kind==='g' ? `rgba(200,164,85,${a})` : `rgba(0,153,255,${a})`;
+    fldCtx.beginPath(); fldCtx.arc(this.x, this.y, this.sz, 0, Math.PI*2);
+    fldCtx.fillStyle = col; fldCtx.fill();
+  }
+}
+
+const PTS = Array.from({length:72}, () => new Particle());
+
+function flashNear(x, y, r) {
+  PTS.forEach(p => {
+    const dx=x-p.x, dy=y-p.y;
+    if (Math.sqrt(dx*dx+dy*dy) < r) { p.bright=true; p.brightT=50; }
+  });
+}
+
+function drawField() {
+  fldCtx.clearRect(0, 0, FW, FH);
+  PTS.forEach(p => { p.update(); p.draw(); });
+  for (let i=0; i<PTS.length; i++) for (let j=i+1; j<PTS.length; j++) {
+    const a=PTS[i], b=PTS[j];
+    const dx=a.x-b.x, dy=a.y-b.y, d=Math.sqrt(dx*dx+dy*dy);
+    if (d < 95) {
+      fldCtx.beginPath(); fldCtx.moveTo(a.x,a.y); fldCtx.lineTo(b.x,b.y);
+      fldCtx.strokeStyle = `rgba(0,153,255,${(1-d/95)*0.07*S.energy})`;
+      fldCtx.lineWidth = 0.4; fldCtx.stroke();
+    }
+  }
+}
+
+// ══════════════════════
+// ANIMATION LOOP
+// ══════════════════════
+function loop(t) {
+  S.t = t;
+  S.energy += (S.targetEnergy - S.energy) * 0.007;
+  drawOrganism();
+  drawField();
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+// ══════════════════════
+// PHASE STATE MACHINE
+// ══════════════════════
+function setPhase(p) {
+  if (S.phase === p) return;
+  S.phase = p;
+  document.getElementById('hudState').textContent = p;
+
+  switch (p) {
+    case 'AWAKENING':
+      S.targetEnergy = 0.32;
+      initAudio();
+      runAwakening();
+      break;
+    case 'AWARE':
+      S.targetEnergy = 0.70;
+      revealUI();
+      break;
+    case 'PROCESSING':
+      S.targetEnergy = 0.97;
+      neuralPulse();
+      break;
+    case 'SPEAKING':
+      S.targetEnergy = 0.88;
+      S.speaking = true;
+      break;
+    case 'RESTING':
+      S.targetEnergy = 0.62;
+      S.speaking = false;
+      setTimeout(() => { if (S.phase==='RESTING') setPhase('AWARE'); }, 3200);
+      break;
+  }
+}
+
+function revealUI() {
+  ['hudTL','hudTR','hudBL','hudBR'].forEach(id => document.getElementById(id).classList.add('show'));
+  document.getElementById('sysBadge').classList.add('show');
+  document.getElementById('route-rail').classList.add('show');
+  setTimeout(() => document.getElementById('headline').classList.add('show'), 700);
+  setTimeout(() => document.getElementById('cta').classList.add('show'), 2000);
+  document.getElementById('hudRoutes').textContent = 'ROUTES: 247 MAPPED';
+  lightRoutes();
+}
+
+// ── THOUGHT SURFACE ──
+let _thoughtTimer;
+function think(text, hold) {
+  clearTimeout(_thoughtTimer);
+  const el = document.getElementById('thought');
+  el.classList.remove('up','down'); void el.offsetWidth;
+  el.textContent = text; el.classList.add('up');
+  if (hold) _thoughtTimer = setTimeout(() => {
+    el.classList.remove('up'); el.classList.add('down');
+  }, hold);
+}
+function unthink() {
+  const el = document.getElementById('thought');
+  el.classList.remove('up'); el.classList.add('down');
+}
+
+// ── ROUTE CYCLING ──
+let _rl = 0;
+function lightRoutes() {
+  document.querySelectorAll('.route-item').forEach(r => r.classList.remove('lit'));
+  document.getElementById('r' + (_rl % 7)).classList.add('lit');
+  _rl++;
+  setTimeout(lightRoutes, 2400);
+}
+
+// ══════════════════════
+// AWAKENING SEQUENCE
+// ══════════════════════
+function runAwakening() {
+  think('Initialising...', 1800);
+  setTimeout(() => {
+    const line = S.returning ? "You've returned." : "Aware.";
+    think(line, 3200);
+    speakLine(line, 0.68, 0.55);
+  }, 1600);
+  setTimeout(() => {
+    think('Immigration intelligence. Active.', 3600);
+    speakLine('Immigration intelligence. Active.', 0.76, 0.63);
+  }, 4900);
+  setTimeout(() => {
+    unthink();
+    setPhase('AWARE');
+  }, 8000);
+}
+
+// ══════════════════════
+// BIOLOGICAL AUDIO ENGINE
+// ══════════════════════
+let audioCtx, masterGain, droneGain;
+
+function initAudio() {
+  if (S.audioReady) return;
+  audioCtx   = new (window.AudioContext || window.webkitAudioContext)();
+  masterGain = audioCtx.createGain();
+  masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+  masterGain.gain.linearRampToValueAtTime(0.42, audioCtx.currentTime + 4.5);
+  masterGain.connect(audioCtx.destination);
+
+  // Deep biological drone — vast, slow, felt not heard
+  droneGain = audioCtx.createGain();
+  droneGain.gain.value = 0.2;
+  droneGain.connect(masterGain);
+
+  [36, 72, 108, 144].forEach((hz, i) => {
+    const osc = audioCtx.createOscillator();
+    const g   = audioCtx.createGain();
+    // Breath LFO on each drone frequency
+    const lfo = audioCtx.createOscillator();
+    const lg  = audioCtx.createGain();
+    osc.type  = i === 0 ? 'sine' : i === 1 ? 'triangle' : 'sine';
+    osc.frequency.value = hz;
+    lfo.frequency.value = 0.05 + i * 0.018;   // very slow, different per harmonic
+    lg.gain.value = hz * 0.004;
+    lfo.connect(lg); lg.connect(osc.frequency);
+    g.gain.value = [1, 0.35, 0.18, 0.08][i];
+    osc.connect(g); g.connect(droneGain);
+    osc.start(); lfo.start();
+  });
+
+  // Counsel tone — a held harmonic, ancient and formal
+  const counselOsc  = audioCtx.createOscillator();
+  const counselGain = audioCtx.createGain();
+  counselOsc.type = 'sine'; counselOsc.frequency.value = 528; // Hz — clarity tone
+  counselGain.gain.value = 0.018;
+  counselOsc.connect(counselGain); counselGain.connect(masterGain);
+  counselOsc.start();
+
+  // Warm vinyl noise bed
+  const nBuf = audioCtx.createBuffer(1, audioCtx.sampleRate*2, audioCtx.sampleRate);
+  const nd   = nBuf.getChannelData(0);
+  for (let i=0; i<nd.length; i++) nd[i] = (Math.random()*2-1)*0.007;
+  const nSrc = audioCtx.createBufferSource();
+  nSrc.buffer = nBuf; nSrc.loop = true;
+  const nFlt = audioCtx.createBiquadFilter();
+  nFlt.type = 'bandpass'; nFlt.frequency.value = 2600; nFlt.Q.value = 0.4;
+  const nGain = audioCtx.createGain(); nGain.gain.value = 0.012;
+  nSrc.connect(nFlt); nFlt.connect(nGain); nGain.connect(masterGain);
+  nSrc.start();
+
+  S.audioReady = true;
+}
+
+function neuralPulse() {
+  if (!audioCtx) return;
+  const t = audioCtx.currentTime;
+  [220, 330, 495].forEach((hz, i) => {
+    const osc = audioCtx.createOscillator();
+    const g   = audioCtx.createGain();
+    osc.type  = 'sine'; osc.frequency.value = hz;
+    g.gain.setValueAtTime(0, t + i*0.07);
+    g.gain.linearRampToValueAtTime(0.038, t + i*0.07 + 0.14);
+    g.gain.linearRampToValueAtTime(0, t + i*0.07 + 0.7);
+    osc.connect(g); g.connect(masterGain);
+    osc.start(t + i*0.07); osc.stop(t + i*0.07 + 0.9);
+  });
+}
+
+// ══════════════════════
+// ADAPTIVE VOICE ENGINE
+// ══════════════════════
+let _queue = [];
+let _voiceActive = false;
+
+function _getVoice() {
+  const vv = speechSynthesis.getVoices();
+  return (
+    vv.find(v => v.lang==='en-GB' && v.name.toLowerCase().includes('male')) ||
+    vv.find(v => v.lang==='en-GB') ||
+    vv.find(v => v.lang.startsWith('en')) ||
+    vv[0]
+  );
+}
+if (speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = ()=>{};
+
+function _dequeue() {
+  if (!_queue.length) {
+    _voiceActive = false;
+    document.getElementById('voice-ui').classList.remove('on');
+    setPhase('RESTING');
+    return;
+  }
+  const {text, rate, pitch} = _queue.shift();
+  const msg = new SpeechSynthesisUtterance(text);
+  msg.voice = _getVoice(); msg.rate = rate; msg.pitch = pitch; msg.volume = 0.9;
+  document.getElementById('voice-ui').classList.add('on');
+  document.getElementById('vCaption').textContent = text;
+  msg.onend  = () => setTimeout(_dequeue, 350);
+  msg.onerror = () => setTimeout(_dequeue, 350);
+  speechSynthesis.speak(msg);
+}
+
+function speakLine(text, rate, pitch) {
+  if (!text) return;
+  speechSynthesis.cancel();
+  _queue = [{text, rate: rate||0.80, pitch: pitch||0.68}];
+  setPhase('SPEAKING');
+  setTimeout(_dequeue, 260);
+}
+
+function speakSequence(lines) {
+  speechSynthesis.cancel();
+  _queue = lines;
+  setPhase('SPEAKING');
+  setTimeout(_dequeue, 260);
+}
+
+// IDLE — organism speaks unprompted when user is still
+const IDLE = [
+  {text:"Complex cases require complex pathways.",       rate:0.78, pitch:0.64},
+  {text:"The route exists. It always does.",             rate:0.74, pitch:0.60},
+  {text:"Two hundred and forty seven routes mapped.",    rate:0.76, pitch:0.62},
+  {text:"UK immigration. Every pathway. Evaluated.",     rate:0.76, pitch:0.63},
+  {text:"Tell me your situation.",                       rate:0.70, pitch:0.58},
+  {text:"I can find what others cannot.",               rate:0.72, pitch:0.60},
+];
+let _idleI = 0;
+
+function idleSpeak() {
+  if (S.phase === 'SPEAKING' || S.phase === 'DORMANT' || S.phase === 'AWAKENING') return;
+  const l = IDLE[_idleI++ % IDLE.length];
+  think(l.text, 5500);
+  speakLine(l.text, l.rate, l.pitch);
+  flashNear(FW*(0.35+Math.random()*0.3), FH*(0.35+Math.random()*0.3), 80);
+}
+
+// ══════════════════════
+// CLOCK + IDLE WATCH
+// ══════════════════════
+setInterval(() => {
+  document.getElementById('hudClock').textContent = new Date().toTimeString().slice(0,8);
+  const e = Math.floor((Date.now()-S.sessionStart)/1000);
+  document.getElementById('hudElapsed').textContent = `T+${String(Math.floor(e/60)).padStart(2,'0')}:${String(e%60).padStart(2,'0')}`;
+  S.idleSecs++;
+  if (S.idleSecs > 16 && S.phase === 'AWARE') { idleSpeak(); S.idleSecs = 0; }
+}, 1000);
+
+// ══════════════════════
+// INTAKE & ANALYSIS
+// ══════════════════════
+function openIntake() {
+  initAudio();
+  setPhase('PROCESSING');
+  think('Tell me about your case.', 99999);
+  speakLine('Tell me about your case.', 0.72, 0.60);
+  setTimeout(() => {
+    document.getElementById('intake').classList.add('open');
+    document.getElementById('result').classList.remove('show');
+    document.getElementById('result').style.display = 'none';
+    unthink();
+    setPhase('AWARE');
+  }, 1900);
+}
+
+function closeIntake() {
+  document.getElementById('intake').classList.remove('open');
+  setPhase('RESTING');
+}
+
+function buildVoice(nat, visa, job, risk) {
+  const ls = [];
+  ls.push({text:"Profile received.", rate:0.78, pitch:0.65});
+  if (nat && !['british','uk'].includes(nat.toLowerCase()))
+    ls.push({text:`${nat} national. Cross-referencing entry conditions.`, rate:0.80, pitch:0.67});
+  if (job==='yes')
+    ls.push({text:"Employment signal confirmed.", rate:0.82, pitch:0.70});
+  else
+    ls.push({text:"No sponsorship detected. Evaluating alternative pathways.", rate:0.78, pitch:0.65});
+  if (risk==='high')
+    ls.push({text:"Elevated risk. Legal review recommended.", rate:0.74, pitch:0.60});
+  const oc = getOutcome(visa, job, risk);
+  ls.push({text:"Assessment complete.", rate:0.76, pitch:0.63});
+  ls.push({text:oc.voice, rate:0.72, pitch:0.58});
+  return ls;
+}
+
+function getOutcome(visa, job, risk) {
+  if (risk==='high')    return {route:"Manual Legal Review Required",     sub:"Profile complexity warrants specialist assessment before proceeding.",               voice:"Manual legal review required. Complex profile identified."};
+  if (job==='yes' && visa==='Skilled Worker') return {route:"Skilled Worker Route — Viable",          sub:"Employment sponsorship confirmed. Pathway clear for application.",            voice:"Skilled worker route viable. Proceed to application."};
+  if (job==='yes')      return {route:"Skilled Worker Route — Conditional", sub:"Employment signal present. Documentation verification and sponsor check required.", voice:"Skilled worker pathway conditional on documentation."};
+  if (visa==='Student') return {route:"Student Route — Review Required",   sub:"CAS confirmation and sponsor verification required.",                               voice:"Student route viable. Sponsor confirmation required."};
+  if (visa==='Asylum')  return {route:"Protection Pathway",                sub:"Specialist team referral recommended.",                                             voice:"Protection pathway indicated. Specialist referral required."};
+  if (visa==='Family')  return {route:"Family / Spousal Visa Route",       sub:"Relationship evidence and financial requirements to be assessed.",                  voice:"Family visa pathway under review. Financial threshold assessment required."};
+  return {route:"Full Advisory Consultation",                              sub:"No direct route identified. Comprehensive assessment required.",                    voice:"Multiple pathways under consideration. Full consultation advised."};
+}
+
+function runAnalysis() {
+  const nat  = document.getElementById('fNat').value.trim() || 'Unknown';
+  const visa = document.getElementById('fVisa').value;
+  const job  = document.getElementById('fJob').value;
+  const risk = document.getElementById('fRisk').value;
+
+  setPhase('PROCESSING');
+  neuralPulse();
+  flashNear(FW*0.5, FH*0.5, 140);
+
+  const oc    = getOutcome(visa, job, risk);
+  const lines = buildVoice(nat, visa, job, risk);
+
+  setTimeout(() => {
+    const r = document.getElementById('result');
+    r.style.display = 'block';
+    document.getElementById('rRoute').textContent = oc.route;
+    document.getElementById('rSub').textContent   = oc.sub;
+    requestAnimationFrame(() => requestAnimationFrame(() => r.classList.add('show')));
+  }, 1500);
+
+  speakSequence(lines);
+}
+
+// ══════════════════════
+// BOOT
+// ══════════════════════
+document.getElementById('hudVisitor').textContent = S.returning ? 'RETURNING' : 'FIRST CONTACT';
+document.getElementById('hudSession').textContent = S.returning ? 'SESSION RESUMED' : 'SESSION INIT';
+
+// Auto-awaken (visual only) if user never moves — awakening sequence needs interaction for audio
+setTimeout(() => {
+  if (S.phase === 'DORMANT') {
+    S.phase = 'AWAKENING';
+    S.targetEnergy = 0.28;
+    document.getElementById('hudState').textContent = 'AWAKENING';
+    think('Aware.', 3000);
+    setTimeout(() => {
+      think('Immigration intelligence. Active.', 3200);
+      setTimeout(() => { unthink(); setPhase('AWARE'); }, 3200);
+    }, 3200);
+  }
+}, 4800);
+</script>
+</body>
+</html>

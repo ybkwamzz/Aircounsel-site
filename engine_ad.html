@@ -1009,6 +1009,7 @@ let narrationOn = true;
 let narrationRate = audioProfiles.balanced.rate;
 let narrationPitch = audioProfiles.balanced.pitch;
 let narrationVolume = audioProfiles.balanced.volume;
+let narrationOn = true;
 
 function getNarrationVoice() {
   const voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
@@ -1040,12 +1041,21 @@ function speakSceneLine(sceneNumber) {
   utterance.rate = narrationRate;
   utterance.pitch = narrationPitch;
   utterance.volume = narrationVolume;
+  utterance.rate = 0.95;
+  utterance.pitch = 0.92;
+  utterance.volume = 0.9;
   window.speechSynthesis.speak(utterance);
 }
 
 voiceToggle.addEventListener('click', () => {
   const next = narrationOn ? 'off' : 'balanced';
   applyAudioProfile(next);
+  narrationOn = !narrationOn;
+  voiceToggle.textContent = narrationOn ? 'Voice: On' : 'Voice: Off';
+  voiceToggle.setAttribute('aria-pressed', narrationOn ? 'true' : 'false');
+  if (!narrationOn && window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+  }
 });
 
 if (window.speechSynthesis) {

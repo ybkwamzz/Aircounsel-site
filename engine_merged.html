@@ -4,11 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AirCounsel Engine — 3 Variant Trial</title>
+  <title>AirCounsel Engine — Merged Trial Version</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root{--bg:#03060d;--line:rgba(0,166,255,.24);--gold:#c8a455;--text:#edf3ff;--muted:rgba(237,243,255,.64)}
+    :root{--bg:#03060d;--panel:#0a1220;--line:rgba(0,166,255,.2);--gold:#c8a455;--text:#edf3ff;--muted:rgba(237,243,255,.64)}
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:'Space Mono',monospace;background:var(--bg);color:var(--text);padding:10px;min-height:100vh}
     .wrap{max-width:1320px;margin:0 auto;border:1px solid var(--line);background:linear-gradient(180deg,#07101d,#050a14)}
@@ -21,6 +23,8 @@
     .audio-strip{display:flex;gap:.45rem;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line)}
     .audio-btn{background:rgba(0,166,255,.05);border:1px solid rgba(0,166,255,.3);color:var(--muted);padding:.35rem .56rem;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
     .audio-btn.active{color:#9fdefd;border-color:#67cfff;background:rgba(0,166,255,.16)}
+    .tab{background:transparent;border:1px solid rgba(200,164,85,.3);color:var(--muted);padding:.45rem .62rem;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+    .tab.active{color:var(--gold);border-color:rgba(200,164,85,.72);background:rgba(200,164,85,.08)}
     .viewer iframe{width:100%;height:640px;border:0;display:block;background:#02050b}
     .matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
     .cell{padding:12px;border-right:1px solid var(--line)}
@@ -54,6 +58,11 @@
       <button class="audio-btn" data-audio="soft" type="button">Audio: Soft</button>
       <button class="audio-btn" data-audio="off" type="button">Audio: Off</button>
     </div>
+
+      <button class="tab active" data-src="engine_ad.html">Variant A · Cinematic Core</button>
+      <button class="tab" data-src="engine_adaptive.html">Variant B · Manager / IT</button>
+      <button class="tab" data-src="engine_ad_signature.html">Variant C · Signature Voice</button>
+    </nav>
 
     <section class="viewer">
       <iframe id="variantFrame" src="engine_ad.html" title="Selected engine ad variant" loading="lazy" allow="autoplay"></iframe>
@@ -124,5 +133,959 @@
     const startupKey = (window.location.hash || '#a').slice(1).toLowerCase();
     setActiveVariant(startupKey);
   </script>
+    const tabs = [...document.querySelectorAll('.tab')];
+    const frame = document.getElementById('variantFrame');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        frame.src = tab.dataset.src;
+      });
+    });
+  </script>
+    .chips{display:flex;gap:.5rem;flex-wrap:wrap}
+    .chip{border:1px solid rgba(200,164,85,.35);padding:.35rem .6rem;font-size:.62rem;letter-spacing:.11em;text-transform:uppercase;color:var(--gold)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+    .col{border-right:1px solid var(--line)}
+    .col:last-child{border-right:0}
+    .label{padding:10px 14px;border-bottom:1px solid var(--line);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase}
+    .premium .label{color:var(--gold);background:rgba(200,164,85,.08)}
+    .generic .label{color:#89d3ff;background:rgba(0,166,255,.07)}
+    iframe{width:100%;height:620px;border:0;display:block;background:#02050b}
+    .foot{padding:12px 16px;border-top:1px solid var(--line);font-size:.66rem;color:var(--muted);line-height:1.7}
+    .foot b{color:var(--text)}
+    @media (max-width:980px){.grid{grid-template-columns:1fr}.col{border-right:0;border-bottom:1px solid var(--line)}.col:last-child{border-bottom:0}iframe{height:460px}}
+  </style>
+</head>
+<body>
+  <main class="wrap" aria-label="Merged premium and generic engine trial">
+    <header class="head">
+      <div>
+        <div class="k">Merged Trial Version</div>
+        <h1>Premium intelligence experience vs generic intake baseline</h1>
+      </div>
+      <div class="chips">
+        <span class="chip">Voice layer</span>
+        <span class="chip">Adaptive scoring</span>
+        <span class="chip">Manager visibility</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="col premium">
+        <div class="label">Premium Engine Experience</div>
+        <iframe src="engine_ad.html" title="Premium engine showcase" loading="lazy" allow="autoplay"></iframe>
+      </article>
+      <article class="col generic">
+        <div class="label">Generic / Ops-only View</div>
+        <iframe src="engine_adaptive.html" title="Adaptive manager and IT view" loading="lazy"></iframe>
+      </article>
+    </section>
+
+    <footer class="foot">
+      <b>How to read this:</b> left side demonstrates branded, narrative-led client experience; right side shows the operational model managers and IT teams use to verify viability controls.
+    </footer>
+  </main>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Engine — Lead Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Unbounded:wght@200;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #04040a;
+    --ember: #ff6b1a;
+    --arc: #00d4ff;
+    --volt: #b3ff00;
+  }
+  html, body { width:100%; height:100%; background:var(--ink); overflow:hidden; font-family:'DM Mono',monospace; cursor:none; }
+  #cursor { position:fixed; width:8px; height:8px; border-radius:50%; background:var(--arc); pointer-events:none; z-index:9999; transform:translate(-50%,-50%); box-shadow:0 0 12px var(--arc),0 0 30px rgba(0,212,255,0.4); transition:transform 0.1s; }
+  canvas#bg { position:fixed; inset:0; z-index:0; }
+  .grid { position:fixed; inset:0; background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px); background-size:60px 60px; z-index:1; pointer-events:none; }
+  .vignette { position:fixed; inset:0; background:radial-gradient(ellipse at center,transparent 40%,rgba(4,4,10,0.88) 100%); z-index:2; pointer-events:none; }
+  .scanlines { position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px); z-index:3; pointer-events:none; }
+  .noise { position:fixed; inset:0; z-index:4; pointer-events:none; opacity:0.025; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:200px; }
+  .topbar { position:fixed; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--arc),var(--ember),var(--arc),transparent); z-index:50; animation:scan 3s linear infinite; }
+  @keyframes scan { 0%{opacity:0.4} 50%{opacity:1} 100%{opacity:0.4} }
+  .hud { position:fixed; z-index:40; font-size:10px; color:rgba(0,212,255,0.5); letter-spacing:0.2em; text-transform:uppercase; }
+  .hud span { display:block; opacity:0; animation:hudIn 0.4s forwards; }
+  .hud.tl{top:24px;left:24px} .hud.tr{top:24px;right:24px;text-align:right} .hud.bl{bottom:24px;left:24px} .hud.br{bottom:24px;right:24px;text-align:right}
+  .hud span:nth-child(1){animation-delay:0.5s} .hud span:nth-child(2){animation-delay:0.7s} .hud span:nth-child(3){animation-delay:0.9s}
+  @keyframes hudIn{to{opacity:1}}
+  .scene { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.8s ease; z-index:20; }
+  .scene.active { opacity:1; pointer-events:all; }
+  .scene-label { font-size:10px; letter-spacing:0.4em; text-transform:uppercase; color:var(--ember); margin-bottom:16px; opacity:0; animation:fadeUp 0.6s 0.2s forwards; }
+  .scene-headline { font-family:'Unbounded',sans-serif; font-weight:900; font-size:clamp(36px,6vw,78px); line-height:1; text-align:center; color:#fff; text-transform:uppercase; opacity:0; animation:fadeUp 0.7s 0.4s forwards; max-width:800px; }
+  .scene-headline .arc{color:var(--arc)} .scene-headline .ember{color:var(--ember)} .scene-headline .volt{color:var(--volt)}
+  .scene-sub { font-size:clamp(11px,1.3vw,14px); color:rgba(255,255,255,0.5); text-align:center; margin-top:20px; max-width:560px; line-height:1.9; letter-spacing:0.05em; opacity:0; animation:fadeUp 0.6s 0.7s forwards; }
+  .scene-sub .accent{color:rgba(0,212,255,0.9)} 
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .statement { font-family:'Bebas Neue',sans-serif; font-size:clamp(60px,10vw,140px); line-height:0.9; text-align:center; letter-spacing:0.05em; text-transform:uppercase; color:#fff; opacity:0; animation:blastIn 0.5s 0.3s forwards; }
+  @keyframes blastIn { from{opacity:0;transform:scale(1.1);filter:blur(10px)} to{opacity:1;transform:scale(1);filter:blur(0)} }
+  .glitch { position:relative; }
+  .glitch::before,.glitch::after { content:attr(data-text); position:absolute; top:0;left:0;width:100%;height:100%; }
+  .glitch::before { color:var(--ember); animation:g1 3s infinite; clip-path:polygon(0 30%,100% 30%,100% 50%,0 50%); }
+  .glitch::after { color:var(--arc); animation:g2 3s infinite; clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%); }
+  @keyframes g1 { 0%,90%,100%{transform:translate(0);opacity:0} 92%{transform:translate(-3px,1px);opacity:0.8} 94%{transform:translate(3px,-1px);opacity:0} 96%{transform:translate(-2px);opacity:0.6} }
+  @keyframes g2 { 0%,88%,100%{transform:translate(0);opacity:0} 90%{transform:translate(3px,2px);opacity:0.8} 93%{transform:translate(-3px);opacity:0} }
+  #engine-wrap { position:relative; width:300px;height:300px; margin-bottom:36px; }
+  .ring { position:absolute; border-radius:50%; border:1px solid; top:50%;left:50%; transform:translate(-50%,-50%); }
+  .ring-1{width:280px;height:280px;border-color:rgba(0,212,255,0.15);animation:cw 20s linear infinite}
+  .ring-2{width:220px;height:220px;border-color:rgba(255,107,26,0.2);border-style:dashed;animation:ccw 14s linear infinite}
+  .ring-3{width:160px;height:160px;border-color:rgba(0,212,255,0.3);animation:cw 8s linear infinite}
+  @keyframes cw{to{transform:translate(-50%,-50%) rotate(360deg)}}
+  @keyframes ccw{to{transform:translate(-50%,-50%) rotate(-360deg)}}
+  .engine-core { position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,26,0.9) 0%,rgba(255,107,26,0.3) 40%,transparent 70%);box-shadow:0 0 30px var(--ember),0 0 60px rgba(255,107,26,0.4);animation:pulse 2s ease-in-out infinite; }
+  .engine-core::after{content:'';position:absolute;inset:18px;border-radius:50%;background:radial-gradient(circle,#fff8f0,var(--ember));animation:pulse 2s ease-in-out infinite reverse}
+  @keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1}50%{transform:translate(-50%,-50%) scale(1.1);opacity:0.8}}
+  .score-ticker{position:absolute;font-size:9px;color:var(--volt);letter-spacing:0.15em;white-space:nowrap;opacity:0.7}
+  .lead-feed{position:fixed;right:28px;top:50%;transform:translateY(-50%);width:195px;z-index:30;opacity:0;transition:opacity 1s}
+  .lead-feed.visible{opacity:1}
+  .lead-item{display:flex;align-items:center;gap:8px;padding:6px 10px;margin-bottom:4px;background:rgba(0,212,255,0.04);border-left:2px solid;font-size:9px;letter-spacing:0.12em;animation:slideIn 0.4s forwards;opacity:0}
+  .lead-item.hot{border-color:var(--ember);color:rgba(255,200,150,0.8)} .lead-item.warm{border-color:var(--volt);color:rgba(200,255,100,0.8)} .lead-item.cold{border-color:rgba(100,120,150,0.5);color:rgba(150,170,200,0.5)}
+  @keyframes slideIn{from{transform:translateX(20px);opacity:0}to{transform:translateX(0);opacity:1}}
+  .score-badge{margin-left:auto;font-weight:500;font-size:10px}
+  .data-col{position:fixed;left:28px;top:50%;transform:translateY(-50%);width:155px;z-index:30;opacity:0;transition:opacity 1s}
+  .data-col.visible{opacity:1}
+  .data-line{font-size:8px;color:rgba(0,212,255,0.45);letter-spacing:0.1em;margin-bottom:6px;padding-left:10px;border-left:1px solid rgba(0,212,255,0.15)}
+  .data-line .val{color:var(--arc)}
+  .anomaly{font-family:'Unbounded',sans-serif;font-size:clamp(13px,1.8vw,20px);font-weight:200;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.3);text-align:center;margin-top:12px;opacity:0;animation:fadeUp 0.8s 0.9s forwards}
+  .anomaly .strike{text-decoration:line-through;color:rgba(255,107,26,0.5)} .anomaly .bright{color:rgba(255,255,255,0.9)}
+  .divider{width:0;height:1px;background:linear-gradient(90deg,transparent,var(--arc),transparent);margin:24px auto;animation:expandLine 0.8s 0.6s forwards}
+  @keyframes expandLine{to{width:300px}}
+  .split-container{display:flex;gap:2px;width:min(680px,88vw);height:210px;margin-top:16px;opacity:0;animation:fadeUp 0.6s 0.8s forwards}
+  .split-panel{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;gap:9px;position:relative;overflow:hidden}
+  .split-old{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06)}
+  .split-new{background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.2)}
+  .split-label{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.4}
+  .split-old .split-label{color:rgba(255,100,100,0.7)} .split-new .split-label{color:var(--arc)}
+  .split-item{font-size:10px;letter-spacing:0.1em;color:rgba(255,255,255,0.35);text-align:center;padding:4px 10px;border:1px solid rgba(255,255,255,0.05)}
+  .split-item.live{color:var(--volt);border-color:rgba(179,255,0,0.2);background:rgba(179,255,0,0.03);animation:blink 1.5s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0.5}}
+  .split-old .split-item{text-decoration:line-through;opacity:0.3}
+  .cta-block{margin-top:36px;display:flex;gap:16px;opacity:0;animation:fadeUp 0.6s 1.1s forwards}
+  .btn{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;padding:14px 32px;border:none;cursor:pointer;position:relative;overflow:hidden}
+  .btn-primary{background:var(--ember);color:#000;font-weight:500}
+  .btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transform:translateX(-100%);animation:shimmer 2.5s 1.5s infinite}
+  @keyframes shimmer{to{transform:translateX(100%)}}
+  .btn-ghost{background:transparent;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.15)}
+  .progress-bar{position:fixed;bottom:0;left:0;height:2px;background:linear-gradient(90deg,var(--arc),var(--ember));z-index:100;transition:width 5s linear;box-shadow:0 0 8px var(--arc)}
+  .scene-dots{position:fixed;bottom:38px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:50}
+  .dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all 0.3s;cursor:pointer}
+  .dot.active{background:var(--arc);box-shadow:0 0 6px var(--arc);width:20px;border-radius:2px}
+  .flash{position:fixed;inset:0;background:#fff;z-index:200;opacity:0;pointer-events:none}
+  .flash.go{animation:fl 0.3s forwards}
+  @keyframes fl{0%{opacity:0.6}100%{opacity:0}}
+  #map-canvas{position:absolute;inset:0;opacity:0;transition:opacity 1s}
+  #map-canvas.visible{opacity:1}
+
+  /* ── AUDIO UI ── */
+  #audio-ui {
+    position:fixed;
+    bottom:58px;
+    right:28px;
+    z-index:60;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    opacity:0;
+    transition:opacity 0.5s;
+  }
+  #audio-ui.visible { opacity:1; }
+  #mute-btn {
+    width:32px;height:32px;
+    border:1px solid rgba(0,212,255,0.3);
+    background:rgba(0,0,0,0.6);
+    color:var(--arc);
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;
+    transition:all 0.2s;
+  }
+  #mute-btn:hover{border-color:var(--arc);background:rgba(0,212,255,0.08)}
+  .wave-viz {
+    display:flex;align-items:center;gap:2px;height:20px;
+  }
+  .wave-bar {
+    width:2px;
+    background:var(--arc);
+    border-radius:1px;
+    opacity:0.6;
+    animation:wave 0.8s ease-in-out infinite;
+  }
+  .wave-bar:nth-child(1){height:4px;animation-delay:0s}
+  .wave-bar:nth-child(2){height:10px;animation-delay:0.1s}
+  .wave-bar:nth-child(3){height:16px;animation-delay:0.2s}
+  .wave-bar:nth-child(4){height:10px;animation-delay:0.3s}
+  .wave-bar:nth-child(5){height:6px;animation-delay:0.4s}
+  .wave-bar:nth-child(6){height:14px;animation-delay:0.15s}
+  .wave-bar:nth-child(7){height:8px;animation-delay:0.25s}
+  @keyframes wave {
+    0%,100%{transform:scaleY(0.4);opacity:0.4}
+    50%{transform:scaleY(1);opacity:0.9}
+  }
+  .wave-viz.paused .wave-bar { animation-play-state:paused; opacity:0.2; }
+
+  /* ── VOICE CAPTION ── */
+  #caption {
+    position:fixed;
+    bottom:80px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:55;
+    font-size:11px;
+    letter-spacing:0.15em;
+    color:rgba(255,255,255,0.55);
+    text-align:center;
+    max-width:500px;
+    padding:8px 20px;
+    background:rgba(4,4,10,0.7);
+    border-top:1px solid rgba(0,212,255,0.15);
+    opacity:0;
+    transition:opacity 0.5s;
+    pointer-events:none;
+    font-style:italic;
+  }
+  #caption.show { opacity:1; }
+
+  /* VOICE SLOT GUIDE */
+  #voice-guide {
+    position:fixed;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    z-index:300;
+    background:rgba(4,4,10,0.97);
+    border:1px solid rgba(0,212,255,0.2);
+    padding:40px;
+    max-width:460px;
+    width:90%;
+    display:none;
+  }
+  #voice-guide.show{display:block}
+  #voice-guide h2{font-family:'Unbounded',sans-serif;font-size:16px;color:var(--arc);margin-bottom:20px;letter-spacing:0.2em}
+  #voice-guide p{font-size:10px;color:rgba(255,255,255,0.5);line-height:1.8;letter-spacing:0.08em;margin-bottom:14px}
+  #voice-guide code{color:var(--volt);font-size:9px;display:block;padding:8px 12px;background:rgba(179,255,0,0.04);border-left:2px solid var(--volt);margin:8px 0;letter-spacing:0.05em}
+  #voice-guide .close-btn{margin-top:20px;background:var(--ember);color:#000;border:none;padding:10px 24px;font-size:10px;letter-spacing:0.2em;cursor:pointer;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div class="topbar"></div>
+<div class="grid"></div>
+<div class="vignette"></div>
+<div class="scanlines"></div>
+<div class="noise"></div>
+<div class="flash" id="flash"></div>
+
+<!-- VOICE GUIDE OVERLAY -->
+<div id="voice-guide">
+  <h2>// Voice System Active</h2>
+  <p>Browser voice is <strong style="color:var(--volt)">live</strong>. Each scene speaks automatically — no files needed. Tone adapts per scene: low and slow for impact, quicker for data moments.</p>
+  <code>// Upgrade path: swap in ElevenLabs MP3s<br>
+const VOICE_FILES = {<br>
+  &nbsp;1: 'scene1_vo.mp3',<br>
+  &nbsp;2: 'scene2_vo.mp3',<br>
+  &nbsp;3: 'scene3_vo.mp3',<br>
+  &nbsp;// MP3s override browser voice per scene<br>
+};</code>
+  <p>Leave entries commented to keep browser TTS. Add MP3 paths to override specific scenes with ElevenLabs audio.</p>
+  <button class="close-btn" onclick="document.getElementById('voice-guide').classList.remove('show')">Run The Engine</button>
+</div>
+
+<!-- AUDIO UI -->
+<div id="audio-ui">
+  <div class="wave-viz" id="waveViz">
+    <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+    <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+    <div class="wave-bar"></div>
+  </div>
+  <button id="mute-btn" title="Toggle audio" onclick="toggleMute()">🔊</button>
+</div>
+
+<!-- CAPTION -->
+<div id="caption" id="caption"></div>
+
+<!-- HUD -->
+<div class="hud tl">
+  <span>ENG // LIVE</span>
+  <span id="clock">--:--:--</span>
+  <span>UK GRID ACTIVE</span>
+</div>
+<div class="hud tr">
+  <span>LEAD INTEL v4.7</span>
+  <span id="leads-processed">LEADS: 0</span>
+  <span>BHM → LDS</span>
+</div>
+<div class="hud bl">
+  <span>SIGNAL STRONG</span>
+  <span id="score-live">AVG SCORE: —</span>
+</div>
+<div class="hud br">
+  <span>FILTER: ACTIVE</span>
+  <span>ANOMALIES: <span id="anomaly-count" style="color:var(--ember)">0</span></span>
+</div>
+
+<div class="lead-feed" id="leadFeed"></div>
+<div class="data-col" id="dataCol">
+  <div class="data-line">PIPELINE <span class="val" id="d1">—</span></div>
+  <div class="data-line">HOT LEADS <span class="val" id="d2">—</span></div>
+  <div class="data-line">FILTERED <span class="val" id="d3">—</span></div>
+  <div class="data-line">CONVERSION <span class="val" id="d4">—</span></div>
+  <div class="data-line">REGIONS <span class="val">UK-ALL</span></div>
+  <div class="data-line">STATUS <span class="val" style="color:var(--volt)">RUNNING</span></div>
+</div>
+
+<canvas id="bg"></canvas>
+<canvas id="map-canvas"></canvas>
+<div class="progress-bar" id="progressBar" style="width:0%"></div>
+<div class="scene-dots" id="dots"></div>
+
+<!-- SCENES -->
+<div class="scene active" id="s0">
+  <div style="text-align:center">
+    <div class="scene-label" style="animation-delay:0s">Initialising Engine</div>
+    <div style="font-size:11px;color:rgba(0,212,255,0.6);letter-spacing:0.2em;line-height:2;text-align:left;max-width:340px;opacity:0;animation:fadeUp 0.4s 0.3s forwards">
+      <div>► CONNECTING UK GRID.........<span style="color:var(--volt)">OK</span></div>
+      <div>► LOADING SCORE MODELS........<span style="color:var(--volt)">OK</span></div>
+      <div>► PIPELINE SYNC BIRMINGHAM...<span style="color:var(--volt)">OK</span></div>
+      <div>► PIPELINE SYNC LEEDS.........<span style="color:var(--volt)">OK</span></div>
+      <div>► FILTER PROTOCOLS............<span style="color:var(--volt)">OK</span></div>
+      <div id="bootFinal" style="opacity:0;margin-top:10px">► ENGINE <span style="color:var(--ember);font-family:'Bebas Neue';font-size:20px;vertical-align:middle;letter-spacing:0.1em"> LIVE</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="scene" id="s1">
+  <div class="scene-label">The Intelligence Engine</div>
+  <div id="engine-wrap">
+    <div class="ring ring-1"></div>
+    <div class="ring ring-2"></div>
+    <div class="ring ring-3"></div>
+    <div class="engine-core"></div>
+    <div class="score-ticker" style="top:10px;left:50%;transform:translateX(-50%)">SCORING // FILTERING // RANKING</div>
+    <div class="score-ticker" style="bottom:10px;left:50%;transform:translateX(-50%)">BHM ◆ MAN ◆ LDS ◆ SHF ◆ NOT</div>
+  </div>
+  <div class="scene-headline">While You Were <span class="ember">Grafting</span></div>
+  <div class="scene-sub">The engine's already been runnin'.<br><span class="accent">Scores calculated. Dead weight filtered.</span><br>Hot leads ranked — before tha's even had yer brew.</div>
+</div>
+
+<div class="scene" id="s2">
+  <div class="scene-label">UK Grid — Live Coverage</div>
+  <div class="scene-headline" style="font-size:clamp(28px,4vw,56px)">
+    <span class="arc">Birmingham</span> to <span class="volt">Leeds</span><br>
+    <span style="font-size:0.5em;font-weight:200;color:rgba(255,255,255,0.4)">Every hot lead. Every region. One engine.</span>
+  </div>
+  <div class="scene-sub">Manchester. Sheffield. Nottingham. Bristol.<br><span class="accent">The whole of UK — scored, sorted, delivered.</span></div>
+</div>
+
+<div class="scene" id="s3">
+  <div class="scene-label">Then vs Now</div>
+  <div class="scene-headline" style="font-size:clamp(28px,4vw,54px)">Stop <span class="ember">Guessin'</span>.<br>Start <span class="volt">Knowing</span>.</div>
+  <div class="split-container">
+    <div class="split-panel split-old">
+      <div class="split-label">The Old Way</div>
+      <div class="split-item">Sticky notes</div>
+      <div class="split-item">Cold calls</div>
+      <div class="split-item">Gut feeling</div>
+      <div class="split-item">Spreadsheets</div>
+    </div>
+    <div style="display:flex;align-items:center;padding:0 4px;color:var(--ember);font-family:'Bebas Neue';font-size:30px">VS</div>
+    <div class="split-panel split-new">
+      <div class="split-label">The Engine</div>
+      <div class="split-item live">Auto-scored leads</div>
+      <div class="split-item live">Real-time filter</div>
+      <div class="split-item live">UK-wide pipeline</div>
+      <div class="split-item live">Zero dead weight</div>
+    </div>
+  </div>
+</div>
+
+<div class="scene" id="s4">
+  <div class="statement glitch" data-text="The Future">The Future</div>
+  <div class="statement" style="color:var(--arc)">Is Here.</div>
+  <div class="statement" style="color:var(--ember);font-size:clamp(40px,6vw,90px)">With Us. Now.</div>
+  <div class="divider"></div>
+  <div class="anomaly"><span class="strike">Ignore it</span> &nbsp;·&nbsp; <span class="bright">Join it</span> &nbsp;·&nbsp; <span class="strike">Be the anomaly</span></div>
+</div>
+
+<div class="scene" id="s5">
+  <div class="scene-label" style="letter-spacing:0.6em;font-size:8px">Don't Be The Anomaly</div>
+  <div class="scene-headline" style="font-size:clamp(50px,8vw,110px);letter-spacing:-0.02em"><span class="glitch" data-text="THE ENGINE">THE ENGINE</span></div>
+  <div class="scene-sub" style="font-size:11px;letter-spacing:0.15em;margin-top:8px">UK Lead Scoring &amp; Intelligence Platform<br><span class="accent">Birmingham · Leeds · Manchester · Sheffield</span></div>
+  <div class="cta-block">
+    <button class="btn btn-primary" onclick="restart()">WATCH AGAIN</button>
+    <button class="btn btn-ghost" onclick="document.getElementById('voice-guide').classList.add('show')">ADD VOICE</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// 🎙️ VOICE FILE SLOTS — add ElevenLabs MP3s to override browser voice
+// ═══════════════════════════════════════════
+const VOICE_FILES = {
+  // 1: 'scene1_vo.mp3',
+  // 2: 'scene2_vo.mp3',
+  // 3: 'scene3_vo.mp3',
+  // 4: 'scene4_vo.mp3',
+  // 5: 'scene5_vo.mp3',
+};
+
+// Scene captions (shown as subtitles even without audio files)
+const CAPTIONS = {
+  0: '',
+  1: '"Alright, listen \'ere. While you\'ve been graftin\'..."',
+  2: '"Birmingham to Leeds — every hot lead, sorted."',
+  3: '"This int just software, pal. Stop guessin\'. Start knowing."',
+  4: '"The future is here. With us. Now."',
+  5: '"Don\'t be the anomaly."',
+};
+
+// ═══════════════════════════════════════════
+// 🧠 ADAPTIVE BROWSER VOICE ENGINE
+// Scene-specific lines + tone — no imports, no API
+// ═══════════════════════════════════════════
+const SCENE_VOICE = {
+  0: { text: '',                                                     rate: 0.88, pitch: 0.75 },
+  1: { text: "While you've been grafting, the engine's been running. Scores calculated. Dead weight filtered. Hot leads ranked.",
+       rate: 0.82, pitch: 0.70 },
+  2: { text: "Birmingham to Leeds. Manchester. Sheffield. Every region. Every hot lead — scored, sorted, and delivered.",
+       rate: 0.86, pitch: 0.72 },
+  3: { text: "Stop guessing. Start knowing. Sticky notes and cold calls are finished. The engine filters, ranks, and delivers.",
+       rate: 0.84, pitch: 0.68 },
+  4: { text: "The future is here. With us. Now.",
+       rate: 0.72, pitch: 0.60 },
+  5: { text: "Don't be the anomaly.",
+       rate: 0.70, pitch: 0.58 },
+};
+
+let _ttsLastScene = -1;
+let _ttsUtterance = null;
+
+function _getVoice() {
+  const voices = speechSynthesis.getVoices();
+  return (
+    voices.find(v => v.lang === 'en-GB' && v.name.toLowerCase().includes('male')) ||
+    voices.find(v => v.lang === 'en-GB') ||
+    voices.find(v => v.lang.startsWith('en')) ||
+    voices[0]
+  );
+}
+
+// Ensure voices are cached
+if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+  speechSynthesis.onvoiceschanged = () => {};
+}
+
+function speakScene(sceneIndex) {
+  if (isMuted) return;
+  const cfg = SCENE_VOICE[sceneIndex];
+  if (!cfg || !cfg.text) return;
+
+  // Cancel any running speech
+  speechSynthesis.cancel();
+
+  const msg = new SpeechSynthesisUtterance(cfg.text);
+  msg.voice  = _getVoice();
+  msg.rate   = cfg.rate;
+  msg.pitch  = cfg.pitch;
+  msg.volume = 0.92;
+
+  msg.onstart = () => {
+    const wave = document.getElementById('waveViz');
+    if (wave) wave.classList.remove('paused');
+  };
+  msg.onend = () => {
+    // wave continues — ambient audio keeps waveform active
+  };
+
+  _ttsUtterance = msg;
+  _ttsLastScene = sceneIndex;
+  speechSynthesis.speak(msg);
+}
+
+// ═══════════════════════════════════════════
+// WEB AUDIO ENGINE — ambient + SFX (no files needed)
+// ═══════════════════════════════════════════
+let audioCtx, masterGain, droneGain, pulseGain;
+let oscillators = [];
+let audioStarted = false;
+let isMuted = false;
+let currentVO = null;
+
+function initAudio() {
+  if (audioStarted) return;
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  masterGain = audioCtx.createGain();
+  masterGain.gain.setValueAtTime(0.0, audioCtx.currentTime);
+  masterGain.gain.linearRampToValueAtTime(0.55, audioCtx.currentTime + 3);
+  masterGain.connect(audioCtx.destination);
+
+  // ── DEEP DRONE (the "engine hum") ──
+  droneGain = audioCtx.createGain();
+  droneGain.gain.value = 0.18;
+  droneGain.connect(masterGain);
+
+  [40, 80, 120].forEach((freq, i) => {
+    const osc = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    osc.type = i === 0 ? 'sine' : 'triangle';
+    osc.frequency.value = freq;
+    g.gain.value = i === 0 ? 1 : 0.3;
+    osc.connect(g);
+    g.connect(droneGain);
+    osc.start();
+    oscillators.push(osc);
+  });
+
+  // ── LOFI BEAT ──
+  pulseGain = audioCtx.createGain();
+  pulseGain.gain.value = 0.13;
+  pulseGain.connect(masterGain);
+  scheduleLofi();
+
+  // ── VINYL CRACKLE (warm noise bed) ──
+  const crackleBuf = audioCtx.createBuffer(1, audioCtx.sampleRate * 2, audioCtx.sampleRate);
+  const crackleData = crackleBuf.getChannelData(0);
+  for (let i = 0; i < crackleData.length; i++) crackleData[i] = (Math.random() * 2 - 1) * 0.012;
+  const crackleSrc = audioCtx.createBufferSource();
+  crackleSrc.buffer = crackleBuf;
+  crackleSrc.loop = true;
+  const crackleFilter = audioCtx.createBiquadFilter();
+  crackleFilter.type = 'bandpass';
+  crackleFilter.frequency.value = 2200;
+  crackleFilter.Q.value = 0.4;
+  const crackleGain = audioCtx.createGain();
+  crackleGain.gain.value = 0.018;
+  crackleSrc.connect(crackleFilter);
+  crackleFilter.connect(crackleGain);
+  crackleGain.connect(masterGain);
+  crackleSrc.start();
+
+  // ── WARM TAPE HUM (lofi character) ──
+  const tapeOsc = audioCtx.createOscillator();
+  const tapeGain = audioCtx.createGain();
+  const tapeLFO = audioCtx.createOscillator();
+  const tapeLFOGain = audioCtx.createGain();
+  tapeOsc.type = 'sine';
+  tapeOsc.frequency.value = 1320;
+  tapeGain.gain.value = 0.007;
+  tapeLFO.frequency.value = 0.08;
+  tapeLFOGain.gain.value = 180;
+  tapeLFO.connect(tapeLFOGain);
+  tapeLFOGain.connect(tapeOsc.frequency);
+  tapeOsc.connect(tapeGain);
+  tapeGain.connect(masterGain);
+  tapeOsc.start();
+  tapeLFO.start();
+
+  audioStarted = true;
+  document.getElementById('audio-ui').classList.add('visible');
+}
+
+function scheduleLofi() {
+  if (!audioCtx) return;
+  const now = audioCtx.currentTime;
+  const bpm = 78; // slow, sleepy lofi tempo
+  const beat = 60 / bpm;
+  const bar = beat * 4;
+
+  // ── WARM KICK (muffled, round, lofi) ──
+  function makeKick(t) {
+    const dur = audioCtx.sampleRate * 0.22;
+    const buf = audioCtx.createBuffer(1, dur, audioCtx.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < dur; i++) {
+      const env = Math.pow(1 - i / dur, 2.2);
+      d[i] = Math.sin(2 * Math.PI * (55 + 140 * Math.pow(1 - i / dur, 3)) * i / audioCtx.sampleRate) * env * 0.9;
+    }
+    const src = audioCtx.createBufferSource();
+    const g = audioCtx.createGain();
+    const lp = audioCtx.createBiquadFilter();
+    src.buffer = buf;
+    lp.type = 'lowpass'; lp.frequency.value = 180;
+    g.gain.value = 0.55;
+    src.connect(lp); lp.connect(g); g.connect(pulseGain);
+    src.start(t);
+  }
+
+  // ── BRUSHED SNARE (soft, roomy) ──
+  function makeSnare(t) {
+    const dur = audioCtx.sampleRate * 0.18;
+    const buf = audioCtx.createBuffer(1, dur, audioCtx.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < dur; i++) {
+      const env = Math.pow(1 - i / dur, 1.6);
+      d[i] = (Math.random() * 2 - 1) * env * 0.45 +
+              Math.sin(2 * Math.PI * 200 * i / audioCtx.sampleRate) * env * 0.12;
+    }
+    const src = audioCtx.createBufferSource();
+    const g = audioCtx.createGain();
+    const bp = audioCtx.createBiquadFilter();
+    src.buffer = buf;
+    bp.type = 'bandpass'; bp.frequency.value = 1400; bp.Q.value = 0.7;
+    g.gain.value = 0.28;
+    src.connect(bp); bp.connect(g); g.connect(pulseGain);
+    src.start(t);
+  }
+
+  // ── SOFT CLOSED HI-HAT ──
+  function makeHat(t, vol) {
+    const dur = audioCtx.sampleRate * 0.04;
+    const buf = audioCtx.createBuffer(1, dur, audioCtx.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < dur; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / dur, 3);
+    const src = audioCtx.createBufferSource();
+    const g = audioCtx.createGain();
+    const hp = audioCtx.createBiquadFilter();
+    src.buffer = buf;
+    hp.type = 'highpass'; hp.frequency.value = 7000;
+    g.gain.value = vol * 0.14;
+    src.connect(hp); hp.connect(g); g.connect(pulseGain);
+    src.start(t);
+  }
+
+  // ── LOFI BASS NOTE (warm low hum, one note per bar) ──
+  function makeBass(t) {
+    const notes = [55, 49, 52, 58]; // A1, G#1, B1, Bb1
+    const freq = notes[Math.floor(Math.random() * notes.length)];
+    const osc = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    const lp = audioCtx.createBiquadFilter();
+    osc.type = 'triangle';
+    osc.frequency.value = freq;
+    lp.type = 'lowpass'; lp.frequency.value = 220;
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.09, t + 0.06);
+    g.gain.setValueAtTime(0.07, t + beat * 1.5);
+    g.gain.linearRampToValueAtTime(0, t + bar - 0.1);
+    osc.connect(lp); lp.connect(g); g.connect(masterGain);
+    osc.start(t); osc.stop(t + bar);
+  }
+
+  // Pattern: kick on 1 & 3, snare on 2 & 4, hats on offbeats
+  makeKick(now);
+  makeHat(now + beat * 0.5, 0.6);
+  makeSnare(now + beat * 1);
+  makeHat(now + beat * 1.5, 0.9);
+  makeKick(now + beat * 1.8);
+  makeHat(now + beat * 2, 0.5);
+  makeSnare(now + beat * 3);
+  makeHat(now + beat * 3.5, 0.7);
+  makeHat(now + beat * 3.75, 0.4);
+  makeBass(now);
+
+  setTimeout(scheduleLofi, bar * 1000 - 20);
+}
+
+function playTransitionHit() {
+  if (!audioCtx) return;
+  const t = audioCtx.currentTime;
+
+  // Soft warm pad chord — lofi transition breath
+  const chordFreqs = [130.8, 164.8, 196.0, 246.9]; // C3 E3 G3 B3 — warm jazz minor feel
+  chordFreqs.forEach((freq, i) => {
+    const osc = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    const lp = audioCtx.createBiquadFilter();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    lp.type = 'lowpass';
+    lp.frequency.value = 900;
+    g.gain.setValueAtTime(0, t + i * 0.04);
+    g.gain.linearRampToValueAtTime(0.038, t + i * 0.04 + 0.18);
+    g.gain.linearRampToValueAtTime(0, t + 1.6);
+    osc.connect(lp); lp.connect(g); g.connect(masterGain);
+    osc.start(t + i * 0.04);
+    osc.stop(t + 2);
+  });
+
+  // Very faint soft noise swoosh (tape flutter feel, no whistle)
+  const swBuf = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.3, audioCtx.sampleRate);
+  const swData = swBuf.getChannelData(0);
+  for (let i = 0; i < swData.length; i++) swData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / swData.length, 1.2) * 0.3;
+  const sw = audioCtx.createBufferSource();
+  const swG = audioCtx.createGain();
+  const swF = audioCtx.createBiquadFilter();
+  sw.buffer = swBuf;
+  swF.type = 'bandpass'; swF.frequency.value = 800; swF.Q.value = 1.5;
+  swG.gain.value = 0.04;
+  sw.connect(swF); swF.connect(swG); swG.connect(masterGain);
+  sw.start(t);
+}
+
+function playSceneSwellIn(sceneIndex) {
+  if (!audioCtx) return;
+  const t = audioCtx.currentTime;
+
+  if (sceneIndex === 4) {
+    // BIG swell for "The Future Is Here"
+    [110, 165, 220, 330].forEach((freq, i) => {
+      const osc = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      g.gain.setValueAtTime(0, t + i * 0.08);
+      g.gain.linearRampToValueAtTime(0.06, t + i * 0.08 + 0.8);
+      g.gain.linearRampToValueAtTime(0, t + 3.5);
+      osc.connect(g);
+      g.connect(masterGain);
+      osc.start(t + i * 0.08);
+      osc.stop(t + 4);
+    });
+  }
+
+  if (sceneIndex === 5) {
+    // Fade to quiet for end card
+    droneGain && (droneGain.gain.linearRampToValueAtTime(0.06, t + 2));
+  }
+
+  if (sceneIndex === 1) {
+    // Restore drone on scene 1
+    droneGain && (droneGain.gain.linearRampToValueAtTime(0.18, t + 1));
+  }
+}
+
+function toggleMute() {
+  if (!audioCtx) return;
+  isMuted = !isMuted;
+  const btn = document.getElementById('mute-btn');
+  const wave = document.getElementById('waveViz');
+  masterGain.gain.setTargetAtTime(isMuted ? 0 : 0.55, audioCtx.currentTime, 0.3);
+  btn.textContent = isMuted ? '🔇' : '🔊';
+  wave.classList.toggle('paused', isMuted);
+  if (currentVO) isMuted ? currentVO.pause() : currentVO.play().catch(()=>{});
+  if (isMuted) { speechSynthesis.cancel(); } 
+  else if (_ttsLastScene >= 0) { speakScene(_ttsLastScene); } // resume TTS for current scene
+}
+
+function playVoiceover(sceneIndex) {
+  // MP3 override: if a file is set for this scene, use it
+  if (VOICE_FILES[sceneIndex]) {
+    speechSynthesis.cancel(); // stop TTS if running
+    if (currentVO) { currentVO.pause(); currentVO.currentTime = 0; currentVO = null; }
+    const audio = new Audio(VOICE_FILES[sceneIndex]);
+    audio.volume = 0.85;
+    if (isMuted) return;
+    audio.play().catch(() => {});
+    currentVO = audio;
+    return;
+  }
+  // No MP3 — use adaptive browser voice
+  if (currentVO) { currentVO.pause(); currentVO.currentTime = 0; currentVO = null; }
+  // Small delay so scene flash + audio init don't collide
+  setTimeout(() => speakScene(sceneIndex), 320);
+}
+
+function showCaption(sceneIndex) {
+  const cap = document.getElementById('caption');
+  const text = CAPTIONS[sceneIndex];
+  if (!text) { cap.classList.remove('show'); return; }
+  cap.textContent = text;
+  cap.classList.add('show');
+  setTimeout(() => cap.classList.remove('show'), 4000);
+}
+
+// ═══════════════════════════════════════════
+// CURSOR
+// ═══════════════════════════════════════════
+document.addEventListener('mousemove', e => {
+  document.getElementById('cursor').style.cssText += `left:${e.clientX}px;top:${e.clientY}px`;
+});
+
+// ═══════════════════════════════════════════
+// CLOCK
+// ═══════════════════════════════════════════
+setInterval(() => { document.getElementById('clock').textContent = new Date().toTimeString().slice(0,8); }, 1000);
+
+// ═══════════════════════════════════════════
+// PARTICLE BG
+// ═══════════════════════════════════════════
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d');
+let W, H;
+const particles = [];
+
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+
+class P {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random()*W; this.y = Math.random()*H;
+    this.vx = (Math.random()-.5)*.4; this.vy = (Math.random()-.5)*.4;
+    this.life = Math.random(); this.maxLife = .4+Math.random()*.6;
+    this.size = .5+Math.random()*1.5;
+    this.type = Math.random()>.7?'e':'a';
+  }
+  update() {
+    this.x+=this.vx; this.y+=this.vy; this.life+=.003;
+    if(this.life>this.maxLife||this.x<0||this.x>W||this.y<0||this.y>H) this.reset();
+  }
+  draw() {
+    const a = Math.sin((this.life/this.maxLife)*Math.PI)*.6;
+    ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    ctx.fillStyle = this.type==='e'?`rgba(255,107,26,${a})`:`rgba(0,212,255,${a})`;
+    ctx.fill();
+  }
+}
+for(let i=0;i<120;i++) particles.push(new P());
+
+function animBg() {
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p=>{p.update();p.draw()});
+  for(let i=0;i<particles.length;i++) for(let j=i+1;j<particles.length;j++) {
+    const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+    const d=Math.sqrt(dx*dx+dy*dy);
+    if(d<80){ ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.strokeStyle=`rgba(0,212,255,${(1-d/80)*.06})`; ctx.lineWidth=.5; ctx.stroke(); }
+  }
+  requestAnimationFrame(animBg);
+}
+animBg();
+
+// ═══════════════════════════════════════════
+// MAP
+// ═══════════════════════════════════════════
+const mapCanvas = document.getElementById('map-canvas');
+const mctx = mapCanvas.getContext('2d');
+function resizeMap() { mapCanvas.width = window.innerWidth; mapCanvas.height = window.innerHeight; }
+resizeMap(); window.addEventListener('resize', resizeMap);
+
+const cities = [
+  {name:'Birmingham',rx:.47,ry:.55,hot:true},
+  {name:'Leeds',rx:.49,ry:.40,hot:true},
+  {name:'Manchester',rx:.44,ry:.43,hot:false},
+  {name:'Sheffield',rx:.50,ry:.47,hot:false},
+  {name:'Nottingham',rx:.52,ry:.52,hot:false},
+  {name:'London',rx:.54,ry:.70,hot:false},
+  {name:'Bristol',rx:.40,ry:.65,hot:false},
+  {name:'Newcastle',rx:.50,ry:.28,hot:false},
+];
+let mapLines=[], mapAnim=0;
+
+function drawMap() {
+  mctx.clearRect(0,0,mapCanvas.width,mapCanvas.height);
+  const cx=x=>x*mapCanvas.width, cy=y=>y*mapCanvas.height;
+  mapLines.forEach(line=>{
+    const a=cities[line.from],b=cities[line.to];
+    const prog=Math.min(1,line.progress);
+    const ex=cx(a.rx)+(cx(b.rx)-cx(a.rx))*prog, ey=cy(a.ry)+(cy(b.ry)-cy(a.ry))*prog;
+    mctx.beginPath(); mctx.moveTo(cx(a.rx),cy(a.ry)); mctx.lineTo(ex,ey);
+    mctx.strokeStyle=`rgba(0,212,255,${.2*prog})`; mctx.lineWidth=1; mctx.stroke();
+    if(prog<1){ mctx.beginPath(); mctx.arc(ex,ey,2,0,Math.PI*2); mctx.fillStyle='rgba(0,212,255,0.9)'; mctx.fill(); }
+    line.progress+=.015;
+  });
+  cities.forEach(c=>{
+    mctx.beginPath(); mctx.arc(cx(c.rx),cy(c.ry),c.hot?4:2.5,0,Math.PI*2);
+    mctx.fillStyle=c.hot?'rgba(255,107,26,0.9)':'rgba(0,212,255,0.5)'; mctx.fill();
+    if(c.hot){ mctx.beginPath(); mctx.arc(cx(c.rx),cy(c.ry),8+Math.sin(mapAnim*.05)*4,0,Math.PI*2); mctx.strokeStyle=`rgba(255,107,26,${.3+Math.sin(mapAnim*.05)*.2})`; mctx.lineWidth=1; mctx.stroke(); }
+    mctx.fillStyle='rgba(255,255,255,0.35)'; mctx.font='9px DM Mono,monospace';
+    mctx.fillText(c.name.toUpperCase(),cx(c.rx)+8,cy(c.ry)+3);
+  });
+  mapAnim++;
+  if(currentScene===2) requestAnimationFrame(drawMap);
+}
+
+// ═══════════════════════════════════════════
+// LEAD FEED
+// ═══════════════════════════════════════════
+const names=['J.Hassan','M.Thompson','S.Patel','R.Clarke','D.Williams','K.Okafor','A.Broderick','L.Sharma','T.Walsh','N.Ahmed','P.Griffiths','C.Kowalski'];
+const statuses=[{label:'HOT',cls:'hot',score:92},{label:'HOT',cls:'hot',score:88},{label:'WARM',cls:'warm',score:74},{label:'WARM',cls:'warm',score:69},{label:'COLD',cls:'cold',score:31},{label:'HOT',cls:'hot',score:95}];
+let leadCount=0,totalScore=0,anomalyCount=0,leadInterval;
+
+function addLead() {
+  const feed=document.getElementById('leadFeed');
+  const name=names[Math.floor(Math.random()*names.length)];
+  const status=statuses[Math.floor(Math.random()*statuses.length)];
+  const score=status.score+Math.floor(Math.random()*5-2);
+  leadCount++; totalScore+=score;
+  if(status.cls==='cold') anomalyCount++;
+  const item=document.createElement('div');
+  item.className=`lead-item ${status.cls}`;
+  item.innerHTML=`<span>${name}</span><span class="score-badge">${score}</span>`;
+  feed.insertBefore(item,feed.firstChild);
+  if(feed.children.length>8) feed.removeChild(feed.lastChild);
+  document.getElementById('leads-processed').textContent=`LEADS: ${leadCount}`;
+  document.getElementById('score-live').textContent=`AVG SCORE: ${Math.round(totalScore/leadCount)}`;
+  document.getElementById('anomaly-count').textContent=anomalyCount;
+}
+
+function updateDataCol() {
+  const pipeline=1200+Math.floor(Math.random()*300);
+  const hot=Math.floor(pipeline*.22);
+  const filtered=pipeline-hot-Math.floor(pipeline*.3);
+  document.getElementById('d1').textContent=pipeline.toLocaleString();
+  document.getElementById('d2').textContent=hot.toLocaleString();
+  document.getElementById('d3').textContent=filtered.toLocaleString();
+  document.getElementById('d4').textContent=(18+Math.random()*6).toFixed(1)+'%';
+}
+setInterval(updateDataCol,2000); updateDataCol();
+
+// ═══════════════════════════════════════════
+// SCENE SYSTEM
+// ═══════════════════════════════════════════
+const scenes=['s0','s1','s2','s3','s4','s5'];
+let currentScene=0, sceneTimeout;
+const durations=[3800,5200,5200,5200,5800,99999];
+
+function buildDots() {
+  const c=document.getElementById('dots'); c.innerHTML='';
+  scenes.forEach((_,i)=>{ const d=document.createElement('div'); d.className='dot'+(i===0?' active':''); d.addEventListener('click',()=>goScene(i)); c.appendChild(d); });
+}
+buildDots();
+
+function goScene(n) {
+  clearTimeout(sceneTimeout);
+  initAudio();
+  playTransitionHit();
+  playVoiceover(n);
+  showCaption(n);
+  playSceneSwellIn(n);
+
+  const fl=document.getElementById('flash');
+  fl.classList.remove('go'); void fl.offsetWidth; fl.classList.add('go');
+  scenes.forEach(id=>document.getElementById(id).classList.remove('active'));
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===n));
+  currentScene=n;
+  document.getElementById(scenes[n]).classList.add('active');
+
+  const bar=document.getElementById('progressBar');
+  bar.style.transition='none'; bar.style.width='0%';
+  setTimeout(()=>{ bar.style.transition=`width ${durations[n]/1000}s linear`; bar.style.width='100%'; },50);
+
+  if(n===0) setTimeout(()=>{ document.getElementById('bootFinal').style.opacity='1'; },2200);
+  if(n===2){ document.getElementById('map-canvas').classList.add('visible'); mapLines=[]; [[0,1],[0,2],[0,3],[1,2],[1,3],[0,5],[2,7],[3,4],[0,6]].forEach(([f,t])=>mapLines.push({from:f,to:t,progress:0})); drawMap(); }
+  else document.getElementById('map-canvas').classList.remove('visible');
+
+  if(n>=1){
+    document.getElementById('leadFeed').classList.add('visible');
+    document.getElementById('dataCol').classList.add('visible');
+    clearInterval(leadInterval);
+    leadInterval=setInterval(addLead,800);
+  }
+
+  if(n<scenes.length-1) sceneTimeout=setTimeout(()=>goScene(n+1),durations[n]);
+}
+
+function restart() {
+  clearInterval(leadInterval);
+  document.getElementById('leadFeed').innerHTML='';
+  document.getElementById('leadFeed').classList.remove('visible');
+  document.getElementById('dataCol').classList.remove('visible');
+  leadCount=0; totalScore=0; anomalyCount=0;
+  document.getElementById('leads-processed').textContent='LEADS: 0';
+  goScene(0);
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' ') goScene(Math.min(currentScene+1,scenes.length-1));
+  if(e.key==='ArrowLeft') goScene(Math.max(currentScene-1,0));
+  if(e.key==='m'||e.key==='M') toggleMute();
+});
+
+// Show voice guide on first load after 1s
+setTimeout(()=>{ document.getElementById('voice-guide').classList.add('show'); }, 1200);
+goScene(0);
+</script>
 </body>
 </html>
