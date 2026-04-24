@@ -998,6 +998,17 @@ const voiceToggle = document.getElementById('voiceToggle');
 const narrationLines = {
   1: "The intelligence engine is running. Live leads are scored, filtered, and ranked before your team even opens the pipeline.",
 };
+const audioProfiles = {
+  off: { narrationOn: false, rate: 0.95, pitch: 0.92, volume: 0 },
+  soft: { narrationOn: true, rate: 0.9, pitch: 0.86, volume: 0.56 },
+  balanced: { narrationOn: true, rate: 0.95, pitch: 0.92, volume: 0.9 },
+  cinematic: { narrationOn: true, rate: 0.88, pitch: 0.82, volume: 1 }
+};
+let audioProfile = 'balanced';
+let narrationOn = true;
+let narrationRate = audioProfiles.balanced.rate;
+let narrationPitch = audioProfiles.balanced.pitch;
+let narrationVolume = audioProfiles.balanced.volume;
 let narrationOn = true;
 
 function getNarrationVoice() {
@@ -1005,6 +1016,18 @@ function getNarrationVoice() {
   return voices.find(v => v.lang && v.lang.toLowerCase().startsWith('en-gb'))
     || voices.find(v => v.lang && v.lang.toLowerCase().startsWith('en'))
     || null;
+}
+
+function applyAudioProfile(profileName) {
+  const profile = audioProfiles[profileName] || audioProfiles.balanced;
+  audioProfile = audioProfiles[profileName] ? profileName : 'balanced';
+  narrationOn = profile.narrationOn;
+  narrationRate = profile.rate;
+  narrationPitch = profile.pitch;
+  narrationVolume = profile.volume;
+  voiceToggle.textContent = narrationOn ? `Voice: On (${audioProfile})` : 'Voice: Off';
+  voiceToggle.setAttribute('aria-pressed', narrationOn ? 'true' : 'false');
+  if (!narrationOn && window.speechSynthesis) window.speechSynthesis.cancel();
 }
 
 function speakSceneLine(sceneNumber) {
@@ -1015,6 +1038,9 @@ function speakSceneLine(sceneNumber) {
   const utterance = new SpeechSynthesisUtterance(line);
   const chosenVoice = getNarrationVoice();
   if (chosenVoice) utterance.voice = chosenVoice;
+  utterance.rate = narrationRate;
+  utterance.pitch = narrationPitch;
+  utterance.volume = narrationVolume;
   utterance.rate = 0.95;
   utterance.pitch = 0.92;
   utterance.volume = 0.9;
@@ -1022,6 +1048,8 @@ function speakSceneLine(sceneNumber) {
 }
 
 voiceToggle.addEventListener('click', () => {
+  const next = narrationOn ? 'off' : 'balanced';
+  applyAudioProfile(next);
   narrationOn = !narrationOn;
   voiceToggle.textContent = narrationOn ? 'Voice: On' : 'Voice: Off';
   voiceToggle.setAttribute('aria-pressed', narrationOn ? 'true' : 'false');
@@ -1033,6 +1061,15 @@ voiceToggle.addEventListener('click', () => {
 if (window.speechSynthesis) {
   window.speechSynthesis.onvoiceschanged = getNarrationVoice;
 }
+
+window.addEventListener('message', (event) => {
+  if (event.origin !== window.location.origin) return;
+  const data = event.data || {};
+  if (data.type === 'AC_AUDIO_PROFILE') applyAudioProfile((data.profile || '').toLowerCase());
+});
+
+const initialAudio = new URLSearchParams(window.location.search).get('audio');
+applyAudioProfile((initialAudio || 'balanced').toLowerCase());
 
 // ─── SCENES ───
 const scenes = ['s0','s1','s2','s3','s4','s5'];

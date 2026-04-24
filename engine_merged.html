@@ -18,6 +18,11 @@
     .head h1{font:600 1.1rem 'Cormorant Garamond',serif;letter-spacing:.03em}
     .k{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
     .tabs{display:flex;gap:.5rem;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line)}
+    .tab{display:inline-block;text-decoration:none;background:transparent;border:1px solid rgba(200,164,85,.3);color:var(--muted);padding:.45rem .62rem;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+    .tab.active{color:var(--gold);border-color:rgba(200,164,85,.72);background:rgba(200,164,85,.08)}
+    .audio-strip{display:flex;gap:.45rem;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line)}
+    .audio-btn{background:rgba(0,166,255,.05);border:1px solid rgba(0,166,255,.3);color:var(--muted);padding:.35rem .56rem;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+    .audio-btn.active{color:#9fdefd;border-color:#67cfff;background:rgba(0,166,255,.16)}
     .tab{background:transparent;border:1px solid rgba(200,164,85,.3);color:var(--muted);padding:.45rem .62rem;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
     .tab.active{color:var(--gold);border-color:rgba(200,164,85,.72);background:rgba(200,164,85,.08)}
     .viewer iframe{width:100%;height:640px;border:0;display:block;background:#02050b}
@@ -42,6 +47,18 @@
     </header>
 
     <nav class="tabs" aria-label="Engine ad variants">
+      <a class="tab active" data-key="a" href="#a">Variant A · Cinematic Core</a>
+      <a class="tab" data-key="b" href="#b">Variant B · Manager / IT</a>
+      <a class="tab" data-key="c" href="#c">Variant C · Signature Voice</a>
+    </nav>
+
+    <div class="audio-strip" aria-label="Audio tuning profiles">
+      <button class="audio-btn active" data-audio="balanced" type="button">Audio: Balanced</button>
+      <button class="audio-btn" data-audio="cinematic" type="button">Audio: Cinematic</button>
+      <button class="audio-btn" data-audio="soft" type="button">Audio: Soft</button>
+      <button class="audio-btn" data-audio="off" type="button">Audio: Off</button>
+    </div>
+
       <button class="tab active" data-src="engine_ad.html">Variant A · Cinematic Core</button>
       <button class="tab" data-src="engine_adaptive.html">Variant B · Manager / IT</button>
       <button class="tab" data-src="engine_ad_signature.html">Variant C · Signature Voice</button>
@@ -63,6 +80,59 @@
   </main>
 
   <script>
+    const VARIANTS = {
+      a: 'engine_ad.html',
+      b: 'engine_adaptive.html',
+      c: 'engine_ad_signature.html'
+    };
+
+    const frame = document.getElementById('variantFrame');
+    const tabs = [...document.querySelectorAll('.tab')];
+    const audioButtons = [...document.querySelectorAll('.audio-btn')];
+    let currentAudioProfile = 'balanced';
+
+    function buildVariantUrl(key) {
+      const path = VARIANTS[key] || VARIANTS.a;
+      const url = new URL(path, window.location.href);
+      url.searchParams.set('audio', currentAudioProfile);
+      return url.toString();
+    }
+
+    function setActiveVariant(key) {
+      const resolved = VARIANTS[key] ? key : 'a';
+      tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.key === resolved));
+      frame.src = buildVariantUrl(resolved);
+      history.replaceState(null, '', '#' + resolved);
+    }
+
+    function sendAudioProfile(profile) {
+      if (!frame.contentWindow) return;
+      frame.contentWindow.postMessage({ type: 'AC_AUDIO_PROFILE', profile }, window.location.origin);
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        setActiveVariant(tab.dataset.key);
+      });
+    });
+
+    audioButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentAudioProfile = btn.dataset.audio;
+        audioButtons.forEach(b => b.classList.toggle('active', b === btn));
+        const activeTab = document.querySelector('.tab.active');
+        if (activeTab) {
+          setActiveVariant(activeTab.dataset.key);
+        }
+      });
+    });
+
+    frame.addEventListener('load', () => sendAudioProfile(currentAudioProfile));
+
+    const startupKey = (window.location.hash || '#a').slice(1).toLowerCase();
+    setActiveVariant(startupKey);
+  </script>
     const tabs = [...document.querySelectorAll('.tab')];
     const frame = document.getElementById('variantFrame');
     tabs.forEach(tab => {
