@@ -585,29 +585,58 @@
       margin-bottom: 1.5rem;
     }
 
-    /* MICRO-ADJUSTMENT: Cinematic framing line */
     .cinematic-framing {
-      font-family: var(--ff-display);
-      font-size: 1rem;
-      font-style: italic;
       color: var(--text-muted);
-      max-width: 58ch;
-      margin: 0 auto 3rem;
-      line-height: 1.65;
+      max-width: 62ch;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
       text-align: center;
-      border-top: 1px solid var(--border-soft);
-      border-bottom: 1px solid var(--border-soft);
-      padding: 1.5rem 0;
     }
 
-    /* Video wrapper */
-    .video-wrapper {
+    .engine-documentation-frame {
+      border: 1px solid var(--border);
+      background: linear-gradient(160deg, rgba(13,27,42,0.96), rgba(7,13,20,0.98));
+      box-shadow: 0 22px 70px rgba(0,0,0,0.32);
+      overflow: hidden;
+    }
+
+    .engine-live-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(13,27,42,0.94);
+      font-family: var(--ff-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .engine-live-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--gold-light);
+    }
+
+    .engine-live-status::before {
+      content: '';
+      width: 0.46rem;
+      height: 0.46rem;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 14px rgba(74,222,128,0.65);
+      animation: dotBlink 1.6s ease-in-out infinite;
+    }
+
+    .engine-frame-shell {
       position: relative;
       width: 100%;
       aspect-ratio: 16/9;
-      background: var(--navy-mid);
-      border: 1px solid var(--border);
-      overflow: hidden;
+      background: #02040a;
     }
 
     .video-engine-frame {
@@ -619,45 +648,37 @@
       background: #02040a;
     }
 
-
-    .premium-compare {
-      margin-top: 1.35rem;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .engine-compliance-stamps {
+      display: flex;
+      justify-content: space-between;
       gap: 1rem;
-    }
-    .compare-card {
-      border: 1px solid var(--border);
-      background: linear-gradient(160deg, rgba(12,22,36,0.86), rgba(12,18,30,0.5));
-      padding: 1.25rem 1.35rem;
-    }
-    .compare-card h3 {
-      font-family: var(--ff-display);
-      color: var(--text-bright);
-      font-size: 1.28rem;
-      line-height: 1.2;
-      margin-bottom: 0.45rem;
-      font-weight: 400;
-    }
-    .compare-card p {
-      font-size: 0.87rem;
-      color: var(--text-mid);
-      line-height: 1.65;
-      max-width: none;
-    }
-    .compare-kicker {
-      display: inline-block;
+      flex-wrap: wrap;
+      padding: 0.85rem 1rem;
+      border-top: 1px solid var(--border);
+      background: rgba(7,13,20,0.92);
       font-family: var(--ff-mono);
-      font-size: 0.66rem;
-      letter-spacing: 0.13em;
+      font-size: 0.64rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 0.55rem;
+      color: var(--text-muted);
     }
-    .compare-card.premium { border-color: rgba(184,154,90,0.34); }
-    .compare-card.premium .compare-kicker { color: var(--gold-light); }
-    .compare-card.generic { border-color: var(--border-soft); }
-    .compare-card.generic .compare-kicker { color: var(--text-muted); }
+
+    .engine-compliance-stamps span {
+      color: var(--gold-light);
+    }
+
+    .engine-preview-ctas {
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 640px) {
+      .engine-live-bar,
+      .engine-compliance-stamps {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
 
     /* ─── SECTION: HOW IT WORKS ────────────────────────────────────── */
     #how-it-works {
@@ -1272,10 +1293,6 @@
       section { padding: 5rem 0; }
     }
 
-    @media (max-width: 860px) {
-      .premium-compare { grid-template-columns: 1fr; }
-    }
-
   </style>
 
   <meta name="geo.region" content="GB" />
@@ -1469,72 +1486,45 @@
 
   <hr class="section-rule" />
 
-  <!-- ══ §4 — CINEMATIC ENGINE PREVIEW ════════════════════════════ -->
+  <!-- ══ §4 — ENGINE DOCUMENTATION PREVIEW ════════════════════════ -->
   <section id="cinematic" aria-labelledby="cinematic-h2">
     <div class="container">
 
       <div class="cinematic-header fade-up">
-        <span class="label">Cinematic Preview · Visual Briefing</span>
+        <span class="label">Engine Preview · Product Documentation</span>
         <h2 class="display" id="cinematic-h2">
-          How clarity forms<br />inside your practice
+          Intake qualification engine<br />institutional operating view
         </h2>
       </div>
 
-      <!-- MICRO-ADJUSTMENT: Cinematic framing line -->
       <p class="cinematic-framing fade-up d1">
-        Adaptive engine walkthrough for partners and managers. This is the diligence-first operating view used to evaluate viability, risk, and team readiness.
-        Live demo for partners and practice managers: compare three isolated ad variants and score which one delivers the most premium voice and feel.
-        Live demo for partners and practice managers: compare a premium intelligence experience against a generic intake flow in the same frame.
+        A controlled view of Layer 1: structured intake, suitability signals, escalation thresholds, and solicitor-ready output before an enquiry reaches the team.
       </p>
 
-      <div class="video-wrapper fade-up d2" role="region" aria-label="Cinematic engine ad preview">
-        <iframe
-          class="video-engine-frame"
-          src="engine_adaptive.html"
-          title="AirCounsel adaptive engine preview"
-          src="engine_merged.html"
-          title="AirCounsel three-variant engine showcase"
-          title="AirCounsel premium vs generic engine showcase"
-          loading="lazy"
-          allow="autoplay"
-        ></iframe>
+      <div class="engine-documentation-frame fade-up d2" role="region" aria-label="AirCounsel institutional engine preview">
+        <div class="engine-live-bar" aria-label="Live engine status">
+          <span class="engine-live-status">Live institutional preview</span>
+          <span>Layer 1 · Intake qualification</span>
+        </div>
+        <div class="engine-frame-shell">
+          <iframe
+            class="video-engine-frame"
+            src="engine_institutional.html"
+            title="AirCounsel institutional engine operating view"
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="engine-compliance-stamps" aria-label="Compliance positioning">
+          <span>GDPR-aligned data handling</span>
+          <span>SRA-compatible intake workflow</span>
+          <span>Secure by design</span>
+        </div>
       </div>
 
-      <div class="premium-compare fade-up d3" role="list" aria-label="Three ad variant differentiation">
-        <article class="compare-card premium" role="listitem">
-          <span class="compare-kicker">Variant A · Cinematic Core</span>
-          <h3>Visual intensity + voice narration.</h3>
-          <p>Best for attention and cinematic impact when you want the strongest first impression in client-facing demos.</p>
-        </article>
-        <article class="compare-card generic" role="listitem">
-          <span class="compare-kicker">Variant B · Manager / IT</span>
-          <h3>Operational clarity and control.</h3>
-          <p>Highlights qualification metrics, queue protection, and implementation safety for internal decision-makers.</p>
-        </article>
-        <article class="compare-card premium" role="listitem">
-          <span class="compare-kicker">Variant C · Signature Voice</span>
-          <h3>Most premium tone and trust signal.</h3>
-          <p>Slower, high-authority messaging tuned for executive perception and a refined advisory feel.</p>
-        </article>
-      <div class="premium-compare fade-up d3" role="list" aria-label="Premium versus generic differentiation">
-        <article class="compare-card premium" role="listitem">
-          <span class="compare-kicker">Premium Intelligence Engine</span>
-          <h3>Context-rich, voiced, manager-ready.</h3>
-          <p>Adaptive routing, confidence-weighted recommendations, and executive visibility into intake quality in under 10 minutes.</p>
-        </article>
-        <article class="compare-card generic" role="listitem">
-          <span class="compare-kicker">Generic Intake Experience</span>
-          <h3>Static forms and fragmented follow-up.</h3>
-          <p>Collects data but leaves teams manually triaging risk, viability, and solicitor readiness after submission.</p>
-        </article>
-          src="engine_ad.html"
-          title="AirCounsel Engine ad"
-          loading="lazy"
-          allow="autoplay"
-        ></iframe>
+      <div class="cta-row engine-preview-ctas fade-up d3">
+        <a href="https://calendly.com/kwamehjuma/30min" class="btn btn-gold" target="_blank" rel="noopener">Book Walkthrough</a>
+        <a href="intake.html" class="btn btn-outline">Try Intake Filter</a>
       </div>
-
-      
 
     </div>
   </section>
