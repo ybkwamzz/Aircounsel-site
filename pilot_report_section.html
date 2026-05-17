@@ -1,0 +1,278 @@
+<!--
+  ═══════════════════════════════════════════════════════════
+  AIRCOUNSEL — PILOT REPORT SECTION (DROP-IN)
+  Placement: after Founder section, before Principles block
+  ═══════════════════════════════════════════════════════════
+-->
+
+<section class="pr-section" aria-label="Pilot report">
+
+  <div class="pr-inner">
+
+    <!-- LEFT: LABEL COLUMN -->
+    <div class="pr-label-col">
+      <p class="pr-eyebrow">In Practice</p>
+      <div class="pr-rule"></div>
+      <div class="pr-meta">
+        <div class="pr-meta-item">
+          <span class="pr-meta-key">Framework</span>
+          <span class="pr-meta-val">Six-Gate Qualification</span>
+        </div>
+        <div class="pr-meta-item">
+          <span class="pr-meta-key">Routes</span>
+          <span class="pr-meta-val">Skilled Worker · Family · ILR</span>
+        </div>
+        <div class="pr-meta-item">
+          <span class="pr-meta-key">Output</span>
+          <span class="pr-meta-val">Structured Report</span>
+        </div>
+        <div class="pr-meta-item">
+          <span class="pr-meta-key">Status</span>
+          <span class="pr-meta-val pr-status">
+            <span class="pr-status-dot"></span>
+            Pilot Complete
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: CONTENT COLUMN -->
+    <div class="pr-content-col">
+
+      <h2 class="pr-heading">How the Engine<br>Performs in Practice</h2>
+
+      <p class="pr-body">
+        AirCounsel was piloted against live UK immigration enquiry patterns
+        across a structured test period. The report outlines how the six-gate
+        qualification framework performs against Skilled Worker, family, and ILR
+        route enquiries — including filtering accuracy and the format of the
+        structured report delivered to the fee earner.
+      </p>
+
+      <a
+        href="https://ybkwamzz.github.io/Aircounsel-report/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="pr-cta"
+        aria-label="View the AirCounsel pilot report"
+      >
+        <span class="pr-cta-text">View the Pilot Report</span>
+        <span class="pr-cta-arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </span>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════
+     STYLES — scoped with pr- prefix
+     ══════════════════════════════════ -->
+<style>
+
+.pr-section {
+  width: 100%;
+  padding: 90px 0;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.pr-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, 80vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.12), transparent);
+}
+
+/* ── LAYOUT ── */
+.pr-inner {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 72px;
+  align-items: start;
+  max-width: 860px;
+  width: 90%;
+}
+
+/* ── LABEL COLUMN ── */
+.pr-label-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 6px;
+}
+
+.pr-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 107, 26, 0.8);
+}
+
+.pr-rule {
+  width: 32px;
+  height: 1px;
+  background: rgba(0, 212, 255, 0.25);
+}
+
+.pr-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pr-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pr-meta-key {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+}
+
+.pr-meta-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+}
+
+.pr-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(179, 255, 0, 0.7);
+}
+
+.pr-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(179, 255, 0, 0.8);
+  box-shadow: 0 0 6px rgba(179, 255, 0, 0.4);
+  animation: pr-pulse 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pr-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ── CONTENT COLUMN ── */
+.pr-content-col {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.pr-heading {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.pr-body {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  line-height: 2;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.02em;
+  max-width: 520px;
+  border-left: 2px solid rgba(0, 212, 255, 0.12);
+  padding-left: 20px;
+}
+
+/* ── CTA ── */
+.pr-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(0, 212, 255, 0.7);
+  text-decoration: none;
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  padding: 14px 24px;
+  align-self: flex-start;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pr-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 212, 255, 0.04);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.pr-cta:hover {
+  color: rgba(0, 212, 255, 1);
+  border-color: rgba(0, 212, 255, 0.35);
+}
+
+.pr-cta:hover::before {
+  opacity: 1;
+}
+
+.pr-cta-arrow {
+  transition: transform 0.2s ease;
+}
+
+.pr-cta:hover .pr-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 680px) {
+  .pr-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .pr-label-col {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .pr-rule { display: none; }
+
+  .pr-meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+  }
+
+  .pr-body {
+    font-size: 12px;
+  }
+}
+</style>
