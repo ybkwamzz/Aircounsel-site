@@ -1,0 +1,462 @@
+<!--
+  ═══════════════════════════════════════════════════════════
+  AIRCOUNSEL — PILOT COHORT SECTION (DROP-IN)
+  Placement: after FAQ section, before Principles block
+  
+  HOW TO UPDATE:
+  - Change SLOTS_FILLED (0–5) to reflect real pipeline
+  - When a firm enters: increment SLOTS_FILLED
+  - When a firm consents to reference: replace a
+    "slot-item--pending" with "slot-item--active"
+    and add their anonymised descriptor
+  ═══════════════════════════════════════════════════════════
+-->
+
+<section class="pc-section" aria-label="Pilot cohort">
+
+  <!-- HEADER -->
+  <div class="pc-header">
+    <p class="pc-eyebrow">Founding Cohort · 2025</p>
+    <h2 class="pc-heading">First Practices.<br><span class="pc-heading-accent">Highest Leverage.</span></h2>
+    <p class="pc-subheading">
+      Five UK immigration practices will shape how AirCounsel is calibrated,
+      validated, and deployed at scale. The pilot cohort defines the standard
+      everything that follows is measured against.
+    </p>
+  </div>
+
+  <!-- ADOPTER LOGIC -->
+  <div class="pc-logic">
+    <div class="pc-logic-item">
+      <span class="pc-logic-num">First</span>
+      <p class="pc-logic-text">
+        Pilot firms configure the engine to their caseload profile.
+        Their parameters become the calibration baseline.
+      </p>
+    </div>
+    <div class="pc-logic-divider" aria-hidden="true">→</div>
+    <div class="pc-logic-item">
+      <span class="pc-logic-num">Formative</span>
+      <p class="pc-logic-text">
+        Feedback from the pilot directly shapes the qualification framework
+        before general availability.
+      </p>
+    </div>
+    <div class="pc-logic-divider" aria-hidden="true">→</div>
+    <div class="pc-logic-item">
+      <span class="pc-logic-num">Fixed Rate</span>
+      <p class="pc-logic-text">
+        Pilot firms access AirCounsel at a rate that does not increase
+        as the platform scales.
+      </p>
+    </div>
+  </div>
+
+  <!-- SLOT TRACKER -->
+  <div class="pc-tracker">
+    <div class="pc-tracker-header">
+      <p class="pc-tracker-label">Pilot Places — 5 Available</p>
+      <p class="pc-tracker-status">
+        <span class="pc-live-dot" aria-hidden="true"></span>
+        <span id="pc-status-text">Accepting applications</span>
+      </p>
+    </div>
+
+    <div class="pc-slots" role="list" aria-label="Pilot slot availability">
+
+      <!-- SLOT 1 — update to active when firm enters -->
+      <div class="pc-slot pc-slot--open" role="listitem" aria-label="Pilot slot 1: open">
+        <div class="pc-slot-num">01</div>
+        <div class="pc-slot-body">
+          <span class="pc-slot-state">Open</span>
+          <span class="pc-slot-desc">Available to qualifying UK immigration practices</span>
+        </div>
+        <div class="pc-slot-indicator pc-slot-indicator--open" aria-hidden="true"></div>
+      </div>
+
+      <!-- SLOT 2 -->
+      <div class="pc-slot pc-slot--open" role="listitem" aria-label="Pilot slot 2: open">
+        <div class="pc-slot-num">02</div>
+        <div class="pc-slot-body">
+          <span class="pc-slot-state">Open</span>
+          <span class="pc-slot-desc">Available to qualifying UK immigration practices</span>
+        </div>
+        <div class="pc-slot-indicator pc-slot-indicator--open" aria-hidden="true"></div>
+      </div>
+
+      <!-- SLOT 3 -->
+      <div class="pc-slot pc-slot--open" role="listitem" aria-label="Pilot slot 3: open">
+        <div class="pc-slot-num">03</div>
+        <div class="pc-slot-body">
+          <span class="pc-slot-state">Open</span>
+          <span class="pc-slot-desc">Available to qualifying UK immigration practices</span>
+        </div>
+        <div class="pc-slot-indicator pc-slot-indicator--open" aria-hidden="true"></div>
+      </div>
+
+      <!-- SLOT 4 -->
+      <div class="pc-slot pc-slot--open" role="listitem" aria-label="Pilot slot 4: open">
+        <div class="pc-slot-num">04</div>
+        <div class="pc-slot-body">
+          <span class="pc-slot-state">Open</span>
+          <span class="pc-slot-desc">Available to qualifying UK immigration practices</span>
+        </div>
+        <div class="pc-slot-indicator pc-slot-indicator--open" aria-hidden="true"></div>
+      </div>
+
+      <!-- SLOT 5 -->
+      <div class="pc-slot pc-slot--open" role="listitem" aria-label="Pilot slot 5: open">
+        <div class="pc-slot-num">05</div>
+        <div class="pc-slot-body">
+          <span class="pc-slot-state">Open</span>
+          <span class="pc-slot-desc">Available to qualifying UK immigration practices</span>
+        </div>
+        <div class="pc-slot-indicator pc-slot-indicator--open" aria-hidden="true"></div>
+      </div>
+
+    </div>
+
+    <!--
+      WHEN A FIRM ENTERS THE PILOT — replace the relevant slot with:
+
+      <div class="pc-slot pc-slot--active" role="listitem" aria-label="Pilot slot X: under review">
+        <div class="pc-slot-num">0X</div>
+        <div class="pc-slot-body">
+          <span class="pc-slot-state pc-slot-state--active">Under Review</span>
+          <span class="pc-slot-desc">UK immigration practice · Pilot active</span>
+        </div>
+        <div class="pc-slot-indicator pc-slot-indicator--active" aria-hidden="true"></div>
+      </div>
+
+      WHEN ALL 5 ARE FILLED — update pc-status-text to "Cohort closed"
+      and pc-live-dot to pc-live-dot--closed
+    -->
+
+  </div>
+
+  <!-- QUALIFYING NOTE -->
+  <div class="pc-qualify">
+    <p class="pc-qualify-text">
+      The pilot is open to UK-regulated immigration practices with an active
+      enquiry pipeline. Firms are assessed on caseload profile and route
+      coverage before a place is confirmed.
+    </p>
+  </div>
+
+  <!-- CTA -->
+  <div class="pc-cta-block">
+    <a href="mailto:hello@aircounsel.uk?subject=Pilot%20Application%20—%20AirCounsel"
+       class="pc-cta"
+       aria-label="Apply for a pilot place">
+      <span>Apply for a Pilot Place</span>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </a>
+    <p class="pc-cta-note">Direct response within one working day.</p>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════
+     STYLES — scoped with pc- prefix
+     ══════════════════════════════════ -->
+<style>
+
+/* ── SECTION ── */
+.pc-section {
+  width: 100%;
+  padding: 100px 0 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 56px;
+  position: relative;
+}
+
+.pc-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, 80vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.12), transparent);
+}
+
+/* ── HEADER ── */
+.pc-header {
+  text-align: center;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pc-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 107, 26, 0.8);
+}
+
+.pc-heading {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(24px, 3.2vw, 40px);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.pc-heading-accent {
+  color: rgba(0, 212, 255, 0.85);
+}
+
+.pc-subheading {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.32);
+  letter-spacing: 0.03em;
+}
+
+/* ── ADOPTER LOGIC ── */
+.pc-logic {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  width: min(760px, 90vw);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.pc-logic-item {
+  flex: 1;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pc-logic-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(0, 212, 255, 0.6);
+  letter-spacing: 0.05em;
+}
+
+.pc-logic-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.32);
+  letter-spacing: 0.02em;
+}
+
+.pc-logic-divider {
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  color: rgba(255, 107, 26, 0.25);
+  padding-top: 28px;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+/* ── SLOT TRACKER ── */
+.pc-tracker {
+  width: min(760px, 90vw);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pc-tracker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 0;
+}
+
+.pc-tracker-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+
+.pc-tracker-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(179, 255, 0, 0.6);
+}
+
+.pc-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(179, 255, 0, 0.8);
+  box-shadow: 0 0 6px rgba(179,255,0,0.3);
+  animation: pc-pulse 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.pc-live-dot--closed {
+  background: rgba(255, 107, 26, 0.6);
+  box-shadow: 0 0 6px rgba(255,107,26,0.2);
+  animation: none;
+}
+
+@keyframes pc-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ── SLOTS ── */
+.pc-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pc-slot {
+  display: grid;
+  grid-template-columns: 40px 1fr 16px;
+  gap: 20px;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.2s ease;
+}
+
+.pc-slot:hover {
+  background: rgba(255,255,255,0.01);
+}
+
+.pc-slot--active {
+  background: rgba(0, 212, 255, 0.015);
+  border-bottom-color: rgba(0, 212, 255, 0.06);
+}
+
+.pc-slot-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.15);
+  text-align: right;
+}
+
+.pc-slot-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pc-slot-state {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+.pc-slot-state--active {
+  color: rgba(0, 212, 255, 0.6);
+}
+
+.pc-slot-desc {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.18);
+  line-height: 1.5;
+}
+
+.pc-slot-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  justify-self: center;
+}
+
+.pc-slot-indicator--open {
+  border: 1px solid rgba(255,255,255,0.15);
+  background: transparent;
+}
+
+.pc-slot-indicator--active {
+  background: rgba(0, 212, 255, 0.6);
+  box-shadow: 0 0 5px rgba(0,212,255,0.2);
+}
+
+/* ── QUALIFYING NOTE ── */
+.pc-qualify {
+  width: min(580px, 90vw);
+  border-left: 2px solid rgba(255,255,255,0.05);
+  padding-left: 20px;
+}
+
+.pc-qualify-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.03em;
+}
+
+/* ── CTA ── */
+.pc-cta-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.pc-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #000;
+  background: rgba(0, 212, 255, 0.85);
+  text-decoration: none;
+  padding: 15px 32px;
+  transition: background 0.2s ease;
+}
+
+.pc-cta:hover {
+  background: rgba(0, 212, 255, 1);
+}
+
+.pc-cta-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.18);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .pc-section { padding: 60px 0; gap: 40px; }
+  .pc-logic { flex-direction: column; }
+  .pc-logic-divider { display: none; }
+  .pc-logic-item { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .pc-slot { grid-template-columns: 32px 1fr 12px; gap: 12px; }
+  .pc-tracker-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+</style>
