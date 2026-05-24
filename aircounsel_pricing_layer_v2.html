@@ -1,0 +1,99 @@
+
+<h2 class="sr-only">Air Counsel pricing tier structure — two tiers with pilot entry point and enterprise contact option</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:2rem 0}
+.pilot-band{border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:1.25rem 1.5rem;margin-bottom:2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.pilot-eyebrow{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--color-text-secondary);margin-bottom:4px}
+.pilot-title{font-size:16px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.pilot-desc{font-size:13px;color:var(--color-text-secondary);line-height:1.6;max-width:480px}
+.pilot-cta{white-space:nowrap;padding:8px 18px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);font-size:13px;font-weight:500;cursor:pointer;color:var(--color-text-primary);background:transparent}
+.pilot-cta:hover{background:var(--color-background-secondary)}
+.tiers{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.tier{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.5rem}
+.tier.featured{border:2px solid var(--color-border-info)}
+.tier-badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:var(--border-radius-md);background:var(--color-background-info);color:var(--color-text-info);margin-bottom:12px}
+.tier-name{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.tier-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:20px;line-height:1.5}
+.tier-price{font-size:13px;color:var(--color-text-secondary);margin-bottom:20px;padding:10px 12px;background:var(--color-background-secondary);border-radius:var(--border-radius-md)}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin-bottom:16px}
+.feat-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--color-text-secondary);margin-bottom:10px}
+.feat-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.feat-list li{font-size:13px;color:var(--color-text-primary);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.feat-list li i{color:var(--color-text-success);font-size:16px;flex-shrink:0;margin-top:1px}
+.tier-btn{width:100%;padding:9px 0;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);font-size:13px;font-weight:500;cursor:pointer;background:transparent;color:var(--color-text-primary)}
+.tier-btn:hover{background:var(--color-background-secondary)}
+.enterprise-row{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.ent-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+.ent-desc{font-size:12px;color:var(--color-text-secondary)}
+.ent-link{font-size:13px;color:var(--color-text-secondary);cursor:pointer;border:none;background:none;display:flex;align-items:center;gap:4px}
+.ent-link:hover{color:var(--color-text-primary)}
+.compliance-row{display:flex;gap:16px;margin-top:12px;flex-wrap:wrap}
+.comp-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)}
+.comp-item i{font-size:14px}
+@media(max-width:540px){.tiers{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+
+<div class="pilot-band">
+  <div>
+    <div class="pilot-eyebrow">Start here</div>
+    <div class="pilot-title">Structured pilot — 14 days</div>
+    <div class="pilot-desc">Your live Skilled Worker enquiries. Qualification logic applied upstream. A structured intake report delivered to your fee earner's desk before the first consultation is booked. No commitment.</div>
+  </div>
+  <button class="pilot-cta" onclick="sendPrompt('Tell me more about the Air Counsel 14-day pilot')">Request pilot access →</button>
+</div>
+
+<div class="tiers">
+  <div class="tier">
+    <div class="tier-name">Practice</div>
+    <div class="tier-sub">For single-site immigration practices running structured intake across one primary route.</div>
+    <div class="tier-price">Pricing discussed at onboarding, based on monthly enquiry volume and route configuration.</div>
+    <div class="divider"></div>
+    <div class="feat-label">What's included</div>
+    <ul class="feat-list">
+      <li><i class="ti ti-check" aria-hidden="true"></i>Skilled Worker qualification flow: threshold, SOC, sponsorship, English language</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i>Structured intake report delivered to fee earner before consultation</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i>Six-gate scoring: Instruction Ready / Needs Development / Not Viable</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i>Qualification audit trail retained by the firm</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i>GDPR-compliant data handling. UK-hosted.</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i>Onboarding and configuration support</li>
+    </ul>
+    <button class="tier-btn" onclick="sendPrompt('I want to discuss the Practice tier pricing for my firm')">Discuss pricing →</button>
+  </div>
+
+  <div class="tier featured">
+    <div class="tier-badge">Most requested</div>
+    <div class="tier-name">Firm</div>
+    <div class="tier-sub">For practices running multiple immigration routes with higher enquiry volume and a dedicated caseworker layer.</div>
+    <div class="tier-price">Pricing discussed at onboarding, based on monthly enquiry volume and route configuration.</div>
+    <div class="divider"></div>
+    <div class="feat-label">Everything in Practice, plus</div>
+    <ul class="feat-list">
+      <li><i class="ti ti-check" aria-hidden="true"></i>Multi-route qualification: Skilled Worker, FLR(M), ILR, Spouse Visa</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i>Route identification at intake: prevents misrouting before the file opens</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i>Caseworker dashboard: qualification summaries organised by status and route</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i>Going-rate update notifications when Annex to Appendix Skilled Worker is revised</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i>Priority configuration support and quarterly review</li>
+    </ul>
+    <button class="tier-btn" onclick="sendPrompt('I want to discuss the Firm tier pricing for my firm')">Discuss pricing →</button>
+  </div>
+</div>
+
+<div class="enterprise-row">
+  <div>
+    <div class="ent-title">Multi-site or high-volume practices</div>
+    <div class="ent-desc">Multiple offices, high enquiry volume, or bespoke route configuration. Pricing and implementation discussed directly.</div>
+  </div>
+  <button class="ent-link" onclick="sendPrompt('I want to discuss Air Counsel for a multi-site or high-volume practice')">Contact us <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+</div>
+
+<div class="compliance-row">
+  <div class="comp-item"><i class="ti ti-shield-check" aria-hidden="true"></i>SRA-aligned methodology</div>
+  <div class="comp-item"><i class="ti ti-shield-check" aria-hidden="true"></i>OISC-compatible workflow</div>
+  <div class="comp-item"><i class="ti ti-shield-check" aria-hidden="true"></i>UK GDPR compliant</div>
+  <div class="comp-item"><i class="ti ti-shield-check" aria-hidden="true"></i>No eligibility determinations made</div>
+</div>
+
+</div>
