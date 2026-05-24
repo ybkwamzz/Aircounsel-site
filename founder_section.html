@@ -1,0 +1,283 @@
+
+<section class="fd-section" aria-label="Founder">
+
+  <div class="fd-inner">
+
+    <!-- ── LEFT: PHOTO ── -->
+    <div class="fd-photo-col">
+      <div class="fd-photo-frame">
+        <div class="fd-photo-corner fd-corner-tl"></div>
+        <div class="fd-photo-corner fd-corner-br"></div>
+        <img
+          src="Natural professional.png"
+          alt="Kwameh J. Dande — Founder, AirCounsel"
+          class="fd-photo"
+          loading="lazy"
+        />
+        <div class="fd-photo-badge">FOUNDER</div>
+      </div>
+    </div>
+
+    <!-- ── RIGHT: IDENTITY ── -->
+    <div class="fd-text-col">
+
+      <p class="fd-eyebrow">Built by</p>
+
+      <h2 class="fd-name">Kwameh J.<br>Dande</h2>
+
+      <p class="fd-title">Founder &amp; Engineer · AirCounsel</p>
+
+      <div class="fd-divider"></div>
+
+      <p class="fd-bio">
+        Kwameh J. Dande is the founder of AirCounsel, an intake-engineering
+        system for UK immigration practices. His work focuses on the control
+        layer — the point where information becomes judgment-ready.
+      </p>
+
+      <div class="fd-links">
+        <a
+          href="https://www.linkedin.com/in/kwamehdande/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fd-link"
+          aria-label="LinkedIn profile"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          LinkedIn
+        </a>
+        <a
+          href="mailto:kwameh@aircounsel.uk"
+          class="fd-link"
+          aria-label="Email AirCounsel"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          hello@aircounsel.uk
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════
+     STYLES — scoped with fd- prefix
+     ══════════════════════════════════ -->
+<style>
+/* ── ROOT / TOKENS ── */
+.fd-section {
+  width: 100%;
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  position: relative;
+}
+
+.fd-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, 80vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.15), transparent);
+}
+
+/* ── LAYOUT ── */
+.fd-inner {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 72px;
+  align-items: center;
+  max-width: 860px;
+  width: 90%;
+}
+
+/* ── PHOTO COLUMN ── */
+.fd-photo-col {
+  display: flex;
+  justify-content: center;
+}
+
+.fd-photo-frame {
+  position: relative;
+  width: 240px;
+  height: 240px;
+}
+
+/* Bracket corners — top-left */
+.fd-photo-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  z-index: 2;
+}
+
+.fd-corner-tl {
+  top: -8px;
+  left: -8px;
+  border-top: 1px solid rgba(0, 212, 255, 0.5);
+  border-left: 1px solid rgba(0, 212, 255, 0.5);
+}
+
+.fd-corner-br {
+  bottom: -8px;
+  right: -8px;
+  border-bottom: 1px solid rgba(255, 107, 26, 0.5);
+  border-right: 1px solid rgba(255, 107, 26, 0.5);
+}
+
+.fd-photo {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: grayscale(15%) contrast(1.05);
+  transition: filter 0.4s ease;
+}
+
+.fd-photo:hover {
+  filter: grayscale(0%) contrast(1.08);
+}
+
+.fd-photo-badge {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  padding: 6px 0;
+  background: rgba(4, 4, 10, 0.9);
+  border-top: 1px solid rgba(0, 212, 255, 0.12);
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.35em;
+  color: rgba(0, 212, 255, 0.45);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* ── TEXT COLUMN ── */
+.fd-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.fd-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 107, 26, 0.8);
+  margin-bottom: 12px;
+}
+
+.fd-name {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+
+.fd-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 28px;
+}
+
+.fd-divider {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0, 212, 255, 0.4), transparent);
+  margin-bottom: 24px;
+}
+
+.fd-bio {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.02em;
+  margin-bottom: 32px;
+  max-width: 420px;
+}
+
+/* ── LINKS ── */
+.fd-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.fd-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(0, 212, 255, 0.55);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.fd-link:hover {
+  color: rgba(0, 212, 255, 0.9);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .fd-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .fd-photo-col {
+    justify-content: center;
+  }
+
+  .fd-eyebrow,
+  .fd-title {
+    text-align: center;
+  }
+
+  .fd-divider {
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.4), transparent);
+    width: 60px;
+  }
+
+  .fd-bio {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .fd-links {
+    justify-content: center;
+  }
+
+  .fd-name {
+    text-align: center;
+  }
+}
+</style>
