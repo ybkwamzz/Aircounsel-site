@@ -1277,15 +1277,15 @@
   // ── CONFIGURATION ──────────────────────────────────────────────
   const WEBHOOK_URL = 'https://YOUR_BACKEND_URL/webhook/law-firm-intake';
 
-  // Audio assets — pre-rendered MP3 per language (presentation layer only)
-  // Vetted script: "Good day. Your enquiry has been received by Air Counsel.
-  //                 A solicitor will be in touch with you shortly. Thank you."
+  // Audio assets selected by presentation language toggle.
+  // All files are loaded from /audio and played on the confirmation screen
+  // (which is rendered only after form submission).
   const AUDIO_ASSETS = {
-    en: '/audio/confirmation-en.mp3',
-    fr: '/audio/confirmation-fr.mp3',
-    ar: '/audio/confirmation-ar.mp3',
-    ur: '/audio/confirmation-ur.mp3',
-    zh: '/audio/confirmation-zh.mp3'
+    en: '/audio/ElevenLabs_2026-04-20T23_11_03_Adam%20-%20Steady,%20Rich%20and%20Round_pvc_sp100_s50_sb75_v3%20(1).mp3',
+    fr: '/audio/ElevenLabs_2026-04-20T22_57_27_Effy%20-%20Cheltenham%20(English)%20accent_pvc_sp100_s50_sb75_v3.mp3',
+    ar: '/audio/ElevenLabs_2026-04-20T23_23_46_Hasan%20-%20Natural%20and%20Clear_pvc_sp100_s100_sb100_v3.mp3',
+    ur: '/audio/ElevenLabs_2026-04-20T23_29_52_Adam%20Li%20-%20%20Deep,%20Steady%20and%20Calm_pvc_sp108_s50_sb75_v3.mp3',
+    zh: '/audio/ElevenLabs_2026-04-20T23_18_21_Pierre%20-%20News%20Presenter_pvc_sp100_s50_sb75_v3.mp3'
   };
 
   // Presentation language — UI + audio only. NEVER touches scoring pipeline.
