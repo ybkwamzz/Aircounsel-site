@@ -557,6 +557,7 @@
       align-items: center;
       justify-content: center;
       margin: 0 auto 2rem;
+      /* Hidden by renderConfirmation — fee earner view only */
     }
     .score-value {
       font-family: var(--ff-d);
@@ -1649,75 +1650,46 @@
   }
 
   // ── CONFIRMATION RENDER ────────────────────────────────────────
-  const RESULTS = {
-    INSTRUCTION_READY: {
-      badge: 'instruction-ready',
-      badgeText: 'Instruction Ready',
-      title: 'Your enquiry looks <em>viable</em>',
-      desc: 'Based on the information provided, your matter appears viable for a consultation with our immigration team. A solicitor will be in touch to confirm and arrange your appointment.',
-      steps: [
-        'A solicitor will review your qualification summary within 1 working day.',
-        'You will receive a confirmation email with consultation details.',
-        'Please have your documents ready for the consultation.',
-        'The consultation will focus on your specific route and next steps.'
-      ]
-    },
-    NEEDS_DEVELOPMENT: {
-      badge: 'needs-development',
-      badgeText: 'Needs Development',
-      title: 'Your enquiry needs <em>further review</em>',
-      desc: 'There are one or more factors in your enquiry that require further assessment before a consultation can be confirmed. A solicitor will review your information and may be in touch with additional questions.',
-      steps: [
-        'A solicitor will review your qualification summary within 2 working days.',
-        'You may receive a request for additional information.',
-        'A consultation will be confirmed once the additional factors are assessed.',
-        'You will receive a full explanation of any eligibility concerns.'
-      ]
-    },
-    NOT_VIABLE: {
-      badge: 'not-viable',
-      badgeText: 'Not Viable at This Time',
-      title: 'We may not be able <em>to assist</em>',
-      desc: 'Based on the information provided, your matter does not currently meet the eligibility requirements for the route you have selected. A member of our team will be in touch to explain the position and, where possible, suggest alternative options.',
-      steps: [
-        'A solicitor will review your qualification summary within 2 working days.',
-        'You will receive a clear explanation of the eligibility issues identified.',
-        'Where alternatives exist, our team will outline them.',
-        'No consultation fee will be charged if we are unable to assist.'
-      ]
-    }
+  // INTERNAL ONLY — tier and score are sent to the backend for fee earner review.
+  // They are never rendered in the client-facing confirmation screen.
+  // The applicant sees a single neutral acknowledgement regardless of qualification outcome.
+
+  const NEUTRAL_CONFIRMATION = {
+    title: 'Your enquiry has been <em>received</em>',
+    desc:  'Thank you for submitting your details. Your information has been passed to our team and a qualified member of the firm will be in touch within 2 working days.',
+    steps: [
+      'Your enquiry has been logged and passed to our team for review.',
+      'A qualified member of the firm will contact you directly.',
+      'You may be asked to provide supporting documents before your consultation is confirmed.',
+      'No assessment of your eligibility has been communicated at this stage — all determinations are made by a qualified solicitor.'
+    ]
   };
 
   function renderConfirmation(score, tier, email) {
-    const result = RESULTS[tier] || RESULTS.NEEDS_DEVELOPMENT;
+    // score and tier are retained in payload for backend/fee earner use only.
+    // Neither is displayed to the applicant.
 
-    document.getElementById('result-score').textContent = score;
-
-    const badge = document.getElementById('result-badge');
-    badge.className = `result-badge ${result.badge}`;
-    document.getElementById('result-badge-text').textContent = result.badgeText;
-
-    document.getElementById('result-title').innerHTML = result.title;
-    document.getElementById('result-desc').textContent = result.desc;
+    document.getElementById('result-title').innerHTML = NEUTRAL_CONFIRMATION.title;
+    document.getElementById('result-desc').textContent = NEUTRAL_CONFIRMATION.desc;
     document.getElementById('result-email').textContent = email || 'your email address';
 
-    // Tier-aware footer copy
-    const followupCopy = {
-      INSTRUCTION_READY: 'A solicitor will be in touch within 1 working day.',
-      NEEDS_DEVELOPMENT:  'Your information is under review. A solicitor will be in touch within 2 working days.',
-      NOT_VIABLE:         'A member of our team will contact you to explain the position and outline any alternatives.'
-    };
     const followupEl = document.getElementById('result-followup');
-    if (followupEl) followupEl.textContent = followupCopy[tier] || followupCopy.NEEDS_DEVELOPMENT;
+    if (followupEl) followupEl.textContent = 'A qualified member of the firm will be in touch within 2 working days.';
 
-    // Tier-aware CTA — NOT_VIABLE never sees the Calendly booking link
+    // Score ring and badge are hidden — classification is for fee earner review only
+    const scoreRing = document.getElementById('score-ring');
+    if (scoreRing) scoreRing.style.display = 'none';
+    const badge = document.getElementById('result-badge');
+    if (badge) badge.style.display = 'none';
+
+    // Single neutral CTA regardless of tier
     const ctaBook    = document.getElementById('cta-book');
     const ctaContact = document.getElementById('cta-contact');
-    if (ctaBook)    ctaBook.style.display    = (tier !== 'NOT_VIABLE') ? 'inline-flex' : 'none';
-    if (ctaContact) ctaContact.style.display = (tier === 'NOT_VIABLE')  ? 'inline-flex' : 'none';
+    if (ctaBook)    ctaBook.style.display    = 'none';
+    if (ctaContact) ctaContact.style.display = 'inline-flex';
 
     const stepList = document.getElementById('next-steps-list');
-    stepList.innerHTML = result.steps.map((s, i) =>
+    stepList.innerHTML = NEUTRAL_CONFIRMATION.steps.map((s, i) =>
       `<li><span class="step-num">0${i+1}</span><span>${s}</span></li>`
     ).join('');
 
@@ -1764,10 +1736,11 @@
       // If webhook not yet live — show confirmation anyway for testing
       // Remove this block and uncomment the error screen once backend is live
       if (WEBHOOK_URL.includes('YOUR_BACKEND_URL')) {
-        // Demo mode — show sample confirmation
+        // Demo mode — backend not yet connected.
+        // Renders neutral client confirmation only. No tier or score shown.
         document.getElementById('loading-screen').style.display = 'none';
         document.getElementById('confirmation-screen').style.display = 'block';
-        renderConfirmation(72, 'NEEDS_DEVELOPMENT', payload.email);
+        renderConfirmation(null, null, payload.email);
         return;
       }
 
