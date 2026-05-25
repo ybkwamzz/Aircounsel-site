@@ -1598,6 +1598,40 @@
 .wrap:hover .tier, .wrap:hover .pilot-band, .wrap:hover .enterprise-row {
   border-color: rgba(198,168,106,0.24);
   transform: translateY(-1px);
+/* institutional interactive emphasis */
+.fd-section, .pr-section, .pd-section, .ps-section, .cb-section, .fq-section, .pc-section, .wrap {
+  transition: background-color .25s ease, border-color .25s ease, color .25s ease;
+}
+
+.fd-section:hover .fd-name, .fd-section:focus-within .fd-name,
+.pr-section:hover .pr-heading, .pr-section:focus-within .pr-heading,
+.pd-section:hover .pd-heading, .pd-section:focus-within .pd-heading,
+.ps-section:hover .ps-heading, .ps-section:focus-within .ps-heading,
+.fq-section:hover .fq-heading, .fq-section:focus-within .fq-heading,
+.pc-section:hover .pc-heading, .pc-section:focus-within .pc-heading,
+.wrap:hover .pilot-title, .wrap:focus-within .pilot-title,
+.wrap:hover .tier-name, .wrap:focus-within .tier-name {
+  color: rgba(0, 212, 255, 1);
+}
+
+.fd-section:hover .fd-link, .fd-section:focus-within .fd-link,
+.pr-section:hover .pr-cta, .pr-section:focus-within .pr-cta,
+.pd-section:hover .pd-stage-tag, .pd-section:focus-within .pd-stage-tag,
+.ps-section:hover .ps-item-title, .ps-section:focus-within .ps-item-title,
+.fq-section:hover .fq-q-text, .fq-section:focus-within .fq-q-text,
+.pc-section:hover .pc-slot-state, .pc-section:focus-within .pc-slot-state,
+.wrap:hover .pilot-cta, .wrap:focus-within .pilot-cta,
+.wrap:hover .tier-btn, .wrap:focus-within .tier-btn,
+.wrap:hover .ent-link, .wrap:focus-within .ent-link {
+  color: rgba(0, 212, 255, 1);
+  border-color: rgba(0, 212, 255, 0.35);
+}
+
+.fd-section:hover .fd-photo-frame, .pr-section:hover .pr-cta,
+.pd-section:hover .pd-stage-body, .ps-section:hover .ps-item,
+.fq-section:hover .fq-item, .pc-section:hover .pc-slot,
+.wrap:hover .tier, .wrap:hover .pilot-band, .wrap:hover .enterprise-row {
+  border-color: rgba(0, 212, 255, 0.25);
 }
 </style>
 
@@ -1731,6 +1765,214 @@
 .ps-section:hover .ps-item, .fq-section:hover .fq-item, .pc-section:hover .pc-slot,
 .wrap:hover .tier, .wrap:hover .pilot-band, .wrap:hover .enterprise-row {
   border-color: rgba(198,168,106,0.22);
+/* ── ROOT / TOKENS ── */
+.fd-section {
+  width: 100%;
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  position: relative;
+}
+
+.fd-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, 80vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.15), transparent);
+}
+
+/* ── LAYOUT ── */
+.fd-inner {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 72px;
+  align-items: center;
+  max-width: 860px;
+  width: 90%;
+}
+
+/* ── PHOTO COLUMN ── */
+.fd-photo-col {
+  display: flex;
+  justify-content: center;
+}
+
+.fd-photo-frame {
+  position: relative;
+  width: 240px;
+  height: 240px;
+}
+
+/* Bracket corners — top-left */
+.fd-photo-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  z-index: 2;
+}
+
+.fd-corner-tl {
+  top: -8px;
+  left: -8px;
+  border-top: 1px solid rgba(0, 212, 255, 0.5);
+  border-left: 1px solid rgba(0, 212, 255, 0.5);
+}
+
+.fd-corner-br {
+  bottom: -8px;
+  right: -8px;
+  border-bottom: 1px solid rgba(255, 107, 26, 0.5);
+  border-right: 1px solid rgba(255, 107, 26, 0.5);
+}
+
+.fd-photo {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: grayscale(15%) contrast(1.05);
+  transition: filter 0.4s ease;
+}
+
+.fd-photo:hover {
+  filter: grayscale(0%) contrast(1.08);
+}
+
+.fd-photo-badge {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  padding: 6px 0;
+  background: rgba(4, 4, 10, 0.9);
+  border-top: 1px solid rgba(0, 212, 255, 0.12);
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.35em;
+  color: rgba(0, 212, 255, 0.45);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* ── TEXT COLUMN ── */
+.fd-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.fd-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 107, 26, 0.8);
+  margin-bottom: 12px;
+}
+
+.fd-name {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+
+.fd-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 28px;
+}
+
+.fd-divider {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0, 212, 255, 0.4), transparent);
+  margin-bottom: 24px;
+}
+
+.fd-bio {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.02em;
+  margin-bottom: 32px;
+  max-width: 420px;
+}
+
+/* ── LINKS ── */
+.fd-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.fd-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(0, 212, 255, 0.55);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.fd-link:hover {
+  color: rgba(0, 212, 255, 0.9);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .fd-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .fd-photo-col {
+    justify-content: center;
+  }
+
+  .fd-eyebrow,
+  .fd-title {
+    text-align: center;
+  }
+
+  .fd-divider {
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.4), transparent);
+    width: 60px;
+  }
+
+  .fd-bio {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .fd-links {
+    justify-content: center;
+  }
+
+  .fd-name {
+    text-align: center;
+  }
 }
 </style>
 <!-- END founder_section.html -->
