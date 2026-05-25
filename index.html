@@ -1521,6 +1521,45 @@
 
 <!-- ══ FOOTER ════════════════════════════════════════════════════ -->
 
+
+<style>
+/* institutional interactive emphasis */
+.fd-section, .pr-section, .pd-section, .ps-section, .cb-section, .fq-section, .pc-section, .wrap {
+  transition: background-color .25s ease, border-color .25s ease, color .25s ease;
+}
+
+.fd-section:hover .fd-name, .fd-section:focus-within .fd-name,
+.pr-section:hover .pr-heading, .pr-section:focus-within .pr-heading,
+.pd-section:hover .pd-heading, .pd-section:focus-within .pd-heading,
+.ps-section:hover .ps-heading, .ps-section:focus-within .ps-heading,
+.fq-section:hover .fq-heading, .fq-section:focus-within .fq-heading,
+.pc-section:hover .pc-heading, .pc-section:focus-within .pc-heading,
+.wrap:hover .pilot-title, .wrap:focus-within .pilot-title,
+.wrap:hover .tier-name, .wrap:focus-within .tier-name {
+  color: rgba(0, 212, 255, 1);
+}
+
+.fd-section:hover .fd-link, .fd-section:focus-within .fd-link,
+.pr-section:hover .pr-cta, .pr-section:focus-within .pr-cta,
+.pd-section:hover .pd-stage-tag, .pd-section:focus-within .pd-stage-tag,
+.ps-section:hover .ps-item-title, .ps-section:focus-within .ps-item-title,
+.fq-section:hover .fq-q-text, .fq-section:focus-within .fq-q-text,
+.pc-section:hover .pc-slot-state, .pc-section:focus-within .pc-slot-state,
+.wrap:hover .pilot-cta, .wrap:focus-within .pilot-cta,
+.wrap:hover .tier-btn, .wrap:focus-within .tier-btn,
+.wrap:hover .ent-link, .wrap:focus-within .ent-link {
+  color: rgba(0, 212, 255, 1);
+  border-color: rgba(0, 212, 255, 0.35);
+}
+
+.fd-section:hover .fd-photo-frame, .pr-section:hover .pr-cta,
+.pd-section:hover .pd-stage-body, .ps-section:hover .ps-item,
+.fq-section:hover .fq-item, .pc-section:hover .pc-slot,
+.wrap:hover .tier, .wrap:hover .pilot-band, .wrap:hover .enterprise-row {
+  border-color: rgba(0, 212, 255, 0.25);
+}
+</style>
+
 <!-- BEGIN founder_section.html -->
 <section class="fd-section" aria-label="Founder">
 
