@@ -1523,6 +1523,81 @@
 
 
 <style>
+/* integrated institutional layer — canonical restrained system */
+:root {
+  --ac-bg-primary: #0A0A0A;
+  --ac-bg-secondary: #111111;
+  --ac-bg-panel: #171717;
+  --ac-bg-elevated: #1F1F1F;
+  --ac-text-primary: #F5F1E8;
+  --ac-text-secondary: #CFC7B6;
+  --ac-text-muted: #8D877C;
+  --ac-gold-primary: #C6A86A;
+  --ac-gold-soft: #D8BE86;
+  --ac-gold-deep: #8F7442;
+  --ac-border-subtle: rgba(255,255,255,0.06);
+}
+
+/* scope: integrated blocks only */
+.fd-section, .pr-section, .pd-section, .ps-section, .cb-section, .fq-section, .pc-section, .wrap {
+  background: var(--ac-bg-primary);
+  color: var(--ac-text-primary);
+}
+
+/* calm section surfaces */
+.fd-inner, .pr-inner, .pd-diagram, .ps-list, .cb-grid, .fq-list, .pc-tracker,
+.wrap .pilot-band, .wrap .tier, .wrap .enterprise-row {
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0)) , var(--ac-bg-secondary);
+  border: 1px solid var(--ac-border-subtle);
+  border-radius: 22px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.42);
+}
+
+.fd-eyebrow, .pr-eyebrow, .pd-eyebrow, .ps-eyebrow, .cb-eyebrow, .fq-eyebrow, .pc-eyebrow,
+.pilot-eyebrow, .feat-label { color: var(--ac-text-muted); letter-spacing: .24em; }
+
+.fd-name, .pr-heading, .pd-heading, .ps-heading, .fq-heading, .pc-heading,
+.pilot-title, .tier-name, .ent-title { color: var(--ac-text-primary); }
+
+.fd-bio, .pr-body, .pd-subheading, .pd-stage-text, .ps-subheading, .ps-item-text, .cb-note,
+.fq-subheading, .fq-answer p, .pc-subheading, .pc-slot-desc, .pilot-desc, .tier-sub,
+.tier-price, .ent-desc, .comp-item { color: var(--ac-text-secondary); }
+
+.fd-link, .pr-cta, .pd-stage-tag, .ps-item-title, .fq-q-text, .pc-slot-state,
+.pilot-cta, .tier-btn, .ent-link, .tier-badge { color: var(--ac-gold-primary); border-color: rgba(198,168,106,0.22); }
+
+.fd-section::before, .pr-section::before, .pd-section::before, .ps-section::before,
+.cb-section::before, .fq-section::before, .pc-section::before {
+  background: linear-gradient(90deg, transparent, rgba(198,168,106,0.35), transparent);
+}
+
+/* slow, intentional motion */
+.fd-section *, .pr-section *, .pd-section *, .ps-section *, .cb-section *, .fq-section *, .pc-section *, .wrap * {
+  transition: color .45s cubic-bezier(0.22,1,0.36,1), border-color .45s cubic-bezier(0.22,1,0.36,1), background-color .45s cubic-bezier(0.22,1,0.36,1), transform .45s cubic-bezier(0.22,1,0.36,1), opacity .45s cubic-bezier(0.22,1,0.36,1);
+}
+
+.fd-section:hover .fd-name, .pr-section:hover .pr-heading, .pd-section:hover .pd-heading,
+.ps-section:hover .ps-heading, .fq-section:hover .fq-heading, .pc-section:hover .pc-heading,
+.wrap:hover .pilot-title, .wrap:hover .tier-name,
+.fd-section:focus-within .fd-name, .pr-section:focus-within .pr-heading, .pd-section:focus-within .pd-heading,
+.ps-section:focus-within .ps-heading, .fq-section:focus-within .fq-heading, .pc-section:focus-within .pc-heading,
+.wrap:focus-within .pilot-title, .wrap:focus-within .tier-name { color: var(--ac-gold-soft); }
+
+.fd-section:hover .fd-link, .pr-section:hover .pr-cta, .pd-section:hover .pd-stage-tag,
+.ps-section:hover .ps-item-title, .fq-section:hover .fq-q-text, .pc-section:hover .pc-slot-state,
+.wrap:hover .pilot-cta, .wrap:hover .tier-btn, .wrap:hover .ent-link,
+.fd-section:focus-within .fd-link, .pr-section:focus-within .pr-cta, .pd-section:focus-within .pd-stage-tag,
+.ps-section:focus-within .ps-item-title, .fq-section:focus-within .fq-q-text, .pc-section:focus-within .pc-slot-state,
+.wrap:focus-within .pilot-cta, .wrap:focus-within .tier-btn, .wrap:focus-within .ent-link {
+  color: var(--ac-text-primary);
+  border-color: rgba(216,190,134,0.38);
+}
+
+.fd-section:hover .fd-inner, .pr-section:hover .pr-inner, .pd-section:hover .pd-stage-body,
+.ps-section:hover .ps-item, .fq-section:hover .fq-item, .pc-section:hover .pc-slot,
+.wrap:hover .tier, .wrap:hover .pilot-band, .wrap:hover .enterprise-row {
+  border-color: rgba(198,168,106,0.24);
+  transform: translateY(-1px);
 /* institutional interactive emphasis */
 .fd-section, .pr-section, .pd-section, .ps-section, .cb-section, .fq-section, .pc-section, .wrap {
   transition: background-color .25s ease, border-color .25s ease, color .25s ease;
@@ -1633,6 +1708,63 @@
      STYLES — scoped with fd- prefix
      ══════════════════════════════════ -->
 <style>
+/* institutional integrated layer — restrained operational cinema */
+.fd-section, .pr-section, .pd-section, .ps-section, .cb-section, .fq-section, .pc-section, .wrap {
+  background: #0A0A0A;
+  color: #F5F1E8;
+}
+
+.fd-inner, .pr-inner, .pd-diagram, .ps-list, .cb-grid, .fq-list, .pc-tracker, .wrap .pilot-band, .wrap .tier, .wrap .enterprise-row {
+  background: #111111;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 18px 52px rgba(0,0,0,0.35);
+}
+
+.fd-eyebrow, .pr-eyebrow, .pd-eyebrow, .ps-eyebrow, .cb-eyebrow, .fq-eyebrow, .pc-eyebrow, .pilot-eyebrow, .feat-label {
+  color: #8D877C;
+  letter-spacing: .24em;
+}
+
+.fd-name, .pr-heading, .pd-heading, .ps-heading, .fq-heading, .pc-heading, .pilot-title, .tier-name, .ent-title {
+  color: #F5F1E8;
+}
+
+.fd-bio, .pr-body, .pd-subheading, .pd-stage-text, .ps-subheading, .ps-item-text, .cb-note, .fq-subheading, .fq-answer p, .pc-subheading, .pc-slot-desc, .pilot-desc, .tier-sub, .tier-price, .ent-desc, .comp-item {
+  color: #CFC7B6;
+}
+
+.fd-link, .pr-cta, .pd-stage-tag, .ps-item-title, .fq-q-text, .pc-slot-state, .pilot-cta, .tier-btn, .ent-link, .tier-badge {
+  color: #C6A86A;
+  border-color: rgba(198,168,106,0.22);
+}
+
+.fd-section::before, .pr-section::before, .pd-section::before, .ps-section::before, .cb-section::before, .fq-section::before, .pc-section::before {
+  background: linear-gradient(90deg, transparent, rgba(198,168,106,0.35), transparent);
+}
+
+.fd-section:hover .fd-name, .pr-section:hover .pr-heading, .pd-section:hover .pd-heading,
+.ps-section:hover .ps-heading, .fq-section:hover .fq-heading, .pc-section:hover .pc-heading,
+.wrap:hover .pilot-title, .wrap:hover .tier-name,
+.fd-section:focus-within .fd-name, .pr-section:focus-within .pr-heading, .pd-section:focus-within .pd-heading,
+.ps-section:focus-within .ps-heading, .fq-section:focus-within .fq-heading, .pc-section:focus-within .pc-heading,
+.wrap:focus-within .pilot-title, .wrap:focus-within .tier-name {
+  color: #C6A86A;
+}
+
+.fd-section:hover .fd-link, .pr-section:hover .pr-cta, .pd-section:hover .pd-stage-tag,
+.ps-section:hover .ps-item-title, .fq-section:hover .fq-q-text, .pc-section:hover .pc-slot-state,
+.wrap:hover .pilot-cta, .wrap:hover .tier-btn, .wrap:hover .ent-link,
+.fd-section:focus-within .fd-link, .pr-section:focus-within .pr-cta, .pd-section:focus-within .pd-stage-tag,
+.ps-section:focus-within .ps-item-title, .fq-section:focus-within .fq-q-text, .pc-section:focus-within .pc-slot-state,
+.wrap:focus-within .pilot-cta, .wrap:focus-within .tier-btn, .wrap:focus-within .ent-link {
+  color: #F5F1E8;
+  border-color: rgba(198,168,106,0.35);
+}
+
+.fd-section:hover .fd-inner, .pr-section:hover .pr-inner, .pd-section:hover .pd-stage-body,
+.ps-section:hover .ps-item, .fq-section:hover .fq-item, .pc-section:hover .pc-slot,
+.wrap:hover .tier, .wrap:hover .pilot-band, .wrap:hover .enterprise-row {
+  border-color: rgba(198,168,106,0.22);
 /* ── ROOT / TOKENS ── */
 .fd-section {
   width: 100%;
