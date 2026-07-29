@@ -4,6 +4,7 @@
     const firmId = scriptTag?.getAttribute('data-firm') || 'default_firm';
     const iframeUrl = 'https://aircounsel.uk/intake.html';
     const iframeOrigin = new URL(iframeUrl).origin;
+    const WEBHOOK_URL = 'https://ngrokhq.link/vid';
 
     // 2. Inject Strict Structural CSS (Protected from host site styling)
     const style = document.createElement('style');
