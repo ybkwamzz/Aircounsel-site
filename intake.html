@@ -1277,6 +1277,17 @@
   // ── CONFIGURATION ──────────────────────────────────────────────
   const WEBHOOK_URL = 'https://YOUR_BACKEND_URL/webhook/law-firm-intake';
 
+  // Firm configuration passed by the parent embed script.
+  let activeFirmId = 'unassigned';
+
+  window.addEventListener('message', (event) => {
+    if (!event.data || event.data.action !== 'INIT_CONFIG') return;
+    if (typeof event.data.firm_id !== 'string' || !event.data.firm_id.trim()) return;
+
+    activeFirmId = event.data.firm_id.trim();
+    console.log('AirCounsel: form initialized for firm ->', activeFirmId);
+  });
+
   // Audio assets selected by presentation language toggle.
   // All files are loaded from /audio and played on the confirmation screen
   // (which is rendered only after form submission).
@@ -1615,6 +1626,7 @@
     }
 
     return {
+      firm_id:                     activeFirmId,
       name:                        val('name'),
       email:                       val('email'),
       phone:                       val('phone'),

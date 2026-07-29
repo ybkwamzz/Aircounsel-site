@@ -1,7 +1,9 @@
 (function() {
     // 1. Capture configuration from the script tag
     const scriptTag = document.currentScript;
-    const firmId = scriptTag.getAttribute('data-firm') || 'default_firm';
+    const firmId = scriptTag?.getAttribute('data-firm') || 'default_firm';
+    const iframeUrl = 'https://aircounsel.uk/intake.html';
+    const iframeOrigin = new URL(iframeUrl).origin;
 
     // 2. Inject Strict Structural CSS (Protected from host site styling)
     const style = document.createElement('style');
@@ -62,8 +64,15 @@
 
     const iframe = document.createElement('iframe');
     iframe.className = 'strata-embed-iframe';
-    // Append the firm parameter so the backend knows which ledger to write to
-    iframe.src = `https://aircounsel.uk/intake.html?firm=${firmId}`;
+    // Load the raw form and pass configuration via postMessage once ready.
+    iframe.src = iframeUrl;
+
+    iframe.onload = () => {
+        iframe.contentWindow?.postMessage({
+            action: 'INIT_CONFIG',
+            firm_id: firmId
+        }, iframeOrigin);
+    };
 
     // 4. Assemble the DOM
     modal.appendChild(closeBtn);
