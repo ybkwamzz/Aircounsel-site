@@ -96,9 +96,10 @@
 
     // Optional: Listen for completion message from intake.html to auto-close
     window.addEventListener('message', (event) => {
-        // Ensure origin matching in production
-        if (event.data === 'STRATA_INTAKE_COMPLETE') {
-            setTimeout(closeModal, 3000); // Close 3 seconds after confirmation screen
+        // Only accept messages from the embedded intake origin and the specific completion token
+        if (event.origin === iframeOrigin && event.data === 'STRATA_INTAKE_COMPLETE') {
+            // Auto-close the overlay 3 seconds after confirmation displays
+            setTimeout(closeModal, 3000);
         }
     });
 })();
