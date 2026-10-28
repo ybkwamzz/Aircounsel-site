@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Immigration Intake Form — Suitability Assessment | AirCounsel</title>
-  <meta name="description" content="Submit your details for a structured, solicitor-grade suitability assessment powered by AirCounsel’s intake engine." />
+  <title>Immigration Intake Form â€” Suitability Assessment | AirCounsel</title>
+  <meta name="description" content="Submit your details for a structured, solicitor-grade suitability assessment powered by AirCounselâ€™s intake engine." />
   <link rel="canonical" href="https://aircounsel.uk/intake.html" />
-  <title>AirCounsel — Start Your Enquiry</title>
+  <title>AirCounsel â€” Start Your Enquiry</title>
   <meta name="description" content="Begin your immigration enquiry with Air Counsel. Structured, confidential, and solicitor-safe." />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
@@ -22,7 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
 
   <style>
-    /* ─── TOKENS ── */
+    /* â”€â”€â”€ TOKENS â”€â”€ */
     :root {
       --ink:        #070d14;
       --navy:       #0d1b2a;
@@ -61,7 +61,7 @@
       overflow-x: hidden;
     }
 
-    /* ─── BACKGROUND ── */
+    /* â”€â”€â”€ BACKGROUND â”€â”€ */
     .bg-grid {
       position: fixed;
       inset: 0;
@@ -74,7 +74,7 @@
       mask-image: radial-gradient(ellipse 90% 80% at 50% 30%, black 30%, transparent 100%);
     }
 
-    /* ─── LAYOUT ── */
+    /* â”€â”€â”€ LAYOUT â”€â”€ */
     .page {
       position: relative;
       z-index: 1;
@@ -83,7 +83,7 @@
       flex-direction: column;
     }
 
-    /* ─── HEADER ── */
+    /* â”€â”€â”€ HEADER â”€â”€ */
     .site-header {
       padding: 1.5rem 2rem;
       display: flex;
@@ -108,7 +108,7 @@
       text-transform: uppercase;
     }
 
-    /* ─── MAIN FORM AREA ── */
+    /* â”€â”€â”€ MAIN FORM AREA â”€â”€ */
     .form-wrap {
       flex: 1;
       display: flex;
@@ -122,7 +122,7 @@
       max-width: 680px;
     }
 
-    /* ─── PROGRESS BAR ── */
+    /* â”€â”€â”€ PROGRESS BAR â”€â”€ */
     .progress-track {
       display: flex;
       gap: 4px;
@@ -158,7 +158,7 @@
       letter-spacing: 0.1em;
     }
 
-    /* ─── GATE PANEL ── */
+    /* â”€â”€â”€ GATE PANEL â”€â”€ */
     .gate {
       display: none;
       animation: gateIn 0.45s cubic-bezier(0.22,1,0.36,1) both;
@@ -207,7 +207,7 @@
       line-height: 1.7;
     }
 
-    /* ─── FIELDS ── */
+    /* â”€â”€â”€ FIELDS â”€â”€ */
     .field-group {
       display: flex;
       flex-direction: column;
@@ -292,7 +292,7 @@
     }
     .field.error .field-error { display: block; }
 
-    /* ─── TOGGLE / RADIO CARDS ── */
+    /* â”€â”€â”€ TOGGLE / RADIO CARDS â”€â”€ */
     .toggle-group {
       display: flex;
       flex-direction: column;
@@ -336,7 +336,7 @@
     }
     .radio-card label:hover { border-color: rgba(184,154,90,0.4); }
 
-    /* ─── ROUTE SELECTOR GRID ── */
+    /* â”€â”€â”€ ROUTE SELECTOR GRID â”€â”€ */
     .route-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -379,11 +379,11 @@
     .route-card input:checked + label .route-name { color: var(--gold-light); }
     .route-card label:hover { border-color: rgba(184,154,90,0.35); }
 
-    /* ─── CONDITIONAL FIELDS ── */
+    /* â”€â”€â”€ CONDITIONAL FIELDS â”€â”€ */
     .conditional { display: none; }
     .conditional.show { display: flex; flex-direction: column; gap: 1.2rem; }
 
-    /* ─── NAVIGATION BUTTONS ── */
+    /* â”€â”€â”€ NAVIGATION BUTTONS â”€â”€ */
     .nav-row {
       display: flex;
       align-items: center;
@@ -450,7 +450,7 @@
     /* Arrow SVG */
     .arrow { width: 14px; height: 14px; flex-shrink: 0; }
 
-    /* ─── COMPLIANCE NOTE ── */
+    /* â”€â”€â”€ COMPLIANCE NOTE â”€â”€ */
     .compliance-note {
       margin-top: 2rem;
       padding: 1.2rem 1.4rem;
@@ -462,7 +462,7 @@
     }
     .compliance-note strong { color: var(--text-mid); font-weight: 500; }
 
-    /* ─── LOADING STATE ── */
+    /* â”€â”€â”€ LOADING STATE â”€â”€ */
     #loading-screen {
       display: none;
       text-align: center;
@@ -485,7 +485,7 @@
       color: var(--text-mid);
     }
 
-    /* ─── CONFIRMATION SCREEN ── */
+    /* â”€â”€â”€ CONFIRMATION SCREEN â”€â”€ */
     #confirmation-screen {
       display: none;
       animation: gateIn 0.5s ease both;
@@ -557,7 +557,7 @@
       align-items: center;
       justify-content: center;
       margin: 0 auto 2rem;
-      /* Hidden by renderConfirmation — fee earner view only */
+      /* Hidden by renderConfirmation â€” fee earner view only */
     }
     .score-value {
       font-family: var(--ff-d);
@@ -629,7 +629,7 @@
     }
     .btn-return:hover { color: var(--text-mid); border-color: var(--border); }
 
-    /* ─── ERROR SCREEN ── */
+    /* â”€â”€â”€ ERROR SCREEN â”€â”€ */
     #error-screen {
       display: none;
       text-align: center;
@@ -649,7 +649,7 @@
       margin-bottom: 2rem;
     }
 
-    /* ─── FOOTER ── */
+    /* â”€â”€â”€ FOOTER â”€â”€ */
     .site-footer {
       padding: 1.5rem 2rem;
       border-top: 1px solid var(--border-soft);
@@ -670,7 +670,7 @@
     }
     .site-footer a:hover { color: var(--gold); }
 
-    /* ─── RESPONSIVE ── */
+    /* â”€â”€â”€ RESPONSIVE â”€â”€ */
     @media (max-width: 640px) {
       .field-row { grid-template-columns: 1fr; }
       .route-grid { grid-template-columns: 1fr; }
@@ -678,7 +678,7 @@
       .form-wrap { padding: 2.5rem 1rem 4rem; }
     }
 
-    /* ─── LANGUAGE TOGGLE ── */
+    /* â”€â”€â”€ LANGUAGE TOGGLE â”€â”€ */
     .lang-toggle { display:flex; align-items:center; gap:0.4rem; }
     .lang-btn {
       font-family: var(--ff-m); font-size:0.62rem; font-weight:400;
@@ -689,7 +689,7 @@
     .lang-btn:hover { color:var(--text-mid); }
     .lang-btn.active { color:var(--gold); border-color:var(--border); background:var(--gold-dim); }
 
-    /* ─── AUDIO ── */
+    /* â”€â”€â”€ AUDIO â”€â”€ */
     .audio-bar {
       display:flex; align-items:center; justify-content:center;
       gap:0.9rem; margin-top:1.5rem; margin-bottom:-0.5rem;
@@ -737,7 +737,7 @@
 
 <div class="page">
 
-  <!-- ── HEADER ── -->
+  <!-- â”€â”€ HEADER â”€â”€ -->
   <header class="site-header" role="banner">
     <a href="/" class="logo">Air<span>Counsel</span></a>
     <div style="display:flex;align-items:center;gap:1.5rem;">
@@ -748,11 +748,11 @@
         <button class="lang-btn" onclick="setLang(this,'ur')" aria-pressed="false">UR</button>
         <button class="lang-btn" onclick="setLang(this,'zh')" aria-pressed="false">ZH</button>
       </div>
-      <span class="header-note" id="header-note">Confidential Intake · GDPR Compliant</span>
+      <span class="header-note" id="header-note">Confidential Intake Â· GDPR Compliant</span>
     </div>
   </header>
 
-  <!-- ── FORM AREA ── -->
+  <!-- â”€â”€ FORM AREA â”€â”€ -->
   <main class="form-wrap" role="main">
     <div class="form-card">
 
@@ -772,7 +772,7 @@
 
       <form id="intake-form" novalidate>
 
-        <!-- ══ GATE 0 — CONTACT ══════════════════════════════════ -->
+        <!-- â•â• GATE 0 â€” CONTACT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
         <!-- Pre-gate: collect contact details first -->
         <div class="gate active" id="gate-0" data-gate="0">
           <p class="gate-eyebrow">Before we begin</p>
@@ -814,11 +814,11 @@
           </div>
         </div>
 
-        <!-- ══ GATE 1 — ROUTE FIT ════════════════════════════════ -->
+        <!-- â•â• GATE 1 â€” ROUTE FIT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
         <div class="gate" id="gate-1" data-gate="1">
-          <p class="gate-eyebrow">Gate 1 — Route Fit</p>
+          <p class="gate-eyebrow">Gate 1 â€” Route Fit</p>
           <h2 class="gate-title">What <em>visa route</em><br />are you enquiring about?</h2>
-          <p class="gate-desc">Select the route most relevant to your situation. If you are unsure, select the closest option — your solicitor will clarify in the consultation.</p>
+          <p class="gate-desc">Select the route most relevant to your situation. If you are unsure, select the closest option â€” your solicitor will clarify in the consultation.</p>
 
           <div class="field-group">
             <div class="field" id="f-visa-route">
@@ -872,7 +872,7 @@
           </div>
 
           <div class="nav-row">
-            <button type="button" class="btn btn-back" onclick="prevGate(1)">← Back</button>
+            <button type="button" class="btn btn-back" onclick="prevGate(1)">â† Back</button>
             <button type="button" class="btn btn-next" onclick="nextGate(1)">
               Continue
               <svg class="arrow" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -880,20 +880,20 @@
           </div>
         </div>
 
-        <!-- ══ GATE 2 — ELIGIBILITY (BRANCHED) ══════════════════ -->
+        <!-- â•â• GATE 2 â€” ELIGIBILITY (BRANCHED) â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
         <div class="gate" id="gate-2" data-gate="2">
-          <p class="gate-eyebrow">Gate 2 — Eligibility Thresholds</p>
+          <p class="gate-eyebrow">Gate 2 â€” Eligibility Thresholds</p>
           <h2 class="gate-title"><em>Eligibility</em><br />questions</h2>
-          <p class="gate-desc" id="gate2-desc">These questions are specific to your selected visa route. They are used only to assess viability — not to make legal determinations.</p>
+          <p class="gate-desc" id="gate2-desc">These questions are specific to your selected visa route. They are used only to assess viability â€” not to make legal determinations.</p>
 
           <div class="field-group">
 
             <!-- Skilled Worker branch -->
             <div class="conditional" id="branch-skilled_worker">
               <div class="field" id="f-salary">
-                <label for="annual_salary_gbp">Annual salary offered by employer (£) <span class="req">*</span></label>
+                <label for="annual_salary_gbp">Annual salary offered by employer (Â£) <span class="req">*</span></label>
                 <input type="number" id="annual_salary_gbp" name="annual_salary_gbp" placeholder="e.g. 38700" min="0" />
-                <span class="field-hint">Current threshold: £38,700 general / £30,960 new entrant</span>
+                <span class="field-hint">Current threshold: Â£38,700 general / Â£30,960 new entrant</span>
                 <span class="field-error">Please enter the offered salary</span>
               </div>
               <div class="field">
@@ -901,11 +901,11 @@
                 <div class="toggle-row">
                   <div class="radio-card">
                     <input type="radio" id="ne-yes" name="is_new_entrant" value="true" />
-                    <label for="ne-yes">Yes — new entrant</label>
+                    <label for="ne-yes">Yes â€” new entrant</label>
                   </div>
                   <div class="radio-card">
                     <input type="radio" id="ne-no" name="is_new_entrant" value="false" checked />
-                    <label for="ne-no">No — experienced worker</label>
+                    <label for="ne-no">No â€” experienced worker</label>
                   </div>
                 </div>
               </div>
@@ -927,13 +927,13 @@
             <!-- Spouse / Partner Visa branch -->
             <div class="conditional" id="branch-spouse_partner_visa">
               <div class="field" id="f-sponsor-income">
-                <label for="sponsor_annual_income_gbp">Sponsor's annual income in UK (£) <span class="req">*</span></label>
+                <label for="sponsor_annual_income_gbp">Sponsor's annual income in UK (Â£) <span class="req">*</span></label>
                 <input type="number" id="sponsor_annual_income_gbp" name="sponsor_annual_income_gbp" placeholder="e.g. 29000" min="0" />
-                <span class="field-hint">Current threshold: £29,000 (April 2024 onwards)</span>
+                <span class="field-hint">Current threshold: Â£29,000 (April 2024 onwards)</span>
                 <span class="field-error">Please enter sponsor income</span>
               </div>
               <div class="field">
-                <label for="combined_annual_income_gbp">Combined annual income if both working (£)</label>
+                <label for="combined_annual_income_gbp">Combined annual income if both working (Â£)</label>
                 <input type="number" id="combined_annual_income_gbp" name="combined_annual_income_gbp" placeholder="Leave blank if not applicable" min="0" />
               </div>
               <div class="field">
@@ -983,7 +983,7 @@
                 </div>
               </div>
               <div class="field">
-                <label for="annual_salary_gbp-student">Maintenance funds available (£)</label>
+                <label for="annual_salary_gbp-student">Maintenance funds available (Â£)</label>
                 <input type="number" id="annual_salary_gbp-student" placeholder="e.g. 12000" min="0" />
                 <span class="field-hint">You must demonstrate sufficient funds to support yourself during study</span>
               </div>
@@ -1005,7 +1005,7 @@
                 </div>
               </div>
               <div class="field">
-                <label for="annual_salary_gbp-biz">Available investment funds (£)</label>
+                <label for="annual_salary_gbp-biz">Available investment funds (Â£)</label>
                 <input type="number" id="annual_salary_gbp-biz" placeholder="e.g. 50000" min="0" />
               </div>
             </div>
@@ -1014,14 +1014,14 @@
             <div class="conditional" id="branch-other">
               <div class="field">
                 <label for="message-other">Please briefly describe your situation</label>
-                <textarea id="message-other" name="message" placeholder="Describe your immigration situation and what outcome you are looking for…"></textarea>
+                <textarea id="message-other" name="message" placeholder="Describe your immigration situation and what outcome you are looking forâ€¦"></textarea>
               </div>
             </div>
 
           </div>
 
           <div class="nav-row">
-            <button type="button" class="btn btn-back" onclick="prevGate(2)">← Back</button>
+            <button type="button" class="btn btn-back" onclick="prevGate(2)">â† Back</button>
             <button type="button" class="btn btn-next" onclick="nextGate(2)">
               Continue
               <svg class="arrow" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1029,11 +1029,11 @@
           </div>
         </div>
 
-        <!-- ══ GATE 3 — IMMIGRATION HISTORY ══════════════════════ -->
+        <!-- â•â• GATE 3 â€” IMMIGRATION HISTORY â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
         <div class="gate" id="gate-3" data-gate="3">
-          <p class="gate-eyebrow">Gate 3 — Immigration History</p>
+          <p class="gate-eyebrow">Gate 3 â€” Immigration History</p>
           <h2 class="gate-title">Previous <em>immigration<br />history</em></h2>
-          <p class="gate-desc">All disclosures are treated in strict confidence. Accurate information is essential — risk factors disclosed here allow your solicitor to prepare properly, not to exclude you.</p>
+          <p class="gate-desc">All disclosures are treated in strict confidence. Accurate information is essential â€” risk factors disclosed here allow your solicitor to prepare properly, not to exclude you.</p>
 
           <div class="field-group">
             <div class="field" id="f-refusals">
@@ -1076,7 +1076,7 @@
           </div>
 
           <div class="nav-row">
-            <button type="button" class="btn btn-back" onclick="prevGate(3)">← Back</button>
+            <button type="button" class="btn btn-back" onclick="prevGate(3)">â† Back</button>
             <button type="button" class="btn btn-next" onclick="nextGate(3)">
               Continue
               <svg class="arrow" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1084,9 +1084,9 @@
           </div>
         </div>
 
-        <!-- ══ GATE 4 — FEE CAPACITY ══════════════════════════════ -->
+        <!-- â•â• GATE 4 â€” FEE CAPACITY â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
         <div class="gate" id="gate-4" data-gate="4">
-          <p class="gate-eyebrow">Gate 4 — Fee Capacity</p>
+          <p class="gate-eyebrow">Gate 4 â€” Fee Capacity</p>
           <h2 class="gate-title">Funding your <em>application</em></h2>
           <p class="gate-desc">This information helps ensure a consultation is appropriate for your situation. Air Counsel does not provide legal aid funded services.</p>
 
@@ -1096,11 +1096,11 @@
               <div class="toggle-row">
                 <div class="radio-card">
                   <input type="radio" id="aid-yes" name="asked_for_legal_aid" value="true" />
-                  <label for="aid-yes">Yes — Legal Aid</label>
+                  <label for="aid-yes">Yes â€” Legal Aid</label>
                 </div>
                 <div class="radio-card">
                   <input type="radio" id="aid-no" name="asked_for_legal_aid" value="false" checked />
-                  <label for="aid-no">No — privately funded</label>
+                  <label for="aid-no">No â€” privately funded</label>
                 </div>
               </div>
             </div>
@@ -1109,17 +1109,17 @@
               <label for="budget_range">Approximate budget range for legal fees</label>
               <select id="budget_range" name="budget_range">
                 <option value="">Prefer not to say</option>
-                <option value="under_1000">Under £1,000</option>
-                <option value="1000_2500">£1,000 – £2,500</option>
-                <option value="2500_5000">£2,500 – £5,000</option>
-                <option value="5000_10000">£5,000 – £10,000</option>
-                <option value="over_10000">Over £10,000</option>
+                <option value="under_1000">Under Â£1,000</option>
+                <option value="1000_2500">Â£1,000 â€“ Â£2,500</option>
+                <option value="2500_5000">Â£2,500 â€“ Â£5,000</option>
+                <option value="5000_10000">Â£5,000 â€“ Â£10,000</option>
+                <option value="over_10000">Over Â£10,000</option>
               </select>
             </div>
           </div>
 
           <div class="nav-row">
-            <button type="button" class="btn btn-back" onclick="prevGate(4)">← Back</button>
+            <button type="button" class="btn btn-back" onclick="prevGate(4)">â† Back</button>
             <button type="button" class="btn btn-next" onclick="nextGate(4)">
               Continue
               <svg class="arrow" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1127,9 +1127,9 @@
           </div>
         </div>
 
-        <!-- ══ GATE 5 — JURISDICTION ══════════════════════════════ -->
+        <!-- â•â• GATE 5 â€” JURISDICTION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
         <div class="gate" id="gate-5" data-gate="5">
-          <p class="gate-eyebrow">Gate 5 — Jurisdiction</p>
+          <p class="gate-eyebrow">Gate 5 â€” Jurisdiction</p>
           <h2 class="gate-title">About your <em>matter</em></h2>
           <p class="gate-desc">These questions confirm the matter falls within UK immigration jurisdiction and within our practice areas.</p>
 
@@ -1140,18 +1140,18 @@
                 <option value="">No preference</option>
                 <option value="video_call">Video call</option>
                 <option value="phone">Phone call</option>
-                <option value="in_person_leeds">In person — Leeds</option>
+                <option value="in_person_leeds">In person â€” Leeds</option>
               </select>
             </div>
 
             <div class="field">
               <label for="message">Any additional information you'd like your solicitor to know</label>
-              <textarea id="message" name="message" placeholder="Optional — any context that would help your solicitor prepare for the consultation…"></textarea>
+              <textarea id="message" name="message" placeholder="Optional â€” any context that would help your solicitor prepare for the consultationâ€¦"></textarea>
             </div>
           </div>
 
           <div class="nav-row">
-            <button type="button" class="btn btn-back" onclick="prevGate(5)">← Back</button>
+            <button type="button" class="btn btn-back" onclick="prevGate(5)">â† Back</button>
             <button type="button" class="btn btn-next" onclick="nextGate(5)">
               Continue
               <svg class="arrow" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1159,9 +1159,9 @@
           </div>
         </div>
 
-        <!-- ══ GATE 6 — URGENCY ══════════════════════════════════ -->
+        <!-- â•â• GATE 6 â€” URGENCY â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
         <div class="gate" id="gate-6" data-gate="6">
-          <p class="gate-eyebrow">Gate 6 — Urgency</p>
+          <p class="gate-eyebrow">Gate 6 â€” Urgency</p>
           <h2 class="gate-title">Timeline &amp; <em>deadlines</em></h2>
           <p class="gate-desc">Urgency indicators allow your solicitor to prioritise time-sensitive matters correctly.</p>
 
@@ -1187,33 +1187,33 @@
               Submit my enquiry
               <svg class="arrow" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <button type="button" class="btn btn-back" style="width:100%;justify-content:center;" onclick="prevGate(6)">← Back</button>
+            <button type="button" class="btn btn-back" style="width:100%;justify-content:center;" onclick="prevGate(6)">â† Back</button>
           </div>
         </div>
 
       </form>
 
-      <!-- ── LOADING ── -->
+      <!-- â”€â”€ LOADING â”€â”€ -->
       <div id="loading-screen" role="status" aria-live="polite">
         <div class="spinner" aria-hidden="true"></div>
-        <p>Assessing your enquiry…</p>
+        <p>Assessing your enquiryâ€¦</p>
       </div>
 
-      <!-- ── CONFIRMATION ── -->
+      <!-- â”€â”€ CONFIRMATION â”€â”€ -->
       <div id="confirmation-screen" role="main" aria-live="polite">
         <div class="result-header">
           <div class="score-ring" aria-hidden="true">
-            <span class="score-value" id="result-score">—</span>
+            <span class="score-value" id="result-score">â€”</span>
             <span class="score-label">Score</span>
           </div>
 
           <div class="result-badge" id="result-badge" role="status">
             <span class="result-dot"></span>
-            <span id="result-badge-text">—</span>
+            <span id="result-badge-text">â€”</span>
           </div>
 
-          <h2 class="result-title" id="result-title">—</h2>
-          <p class="result-desc" id="result-desc">—</p>
+          <h2 class="result-title" id="result-title">â€”</h2>
+          <p class="result-desc" id="result-desc">â€”</p>
         </div>
 
         <div class="next-steps">
@@ -1240,7 +1240,7 @@
             A copy of your submission has been sent to <span id="result-email">your email address</span>.
           </p>
           <div style="display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap;margin-top:1.5rem;">
-            <a href="index.html" class="btn btn-return">← Return to Air Counsel</a>
+            <a href="index.html" class="btn btn-return">â† Return to Air Counsel</a>
             <a href="https://calendly.com/kwamehjuma/30min"
                class="btn btn-next"
                id="cta-book"
@@ -1255,7 +1255,7 @@
         </div>
       </div>
 
-      <!-- ── ERROR ── -->
+      <!-- â”€â”€ ERROR â”€â”€ -->
       <div id="error-screen">
         <h2>Submission failed</h2>
         <p>We were unable to process your enquiry. Please try again or contact us directly at <a href="mailto:hello@aircounsel.uk" style="color:var(--gold-light);">hello@aircounsel.uk</a></p>
@@ -1266,16 +1266,16 @@
   </main>
 
   <footer class="site-footer" role="contentinfo">
-    <p>© 2026 AirCounsel.uk · <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms</a></p>
-    <p>GDPR Compliant · SRA Guidance Aligned · No legal advice is provided by this form</p>
-    <p>AirCounsel — UK Immigration Intake Engineering (Leeds, United Kingdom)</p>
+    <p>Â© 2026 AirCounsel.uk Â· <a href="privacy-policy.html">Privacy Policy</a> Â· <a href="terms-of-service.html">Terms</a></p>
+    <p>GDPR Compliant Â· SRA Guidance Aligned Â· No legal advice is provided by this form</p>
+    <p>AirCounsel â€” UK Immigration Intake Engineering (Leeds, United Kingdom)</p>
 </footer>
 
 </div><!-- /page -->
 
 <script>
-  // ── CONFIGURATION ──────────────────────────────────────────────
-  const WEBHOOK_URL = 'https://paprika-extortion-illusion.ngrok-free.dev/webhook/law-firm-intake';
+  // â”€â”€ CONFIGURATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  const WEBHOOK_URL = 'https://aircounsel-strata-core-production.up.railway.app/webhook/law-firm-intake';
 
   // Firm configuration passed by the parent embed script.
   let activeFirmId = 'unassigned';
@@ -1299,13 +1299,13 @@
     zh: '/audio/ElevenLabs_2026-04-20T23_18_21_Pierre%20-%20News%20Presenter_pvc_sp100_s50_sb75_v3.mp3'
   };
 
-  // Presentation language — UI + audio only. NEVER touches scoring pipeline.
+  // Presentation language â€” UI + audio only. NEVER touches scoring pipeline.
   let presentationLang = 'en';
   let activeAudio = null;
   let isMuted = localStorage.getItem('ac_audio_muted') === 'true';
   const UI_TRANSLATIONS = {
     en: {
-      headerNote: 'Confidential Intake · GDPR Compliant',
+      headerNote: 'Confidential Intake Â· GDPR Compliant',
       beforeBegin: 'Before you begin',
       gatePrefix: 'Gate',
       ofSix: 'of 6',
@@ -1317,52 +1317,52 @@
       unmute: 'Unmute audio'
     },
     fr: {
-      headerNote: 'Collecte confidentielle · Conforme RGPD',
+      headerNote: 'Collecte confidentielle Â· Conforme RGPD',
       beforeBegin: 'Avant de commencer',
-      gatePrefix: 'Étape',
+      gatePrefix: 'Ã‰tape',
       ofSix: 'sur 6',
-      gateNames: ['Vos coordonnées', 'Type de visa', 'Éligibilité', 'Historique migratoire', 'Capacité financière', 'Juridiction', 'Urgence'],
+      gateNames: ['Vos coordonnÃ©es', 'Type de visa', 'Ã‰ligibilitÃ©', 'Historique migratoire', 'CapacitÃ© financiÃ¨re', 'Juridiction', 'Urgence'],
       back: 'Retour',
       continue: 'Continuer',
       submit: 'Soumettre la demande',
-      mute: 'Couper l’audio',
-      unmute: 'Activer l’audio'
+      mute: 'Couper lâ€™audio',
+      unmute: 'Activer lâ€™audio'
     },
     ar: {
-      headerNote: 'استمارة سرية · متوافقة مع GDPR',
-      beforeBegin: 'قبل البدء',
-      gatePrefix: 'المرحلة',
-      ofSix: 'من 6',
-      gateNames: ['بياناتك', 'نوع المسار', 'الأهلية', 'السجل الهجري', 'القدرة المالية', 'الاختصاص', 'الاستعجال'],
-      back: 'رجوع',
-      continue: 'متابعة',
-      submit: 'إرسال الطلب',
-      mute: 'كتم الصوت',
-      unmute: 'إلغاء كتم الصوت'
+      headerNote: 'Ø§Ø³ØªÙ…Ø§Ø±Ø© Ø³Ø±ÙŠØ© Â· Ù…ØªÙˆØ§ÙÙ‚Ø© Ù…Ø¹ GDPR',
+      beforeBegin: 'Ù‚Ø¨Ù„ Ø§Ù„Ø¨Ø¯Ø¡',
+      gatePrefix: 'Ø§Ù„Ù…Ø±Ø­Ù„Ø©',
+      ofSix: 'Ù…Ù† 6',
+      gateNames: ['Ø¨ÙŠØ§Ù†Ø§ØªÙƒ', 'Ù†ÙˆØ¹ Ø§Ù„Ù…Ø³Ø§Ø±', 'Ø§Ù„Ø£Ù‡Ù„ÙŠØ©', 'Ø§Ù„Ø³Ø¬Ù„ Ø§Ù„Ù‡Ø¬Ø±ÙŠ', 'Ø§Ù„Ù‚Ø¯Ø±Ø© Ø§Ù„Ù…Ø§Ù„ÙŠØ©', 'Ø§Ù„Ø§Ø®ØªØµØ§Øµ', 'Ø§Ù„Ø§Ø³ØªØ¹Ø¬Ø§Ù„'],
+      back: 'Ø±Ø¬ÙˆØ¹',
+      continue: 'Ù…ØªØ§Ø¨Ø¹Ø©',
+      submit: 'Ø¥Ø±Ø³Ø§Ù„ Ø§Ù„Ø·Ù„Ø¨',
+      mute: 'ÙƒØªÙ… Ø§Ù„ØµÙˆØª',
+      unmute: 'Ø¥Ù„ØºØ§Ø¡ ÙƒØªÙ… Ø§Ù„ØµÙˆØª'
     },
     ur: {
-      headerNote: 'خفیہ انٹیک · GDPR کے مطابق',
-      beforeBegin: 'شروع کرنے سے پہلے',
-      gatePrefix: 'مرحلہ',
-      ofSix: 'میں سے 6',
-      gateNames: ['آپ کی تفصیلات', 'ویزہ روٹ', 'اہلیت', 'امیگریشن ہسٹری', 'فیس کی استطاعت', 'دائرہ اختیار', 'فوریت'],
-      back: 'واپس',
-      continue: 'جاری رکھیں',
-      submit: 'درخواست جمع کریں',
-      mute: 'آڈیو بند کریں',
-      unmute: 'آڈیو چلائیں'
+      headerNote: 'Ø®ÙÛŒÛ Ø§Ù†Ù¹ÛŒÚ© Â· GDPR Ú©Û’ Ù…Ø·Ø§Ø¨Ù‚',
+      beforeBegin: 'Ø´Ø±ÙˆØ¹ Ú©Ø±Ù†Û’ Ø³Û’ Ù¾ÛÙ„Û’',
+      gatePrefix: 'Ù…Ø±Ø­Ù„Û',
+      ofSix: 'Ù…ÛŒÚº Ø³Û’ 6',
+      gateNames: ['Ø¢Ù¾ Ú©ÛŒ ØªÙØµÛŒÙ„Ø§Øª', 'ÙˆÛŒØ²Û Ø±ÙˆÙ¹', 'Ø§ÛÙ„ÛŒØª', 'Ø§Ù…ÛŒÚ¯Ø±ÛŒØ´Ù† ÛØ³Ù¹Ø±ÛŒ', 'ÙÛŒØ³ Ú©ÛŒ Ø§Ø³ØªØ·Ø§Ø¹Øª', 'Ø¯Ø§Ø¦Ø±Û Ø§Ø®ØªÛŒØ§Ø±', 'ÙÙˆØ±ÛŒØª'],
+      back: 'ÙˆØ§Ù¾Ø³',
+      continue: 'Ø¬Ø§Ø±ÛŒ Ø±Ú©Ú¾ÛŒÚº',
+      submit: 'Ø¯Ø±Ø®ÙˆØ§Ø³Øª Ø¬Ù…Ø¹ Ú©Ø±ÛŒÚº',
+      mute: 'Ø¢ÚˆÛŒÙˆ Ø¨Ù†Ø¯ Ú©Ø±ÛŒÚº',
+      unmute: 'Ø¢ÚˆÛŒÙˆ Ú†Ù„Ø§Ø¦ÛŒÚº'
     },
     zh: {
-      headerNote: '保密受理 · 符合 GDPR',
-      beforeBegin: '开始前',
-      gatePrefix: '步骤',
-      ofSix: '共 6 步',
-      gateNames: ['您的信息', '签证路径', '资格条件', '移民记录', '费用能力', '司法辖区', '紧急程度'],
-      back: '返回',
-      continue: '继续',
-      submit: '提交咨询',
-      mute: '静音',
-      unmute: '取消静音'
+      headerNote: 'ä¿å¯†å—ç† Â· ç¬¦åˆ GDPR',
+      beforeBegin: 'å¼€å§‹å‰',
+      gatePrefix: 'æ­¥éª¤',
+      ofSix: 'å…± 6 æ­¥',
+      gateNames: ['æ‚¨çš„ä¿¡æ¯', 'ç­¾è¯è·¯å¾„', 'èµ„æ ¼æ¡ä»¶', 'ç§»æ°‘è®°å½•', 'è´¹ç”¨èƒ½åŠ›', 'å¸æ³•è¾–åŒº', 'ç´§æ€¥ç¨‹åº¦'],
+      back: 'è¿”å›ž',
+      continue: 'ç»§ç»­',
+      submit: 'æäº¤å’¨è¯¢',
+      mute: 'é™éŸ³',
+      unmute: 'å–æ¶ˆé™éŸ³'
     }
   };
   function getUiCopy() {
@@ -1381,7 +1381,7 @@
     if (header) header.textContent = copy.headerNote;
 
     document.querySelectorAll('.btn-back').forEach(btn => {
-      btn.textContent = `← ${copy.back}`;
+      btn.textContent = `â† ${copy.back}`;
     });
     document.querySelectorAll('.btn-next').forEach(btn => {
       if (btn.id === 'submit-btn') btn.textContent = copy.submit;
@@ -1393,9 +1393,9 @@
     updateProgress(currentGate);
   }
 
-  // ── LANGUAGE TOGGLE (PRESENTATION LAYER ONLY) ──────────────────
+  // â”€â”€ LANGUAGE TOGGLE (PRESENTATION LAYER ONLY) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // Changes UI display language only. All form values are structured data
-  // (numbers, selects, radios) — no language dependency on the pipeline.
+  // (numbers, selects, radios) â€” no language dependency on the pipeline.
   function setLang(btn, lang) {
     presentationLang = lang;
     document.querySelectorAll('.lang-btn').forEach(b => {
@@ -1407,7 +1407,7 @@
     applyLanguageUI();
   }
 
-  // ── AUDIO ENGINE ───────────────────────────────────────────────
+  // â”€â”€ AUDIO ENGINE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function playConfirmationAudio() {
     if (isMuted) return;
     const src = AUDIO_ASSETS[presentationLang] || AUDIO_ASSETS.en;
@@ -1427,15 +1427,15 @@
         console.info('AC Audio: asset not yet uploaded at', src);
       });
 
-      // 600ms delay — confirmation screen renders first
+      // 600ms delay â€” confirmation screen renders first
       setTimeout(() => {
         activeAudio.play().catch(() => {
-          // Autoplay blocked by browser — show tap-to-play prompt
+          // Autoplay blocked by browser â€” show tap-to-play prompt
           const bar = document.getElementById('audio-bar');
           if (bar) {
             const prompt = document.createElement('button');
             prompt.className = 'mute-btn';
-            prompt.textContent = '▶ Hear Air Counsel';
+            prompt.textContent = 'â–¶ Hear Air Counsel';
             prompt.onclick = () => { activeAudio.play(); prompt.remove(); };
             bar.prepend(prompt);
           }
@@ -1467,11 +1467,11 @@
     }
   }
 
-  // ── STATE ──────────────────────────────────────────────────────
+  // â”€â”€ STATE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   let currentGate = 0;
-  const TOTAL_GATES = 7; // gates 0–6
+  const TOTAL_GATES = 7; // gates 0â€“6
 
-  // ── PROGRESS ───────────────────────────────────────────────────
+  // â”€â”€ PROGRESS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function updateProgress(gate) {
     const copy = getUiCopy();
     document.getElementById('gate-label').textContent =
@@ -1489,7 +1489,7 @@
     }
   }
 
-  // ── ROUTE BRANCHING ────────────────────────────────────────────
+  // â”€â”€ ROUTE BRANCHING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function showBranch(route) {
     const branches = document.querySelectorAll('.conditional');
     branches.forEach(b => b.classList.remove('show'));
@@ -1507,12 +1507,12 @@
         other: 'Please describe your situation so your solicitor can assess the most appropriate route.'
       },
       fr: {
-        skilled_worker: 'Questions spécifiques au visa Skilled Worker, y compris les seuils de salaire et le sponsoring.',
-        spouse_partner_visa: 'Questions spécifiques au visa conjoint/partenaire, y compris l’exigence financière.',
-        ilr_settlement: 'Questions spécifiques à l’ILR/Settlement, y compris la résidence continue et les absences.',
-        student_visa: 'Questions spécifiques au visa étudiant, y compris CAS et fonds de subsistance.',
-        business_visa: 'Questions spécifiques au visa Business / Innovator.',
-        other: 'Veuillez décrire votre situation pour permettre au solicitor d’évaluer la meilleure voie.'
+        skilled_worker: 'Questions spÃ©cifiques au visa Skilled Worker, y compris les seuils de salaire et le sponsoring.',
+        spouse_partner_visa: 'Questions spÃ©cifiques au visa conjoint/partenaire, y compris lâ€™exigence financiÃ¨re.',
+        ilr_settlement: 'Questions spÃ©cifiques Ã  lâ€™ILR/Settlement, y compris la rÃ©sidence continue et les absences.',
+        student_visa: 'Questions spÃ©cifiques au visa Ã©tudiant, y compris CAS et fonds de subsistance.',
+        business_visa: 'Questions spÃ©cifiques au visa Business / Innovator.',
+        other: 'Veuillez dÃ©crire votre situation pour permettre au solicitor dâ€™Ã©valuer la meilleure voie.'
       }
     };
     const descs = routeDescs[presentationLang] || routeDescs.en;
@@ -1525,7 +1525,7 @@
     input.addEventListener('change', () => showBranch(input.value));
   });
 
-  // ── VALIDATION ─────────────────────────────────────────────────
+  // â”€â”€ VALIDATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function validateGate(gate) {
     let valid = true;
 
@@ -1588,7 +1588,7 @@
     return valid;
   }
 
-  // ── NAVIGATION ─────────────────────────────────────────────────
+  // â”€â”€ NAVIGATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function nextGate(from) {
     if (!validateGate(from)) return;
 
@@ -1607,7 +1607,7 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // ── COLLECT PAYLOAD ────────────────────────────────────────────
+  // â”€â”€ COLLECT PAYLOAD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function collectPayload() {
     function val(id, fallback = '') {
       const el = document.getElementById(id);
@@ -1651,7 +1651,7 @@
       days_until_deadline:         numVal('days_until_deadline'),
       message:                     val('message') || val('message-other'),
 
-      // Audit trail metadata — presentation layer flags only
+      // Audit trail metadata â€” presentation layer flags only
       presentation_language:       presentationLang,
       intake_lang_tag:             presentationLang,
       voice_played:                !isMuted,
@@ -1661,8 +1661,8 @@
     };
   }
 
-  // ── CONFIRMATION RENDER ────────────────────────────────────────
-  // INTERNAL ONLY — tier and score are sent to the backend for fee earner review.
+  // â”€â”€ CONFIRMATION RENDER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // INTERNAL ONLY â€” tier and score are sent to the backend for fee earner review.
   // They are never rendered in the client-facing confirmation screen.
   // The applicant sees a single neutral acknowledgement regardless of qualification outcome.
 
@@ -1673,7 +1673,7 @@
       'Your enquiry has been logged and passed to our team for review.',
       'A qualified member of the firm will contact you directly.',
       'You may be asked to provide supporting documents before your consultation is confirmed.',
-      'No assessment of your eligibility has been communicated at this stage — all determinations are made by a qualified solicitor.'
+      'No assessment of your eligibility has been communicated at this stage â€” all determinations are made by a qualified solicitor.'
     ]
   };
 
@@ -1688,7 +1688,7 @@
     const followupEl = document.getElementById('result-followup');
     if (followupEl) followupEl.textContent = 'A qualified member of the firm will be in touch within 2 working days.';
 
-    // Score ring and badge are hidden — classification is for fee earner review only
+    // Score ring and badge are hidden â€” classification is for fee earner review only
     const scoreRing = document.getElementById('score-ring');
     if (scoreRing) scoreRing.style.display = 'none';
     const badge = document.getElementById('result-badge');
@@ -1705,7 +1705,7 @@
       `<li><span class="step-num">0${i+1}</span><span>${s}</span></li>`
     ).join('');
 
-    // Trigger confirmation audio (presentation layer — pipeline untouched)
+    // Trigger confirmation audio (presentation layer â€” pipeline untouched)
     playConfirmationAudio();
 
     // Notify the parent embed that the intake flow completed so the overlay can
@@ -1715,12 +1715,12 @@
     }
   }
 
-  // ── SUBMIT ─────────────────────────────────────────────────────
+  // â”€â”€ SUBMIT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async function submitForm() {
     const btn = document.getElementById('submit-btn');
     const copy = getUiCopy();
     btn.disabled = true;
-    btn.textContent = `${copy.submit}…`;
+    btn.textContent = `${copy.submit}â€¦`;
 
     // Hide form, show loading
     document.getElementById('intake-form').style.display = 'none';
@@ -1751,10 +1751,10 @@
     } catch (err) {
       console.error('Submission error:', err);
 
-      // If webhook not yet live — show confirmation anyway for testing
+      // If webhook not yet live â€” show confirmation anyway for testing
       // Remove this block and uncomment the error screen once backend is live
       if (WEBHOOK_URL.includes('YOUR_BACKEND_URL')) {
-        // Demo mode — backend not yet connected.
+        // Demo mode â€” backend not yet connected.
         // Renders neutral client confirmation only. No tier or score shown.
         document.getElementById('loading-screen').style.display = 'none';
         document.getElementById('confirmation-screen').style.display = 'block';
@@ -1767,7 +1767,7 @@
     }
   }
 
-  // ── RESET ──────────────────────────────────────────────────────
+  // â”€â”€ RESET â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function resetToForm() {
     document.getElementById('error-screen').style.display = 'none';
     document.getElementById('intake-form').style.display = 'block';
@@ -1776,10 +1776,11 @@
     btn.textContent = getUiCopy().submit;
   }
 
-  // ── INIT ───────────────────────────────────────────────────────
+  // â”€â”€ INIT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   updateProgress(0);
   applyLanguageUI();
 </script>
 
 </body>
 </html>
+
