@@ -1,0 +1,25 @@
+name: Scheduled Institutional Pillar Publisher
+on:
+  schedule:
+    - cron: '30 8 * * 1,3,5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Publish Next Queued Pillar Page
+        run: python publish_pillar.py
+      - name: Commit & Push Live to aircounsel.uk
+        run: |
+          git config user.name "AirCounsel Institutional Bot"
+          git config user.email "bot@aircounsel.uk"
+          git add .
+          git diff --staged --quiet || (git commit -m "Auto-publish scheduled institutional briefing" && git push)

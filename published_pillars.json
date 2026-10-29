@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "hidden-cost-uninstructed-immigration-consultations",
+    "pillar_category": "PILLAR 3: PRACTICE ECONOMICS BENCHMARK",
+    "audience": "MANAGING PARTNERS & PRACTICE DIRECTORS",
+    "title": "The 22% Consultation Drag: Quantifying Unbilled Fee-Earner Leakage in Boutique Practices",
+    "summary": "Empirical breakdown of how pre-consultation 6-gate deterministic triage recovers 6 to 10 hours per fee-earner per week.",
+    "body_html": "<p>At a fully-loaded cost of \u00a3275 per hour, every uninstructed 45-minute consultation costs a boutique immigration practice both direct fee-earner capacity and opportunity cost on viable corporate and private matters.</p><h2>Pre-Consultation Deterministic Filtering</h2><p>By routing inbound web and voice enquiries through a 6-gate deterministic assessment prior to calendar booking, fee earners engage exclusively with structured, decision-ready dossiers.</p>",
+    "date_iso": "2026-10-29"
+  },
+  {
+    "slug": "uk-skilled-worker-cos-evidentiary-readiness-guide",
+    "pillar_category": "PILLAR 2: APPLICANT & SPONSOR ROUTE BRIEFING",
+    "audience": "VISA APPLICANTS & UK SPONSOR EMPLOYERS",
+    "title": "UK Skilled Worker Visa 2026: The 6 Readiness Gates Before Booking a Legal Consultation",
+    "summary": "A structured pre-consultation guide for Skilled Worker applicants and HR sponsors to verify salary thresholds, SOC codes, and Certificate of Sponsorship readiness.",
+    "body_html": "<p>Over 22% of initial UK immigration consultations fail to progress to a formal instruction due to preventable gaps in sponsor readiness, salary threshold calculations, or unflagged immigration history.</p><h2>Verifying Your 6 Core Gates First</h2><p>Before committing to a paid legal consultation, applicants and HR sponsors can verify Route Fit, Sponsor Licence status, Immigration History, Fee Capacity, Jurisdiction, and Statutory Section 3C Urgency in under 3 minutes.</p>",
+    "date_iso": "2026-10-29"
+  },
+  {
+    "slug": "sra-ai-governance-deterministic-evidence-2026",
+    "pillar_category": "PILLAR 1: LEGAL TECH & SRA GOVERNANCE",
+    "audience": "UK SOLICITORS, PARTNERS & COLPs",
+    "title": "Why Propose-Only AI Sandboxes and Byte-Pinned Attestation Define 2026 SRA Compliance",
+    "summary": "How UK immigration and regulated practices eliminate AI hallucination risk by separating deterministic state machines from LLM triage.",
+    "body_html": "<p>As UK practices face heightened scrutiny under SRA Principles and UK GDPR Article 22, allowing probabilistic language models to directly mutate case states or approve client evidence introduces unacceptable regulatory exposure.</p><h2>The Propose-Only Sandbox Architecture</h2><p>In AirCounsel STRATA V5.0, language models operate strictly as propose-only assistants. Every Certificate of Sponsorship, bank statement, and identity document must pass deterministic inspection and receive a byte-pinned SHA-256 human practitioner attestation before promotion to trusted storage.</p>",
+    "date_iso": "2026-10-29"
+  }
+]
