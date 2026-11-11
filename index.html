@@ -329,6 +329,14 @@
       inset: 0;
       background: linear-gradient(160deg, #0d1b2a 0%, #162032 50%, #0d1b2a 100%);
     }
+    .hero-video-element {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
     .hero-video-bg::after {
       content: '';
       position: absolute;
@@ -656,6 +664,13 @@
     .solution-gif .video-placeholder {
       width: 100%; height: 100%;
       border-color: var(--border);
+    }
+    .solution-gif-media {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 1px solid var(--border);
     }
 
     /* ─── HOW IT WORKS ───────────────────────────────────────────── */
@@ -1160,10 +1175,10 @@
     <!-- Video background placeholder — replace with actual 8s autoplay muted loop clip -->
     <div class="hero-bg" aria-hidden="true">
       <div class="hero-video-bg"></div>
-      <div class="hero-video-label">
-        <p>Hero Video Placeholder</p>
-        <span>8-second cinematic ascent — autoplay · muted · loop</span>
-      </div>
+      <!-- MEDIA SLOT: replace the URL below with a direct MP4 asset URL. -->
+      <video class="hero-video-element" autoplay muted loop playsinline preload="metadata" aria-hidden="true" data-aircounsel-media-slot="hero-video">
+        <source src="PASTE_HERO_VIDEO_MP4_URL_HERE" type="video/mp4" />
+      </video>
     </div>
     <div class="hero-bg-lines" aria-hidden="true"></div>
 
@@ -1308,18 +1323,15 @@
         </p>
       </div>
 
-      <!-- GIF placeholder — filtering animation -->
-      <figure class="solution-gif fade-up delay-2" aria-label="Filtering animation placeholder">
-        <div class="video-placeholder" style="height:100%;">
-          <div class="video-placeholder-inner">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-            </div>
-            <p>GIF Placeholder
-              <span>Filtering animation — enquiries entering, weak cases removed, strong cases delivered</span>
-            </p>
-          </div>
-        </div>
+      <!-- MEDIA SLOT: replace the URL below with a direct GIF or animated WebP URL. -->
+      <figure class="solution-gif fade-up delay-2" aria-label="AirCounsel filtering animation">
+        <img
+          class="solution-gif-media"
+          src="PASTE_FILTERING_GIF_URL_HERE"
+          alt="AirCounsel filtering enquiries, removing weak cases and presenting qualified cases"
+          loading="lazy"
+          data-aircounsel-media-slot="filtering-animation"
+        />
       </figure>
 
     </div>
@@ -1979,6 +1991,47 @@
   }
 }
 </style>
+
+/* ── AIRCOUNSEL INSTITUTIONAL FOUNDER PALETTE ──
+   Uses the homepage's canonical navy / ivory / muted brass tokens.
+   Keeps the founder section on the page surface; no full-width black panel.
+*/
+.fd-section {
+  background: transparent !important;
+  color: var(--text, #1c2432) !important;
+}
+.fd-inner {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.fd-eyebrow { color: var(--gold, #b89a5a) !important; }
+.fd-name { color: var(--navy, #0b1622) !important; }
+.fd-title { color: var(--text-muted, #6b7585) !important; }
+.fd-bio { color: var(--text-mid, #3d4a5c) !important; }
+.fd-divider {
+  background: linear-gradient(90deg, var(--gold, #b89a5a), transparent) !important;
+}
+.fd-photo-corner {
+  border-color: rgba(184,154,90,0.55) !important;
+}
+.fd-photo-badge {
+  background: rgba(11,22,34,0.94) !important;
+  border-top: 1px solid rgba(184,154,90,0.28) !important;
+  color: var(--gold-light, #d4b97a) !important;
+}
+.fd-link { color: var(--gold, #b89a5a) !important; }
+.fd-link:hover { color: var(--navy, #0b1622) !important; }
+.fd-section::before {
+  background: linear-gradient(90deg, transparent, rgba(184,154,90,0.32), transparent) !important;
+}
+@media (max-width: 700px) {
+  .fd-divider {
+    background: linear-gradient(90deg, transparent, var(--gold, #b89a5a), transparent) !important;
+  }
+}
+
 <!-- END founder_section.html -->
 
 <!-- BEGIN pilot_report_section.html -->
