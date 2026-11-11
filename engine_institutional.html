@@ -193,6 +193,7 @@
 <div class="noise"></div>
 <div class="flash" id="flash"></div>
 
+<div style="position:fixed;bottom:8px;left:8px;z-index:9999;font:9px 'DM Mono',monospace;letter-spacing:.18em;color:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.25);padding:4px 8px;background:rgba(0,0,0,.5)">SIMULATED DATA · NOT CLIENT CASES</div>
 <!-- VOICE GUIDE OVERLAY -->
 <div id="voice-guide">
   <h2>// Adaptive Voice Active</h2>
@@ -244,7 +245,7 @@
   <div class="data-line">INSTRUCTION READY <span class="val" id="d2">—</span></div>
   <div class="data-line">FILTERED OUT <span class="val" id="d3">—</span></div>
   <div class="data-line">QUALIFY RATE <span class="val" id="d4">—</span></div>
-  <div class="data-line">COVERAGE <span class="val">UK-ALL</span></div>
+  <div class="data-line">COVERAGE <span class="val">LEEDS</span></div>
   <div class="data-line">STATUS <span class="val" style="color:var(--volt)">RUNNING</span></div>
 </div>
 
@@ -276,7 +277,7 @@
     <div class="ring ring-3"></div>
     <div class="engine-core"></div>
     <div class="score-ticker" style="top:10px;left:50%;transform:translateX(-50%)">CAPTURE // STRUCTURE // SCORE // DELIVER</div>
-    <div class="score-ticker" style="bottom:10px;left:50%;transform:translateX(-50%)">SKILLED WORKER ◆ SPOUSE VISA ◆ ILR ◆ STUDENT</div>
+    <div class="score-ticker" style="bottom:10px;left:50%;transform:translateX(-50%)">SKILLED WORKER ◆ SPOUSE VISA ◆ ILR</div>
   </div>
   <div class="scene-headline">Every Enquiry. <span class="arc">Structured.</span><br><span class="ember">Scored.</span> Delivered.</div>
   <div class="scene-sub">The engine applies Immigration Rules thresholds to every intake<br>before it reaches your desk.<br><span class="accent">Structured data. No unqualified cases. No wasted consultation time.</span></div>
@@ -288,7 +289,7 @@
     <span class="arc">One Engine.</span><br><span class="volt">Every Practice.</span><br>
     <span style="font-size:0.5em;font-weight:200;color:rgba(255,255,255,0.4)">The same qualification standard. Applied consistently. At the point of first contact.</span>
   </div>
-  <div class="scene-sub">Birmingham. Manchester. Leeds. London. Bristol.<br><span class="accent">Immigration practices across the UK — structured intake from day one.</span></div>
+  <div class="scene-sub">Starting in Leeds. Built for UK immigration practices.<br><span class="accent">Immigration practices across the UK — structured intake from day one.</span></div>
 </div>
 
 <div class="scene" id="s3">
@@ -385,7 +386,7 @@ function buildSceneVoice(sceneIndex) {
     case 2: {
       const pipeLine  = s.pipeline !== '—' ? `${s.pipeline} cases in the pipeline. ${s.hot} instruction-ready.` : pick(["UK coverage active.","All regions online."]);
       const convLine  = s.conversion !== '—' ? `Qualification rate holding at ${s.conversion}.` : '';
-      const regionLine = pick(["Birmingham to Leeds. Manchester. London. One qualification standard across every practice.","Every immigration practice. The same structured intake. Applied consistently.","UK-wide. Structured from first contact."]);
+      const regionLine = pick(["Starting in Leeds. One qualification standard, applied consistently.","The same structured intake, applied consistently.","Structured from first contact."]);
       return { lines: [pipeLine, convLine, regionLine].filter(Boolean), rate: 0.86, pitch: 0.72 };
     }
     case 3: {

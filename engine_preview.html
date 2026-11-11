@@ -1339,7 +1339,7 @@
         </div>
 
         <div class="hero-eyebrow fade-up d1" aria-hidden="true">
-          <span class="label">Air Counsel · Engine Preview</span>
+          <span class="label">AirCounsel · Engine Preview</span>
         </div>
 
         <h1 class="display fade-up d2" id="hero-h1">
@@ -1348,7 +1348,7 @@
 
         <p class="hero-subtitle fade-up d3">
           Designed to protect your team's time.<br />
-          Built for immigration departments in Leeds.
+          Starting with immigration practices in Leeds.
         </p>
 
         <div class="cta-row fade-up d4" style="justify-content:center;">
@@ -1366,6 +1366,125 @@
   <hr class="section-rule" />
 
   <!-- ══ §2 — WHAT THE ENGINE DOES TODAY ═══════════════════════════ -->
+  <!-- AC-EXPLAINER:start -->
+<style>
+#explainer{padding:5rem 0;border-top:1px solid var(--border-soft)}
+#explainer .ex-head{max-width:var(--max-narrow);margin:0 auto 2.2rem;text-align:center}
+#explainer .ex-head p{color:var(--text-mid);margin-top:1rem;line-height:1.7}
+.ex-frame{border:1px solid var(--border);background:var(--navy-mid)}
+.ex-bar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 1rem;padding:.65rem 1rem;border-bottom:1px solid var(--border);font:400 .66rem var(--ff-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+.ex-sim{color:var(--gold-light)}
+.ex-tabs{display:flex;flex-wrap:wrap;gap:.5rem;padding:.8rem 1rem;border-bottom:1px solid var(--border-soft)}
+.ex-btn{background:none;border:1px solid var(--border-soft);color:var(--text-mid);font:400 .68rem var(--ff-mono);letter-spacing:.12em;text-transform:uppercase;padding:.5rem .8rem;cursor:pointer;border-radius:0}
+.ex-btn:hover,.ex-btn:focus-visible{color:var(--white);border-color:var(--gold)}
+.ex-btn[aria-pressed=true]{color:var(--ink);background:var(--gold);border-color:var(--gold)}
+.ex-btn:disabled{opacity:.4;cursor:default}
+.ex-body{display:grid;grid-template-columns:190px 1fr;min-height:360px}
+.ex-rail{border-right:1px solid var(--border-soft)}
+.ex-rail button{display:block;width:100%;text-align:left;background:none;border:0;border-left:2px solid transparent;color:var(--text-muted);font:400 .7rem var(--ff-mono);letter-spacing:.1em;text-transform:uppercase;padding:.9rem 1rem;cursor:pointer;border-radius:0}
+.ex-rail button[aria-current=step]{color:var(--white);border-left-color:var(--gold);background:var(--gold-ghost)}
+.ex-panel{padding:1.4rem 1.6rem}
+.ex-h{font:400 .68rem var(--ff-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-light);margin-bottom:1rem}
+.ex-row{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;border-bottom:1px solid var(--border-soft);font:400 .8rem var(--ff-mono);color:var(--text-bright)}
+.ex-row>span:first-child{color:var(--text-mid)}
+.ex-note{display:block;color:var(--text-muted);font-size:.72rem;margin-top:.15rem}
+.ex-item{opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
+.ex-item.on{opacity:1;transform:none}
+.pass{color:#7fd1a0}.flag{color:var(--gold-light)}.fail{color:#e07a6b}
+.ex-meter{height:4px;background:var(--border-soft);margin:1rem 0 .3rem}
+.ex-meter i{display:block;height:100%;width:0;background:var(--gold);transition:width .8s}
+.ex-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+.ex-tile{border:1px solid var(--border-soft);padding:1rem;font:400 .75rem var(--ff-mono);color:var(--text-muted);opacity:.45;transition:opacity .4s,background .4s}
+.ex-tile b{display:block;font-weight:500;color:var(--text-bright);margin-bottom:.4rem;letter-spacing:.06em}
+.ex-tile.hit{opacity:1;border-color:var(--gold);background:var(--gold-dim)}
+.ex-report{border:1px solid var(--gold);background:var(--navy);padding:1.2rem 1.3rem}
+.ex-foot{display:flex;align-items:center;gap:1rem;padding:.8rem 1rem;border-top:1px solid var(--border-soft)}
+.ex-track{flex:1;height:2px;background:var(--border-soft)}
+.ex-track i{display:block;height:100%;width:0;background:var(--gold)}
+.ex-fine{padding:0 1rem 1rem;font:400 .68rem var(--ff-mono);color:var(--text-muted);letter-spacing:.06em}
+.ex-sr{position:absolute;left:-9999px}
+@media(max-width:720px){.ex-body{grid-template-columns:1fr}.ex-rail{display:flex;overflow-x:auto;border-right:0;border-bottom:1px solid var(--border-soft)}.ex-rail button{white-space:nowrap;border-left:0;border-bottom:2px solid transparent}.ex-rail button[aria-current=step]{border-bottom-color:var(--gold)}.ex-tiles{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.ex-item,.ex-tile,.ex-meter i{transition:none}}
+</style>
+<section id="explainer" aria-labelledby="ex-h2">
+  <div class="container">
+    <div class="ex-head fade-up">
+      <span class="label">60-Second Explainer</span>
+      <h2 class="display" id="ex-h2" style="margin-top:1rem">One enquiry, five stages, <span class="accent">one report</span></h2>
+      <p>Watch a single simulated enquiry move from capture to a solicitor-ready report. Switch the enquiry type to see how each outcome is classified.</p>
+    </div>
+    <div class="ex-frame" role="region" aria-label="Interactive engine explainer">
+      <div class="ex-bar"><span class="ex-sim">Simulated sample · not client data</span><span>Layer 1 · Intake qualification</span></div>
+      <div class="ex-tabs" id="ex-cases" role="group" aria-label="Choose an enquiry type"></div>
+      <div class="ex-body">
+        <div class="ex-rail" id="ex-rail" role="group" aria-label="Stages"></div>
+        <div class="ex-panel" id="ex-panel"></div>
+      </div>
+      <div class="ex-foot">
+        <button class="ex-btn" id="ex-play" type="button">Pause</button>
+        <div class="ex-track" aria-hidden="true"><i id="ex-bar"></i></div>
+        <button class="ex-btn" id="ex-restart" type="button">Restart</button>
+      </div>
+      <p class="ex-fine">Illustrative scoring. Thresholds are set by the firm. The report is a qualification summary, not legal advice and not a decision.</p>
+    </div>
+    <p class="ex-sr">Five stages: capture the enquiry, structure it into validated fields, score it across six gates, classify it as Instruction Ready, Needs Development or Not Viable, and deliver a report to the fee earner.</p>
+  </div>
+</section>
+<script>
+(function(){
+var root=document.getElementById('explainer');if(!root)return;
+var STAGES=['Capture','Structure','Score','Prioritise','Deliver'],MS=11000;
+var CLS=['Instruction Ready','Needs Development','Not Viable'],SUB=['Priority callback alert','Solicitor review first','Redirect per firm policy'];
+var CASES=[
+{tab:'Instruction ready',ref:'SIM-0001',cls:0,score:88,
+ fields:[['Route intent','Skilled Worker'],['Declared salary','£52,000'],['Location','England'],['Prior refusals','None declared'],['Funding','Privately funded'],['Time pressure','Visa expires in 21 days']],
+ gates:[['Route fit','pass','Consistent with Skilled Worker'],['Eligibility thresholds','pass','£52,000 against configured £41,700'],['Immigration history','pass','No refusals declared'],['Fee capacity','pass','Within firm fee level'],['Jurisdiction','pass','UK, within remit'],['Urgency','flag','Expiry within 30 days']],
+ action:'Priority callback alert. Full qualification summary attached.'},
+{tab:'Needs development',ref:'SIM-0002',cls:1,score:61,
+ fields:[['Route intent','Skilled Worker'],['Declared salary','£45,000'],['Location','England'],['Prior refusals','One declared (2022)'],['Funding','Privately funded'],['Time pressure','None stated']],
+ gates:[['Route fit','pass','Consistent with Skilled Worker'],['Eligibility thresholds','pass','£45,000 against configured £41,700'],['Immigration history','flag','Prior refusal needs review'],['Fee capacity','pass','Within firm fee level'],['Jurisdiction','pass','UK, within remit'],['Urgency','pass','No time-sensitive element']],
+ action:'Solicitor reviews the history flag before a consultation is booked.'},
+{tab:'Not viable',ref:'SIM-0003',cls:2,score:28,
+ fields:[['Route intent','Skilled Worker'],['Declared salary','£26,000'],['Location','England'],['Prior refusals','None declared'],['Funding','Privately funded'],['Time pressure','None stated']],
+ gates:[['Route fit','pass','Consistent with Skilled Worker'],['Eligibility thresholds','fail','£26,000 against configured £41,700'],['Immigration history','pass','No refusals declared'],['Fee capacity','pass','Within firm fee level'],['Jurisdiction','pass','UK, within remit'],['Urgency','pass','No time-sensitive element']],
+ action:'Redirected per the firm’s policy. No solicitor time used.'}];
+var panel=document.getElementById('ex-panel'),rail=document.getElementById('ex-rail'),tabs=document.getElementById('ex-cases'),bar=document.getElementById('ex-bar'),play=document.getElementById('ex-play'),rest=document.getElementById('ex-restart');
+var c=0,s=0,playing=true,timers=[],next=null,inView=false,reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+function clear(){timers.forEach(clearTimeout);timers=[];clearTimeout(next);}
+function later(f,t){timers.push(setTimeout(f,t));}
+function row(l,v,cls,note){return '<div class="ex-row ex-item"><span>'+l+(note?'<span class="ex-note">'+note+'</span>':'')+'</span><span class="'+(cls||'')+'">'+v+'</span></div>';}
+function reveal(sel,start,gap,animate,done){var els=panel.querySelectorAll(sel);Array.prototype.forEach.call(els,function(e,i){if(animate)later(function(){e.classList.add('on');},start+i*gap);else e.classList.add('on');});if(done){if(animate)later(done,start+els.length*gap+150);else done();}}
+function paint(){
+ rail.innerHTML=STAGES.map(function(n,i){return '<button type="button" data-s="'+i+'"'+(i===s?' aria-current="step"':'')+'>0'+(i+1)+' · '+n+'</button>';}).join('');
+ tabs.innerHTML=CASES.map(function(k,i){return '<button class="ex-btn" type="button" data-c="'+i+'" aria-pressed="'+(i===c)+'">'+k.tab+'</button>';}).join('');
+}
+function render(animate){
+ clear();var k=CASES[c],h='',i;
+ if(s===0){h='<div class="ex-h">Stage 1 · Capture · adaptive intake questions</div>'+k.fields.map(function(f){return row(f[0],f[1]);}).join('');}
+ else if(s===1){h='<div class="ex-h">Stage 2 · Structure · validated data fields</div>'+k.fields.map(function(f){return row(f[0].toLowerCase().replace(/ /g,'_'),f[1]+' ✓','pass');}).join('')+'<div class="ex-row ex-item"><span>Fields valid</span><span class="pass">6 / 6</span></div>';}
+ else if(s===2){h='<div class="ex-h">Stage 3 · Score · six gates</div>'+k.gates.map(function(g){return row(g[0],g[1].toUpperCase(),g[1],g[2]);}).join('')+'<div class="ex-meter"><i id="ex-m"></i></div><div class="ex-row" style="border:0"><span>Score (illustrative)</span><span id="ex-sc">0 / 100</span></div>';
+  panel.innerHTML=h;reveal('.ex-item',500,1100,animate,function(){document.getElementById('ex-m').style.width=k.score+'%';document.getElementById('ex-sc').textContent=k.score+' / 100';});return;}
+ else if(s===3){h='<div class="ex-h">Stage 4 · Prioritise · classification</div><div class="ex-tiles">'+CLS.map(function(n,i){return '<div class="ex-tile" data-i="'+i+'"><b>'+n+'</b>'+SUB[i]+'</div>';}).join('')+'</div>';
+  panel.innerHTML=h;var hit=function(){panel.querySelectorAll('.ex-tile')[k.cls].classList.add('hit');};if(animate)later(hit,1200);else hit();return;}
+ else{var pass=0,flag=0,fail=0;k.gates.forEach(function(g){if(g[1]==='pass')pass++;else if(g[1]==='flag')flag++;else fail++;});
+  h='<div class="ex-h">Stage 5 · Deliver · report to the fee earner</div><div class="ex-report ex-item">'+row('Case reference',k.ref)+row('Classification',CLS[k.cls],k.cls===0?'pass':k.cls===1?'flag':'fail')+row('Score (illustrative)',k.score+' / 100')+row('Gates',pass+' pass · '+flag+' flag · '+fail+' fail')+'<div class="ex-row" style="border:0"><span>Next action</span><span style="text-align:right;max-width:60%">'+k.action+'</span></div></div>';
+  panel.innerHTML=h;reveal('.ex-item',300,500,animate);return;}
+ panel.innerHTML=h;
+ if(s===0)reveal('.ex-item',300,900,animate);else reveal('.ex-item',300,800,animate);
+}
+function runBar(){bar.style.transition='none';bar.style.width=(s/5*100)+'%';void bar.offsetWidth;if(playing&&!reduce){bar.style.transition='width '+MS+'ms linear';bar.style.width=((s+1)/5*100)+'%';}}
+function go(n,animate){s=(n+5)%5;render(animate&&!reduce);paint();runBar();clearTimeout(next);if(playing&&!reduce&&inView)next=setTimeout(function(){go(s+1,true);},MS);}
+rail.addEventListener('click',function(e){var b=e.target.closest('button');if(b)go(+b.dataset.s,true);});
+tabs.addEventListener('click',function(e){var b=e.target.closest('button');if(b){c=+b.dataset.c;go(0,true);}});
+play.addEventListener('click',function(){playing=!playing;play.textContent=playing?'Pause':'Play';if(playing)go(s,true);else{clear();var w=bar.getBoundingClientRect().width/bar.parentNode.getBoundingClientRect().width*100;bar.style.transition='none';bar.style.width=w+'%';}});
+rest.addEventListener('click',function(){playing=!reduce;play.textContent=playing?'Pause':'Play';go(0,true);});
+if(reduce){playing=false;s=4;play.disabled=true;play.textContent='Play';}
+if('IntersectionObserver' in window&&!reduce){new IntersectionObserver(function(en){inView=en[0].isIntersecting;if(inView&&playing)go(s,true);else if(!inView)clear();},{threshold:.35}).observe(root);}else{inView=true;}
+go(s,!reduce);
+})();
+</script>
+<!-- AC-EXPLAINER:end -->
+
   <section id="what-it-does" aria-labelledby="what-h2">
     <div class="container">
       <div class="what-grid">
@@ -1471,8 +1590,7 @@
         </blockquote>
 
         <p>
-          Every non-viable enquiry that reaches a solicitor's desk costs time that cannot be recovered. At a conservative partner rate of £200 per hour, a firm fielding five unqualified enquiries per week is absorbing over £50,000 in lost productivity annually — before a single case is opened.
-        </p>
+          Every non-viable enquiry that reaches a solicitor’s desk costs time that cannot be recovered. As an illustration, at a partner rate of £200 per hour and 0.75 partner hours per unqualified enquiry, five unqualified enquiries a week comes to roughly 195 hours, or £39,000, of partner time a year, before a single case is opened. Your own figures will differ.</p>
         <p>
           Layer 1 of the AirCounsel engine gives practice managers a mechanism to protect that time. It does not change how your team works. It changes what reaches them.
         </p>
@@ -1502,8 +1620,8 @@
       </p>
 
       <div class="engine-documentation-frame fade-up d2" role="region" aria-label="AirCounsel institutional engine preview">
-        <div class="engine-live-bar" aria-label="Live engine status">
-          <span class="engine-live-status">Live institutional preview</span>
+        <div class="engine-live-bar" aria-label="Simulation status">
+          <span class="engine-live-status">Illustrative simulation · simulated data</span>
           <span>Layer 1 · Intake qualification</span>
         </div>
         <div class="engine-frame-shell">
@@ -1621,47 +1739,10 @@
         </article>
 
         <!-- Layer 2 — Future -->
-        <article class="roadmap-layer" aria-labelledby="layer2-h3">
-          <div class="layer-index mono">L·02</div>
-          <div class="layer-body">
-            <div class="layer-status">
-              <span class="status-dot status-dot--future" aria-hidden="true"></span>
-              <span class="status-text status-text--future">Future Module · Not Active</span>
-            </div>
-            <h3 id="layer2-h3">Financial Intelligence</h3>
-            <p class="layer-desc">
-              A future module that maps intake quality to financial outcomes. Designed for firms that want granular visibility into the cost and profitability of their intake pipeline.
-            </p>
-            <ul class="layer-features">
-              <li>Cost per case analysis</li>
-              <li>Profitability by matter type</li>
-              <li>Operational efficiency mapping</li>
-              <li>Partner-level reporting</li>
-            </ul>
-            <p class="layer-inactive-notice">Not part of the pilot. Not shown in the walkthrough. Available on request months after Layer 1 adoption.</p>
-          </div>
-        </article>
 
         <!-- Layer 3 — Future -->
-        <article class="roadmap-layer" aria-labelledby="layer3-h3">
-          <div class="layer-index mono">L·03</div>
-          <div class="layer-body">
-            <div class="layer-status">
-              <span class="status-dot status-dot--future" aria-hidden="true"></span>
-              <span class="status-text status-text--future">Long-Term Module · Not Active</span>
-            </div>
-            <h3 id="layer3-h3">Behaviour Engine</h3>
-            <p class="layer-desc">
-              A long-term module designed to help firms understand workflow patterns, decision dynamics, and partner-level performance signals. Not shown in any walkthrough and not required for any firm adopting Layer 1.
-            </p>
-            <ul class="layer-features">
-              <li>Workflow pattern analysis</li>
-              <li>Decision dynamics modelling</li>
-              <li>Partner alignment insights</li>
-            </ul>
-            <p class="layer-inactive-notice">Included here as a roadmap item only. No firm is required to progress to this layer at any point.</p>
-          </div>
-        </article>
+
+        <p class="roadmap-note" style="margin-top:1.5rem;color:var(--text-mid);line-height:1.7;">Further modules are on the roadmap and can be discussed once Layer 1 has delivered measurable value. They are not part of the pilot or the walkthrough.</p>
 
       </div>
     </div>
@@ -1692,8 +1773,7 @@
             Layer 1 is designed to answer that exactly. It is operationally safe, immediately valuable, and completely controlled by your team. You decide what threshold qualifies for your firm. We build the filter to your specification.
           </p>
           <p>
-            Layers 2 and 3 are optional modules that firms can explore if and when they choose to — months after Layer 1 has delivered measurable value.
-          </p>
+            Further modules are optional and can be discussed once Layer 1 has delivered measurable value.</p>
         </div>
 
         <div class="fade-up d1">
@@ -1798,7 +1878,7 @@
               </div>
               <div class="terminal-line">
                 <span class="terminal-prompt">→</span>
-                <span class="terminal-text">Gate 02 Salary Threshold £38,700 <span class="fail">· FAIL £26,000 declared</span></span>
+                <span class="terminal-text">Gate 02 Salary Threshold £41,700 <span class="fail">· FAIL £26,000 declared</span></span>
               </div>
               <div class="terminal-line">
                 <span class="terminal-prompt">→</span>
@@ -1826,7 +1906,7 @@
     <div class="container">
       <div class="credibility-inner">
         <div class="credibility-text">
-          <p>Built in Leeds, designed with immigration teams.</p>
+          <p>Starting in Leeds, designed with immigration teams.</p>
           <span>AirCounsel · UK Immigration · Legal Technology</span>
         </div>
       </div>
