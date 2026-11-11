@@ -9,7 +9,7 @@
         <div class="fd-photo-corner fd-corner-tl"></div>
         <div class="fd-photo-corner fd-corner-br"></div>
         <img
-          src=Natural professional.png
+          src="Natural professional.png"
           alt="Kwameh J. Dande — Founder, AirCounsel"
           class="fd-photo"
           loading="lazy"
@@ -280,4 +280,45 @@
     text-align: center;
   }
 }
+
+/* ── AIRCOUNSEL INSTITUTIONAL FOUNDER PALETTE ──
+   Uses the homepage's canonical navy / ivory / muted brass tokens.
+   Keeps the founder section on the page surface; no full-width black panel.
+*/
+.fd-section {
+  background: transparent !important;
+  color: var(--text, #1c2432) !important;
+}
+.fd-inner {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.fd-eyebrow { color: var(--gold, #b89a5a) !important; }
+.fd-name { color: var(--navy, #0b1622) !important; }
+.fd-title { color: var(--text-muted, #6b7585) !important; }
+.fd-bio { color: var(--text-mid, #3d4a5c) !important; }
+.fd-divider {
+  background: linear-gradient(90deg, var(--gold, #b89a5a), transparent) !important;
+}
+.fd-photo-corner {
+  border-color: rgba(184,154,90,0.55) !important;
+}
+.fd-photo-badge {
+  background: rgba(11,22,34,0.94) !important;
+  border-top: 1px solid rgba(184,154,90,0.28) !important;
+  color: var(--gold-light, #d4b97a) !important;
+}
+.fd-link { color: var(--gold, #b89a5a) !important; }
+.fd-link:hover { color: var(--navy, #0b1622) !important; }
+.fd-section::before {
+  background: linear-gradient(90deg, transparent, rgba(184,154,90,0.32), transparent) !important;
+}
+@media (max-width: 700px) {
+  .fd-divider {
+    background: linear-gradient(90deg, transparent, var(--gold, #b89a5a), transparent) !important;
+  }
+}
+
 </style>
