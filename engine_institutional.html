@@ -501,9 +501,7 @@ function showCaption(sceneIndex) {
 // ═══════════════════════════════════════════
 // CURSOR
 // ═══════════════════════════════════════════
-document.addEventListener('mousemove', e => {
-  document.getElementById('cursor').style.cssText += `left:${e.clientX}px;top:${e.clientY}px`;
-});
+// Native pointer remains available; no custom cursor tracking.
 
 // ═══════════════════════════════════════════
 // CLOCK
@@ -513,6 +511,7 @@ setInterval(() => { document.getElementById('clock').textContent = new Date().to
 // ═══════════════════════════════════════════
 // PARTICLE BG
 // ═══════════════════════════════════════════
+const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const canvas = document.getElementById('bg');
 const ctx = canvas.getContext('2d');
 let W, H;
@@ -553,7 +552,7 @@ function animBg() {
   }
   requestAnimationFrame(animBg);
 }
-animBg();
+if (!prefersReducedMotion) animBg();
 
 // ═══════════════════════════════════════════
 // MAP
@@ -595,14 +594,14 @@ function drawMap() {
     mctx.fillText(c.name.toUpperCase(),cx(c.rx)+8,cy(c.ry)+3);
   });
   mapAnim++;
-  if(currentScene===2) requestAnimationFrame(drawMap);
+  if(currentScene===2 && !prefersReducedMotion) requestAnimationFrame(drawMap);
 }
 
 // ═══════════════════════════════════════════
 // LEAD FEED
 // ═══════════════════════════════════════════
 const names=['SKILLED WORKER','SPOUSE VISA','ILR APPLICATION','STUDENT VISA','GRADUATE ROUTE','FAMILY REUNION','PARTNER VISA','INNOVATOR FOUNDER','SKILLED WORKER','SPOUSE VISA','ILR APPLICATION','STUDENT VISA'];
-const statuses=[{label:'INSTRUCTION_READY',cls:'hot',score:92},{label:'INSTRUCTION_READY',cls:'hot',score:88},{label:'NEEDS_DEVELOPMENT',cls:'warm',score:74},{label:'NEEDS_DEVELOPMENT',cls:'warm',score:69},{label:'NOT_VIABLE',cls:'cold',score:31},{label:'INSTRUCTION_READY',cls:'hot',score:95}];
+const statuses=[{label:'INSTRUCTION_READY',cls:'hot',score:92},{label:'INSTRUCTION_READY',cls:'hot',score:88},{label:'NEEDS_DEVELOPMENT',cls:'warm',score:74},{label:'NEEDS_DEVELOPMENT',cls:'warm',score:69},{label:'REVIEW_REQUIRED',cls:'cold',score:31},{label:'INSTRUCTION_READY',cls:'hot',score:95}];
 let leadCount=0,totalScore=0,anomalyCount=0,leadInterval;
 
 function addLead() {
@@ -617,7 +616,7 @@ function addLead() {
   item.innerHTML=`<span>${name}</span><span class="score-badge">${score}</span>`;
   feed.insertBefore(item,feed.firstChild);
   if(feed.children.length>8) feed.removeChild(feed.lastChild);
-  document.getElementById('leads-processed').textContent=`CASES: ${leadCount}`;
+  document.getElementById('leads-processed').textContent=`SAMPLE CASES: ${leadCount}`;
   document.getElementById('score-live').textContent=`AVG SCORE: ${Math.round(totalScore/leadCount)}`;
   document.getElementById('anomaly-count').textContent=anomalyCount;
 }
@@ -676,7 +675,7 @@ function goScene(n) {
     leadInterval=setInterval(addLead,800);
   }
 
-  if(n<scenes.length-1) sceneTimeout=setTimeout(()=>goScene(n+1),durations[n]);
+  if(!prefersReducedMotion && n<scenes.length-1) sceneTimeout=setTimeout(()=>goScene(n+1),durations[n]);
 }
 
 function restart() {
