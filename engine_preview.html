@@ -3,8 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AirCounsel Engine Preview — AI-Assisted Immigration Intake</title>
-  <meta name="description" content="See how AirCounsel analyses immigration cases, structures suitability, and produces solicitor-grade reports." />
   <link rel="canonical" href="https://aircounsel.uk/engine_preview.html" />
   <title>AirCounsel — Engine Preview · Technical Briefing</title>
   <meta name="description" content="A controlled, solicitor-grade look at the AirCounsel intake qualification engine. For practice managers and partners." />
@@ -17,8 +15,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="msapplication-config" content="/browserconfig.xml" />
-  <meta name="msapplication-TileColor" content="#0D0D0D" />
-  <meta name="theme-color" content="#0D0D0D" />
+  <meta name="msapplication-TileColor" content="#0B1622" />
+  <meta name="theme-color" content="#0B1622" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
@@ -671,6 +669,15 @@
       justify-content: center;
       margin-top: 2rem;
     }
+
+    .strata-access-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+    .strata-access-card { display:flex; flex-direction:column; min-height:220px; padding:1.5rem; border:1px solid var(--border); background:rgba(7,13,20,.35); text-decoration:none; transition:transform .2s ease,border-color .2s ease; }
+    .strata-access-card:hover { transform:translateY(-2px); border-color:rgba(184,154,90,.55); }
+    .strata-access-card h3 { margin:1.2rem 0 .7rem; color:var(--text-bright); font-family:var(--ff-display); font-size:1.45rem; font-weight:400; }
+    .strata-access-card p { color:var(--text-muted); font-size:.84rem; line-height:1.7; }
+    .strata-access-link { margin-top:auto; padding-top:1.3rem; color:var(--gold-light); font-family:var(--ff-mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; }
+    .ex-row .review { color:var(--gold-light); }
+    @media (max-width: 760px) { .strata-access-grid { grid-template-columns:1fr; } .strata-access-card { min-height:0; } }
 
     @media (max-width: 640px) {
       .engine-live-bar,
@@ -1352,7 +1359,7 @@
         </p>
 
         <div class="cta-row fade-up d4" style="justify-content:center;">
-          <a href="https://calendly.com/kwamehjuma/30min" class="btn btn-gold" target="_blank" rel="noopener">Book a 10-minute walkthrough</a>
+          <a href="https://calendly.com/kwamehjuma/30min" class="btn btn-gold" target="_blank" rel="noopener">Book your walkthrough</a>
           <a href="intake.html" class="btn btn-gold">Try the intake filter</a>
         </div>
 
@@ -1411,7 +1418,7 @@
     <div class="ex-head fade-up">
       <span class="label">60-Second Explainer</span>
       <h2 class="display" id="ex-h2" style="margin-top:1rem">One enquiry, five stages, <span class="accent">one report</span></h2>
-      <p>Watch a single simulated enquiry move from capture to a solicitor-ready report. Switch the enquiry type to see how each outcome is classified.</p>
+      <p>Watch a simulated enquiry move from capture to a structured intake summary for staff review. Switch the enquiry type to see how different review signals are presented.</p>
     </div>
     <div class="ex-frame" role="region" aria-label="Interactive engine explainer">
       <div class="ex-bar"><span class="ex-sim">Simulated sample · not client data</span><span>Layer 1 · Intake qualification</span></div>
@@ -1425,29 +1432,29 @@
         <div class="ex-track" aria-hidden="true"><i id="ex-bar"></i></div>
         <button class="ex-btn" id="ex-restart" type="button">Restart</button>
       </div>
-      <p class="ex-fine">Illustrative scoring. Thresholds are set by the firm. The report is a qualification summary, not legal advice and not a decision.</p>
+      <p class="ex-fine">Illustrative scenario only. Salary figures are declared examples, not eligibility outcomes. This preview does not assess occupation going rates, weekly hours, applicable salary options or transitional provisions. The classification is not legal advice or a legal decision.</p>
     </div>
-    <p class="ex-sr">Five stages: capture the enquiry, structure it into validated fields, score it across six gates, classify it as Instruction Ready, Needs Development or Not Viable, and deliver a report to the fee earner.</p>
+    <p class="ex-sr">Five stages: capture the enquiry, structure the information supplied into consistent fields, apply configured checks, classify it for staff attention, and deliver a review summary to the fee earner.</p>
   </div>
 </section>
 <script>
 (function(){
 var root=document.getElementById('explainer');if(!root)return;
 var STAGES=['Capture','Structure','Score','Prioritise','Deliver'],MS=11000;
-var CLS=['Instruction Ready','Needs Development','Not Viable'],SUB=['Priority callback alert','Solicitor review first','Redirect per firm policy'];
+var CLS=['Instruction Ready','Needs Development','Not Viable'],SUB=['Priority callback alert','Solicitor review first','Hold for authorised review'];
 var CASES=[
 {tab:'Instruction ready',ref:'SIM-0001',cls:0,score:88,
  fields:[['Route intent','Skilled Worker'],['Declared salary','£52,000'],['Location','England'],['Prior refusals','None declared'],['Funding','Privately funded'],['Time pressure','Visa expires in 21 days']],
- gates:[['Route fit','pass','Consistent with Skilled Worker'],['Eligibility thresholds','pass','£52,000 against configured £41,700'],['Immigration history','pass','No refusals declared'],['Fee capacity','pass','Within firm fee level'],['Jurisdiction','pass','UK, within remit'],['Urgency','flag','Expiry within 30 days']],
+ gates:[['Route fit','pass','Consistent with stated route intent'],['Salary comparator','review','£52,000 stated; no occupation going-rate, weekly-hours or salary-option assessment in this illustration'],['Immigration history','pass','No refusals declared by the sample applicant'],['Fee capacity','pass','Within illustrative firm fee level'],['Jurisdiction','pass','Within illustrative remit'],['Urgency','flag','Expiry within 30 days']],
  action:'Priority callback alert. Full qualification summary attached.'},
 {tab:'Needs development',ref:'SIM-0002',cls:1,score:61,
  fields:[['Route intent','Skilled Worker'],['Declared salary','£45,000'],['Location','England'],['Prior refusals','One declared (2022)'],['Funding','Privately funded'],['Time pressure','None stated']],
- gates:[['Route fit','pass','Consistent with Skilled Worker'],['Eligibility thresholds','pass','£45,000 against configured £41,700'],['Immigration history','flag','Prior refusal needs review'],['Fee capacity','pass','Within firm fee level'],['Jurisdiction','pass','UK, within remit'],['Urgency','pass','No time-sensitive element']],
+ gates:[['Route fit','pass','Consistent with stated route intent'],['Salary comparator','review','£45,000 stated; no occupation going-rate, weekly-hours or salary-option assessment in this illustration'],['Immigration history','flag','Prior refusal needs review'],['Fee capacity','pass','Within illustrative firm fee level'],['Jurisdiction','pass','Within illustrative remit'],['Urgency','pass','No time-sensitive element declared']],
  action:'Solicitor reviews the history flag before a consultation is booked.'},
 {tab:'Not viable',ref:'SIM-0003',cls:2,score:28,
  fields:[['Route intent','Skilled Worker'],['Declared salary','£26,000'],['Location','England'],['Prior refusals','None declared'],['Funding','Privately funded'],['Time pressure','None stated']],
- gates:[['Route fit','pass','Consistent with Skilled Worker'],['Eligibility thresholds','fail','£26,000 against configured £41,700'],['Immigration history','pass','No refusals declared'],['Fee capacity','pass','Within firm fee level'],['Jurisdiction','pass','UK, within remit'],['Urgency','pass','No time-sensitive element']],
- action:'Redirected per the firm’s policy. No solicitor time used.'}];
+ gates:[['Route fit','pass','Consistent with stated route intent'],['Salary comparator','review','£26,000 stated; no occupation going-rate, weekly-hours or salary-option assessment in this illustration'],['Immigration history','pass','No refusals declared by the sample applicant'],['Fee capacity','pass','Within illustrative firm fee level'],['Jurisdiction','pass','Within illustrative remit'],['Urgency','pass','No time-sensitive element declared']],
+ action:'Held for authorised staff review under firm policy. No automatic refusal or client-facing redirection is represented.'}];
 var panel=document.getElementById('ex-panel'),rail=document.getElementById('ex-rail'),tabs=document.getElementById('ex-cases'),bar=document.getElementById('ex-bar'),play=document.getElementById('ex-play'),rest=document.getElementById('ex-restart');
 var c=0,s=0,playing=true,timers=[],next=null,inView=false,reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
 function clear(){timers.forEach(clearTimeout);timers=[];clearTimeout(next);}
@@ -1462,7 +1469,7 @@ function render(animate){
  clear();var k=CASES[c],h='',i;
  if(s===0){h='<div class="ex-h">Stage 1 · Capture · adaptive intake questions</div>'+k.fields.map(function(f){return row(f[0],f[1]);}).join('');}
  else if(s===1){h='<div class="ex-h">Stage 2 · Structure · validated data fields</div>'+k.fields.map(function(f){return row(f[0].toLowerCase().replace(/ /g,'_'),f[1]+' ✓','pass');}).join('')+'<div class="ex-row ex-item"><span>Fields valid</span><span class="pass">6 / 6</span></div>';}
- else if(s===2){h='<div class="ex-h">Stage 3 · Score · six gates</div>'+k.gates.map(function(g){return row(g[0],g[1].toUpperCase(),g[1],g[2]);}).join('')+'<div class="ex-meter"><i id="ex-m"></i></div><div class="ex-row" style="border:0"><span>Score (illustrative)</span><span id="ex-sc">0 / 100</span></div>';
+ else if(s===2){h='<div class="ex-h">Stage 3 · Score · six gates</div>'+k.gates.map(function(g){return row(g[0],g[1]==='review'?'REVIEW':g[1].toUpperCase(),g[1],g[2]);}).join('')+'<div class="ex-meter"><i id="ex-m"></i></div><div class="ex-row" style="border:0"><span>Score (illustrative)</span><span id="ex-sc">0 / 100</span></div>';
   panel.innerHTML=h;reveal('.ex-item',500,1100,animate,function(){document.getElementById('ex-m').style.width=k.score+'%';document.getElementById('ex-sc').textContent=k.score+' / 100';});return;}
  else if(s===3){h='<div class="ex-h">Stage 4 · Prioritise · classification</div><div class="ex-tiles">'+CLS.map(function(n,i){return '<div class="ex-tile" data-i="'+i+'"><b>'+n+'</b>'+SUB[i]+'</div>';}).join('')+'</div>';
   panel.innerHTML=h;var hit=function(){panel.querySelectorAll('.ex-tile')[k.cls].classList.add('hit');};if(animate)later(hit,1200);else hit();return;}
@@ -1490,7 +1497,7 @@ go(s,!reduce);
       <div class="what-grid">
 
         <div class="fade-up">
-          <span class="label">Layer 1 · Live Today</span>
+          <span class="label">Layer 1 · Available for Demonstration</span>
           <h2 class="display" id="what-h2">What the engine does today</h2>
 
           <div class="layer-badge" style="margin-top:1.5rem;">
@@ -1499,20 +1506,20 @@ go(s,!reduce);
           </div>
 
           <p>
-            This preview focuses on the part of the system that is live, simple, and safe to adopt immediately. No other layer is active. No other layer is part of the initial walkthrough.
+            This preview focuses on the active intake qualification layer. It shows the scope of the current product experience; other modules remain outside the initial pilot and walkthrough.
           </p>
           <p>
-            The engine applies a structured scoring system to every inbound enquiry before it reaches a solicitor. The result is a qualification report — not a recommendation, not a decision. The solicitor decides. The engine filters the noise.
+            For enquiries submitted through its intake workflow, Layer 1 applies configured scoring checks and produces a structured summary for staff review. The result is an operational signal, not legal advice or a decision. Authorised people at the firm retain decision authority.
           </p>
 
           <div class="constraints fade-up d1">
             <span class="constraints-label">System Constraints — Layer 1 Only</span>
             <ul>
-              <li>No automation that changes your existing workflow</li>
-              <li>No interference with your case management system</li>
-              <li>No AI-generated legal advice of any kind</li>
-              <li>No privileged client data processed</li>
-              <li>No operational disruption during pilot</li>
+              <li>Consequential actions remain subject to authorised human review</li>
+              <li>No case-management integration is represented in this preview</li>
+              <li>No AI-generated legal advice or automated legal determination</li>
+              <li>This walkthrough uses synthetic examples, not privileged client data</li>
+              <li>Pilot scope and workflow impact are agreed with the firm before deployment</li>
             </ul>
           </div>
         </div>
@@ -1524,21 +1531,21 @@ go(s,!reduce);
               <span class="gate-num">01</span>
               <div class="gate-content">
                 <h4>Route Fit</h4>
-                <p>Is the enquiry consistent with a viable UK immigration route for this individual?</p>
+                <p>Does the stated enquiry objective correspond to a route the firm handles?</p>
               </div>
             </li>
             <li class="gate-item">
               <span class="gate-num">02</span>
               <div class="gate-content">
-                <h4>Eligibility Thresholds</h4>
-                <p>Does the enquiry meet current Home Office salary, qualification, and residency requirements?</p>
+                <h4>Rule Parameters</h4>
+                <p>Which route-specific rule parameters and conditions have been identified for review against current guidance? This is an intake check, not an eligibility determination.</p>
               </div>
             </li>
             <li class="gate-item">
               <span class="gate-num">03</span>
               <div class="gate-content">
                 <h4>Immigration History</h4>
-                <p>Are there flags — refusals, overstays, prior applications — that affect viability?</p>
+                <p>Have refusals, overstays or prior applications been declared that require staff review?</p>
               </div>
             </li>
             <li class="gate-item">
@@ -1586,16 +1593,16 @@ go(s,!reduce);
         </h3>
 
         <blockquote class="managers-quote">
-          "We don't need more enquiries — we need clarity."
+          "Start with the intake boundary."
         </blockquote>
 
         <p>
           Every non-viable enquiry that reaches a solicitor’s desk costs time that cannot be recovered. As an illustration, at a partner rate of £200 per hour and 0.75 partner hours per unqualified enquiry, five unqualified enquiries a week comes to roughly 195 hours, or £39,000, of partner time a year, before a single case is opened. Your own figures will differ.</p>
         <p>
-          Layer 1 of the AirCounsel engine gives practice managers a mechanism to protect that time. It does not change how your team works. It changes what reaches them.
+          Layer 1 gives practice managers a way to inspect and structure intake before consultation. Any effect on an existing workflow is reviewed and agreed with the firm.
         </p>
         <p>
-          The pilot requires no technical setup, no system integration, and no preparation from your staff. You see the output in 10 minutes. You decide whether it works for your firm.
+          The short walkthrough demonstrates the existing synthetic sample; it is not a deployment. Pilot configuration, access controls, integrations and staff responsibilities are scoped separately before firm data is introduced.
         </p>
       </div>
 
@@ -1616,7 +1623,7 @@ go(s,!reduce);
       </div>
 
       <p class="cinematic-framing fade-up d1">
-        A controlled view of Layer 1: structured intake, suitability signals, escalation thresholds, and solicitor-ready output before an enquiry reaches the team.
+        A controlled view of Layer 1: structured intake, suitability signals, escalation thresholds, and an organised intake summary for staff review.
       </p>
 
       <div class="engine-documentation-frame fade-up d2" role="region" aria-label="AirCounsel institutional engine preview">
@@ -1633,9 +1640,9 @@ go(s,!reduce);
           ></iframe>
         </div>
         <div class="engine-compliance-stamps" aria-label="Compliance positioning">
-          <span>GDPR-aligned data handling</span>
-          <span>SRA-compatible intake workflow</span>
-          <span>Secure by design</span>
+          <span>Illustrative animation only</span>
+          <span>Synthetic data · not a live tenant feed</span>
+          <span>Human authority remains with the firm</span>
         </div>
       </div>
 
@@ -1649,6 +1656,34 @@ go(s,!reduce);
 
   <hr class="section-rule" />
 
+  <!-- Existing STRATA interfaces. These links expose deployed surfaces; they do not create new routes. -->
+  <section id="strata-access" aria-labelledby="strata-access-h2" style="background:var(--navy);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);">
+    <div class="container">
+      <div class="fade-up" style="max-width:66ch;margin-bottom:2.5rem;">
+        <span class="label" style="display:block;margin-bottom:1rem;">Existing STRATA Interfaces</span>
+        <h2 class="display" id="strata-access-h2">Inspect the system<br />beyond the explanation.</h2>
+        <p style="margin-top:1rem;">The animation above is an illustrative presentation. The links below open existing STRATA surfaces. This page does not create a second workspace, API gateway or intake engine.</p>
+      </div>
+      <div class="strata-access-grid fade-up d1">
+        <a class="strata-access-card" href="https://aircounsel-strata-core-production.up.railway.app/specsheet" target="_blank" rel="noopener noreferrer">
+          <span class="label">01 · Contract</span><h3>Specification &amp; API gateway</h3>
+          <p>The STRATA black-box specification. The API contract and Swagger interface are surfaced within the specsheet.</p><span class="strata-access-link">Open specification ↗</span>
+        </a>
+        <a class="strata-access-card" href="https://aircounsel-strata-core-production.up.railway.app/workspace?firm=ch-0001" target="_blank" rel="noopener noreferrer">
+          <span class="label">02 · Operations</span><h3>V5 practice workspace</h3>
+          <p>Open the preconfigured synthetic workspace for inspection. The <code>ch-0001</code> example is a demonstration tenant, not a live client matter.</p><span class="strata-access-link">Open workspace ↗</span>
+        </a>
+        <a class="strata-access-card" href="https://aircounsel-strata-core-production.up.railway.app/onboard" target="_blank" rel="noopener noreferrer">
+          <span class="label">03 · Evaluation</span><h3>Sandbox onboarding</h3>
+          <p>Enter the existing onboarding flow to obtain a synthetic key and sandbox workspace. This is not evidence of production-firm provisioning.</p><span class="strata-access-link">Open onboarding ↗</span>
+        </a>
+      </div>
+      <p style="margin-top:1.5rem;color:var(--text-muted);font-size:.78rem;max-width:82ch;">The specification is the contract. The deployed gateways are the interfaces. The V5 workspace is the operational experience. Do not enter client or confidential information into a synthetic demonstration environment.</p>
+    </div>
+  </section>
+
+  <hr class="section-rule" />
+
   <!-- ══ §5 — HOW IT WORKS ════════════════════════════════════════ -->
   <section id="how-it-works" aria-labelledby="how-h2">
     <div class="container">
@@ -1656,28 +1691,40 @@ go(s,!reduce);
       <div class="fade-up" style="max-width:54ch;">
         <span class="label" style="margin-bottom:1rem;display:block;">Simple, Non-Technical</span>
         <h2 class="display" id="how-h2">
-          Three steps.<br />No integrations.<br />No risk.
+          Five stages.<br />One controlled intake window.
         </h2>
       </div>
 
       <div class="flow-diagram fade-up d1" role="list">
         <article class="flow-step" role="listitem">
           <div class="flow-dot" aria-hidden="true"></div>
-          <span class="flow-step-label">Step 01</span>
-          <h3>Receive</h3>
-          <p>The engine receives an inbound enquiry through a structured intake form. The client answers a defined sequence of questions.</p>
+          <span class="flow-step-label">Stage 01</span>
+          <h3>Capture</h3>
+          <p>Record the enquiry and the information supplied at the point of first contact.</p>
         </article>
         <article class="flow-step" role="listitem">
           <div class="flow-dot" aria-hidden="true"></div>
-          <span class="flow-step-label">Step 02</span>
+          <span class="flow-step-label">Stage 02</span>
+          <h3>Structure</h3>
+          <p>Arrange declared information into consistent fields, preserving what is supplied and what remains missing.</p>
+        </article>
+        <article class="flow-step" role="listitem">
+          <div class="flow-dot" aria-hidden="true"></div>
+          <span class="flow-step-label">Stage 03</span>
           <h3>Score</h3>
-          <p>The six gates are applied automatically. A qualification score is generated. Non-viable enquiries are redirected before any solicitor contact.</p>
+          <p>Apply configured intake checks and record the resulting indicators. A score is a workflow signal, not a legal conclusion.</p>
         </article>
         <article class="flow-step" role="listitem">
           <div class="flow-dot" aria-hidden="true"></div>
-          <span class="flow-step-label">Step 03</span>
+          <span class="flow-step-label">Stage 04</span>
+          <h3>Prioritise</h3>
+          <p>Classify the enquiry for staff attention. Not Viable does not mean automatic rejection or client-facing redirection.</p>
+        </article>
+        <article class="flow-step" role="listitem">
+          <div class="flow-dot" aria-hidden="true"></div>
+          <span class="flow-step-label">Stage 05</span>
           <h3>Deliver</h3>
-          <p>Your team receives a priority-ranked qualification report. Only viable cases arrive. Every case arrives with full context.</p>
+          <p>Present a structured summary and its outstanding checks to the authorised team for review and next-step control.</p>
         </article>
       </div>
 
@@ -1689,8 +1736,8 @@ go(s,!reduce);
         </div>
         <div class="safety-text">
           <p>
-            <strong>This is the only part of the system you will see in the walkthrough.</strong>
-            No integrations required. No system changes. No risk to your current workflow. You can run the pilot without your IT team, without a procurement process, and without preparing your staff.
+            <strong>This is a product illustration, not a deployment assurance.</strong>
+            Integration scope, data access, retention, staff responsibilities and operational controls must be agreed with the firm before any real enquiry data is introduced.
           </p>
         </div>
       </div>
@@ -1722,17 +1769,17 @@ go(s,!reduce);
           <div class="layer-body">
             <div class="layer-status">
               <span class="status-dot status-dot--active" aria-hidden="true"></span>
-              <span class="status-text status-text--active">Active · Available Now</span>
+              <span class="status-text status-text--active">Active · Demonstration Available</span>
             </div>
             <h3 id="layer1-h3">Intake Qualification Engine</h3>
             <p class="layer-desc">
-              The structured scoring system that filters non-viable enquiries before they reach a solicitor. Six gates. Clear decision logic. No workflow disruption. This is the layer active today.
+              The structured intake layer records information, configured checks and review classifications before a matter is opened. A Not Viable classification is not, by itself, an instruction to reject or redirect an enquiry.
             </p>
             <ul class="layer-features">
               <li>Six qualification gates</li>
-              <li>Priority callback alerts</li>
-              <li>Qualification report delivery</li>
-              <li>Compliance-safe intake only</li>
+              <li>Priority and urgency indicators for staff review</li>
+              <li>Structured intake summary for staff review</li>
+              <li>Human review and authorisation retained</li>
               <li>Free 14-day pilot</li>
             </ul>
           </div>
@@ -1765,15 +1812,15 @@ go(s,!reduce);
           </p>
 
           <div class="manager-pull">
-            <blockquote>"Show us something simple that works today."</blockquote>
-            <cite>Managing Partners · UK Immigration Practices</cite>
+            <blockquote>"Start with the intake boundary."</blockquote>
+            <cite>AirCounsel operating principle</cite>
           </div>
 
           <p>
-            Layer 1 is designed to answer that exactly. It is operationally safe, immediately valuable, and completely controlled by your team. You decide what threshold qualifies for your firm. We build the filter to your specification.
+            Layer 1 is designed to make the intake window easier to inspect and govern. Firm-configured intake criteria remain separate from rule-derived parameters; authorised people at the firm retain decision authority. Deployment controls and the data boundary are agreed before firm data is processed.
           </p>
           <p>
-            Further modules are optional and can be discussed once Layer 1 has delivered measurable value.</p>
+            Further modules remain outside the initial scope and are considered only after the intake layer has been evaluated against agreed measures.</p>
         </div>
 
         <div class="fade-up d1">
@@ -1781,27 +1828,27 @@ go(s,!reduce);
           <div class="properties">
             <div class="property">
               <h4>Low-risk</h4>
-              <p>No integration. No disruption. No changes to existing workflow.</p>
+              <p>Implementation is scoped with the firm. Workflow impact and access controls are reviewed before configuration.</p>
             </div>
             <div class="property">
               <h4>Easy to adopt</h4>
-              <p>Live within five working days. No IT involvement required.</p>
+              <p>Deployment scope and timing are agreed after the firm's workflow, technical requirements and access boundaries are reviewed.</p>
             </div>
             <div class="property">
-              <h4>Operationally safe</h4>
-              <p>Pre-instruction data only. Fully GDPR-compliant. SRA guidance aligned.</p>
+              <h4>Data boundaries</h4>
+              <p>Data handling, retention, access controls and regulatory responsibilities must be documented for the firm's deployment before firm data is processed.</p>
             </div>
             <div class="property">
-              <h4>Immediately valuable</h4>
-              <p>Results visible within the 14-day pilot window. Measurable output from day one.</p>
+              <h4>Evaluable</h4>
+              <p>Pilot objectives and evaluation measures are agreed with the firm before the trial. Outcomes are assessed, not guaranteed.</p>
             </div>
             <div class="property">
               <h4>Fully controlled</h4>
-              <p>Your team sets the scoring thresholds. You own every decision the engine makes.</p>
+              <p>Firm-configured intake criteria are distinct from rule-derived parameters. The firm's authorised people retain decision authority.</p>
             </div>
             <div class="property">
               <h4>No commitment</h4>
-              <p>The pilot is free. No procurement process. No contract required to start.</p>
+              <p>The proposed 14-day pilot is free. Scope, access, data handling and responsibilities are agreed before any firm data is introduced.</p>
             </div>
           </div>
         </div>
@@ -1818,18 +1865,18 @@ go(s,!reduce);
       <div class="walkthrough-grid">
 
         <div class="fade-up">
-          <span class="label" style="margin-bottom:1.2rem;display:block;">The 10-Minute Walkthrough</span>
+          <span class="label" style="margin-bottom:1.2rem;display:block;">Product Walkthrough</span>
           <h2 class="display" id="walkthrough-h2">
-            A meeting,<br />not a video
+            A demonstration,<br />not a deployment
           </h2>
           <p style="margin-top:1.5rem;">
-            No technical setup. No slides. No preparation from your team. The walkthrough is a short, practical demonstration of Layer 1 — the intake qualification engine as it would operate for your firm.
+            The walkthrough is a short, practical demonstration using synthetic example enquiries. No technical setup or staff preparation is needed to attend. It is not a deployment or a connection to your firm's data.
           </p>
           <p>
-            You will see the scoring logic applied to a live sample of enquiry types typical for a UK immigration practice. You ask questions. We show you exactly how the output appears to your team.
+            You will see the scoring logic applied to illustrative enquiry types typical for a UK immigration practice. The sample is not connected to a live firm tenant or client records. You ask questions; we show how the structured output is presented for staff review.
           </p>
           <p>
-            If at the end of 10 minutes it is not clearly useful, there is no further contact.
+            At the end of the walkthrough, you can decide whether the product warrants a separately scoped pilot. No follow-up is assumed.
           </p>
         </div>
 
@@ -1843,7 +1890,7 @@ go(s,!reduce);
             </li>
             <li class="walkthrough-item">
               <span class="wi-num">02</span>
-              <span class="wi-text">How the qualification thresholds are set — and how your team controls them</span>
+              <span class="wi-text">How firm-configured intake criteria are separated from rule-derived parameters</span>
             </li>
             <li class="walkthrough-item">
               <span class="wi-num">03</span>
@@ -1851,11 +1898,11 @@ go(s,!reduce);
             </li>
             <li class="walkthrough-item">
               <span class="wi-num">04</span>
-              <span class="wi-text">How non-viable enquiries are redirected — and what the client receives</span>
+              <span class="wi-text">How Not Viable classifications are held for authorised review</span>
             </li>
             <li class="walkthrough-item">
               <span class="wi-num">05</span>
-              <span class="wi-text">How the pilot is set up for your firm in five working days</span>
+              <span class="wi-text">How pilot scope, access boundaries and responsibilities are agreed</span>
             </li>
           </ol>
 
@@ -1874,23 +1921,23 @@ go(s,!reduce);
               </div>
               <div class="terminal-line">
                 <span class="terminal-prompt">→</span>
-                <span class="terminal-text">Gate 01 Route Fit <span class="pass">· PASS</span></span>
+                <span class="terminal-text">Route intent recorded <span class="highlight">· SAMPLE</span></span>
               </div>
               <div class="terminal-line">
                 <span class="terminal-prompt">→</span>
-                <span class="terminal-text">Gate 02 Salary Threshold £41,700 <span class="fail">· FAIL £26,000 declared</span></span>
+                <span class="terminal-text">Salary comparator <span class="highlight">· REVIEW — further route-specific checks required</span></span>
               </div>
               <div class="terminal-line">
                 <span class="terminal-prompt">→</span>
-                <span class="terminal-text">Score <span class="highlight">28 / 100</span> · Below threshold</span>
+                <span class="terminal-text">Intake classification <span class="highlight">· Not Viable (illustrative only)</span></span>
               </div>
               <div class="terminal-line">
                 <span class="terminal-prompt">→</span>
-                <span class="terminal-text">Action <span class="fail">· Redirected · No solicitor contact</span></span>
+                <span class="terminal-text">Next step <span class="highlight">· Held for authorised staff review</span></span>
               </div>
               <div class="terminal-line">
                 <span class="terminal-prompt">→</span>
-                <span class="terminal-text">Partner hours saved <span class="pass">· 0.75 hrs</span><span class="terminal-cursor"></span></span>
+                <span class="terminal-text">Time impact <span class="highlight">· Not measured in this illustration</span><span class="terminal-cursor"></span></span>
               </div>
             </div>
           </div>
@@ -1920,14 +1967,14 @@ go(s,!reduce);
 
         <div class="cta-rule" aria-hidden="true"></div>
 
-        <span class="label">No Obligation · No Preparation Required</span>
+        <span class="label">No Obligation · Synthetic Demonstration</span>
 
         <h2 class="display" id="cta-h2" style="margin-top:1.2rem;">
-          Book a 10-minute<br />walkthrough
+          Book a product<br />walkthrough
         </h2>
 
         <p style="margin-top:1.2rem;margin-left:auto;margin-right:auto;">
-          A short, practical demonstration of the intake qualification engine. No technical knowledge needed. No commitment required. You see exactly what Layer 1 produces before any decision is made.
+          A focused demonstration of the intake qualification engine using synthetic examples. No technical knowledge is needed to attend, and the session does not commit either party to a pilot or deployment.
         </p>
 
         <div class="cta-row" style="margin-top:2.5rem;">
@@ -1936,10 +1983,10 @@ go(s,!reduce);
         </div>
 
         <div class="cta-reassurance" aria-label="Walkthrough guarantees">
-          <span>No setup required</span>
-          <span>No technical knowledge</span>
+          <span>No setup to attend</span>
+          <span>Synthetic examples</span>
           <span>No commitment</span>
-          <span>10 minutes only</span>
+          <span>Deployment scoped separately</span>
         </div>
 
       </div>
@@ -1964,7 +2011,7 @@ go(s,!reduce);
     </div>
     <div class="footer-bottom">
       <p>© 2026 AirCounsel.uk · Oxford Row, Leeds · Engine Preview · Restricted Distribution</p>
-      <p class="footer-disclaimer">AirCounsel does not provide legal advice. All enquiry filtering is non-advisory and compliance-safe.</p>
+      <p class="footer-disclaimer">AirCounsel does not provide legal advice. Illustrations on this page are not eligibility determinations. Consequential action remains subject to the firm's authorised review and policy.</p>
     </div>
   </div>
   <p>AirCounsel — UK Immigration Intake Engineering (Leeds, United Kingdom)</p>
