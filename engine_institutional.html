@@ -200,13 +200,13 @@
 <div style="position:fixed;bottom:8px;left:8px;z-index:9999;font:9px 'DM Mono',monospace;letter-spacing:.18em;color:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.25);padding:4px 8px;background:rgba(0,0,0,.5)">SIMULATED DATA · NOT CLIENT CASES</div>
 <!-- VOICE GUIDE OVERLAY -->
 <div id="voice-guide">
-  <h2>// Adaptive Voice Active</h2>
-  <p>This voiceover accompanies a staged animation. Counters, sample enquiries, statuses and metrics are generated examples. They are not connected to STRATA, a firm tenant or client records.</p>
+  <h2>// Scripted Institutional Narration</h2>
+  <p>This six-scene voiceover accompanies a staged animation. Counters, sample enquiries, statuses and metrics are generated examples. They are not connected to STRATA, a firm tenant or client records. Sound is muted by default; enable it with the audio control.</p>
   <code>Illustrative animation only.<br>
 No live system telemetry.<br>
 No client cases or customer pipeline.</code>
-  <p>To override a scene with ElevenLabs audio, add the MP3 path to <strong style="color:var(--arc)">VOICE_FILES</strong> in the script. That scene will use the file; others keep adaptive voice.</p>
-  <button class="close-btn" onclick="document.getElementById('voice-guide').classList.remove('show')">Run The Engine</button>
+  <p>Each scene uses a fixed narration script. Optional recorded voice files can be configured through <strong style="color:var(--arc)">VOICE_FILES</strong>.</p>
+  <button class="close-btn" onclick="document.getElementById('voice-guide').classList.remove('show')">Continue</button>
 </div>
 
 <!-- AUDIO UI -->
@@ -260,73 +260,74 @@ No client cases or customer pipeline.</code>
 <!-- SCENES -->
 <div class="scene active" id="s0">
   <div style="text-align:center">
-    <div class="scene-label" style="animation-delay:0s">Initialising Engine</div>
-    <div style="font-size:11px;color:rgba(212,185,122,0.6);letter-spacing:0.2em;line-height:2;text-align:left;max-width:340px;opacity:0;animation:fadeUp 0.4s 0.3s forwards">
-      <div>► WORKFLOW MODEL..............<span style="color:var(--volt)">ILLUSTRATIVE</span></div>
-      <div>► RULE PARAMETERS.............<span style="color:var(--volt)">CONFIGURABLE</span></div>
-      <div>► SAMPLE RECORDS..............<span style="color:var(--volt)">LOADED</span></div>
-      <div>► HUMAN REVIEW................<span style="color:var(--volt)">RETAINED</span></div>
-      <div>► DATA CONTROLS...............<span style="color:var(--volt)">DEPLOYMENT-SPECIFIC</span></div>
-      <div id="bootFinal" style="opacity:0;margin-top:10px">► AIRCOUNSEL <span style="color:var(--ember);font-family:'Bebas Neue';font-size:20px;vertical-align:middle;letter-spacing:0.1em"> READY</span></div>
+    <div class="scene-label" style="animation-delay:0s">The Tenant Boundary</div>
+    <div style="font-size:11px;color:rgba(212,185,122,0.6);letter-spacing:0.2em;line-height:2;text-align:left;max-width:360px;opacity:0;animation:fadeUp 0.4s 0.3s forwards">
+      <div>► FIRM-DEFINED SCOPE...........<span style="color:var(--volt)">SET</span></div>
+      <div>► TENANT SEPARATION............<span style="color:var(--volt)">ENFORCED</span></div>
+      <div>► SCOPED PERMISSIONS...........<span style="color:var(--volt)">APPLIED</span></div>
+      <div>► ACTION AUTHORISATION........<span style="color:var(--volt)">GOVERNED</span></div>
+      <div>► REVIEW AUTHORITY.............<span style="color:var(--volt)">RETAINED</span></div>
+      <div id="bootFinal" style="opacity:0;margin-top:10px">► TENANT BOUNDARY <span style="color:var(--ember);font-family:'Bebas Neue';font-size:20px;vertical-align:middle;letter-spacing:0.1em"> DEFINED</span></div>
     </div>
   </div>
 </div>
 
 <div class="scene" id="s1">
-  <div class="scene-label">The Qualification Engine</div>
+  <div class="scene-label">Data Governance</div>
   <div id="engine-wrap">
     <div class="ring ring-1"></div>
     <div class="ring ring-2"></div>
     <div class="ring ring-3"></div>
     <div class="engine-core"></div>
-    <div class="score-ticker" style="top:10px;left:50%;transform:translateX(-50%)">CAPTURE // STRUCTURE // SCORE // PRIORITISE // DELIVER</div>
-    <div class="score-ticker" style="bottom:10px;left:50%;transform:translateX(-50%)">SAMPLE ROUTE LABELS · NOT CASE RECORDS</div>
+    <div class="score-ticker" style="top:10px;left:50%;transform:translateX(-50%)">UK GDPR CONTROLS // ACCESS GOVERNANCE // REGULATED WORKFLOW</div>
+    <div class="score-ticker" style="bottom:10px;left:50%;transform:translateX(-50%)">DATA PROTECTION · SCOPED ACCESS · OPERATIONAL CONTROL</div>
   </div>
-  <div class="scene-headline">Every Enquiry. <span class="arc">Structured.</span><br><span class="ember">Scored.</span> Delivered.</div>
-  <div class="scene-sub">A structured intake model can organise declared information and configured checks before team review.<br><span class="accent">A score or flag is an operational signal, not a legal determination.</span></div>
+  <div class="scene-headline">Data Protection.<br><span class="arc">Within The Workflow.</span></div>
+  <div class="scene-sub">UK GDPR controls are enforced within the way information is handled.<br><span class="accent">SRA-aligned workflow controls support the requirements of regulated practice.</span></div>
 </div>
 
 <div class="scene" id="s2">
-  <div class="scene-label">Illustrative Geographic Motif</div>
+  <div class="scene-label">Deterministic Operations</div>
   <div class="scene-headline" style="font-size:clamp(28px,4vw,56px)">
-    <span class="arc">One Operating Model.</span><br><span class="volt">Firm-Configured.</span><br>
-    <span style="font-size:0.5em;font-weight:200;color:rgba(255,255,255,0.4)">A structured intake workflow, configured within each firm's agreed scope.</span>
+    <span class="arc">Configured Checks.</span><br><span class="volt">Bounded Intelligence.</span><br>
+    <span style="font-size:0.5em;font-weight:200;color:rgba(255,255,255,0.4)">Firm criteria and rule-derived parameters remain distinct.</span>
   </div>
-  <div class="scene-sub">Built in Leeds for UK immigration practice.<br><span class="accent">The geographic graphic is illustrative. It does not represent customer locations, live deployments or service coverage.</span></div>
+  <div class="scene-sub">Deterministic checks structure information and surface review signals.<br><span class="accent">The map is a visual motif only; it does not show customers, deployments or service coverage.</span></div>
 </div>
 
 <div class="scene" id="s3">
-  <div class="scene-label">Before and After</div>
-  <div class="scene-headline" style="font-size:clamp(28px,4vw,54px)">Unstructured <span class="ember">In.</span><br>Review-Ready <span class="volt">Out.</span></div>
+  <div class="scene-label">Evidence and Traceability</div>
+  <div class="scene-headline" style="font-size:clamp(28px,4vw,54px)">Operational <span class="ember">Evidence.</span><br>Context for <span class="volt">Accountability.</span></div>
   <div class="split-container">
     <div class="split-panel split-old">
-      <div class="split-label">Without AirCounsel</div>
-      <div class="split-item">Unstructured email enquiries</div>
-      <div class="split-item">Manual threshold checking</div>
-      <div class="split-item">Unqualified consultations</div>
-      <div class="split-item">Inconsistent intake quality</div>
+      <div class="split-label">Without an inspectable workflow</div>
+      <div class="split-item">Outcome without context</div>
+      <div class="split-item">Unclear review history</div>
+      <div class="split-item">Unverified changes</div>
+      <div class="split-item">Limited supervision evidence</div>
     </div>
     <div style="display:flex;align-items:center;padding:0 4px;color:var(--ember);font-family:'Bebas Neue';font-size:30px">VS</div>
     <div class="split-panel split-new">
-      <div class="split-label">With AirCounsel</div>
-      <div class="split-item live">Structured case data</div>
-      <div class="split-item live">Configured checks recorded</div>
-      <div class="split-item live">Review flags surfaced</div>
-      <div class="split-item live">Context organised for staff</div>
+      <div class="split-label">Designed for inspection</div>
+      <div class="split-item live">Structured intake context</div>
+      <div class="split-item live">Configured checks visible</div>
+      <div class="split-item live">Review flags in context</div>
+      <div class="split-item live">Event history for supervision</div>
     </div>
   </div>
 </div>
 
 <div class="scene" id="s4">
-  <div class="statement" style="font-size:clamp(32px,5vw,72px);font-family:'Unbounded',sans-serif;font-weight:200;letter-spacing:0.05em;color:rgba(255,255,255,0.85);line-height:1.3">Intake is where<br><span style="color:var(--arc)">judgment begins.</span></div>
+  <div class="scene-label">Human Authority</div>
+  <div class="statement" style="font-size:clamp(32px,5vw,72px);font-family:'Unbounded',sans-serif;font-weight:200;letter-spacing:0.05em;color:rgba(255,255,255,0.85);line-height:1.3">A classification is not<br><span style="color:var(--arc)">a legal decision.</span></div>
   <div class="divider"></div>
-  <div class="anomaly"><span class="bright">We make the information that reaches that moment</span><br><span style="color:rgba(212,185,122,0.7);font-size:0.8em">structured, with gaps and review flags visible.</span></div>
+  <div class="anomaly"><span class="bright">A Not Viable signal is not an automatic refusal.</span><br><span style="color:rgba(212,185,122,0.7);font-size:0.8em">STRATA prepares and prioritises information; authorised people retain control over consequential actions and professional judgement.</span></div>
 </div>
 
 <div class="scene" id="s5">
-  <div class="scene-label" style="letter-spacing:0.6em;font-size:8px">Intake Intelligence for Immigration Practices</div>
+  <div class="scene-label" style="letter-spacing:0.6em;font-size:8px">Infrastructure Before the Consultation</div>
   <div class="scene-headline" style="font-size:clamp(50px,8vw,110px);letter-spacing:-0.02em">AIR<span class="arc">COUNSEL</span></div>
-  <div class="scene-sub" style="font-size:11px;letter-spacing:0.15em;margin-top:8px">aircounsel.uk<br><span class="accent">Illustrative simulation · Human review retained</span></div>
+  <div class="scene-sub" style="font-size:11px;letter-spacing:0.15em;margin-top:8px">One controlled operating environment connecting structured intake, configured assessment, evidence and human authority.<br><span class="accent">The work before the work.</span></div>
   <div class="cta-block">
     <button class="btn btn-primary" onclick="window.open('https://aircounsel.uk','_blank')">REQUEST A PILOT</button>
     <button class="btn btn-ghost" onclick="restart()">WATCH AGAIN</button>
@@ -350,26 +351,27 @@ const VOICE_FILES = {
 // SCRIPTED VOICE GUIDE
 // Narrates the staged demonstration only.
 // ═══════════════════════════════════════════
-// Scripted narration for this staged simulation. No live dashboard metrics are read.
+// Fixed narration for the six institutional scenes. Sample dashboard counters are never narrated as live data.
 function buildSceneVoice(sceneIndex) {
   switch (sceneIndex) {
-    case 0: return null;
-    case 1: return { lines: ["This is an illustrative operating view, not a live system feed.", "It shows how declared intake information can be organised for review."], rate: 0.82, pitch: 0.70 };
-    case 2: return { lines: ["The map is a visual motif only.", "It does not show customer locations, service coverage or deployed firms."], rate: 0.86, pitch: 0.72 };
-    case 3: return { lines: ["Structured information can make missing details and review flags easier to see.", "Any next step remains subject to the firm's policy and authorised review."], rate: 0.84, pitch: 0.68 };
-    case 4: return { lines: ["Intake is where professional judgement begins.", "The system organises information; it does not replace the solicitor's decision."], rate: 0.82, pitch: 0.70 };
-    case 5: return { lines: ["AirCounsel. Structured intake for immigration practices.", "Illustrative animation. Human review retained."], rate: 0.78, pitch: 0.62 };
+    case 0: return { lines: ["Every enquiry enters a firm-defined operational boundary.", "Tenant separation and scoped permissions govern who can access information and perform actions within that environment."], rate: 0.82, pitch: 0.70 };
+    case 1: return { lines: ["Data protection is not an afterthought. UK GDPR controls are enforced within the way information is handled.", "Access is governed, operational responsibilities are defined, and the workflow is designed around the requirements of regulated practice."], rate: 0.82, pitch: 0.70 };
+    case 2: return { lines: ["Firm-configured intake criteria and rule-derived parameters remain distinct.", "Deterministic checks structure the information and surface review signals. Intelligence supports the workflow without assuming the authority of the solicitor."], rate: 0.84, pitch: 0.68 };
+    case 3: return { lines: ["A regulated workflow must be inspectable.", "Its purpose is not simply to produce an outcome, but to preserve the context needed for verification, supervision and accountability."], rate: 0.82, pitch: 0.70 };
+    case 4: return { lines: ["A classification is not a legal decision. A Not Viable signal is not an automatic refusal.", "STRATA prepares and prioritises the information; authorised people retain control over consequential actions and professional judgement."], rate: 0.82, pitch: 0.70 };
+    case 5: return { lines: ["AirCounsel is building the infrastructure before the consultation.", "One controlled operating environment connecting structured intake, configured assessment, evidence and human authority. The work before the work."], rate: 0.78, pitch: 0.62 };
     default: return null;
   }
 }
 
 function buildCaption(sceneIndex) {
   const captions = {
-    1: "Illustrative workflow view. No STRATA telemetry.",
-    2: "Geographic motif only. Not a customer or coverage map.",
-    3: "Review flags support staff attention. They are not legal decisions.",
-    4: "Intake is where professional judgement begins.",
-    5: "AirCounsel. Structured intake for immigration practices."
+    0: "TENANT ISOLATION · SCOPED PERMISSIONS",
+    1: "UK GDPR DATA CONTROLS · SRA-ALIGNED WORKFLOW",
+    2: "CONFIGURED CRITERIA · RULE PARAMETERS · REVIEW SIGNALS",
+    3: "EVIDENCE · EVENT HISTORY · SUPERVISION",
+    4: "CLASSIFICATION ≠ LEGAL DECISION · HUMAN AUTHORISATION",
+    5: "AIRCOUNSEL · STRATA · INTAKE INFRASTRUCTURE"
   };
   return captions[sceneIndex] || "";
 }
@@ -457,16 +459,20 @@ function playSceneSwellIn() {
 }
 
 function toggleMute() {
-  if (!audioCtx) return;
   isMuted = !isMuted;
   const btn = document.getElementById('mute-btn');
   const wave = document.getElementById('waveViz');
   if (audioCtx && audioCtx.state === 'suspended' && !isMuted) audioCtx.resume().catch(() => {});
   if (masterGain && audioCtx) masterGain.gain.setTargetAtTime(isMuted ? 0 : 0.12, audioCtx.currentTime, 0.12);
-  btn.textContent = isMuted ? '🔇' : '🔊';
-  wave.classList.toggle('paused', isMuted);
+  if (btn) btn.textContent = isMuted ? '🔇' : '🔊';
+  if (wave) wave.classList.toggle('paused', isMuted);
   if (currentVO) isMuted ? currentVO.pause() : currentVO.play().catch(()=>{});
-  if (isMuted) { speechSynthesis.cancel(); _ttsQueue = []; }
+  if (isMuted) {
+    if (typeof speechSynthesis !== 'undefined') speechSynthesis.cancel();
+    _ttsQueue = [];
+  } else {
+    speakAdaptive(currentScene);
+  }
 }
 
 function playVoiceover(sceneIndex) {
@@ -480,7 +486,7 @@ function playVoiceover(sceneIndex) {
     currentVO = audio;
     return;
   }
-  // No MP3 — fire adaptive browser voice
+  // No MP3 — use the fixed browser narration for this scene.
   if (currentVO) { currentVO.pause(); currentVO.currentTime = 0; currentVO = null; }
   speakAdaptive(sceneIndex);
 }
@@ -637,7 +643,7 @@ setInterval(updateDataCol,2000); updateDataCol();
 // ═══════════════════════════════════════════
 const scenes=['s0','s1','s2','s3','s4','s5'];
 let currentScene=0, sceneTimeout;
-const durations=[3800,5200,5200,5200,5800,99999];
+const durations=[12000,14000,14000,14000,14000,99999];
 
 function buildDots() {
   const c=document.getElementById('dots'); c.innerHTML='';
