@@ -347,79 +347,31 @@ const VOICE_FILES = {
 };
 
 // ═══════════════════════════════════════════
-// 🧠 ADAPTIVE VOICE ENGINE
-// Reads live dashboard state and builds lines
-// dynamically — different every run
+// SCRIPTED VOICE GUIDE
+// Narrates the staged demonstration only.
 // ═══════════════════════════════════════════
-const _liveState = {
-  leads: 0, avgScore: 0, anomalies: 0,
-  pipeline: '—', hot: '—', filtered: '—', conversion: '—'
-};
-
-function _readLiveState() {
-  const leadsEl   = document.getElementById('leads-processed');
-  const scoreEl   = document.getElementById('score-live');
-  const anomalyEl = document.getElementById('anomaly-count');
-  const d1 = document.getElementById('d1');
-  const d2 = document.getElementById('d2');
-  const d3 = document.getElementById('d3');
-  const d4 = document.getElementById('d4');
-  _liveState.leads      = leadsEl   ? (parseInt(leadsEl.textContent.replace(/\D/g,''))   || 0) : 0;
-  _liveState.avgScore   = scoreEl   ? (parseInt(scoreEl.textContent.replace(/\D/g,''))   || 0) : 0;
-  _liveState.anomalies  = anomalyEl ? (parseInt(anomalyEl.textContent)                   || 0) : 0;
-  _liveState.pipeline   = d1 ? d1.textContent.trim() : '—';
-  _liveState.hot        = d2 ? d2.textContent.trim() : '—';
-  _liveState.filtered   = d3 ? d3.textContent.trim() : '—';
-  _liveState.conversion = d4 ? d4.textContent.trim() : '—';
-}
-
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
+// Scripted narration for this staged simulation. No live dashboard metrics are read.
 function buildSceneVoice(sceneIndex) {
-  _readLiveState();
-  const s = _liveState;
   switch (sceneIndex) {
     case 0: return null;
-    case 1: {
-      const leadLine  = s.leads > 0 ? `${s.leads} cases processed and scored.` : pick(["Qualification engine active.","Intake protocol running."]);
-      const scoreLine = s.avgScore > 0 ? `Average qualification score: ${s.avgScore}.` : '';
-      const graftLine = pick(["Every enquiry structured against Immigration Rules before it reaches the desk.","Scored. Ranked. Decision-ready.","The engine applies consistent thresholds to every intake."]);
-      return { lines: [graftLine, leadLine, scoreLine].filter(Boolean), rate: 0.82, pitch: 0.70 };
-    }
-    case 2: {
-      const pipeLine  = s.pipeline !== '—' ? `${s.pipeline} cases in the pipeline. ${s.hot} instruction-ready.` : pick(["UK coverage active.","All regions online."]);
-      const convLine  = s.conversion !== '—' ? `Qualification rate holding at ${s.conversion}.` : '';
-      const regionLine = pick(["Starting in Leeds. One qualification standard, applied consistently.","The same structured intake, applied consistently.","Structured from first contact."]);
-      return { lines: [pipeLine, convLine, regionLine].filter(Boolean), rate: 0.86, pitch: 0.72 };
-    }
-    case 3: {
-      const anomLine    = s.anomalies > 0 ? `${s.anomalies} non-viable cases filtered before consultation.` : pick(["Unviable cases removed upstream.","Non-qualifying enquiries filtered at intake."]);
-      const filtLine    = s.filtered !== '—' && s.filtered !== '0' ? `${s.filtered} cases filtered.` : '';
-      const knowingLine = pick(["Unstructured email in. Decision-ready data out.","Intake is where judgment begins. We structure what reaches that moment.","Consistent qualification. Repeatable at scale."]);
-      return { lines: [anomLine, filtLine, knowingLine].filter(Boolean), rate: 0.84, pitch: 0.68 };
-    }
-    case 4: {
-      return { lines: ["Intake is where judgment begins.", "We make the information that reaches that moment structured, complete, and reliable."], rate: 0.72, pitch: 0.60 };
-    }
-    case 5: {
-      const totalLine = s.leads > 0 ? `${s.leads} cases processed this session.` : '';
-      return { lines: [totalLine, "AirCounsel. Intake intelligence for immigration practices."].filter(Boolean), rate: 0.70, pitch: 0.58 };
-    }
+    case 1: return { lines: ["This is an illustrative operating view, not a live system feed.", "It shows how declared intake information can be organised for review."], rate: 0.82, pitch: 0.70 };
+    case 2: return { lines: ["The map is a visual motif only.", "It does not show customer locations, service coverage or deployed firms."], rate: 0.86, pitch: 0.72 };
+    case 3: return { lines: ["Structured information can make missing details and review flags easier to see.", "Any next step remains subject to the firm's policy and authorised review."], rate: 0.84, pitch: 0.68 };
+    case 4: return { lines: ["Intake is where professional judgement begins.", "The system organises information; it does not replace the solicitor's decision."], rate: 0.82, pitch: 0.70 };
+    case 5: return { lines: ["AirCounsel. Structured intake for immigration practices.", "Illustrative animation. Human review retained."], rate: 0.78, pitch: 0.62 };
     default: return null;
   }
 }
 
 function buildCaption(sceneIndex) {
-  _readLiveState();
-  const s = _liveState;
-  switch (sceneIndex) {
-    case 1: return s.leads > 0 ? `"${s.leads} cases scored. Engine running."` : '"Every enquiry structured before it reaches your desk."';
-    case 2: return s.pipeline !== '—' ? `"Pipeline: ${s.pipeline} — ${s.hot} instruction-ready"` : '"One qualification standard. Every practice."';
-    case 3: return s.anomalies > 0 ? `"${s.anomalies} non-viable cases filtered."` : '"Unstructured in. Decision-ready out."';
-    case 4: return '"Intake is where judgment begins."';
-    case 5: return '"AirCounsel — aircounsel.uk"';
-    default: return '';
-  }
+  const captions = {
+    1: "Illustrative workflow view. No STRATA telemetry.",
+    2: "Geographic motif only. Not a customer or coverage map.",
+    3: "Review flags support staff attention. They are not legal decisions.",
+    4: "Intake is where professional judgement begins.",
+    5: "AirCounsel. Structured intake for immigration practices."
+  };
+  return captions[sceneIndex] || "";
 }
 
 // ── TTS SPEAKER (queued lines with breath gaps) ──
@@ -732,7 +684,7 @@ function playVoiceover(sceneIndex) {
 
 function showCaption(sceneIndex) {
   const cap = document.getElementById('caption');
-  // Use adaptive caption that reflects live data
+  // Use the fixed caption associated with the current scene.
   const text = buildCaption(sceneIndex);
   if (!text) { cap.classList.remove('show'); return; }
   // Small delay so it appears as voice starts
