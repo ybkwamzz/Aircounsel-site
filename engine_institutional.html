@@ -336,8 +336,8 @@ No client cases or customer pipeline.</code>
 
 <script>
 // ═══════════════════════════════════════════
-// 🎙️ VOICE FILE SLOTS — optional ElevenLabs overrides per scene
-// Leave commented to use adaptive browser voice
+// VOICE FILE SLOTS — optional recorded audio overrides per scene
+// Leave commented to use the fixed scene narration
 // ═══════════════════════════════════════════
 const VOICE_FILES = {
   // 1: 'scene1_vo.mp3',
@@ -405,8 +405,8 @@ function _runQueue() {
   speechSynthesis.speak(msg);
 }
 
-function speakAdaptive(sceneIndex) {
-  if (isMuted) return;
+function speakSceneNarration(sceneIndex) {
+  if (isMuted || typeof speechSynthesis === 'undefined' || typeof SpeechSynthesisUtterance === 'undefined') return;
   const cfg = buildSceneVoice(sceneIndex);
   if (!cfg) return;
   speechSynthesis.cancel();
@@ -415,7 +415,7 @@ function speakAdaptive(sceneIndex) {
 }
 
 // ═══════════════════════════════════════════
-// WEB AUDIO ENGINE — ambient + SFX (no files needed)
+// WEB AUDIO ENGINE — optional four-note cue (no files needed)
 // ═══════════════════════════════════════════
 let audioCtx, masterGain;
 let audioStarted = false;
@@ -471,7 +471,7 @@ function toggleMute() {
     if (typeof speechSynthesis !== 'undefined') speechSynthesis.cancel();
     _ttsQueue = [];
   } else {
-    speakAdaptive(currentScene);
+    speakSceneNarration(currentScene);
   }
 }
 
@@ -488,7 +488,7 @@ function playVoiceover(sceneIndex) {
   }
   // No MP3 — use the fixed browser narration for this scene.
   if (currentVO) { currentVO.pause(); currentVO.currentTime = 0; currentVO = null; }
-  speakAdaptive(sceneIndex);
+  speakSceneNarration(sceneIndex);
 }
 
 function showCaption(sceneIndex) {
@@ -607,7 +607,7 @@ function drawMap() {
 // LEAD FEED
 // ═══════════════════════════════════════════
 const names=['SKILLED WORKER','SPOUSE VISA','ILR APPLICATION','STUDENT VISA','GRADUATE ROUTE','FAMILY REUNION','PARTNER VISA','INNOVATOR FOUNDER','SKILLED WORKER','SPOUSE VISA','ILR APPLICATION','STUDENT VISA'];
-const statuses=[{label:'INSTRUCTION_READY',cls:'hot',score:92},{label:'INSTRUCTION_READY',cls:'hot',score:88},{label:'NEEDS_DEVELOPMENT',cls:'warm',score:74},{label:'NEEDS_DEVELOPMENT',cls:'warm',score:69},{label:'REVIEW_REQUIRED',cls:'cold',score:31},{label:'INSTRUCTION_READY',cls:'hot',score:95}];
+const statuses=[{label:'REVIEW_READY',cls:'hot',score:92},{label:'REVIEW_READY',cls:'hot',score:88},{label:'NEEDS_DEVELOPMENT',cls:'warm',score:74},{label:'NEEDS_DEVELOPMENT',cls:'warm',score:69},{label:'REVIEW_REQUIRED',cls:'cold',score:31},{label:'REVIEW_READY',cls:'hot',score:95}];
 let leadCount=0,totalScore=0,anomalyCount=0,leadInterval;
 
 function addLead() {
