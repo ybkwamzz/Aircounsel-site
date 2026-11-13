@@ -327,13 +327,30 @@
       inset: 0;
       background: linear-gradient(160deg, #0d1b2a 0%, #162032 50%, #0d1b2a 100%);
     }
-    .hero-video-element {
+    .hero-media-element {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       z-index: 1;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        rgba(11,22,34,0.52) 0%,
+        rgba(11,22,34,0.34) 42%,
+        rgba(11,22,34,0.78) 76%,
+        rgba(11,22,34,0.96) 100%
+      );
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-media-element { display: none; }
     }
     .hero-video-bg::after {
       content: '';
@@ -1170,13 +1187,18 @@
   <!-- ══ §1 — HERO ════════════════════════════════════════════════ -->
   <section id="hero" aria-labelledby="hero-headline">
 
-    <!-- Video background placeholder — replace with actual 8s autoplay muted loop clip -->
+    <!-- Temporary animated hero visual; replace with the approved, optimised brand film when selected. -->
     <div class="hero-bg" aria-hidden="true">
       <div class="hero-video-bg"></div>
-      <!-- MEDIA SLOT: replace the URL below with a direct MP4 asset URL. -->
-      <video class="hero-video-element" autoplay muted loop playsinline preload="metadata" aria-hidden="true" data-aircounsel-media-slot="hero-video">
-        <source src="<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7524115657161015296?compact=1" height="399" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>" type="video/mp4" />
-      </video>
+      <img
+        class="hero-media-element"
+        src="/aircounsel_cinematic_case_review.gif"
+        alt=""
+        aria-hidden="true"
+        fetchpriority="high"
+        decoding="async"
+        data-aircounsel-media-slot="hero-gif"
+      />
     </div>
     <div class="hero-bg-lines" aria-hidden="true"></div>
 
@@ -1321,13 +1343,14 @@
         </p>
       </div>
 
-      <!-- MEDIA SLOT: replace the URL below with a direct GIF or animated WebP URL. -->
+      <!-- Supporting filtering animation, served from the site's existing media assets. -->
       <figure class="solution-gif fade-up delay-2" aria-label="AirCounsel filtering animation">
         <img
           class="solution-gif-media"
-          src="PASTE_FILTERING_GIF_URL_HERE"
-          alt="Illustration of AirCounsel structuring enquiry information and surfacing operational signals for staff review"
+          src="/filtering_v2.gif"
+          alt="Animation showing AirCounsel organising enquiry information and surfacing operational signals for staff review"
           loading="lazy"
+          decoding="async"
           data-aircounsel-media-slot="filtering-animation"
         />
       </figure>
