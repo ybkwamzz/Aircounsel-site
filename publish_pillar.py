@@ -13,45 +13,91 @@ TEMPLATE = """<!DOCTYPE html>
 <title>{title} | AirCounsel Institutional Research</title>
 <meta name="description" content="{summary}">
 <link rel="canonical" href="{site_url}/{slug}.html">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{summary}">
+<meta property="og:image" content="{site_url}/og/{slug}.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 {{
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "{title}",
   "description": "{summary}",
-  "author": {{"@type": "Organization", "name": "AirCounsel STRATA Research"}},
+  "author": {{"@type": "Organization", "name": "AirCounsel Institutional Research"}},
   "publisher": {{"@type": "Organization", "name": "AirCounsel", "url": "{site_url}"}},
   "datePublished": "{date_iso}"
 }}
 </script>
 <style>
-  body {{ background:#07070F; color:#F3EFE6; font-family:ui-sans-serif,system-ui,sans-serif; margin:0; padding:48px 24px; line-height:1.75; }}
-  .wrap {{ max-width:820px; margin:0 auto; }}
-  .kicker {{ font-family:monospace; color:#C6A86A; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; }}
-  h1 {{ font-size:32px; line-height:1.25; margin:10px 0 16px; color:#FFFFFF; }}
-  .meta {{ font-family:monospace; font-size:12px; color:#9AA3B5; border-bottom:1px solid #1E293B; padding-bottom:18px; margin-bottom:28px; }}
-  h2 {{ color:#DFC288; font-size:21px; margin-top:34px; }}
-  p, li {{ color:#CBD5E1; font-size:16px; }}
-  .cta-box {{ background:#101520; border:1px solid rgba(198,168,106,0.35); border-radius:10px; padding:24px; margin-top:40px; }}
-  .btn {{ display:inline-block; background:#C6A86A; color:#07080E; font-weight:700; text-decoration:none; padding:11px 18px; border-radius:6px; font-size:13px; margin-right:10px; margin-top:10px; }}
-  .btn-sec {{ display:inline-block; border:1px solid #C6A86A; color:#DFC288; text-decoration:none; padding:11px 18px; border-radius:6px; font-size:13px; margin-top:10px; }}
+  :root {{
+    --paper: #FAF8F5;
+    --card: #FFFFFF;
+    --navy: #161E2E;
+    --body: #2C3444;
+    --muted: #5A6475;
+    --stone: #D8D3C8;
+    --stone-bg: #F1EFEA;
+    --bronze: #8C6D3F;
+  }}
+  * {{ box-sizing: border-box; }}
+  body {{ background: var(--paper); color: var(--body); font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; line-height: 1.78; }}
+  .topbar-inst {{ background: var(--navy); color: #F3EFE6; padding: 14px 28px; font-size: 12px; font-family: ui-monospace, monospace; letter-spacing: 0.08em; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--bronze); }}
+  .topbar-inst a {{ color: #DFC288; text-decoration: none; margin-left: 18px; }}
+  .wrap {{ max-width: 820px; margin: 0 auto; padding: 38px 24px 84px; }}
+  .breadcrumbs {{ font-size: 13px; color: var(--muted); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--stone); }}
+  .breadcrumbs a {{ color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }}
+  .kicker {{ font-family: ui-monospace, monospace; color: var(--bronze); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }}
+  h1 {{ font-size: 33px; line-height: 1.22; margin: 10px 0 16px; color: var(--navy); letter-spacing: -0.02em; }}
+  .meta {{ font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); background: var(--stone-bg); border: 1px solid var(--stone); padding: 12px 16px; margin-bottom: 32px; }}
+  h2 {{ color: var(--navy); font-size: 21px; margin-top: 38px; margin-bottom: 12px; border-bottom: 1px solid var(--stone); padding-bottom: 6px; }}
+  p, li {{ color: var(--body); font-size: 16px; margin-bottom: 16px; }}
+  blockquote {{ margin: 24px 0; padding: 16px 20px; background: var(--card); border-left: 4px solid var(--navy); border-top: 1px solid var(--stone); border-right: 1px solid var(--stone); border-bottom: 1px solid var(--stone); font-style: italic; color: var(--navy); }}
+  table {{ width: 100%; border-collapse: collapse; margin: 22px 0; background: var(--card); font-size: 14px; }}
+  th, td {{ border: 1px solid var(--stone); padding: 11px 14px; text-align: left; }}
+  th {{ background: var(--stone-bg); color: var(--navy); }}
+  .routing-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--stone); }}
+  .route-card {{ background: var(--card); border: 1px solid var(--stone); border-top: 3px solid var(--navy); padding: 18px; }}
+  .route-card h4 {{ margin: 0 0 6px; color: var(--navy); font-size: 15px; }}
+  .route-card p {{ margin: 0 0 10px; font-size: 13.5px; color: var(--muted); line-height: 1.5; }}
+  .route-card a {{ color: var(--navy); font-size: 13.5px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="kicker">{pillar_category} // INSTITUTIONAL BRIEFING</div>
-  <h1>{title}</h1>
-  <div class="meta">PUBLISHED: {date_iso} &nbsp;·&nbsp; AUDIENCE: {audience} &nbsp;·&nbsp; VERIFIED BY AIRCOUNSEL STRATA™</div>
-  <article>{body_html}</article>
-  <div class="cta-box">
-    <div class="kicker">DETERMINISTIC QUALIFICATION &amp; EVIDENCE INFRASTRUCTURE</div>
-    <h3 style="margin:6px 0 8px;color:#FFF">Explore the Live STRATA V5.0 System</h3>
-    <p style="margin:0 0 12px;font-size:14px">Whether you are a UK legal practice auditing case readiness or an applicant verifying route eligibility across 6 deterministic gates:</p>
-    <a class="btn" href="/intake.html">Applicants: Run 6-Gate Eligibility Check →</a>
-    <a class="btn-sec" href="{workspace_url}">Solicitors: Open V5.0 Operator Workspace →</a>
-    <a class="btn-sec" href="/insights.html">All Research Briefings →</a>
+<header class="topbar-inst">
+  <span>AIRCOUNSEL // INSTITUTIONAL RESEARCH &amp; PRACTICE GOVERNANCE</span>
+  <div>
+    <a href="/insights.html">Research Index</a>
+    <a href="{workspace_url}">V5.0 Workspace</a>
+    <a href="https://aircounsel-strata-core-production.up.railway.app/specsheet">Technical Specsheet</a>
   </div>
-</div>
+</header>
+<main class="wrap">
+  <nav class="breadcrumbs">
+    <a href="/">Home</a> &rsaquo; <a href="/insights.html">Institutional Research</a> &rsaquo; {pillar_category}
+  </nav>
+  <div class="kicker">{pillar_category}</div>
+  <h1>{title}</h1>
+  <div class="meta">PUBLISHED: {date_iso} &nbsp;&middot;&nbsp; AUDIENCE: {audience} &nbsp;&middot;&nbsp; PAPER REF: AC-RES-2026</div>
+  <article>{body_html}</article>
+  <section class="routing-grid">
+    <div class="route-card">
+      <h4>Technical &amp; GDPR Specsheet</h4>
+      <p>Examine the 3-Axis Document FSM, Golden Matrix permissions, and OpenAPI 3.1 contract.</p>
+      <a href="https://aircounsel-strata-core-production.up.railway.app/specsheet">Read Specsheet &rarr;</a>
+    </div>
+    <div class="route-card">
+      <h4>Practice Workspace (V5.0)</h4>
+      <p>Inspect the synthetic Matter Register, Evidence Pipeline V2, and Sharded HMAC Audit Outbox.</p>
+      <a href="{workspace_url}">Open Workspace &rarr;</a>
+    </div>
+    <div class="route-card">
+      <h4>6-Gate Route Readiness</h4>
+      <p>Structured pre-consultation verification across UK Skilled Worker and Family routes.</p>
+      <a href="/intake.html">View Intake Gate &rarr;</a>
+    </div>
+  </section>
+</main>
 </body>
 </html>"""
 
@@ -94,14 +140,14 @@ def rebuild_insights_and_sitemap(published):
     cards = ""
     for item in published:
         cards += f"""
-        <div style="background:#101520;border:1px solid rgba(198,168,106,0.25);border-radius:10px;padding:22px;margin-bottom:18px">
+        <div style="background:#FFFFFF;border:1px solid #D8D3C8;border-top:3px solid #161E2E;border-radius:10px;padding:22px;margin-bottom:18px">
           <div style="font-family:monospace;color:#C6A86A;font-size:11px">{item['pillar_category']} · {item['date_iso']} · {item['audience']}</div>
-          <h2 style="margin:6px 0 8px;font-size:20px"><a href="/{item['slug']}.html" style="color:#FFF;text-decoration:none">{item['title']}</a></h2>
-          <p style="margin:0 0 12px;color:#9AA3B5;font-size:14px">{item['summary']}</p>
-          <a href="/{item['slug']}.html" style="color:#DFC288;font-family:monospace;font-size:12px;text-decoration:none">Read Full Briefing →</a>
+          <h2 style="margin:6px 0 8px;font-size:20px"><a href="/{item['slug']}.html" style="color:#161E2E;text-decoration:none">{item['title']}</a></h2>
+          <p style="margin:0 0 12px;color:#2C3444;font-size:14.5px">{item['summary']}</p>
+          <a href="/{item['slug']}.html" style="color:#161E2E;font-weight:600;font-family:monospace;font-size:12px;text-decoration:none">Read Full Briefing →</a>
         </div>"""
     insights_html = f"""<!DOCTYPE html><html><head><meta charset="utf-8"><title>AirCounsel // Institutional Research &amp; Immigration Briefings</title>
-    <style>body{{background:#07070F;color:#F3EFE6;font-family:sans-serif;padding:48px 24px;max-width:880px;margin:0 auto}}</style></head>
+    <style>body{{background:#FAF8F5;color:#2C3444;font-family:sans-serif;padding:48px 24px;max-width:880px;margin:0 auto}}</style></head>
     <body><div style="font-family:monospace;color:#C6A86A;font-size:12px">AIRCOUNSEL STRATA™ // RESEARCH HUB</div>
     <h1>Institutional Legal-Tech &amp; UK Immigration Briefings</h1>{cards}</body></html>"""
     Path("insights.html").write_text(insights_html, encoding="utf-8")
