@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Engine — Lead Intelligence</title>
+<title>The Engine | Lead Intelligence</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Unbounded:wght@200;400;700;900&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -235,7 +235,7 @@ No client cases or customer pipeline.</code>
 </div>
 <div class="hud bl">
   <span>SIGNAL STRONG</span>
-  <span id="score-live">SAMPLE SCORE: —</span>
+  <span id="score-live">SAMPLE SCORE: : </span>
 </div>
 <div class="hud br">
   <span>SIMULATED VIEW</span>
@@ -244,10 +244,10 @@ No client cases or customer pipeline.</code>
 
 <div class="lead-feed" id="leadFeed"></div>
 <div class="data-col" id="dataCol">
-  <div class="data-line">SAMPLE PIPELINE <span class="val" id="d1">—</span></div>
-  <div class="data-line">SAMPLE PRIORITY <span class="val" id="d2">—</span></div>
-  <div class="data-line">SAMPLE REVIEW <span class="val" id="d3">—</span></div>
-  <div class="data-line">SAMPLE MIX <span class="val" id="d4">—</span></div>
+  <div class="data-line">SAMPLE PIPELINE <span class="val" id="d1">: </span></div>
+  <div class="data-line">SAMPLE PRIORITY <span class="val" id="d2">: </span></div>
+  <div class="data-line">SAMPLE REVIEW <span class="val" id="d3">: </span></div>
+  <div class="data-line">SAMPLE MIX <span class="val" id="d4">: </span></div>
   <div class="data-line">ORIGIN <span class="val">LEEDS</span></div>
   <div class="data-line">STATUS <span class="val" style="color:var(--volt)">SIMULATED</span></div>
 </div>
@@ -336,7 +336,7 @@ No client cases or customer pipeline.</code>
 
 <script>
 // ═══════════════════════════════════════════
-// VOICE FILE SLOTS — optional recorded audio overrides per scene
+// VOICE FILE SLOTS: optional recorded audio overrides per scene
 // Leave commented to use the fixed scene narration
 // ═══════════════════════════════════════════
 const VOICE_FILES = {
@@ -415,7 +415,7 @@ function speakSceneNarration(sceneIndex) {
 }
 
 // ═══════════════════════════════════════════
-// WEB AUDIO ENGINE — optional four-note cue (no files needed)
+// WEB AUDIO ENGINE: optional four-note cue (no files needed)
 // ═══════════════════════════════════════════
 let audioCtx, masterGain;
 let audioStarted = false;
@@ -486,7 +486,7 @@ function playVoiceover(sceneIndex) {
     currentVO = audio;
     return;
   }
-  // No MP3 — use the fixed browser narration for this scene.
+  // No MP3: use the fixed browser narration for this scene.
   if (currentVO) { currentVO.pause(); currentVO.currentTime = 0; currentVO = null; }
   speakSceneNarration(sceneIndex);
 }

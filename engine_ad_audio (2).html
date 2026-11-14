@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>AirCounsel — Intake Intelligence</title>
+<title>AirCounsel | Intake Intelligence</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&display=swap');
 
@@ -294,7 +294,7 @@
     color: var(--text);
   }
 
-  /* Risk select — coloured */
+  /* Risk select: coloured */
   select.risk-select { color: var(--text); }
   select.risk-select[data-val="low"]    { border-color: var(--ok);   color: var(--ok); }
   select.risk-select[data-val="medium"] { border-color: var(--warn); color: var(--warn); }
@@ -561,7 +561,7 @@
         <div class="field">
           <label>Current Visa Status</label>
           <select id="f-visaType">
-            <option value="">— Select —</option>
+            <option value="">:  Select : </option>
             <option value="Skilled Worker">Skilled Worker</option>
             <option value="Student">Student</option>
             <option value="Visitor">Visitor</option>
@@ -574,7 +574,7 @@
         <div class="field">
           <label>Risk Level</label>
           <select id="f-risk" class="risk-select" data-val="" onchange="updateRiskColour(this)">
-            <option value="">— Assess —</option>
+            <option value="">:  Assess : </option>
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
@@ -594,7 +594,7 @@
           <label>Employment Offer in UK</label>
           <div class="toggle-row" onclick="toggleJobOffer(this)">
             <div class="toggle" id="jobToggle"></div>
-            <span class="toggle-label" id="jobLabel">No — client has no job offer</span>
+            <span class="toggle-label" id="jobLabel">No: client has no job offer</span>
           </div>
         </div>
 
@@ -627,8 +627,8 @@
 
     <!-- OUTCOME CARD -->
     <div class="outcome-card" id="outcomeCard">
-      <div class="outcome-route" id="outcomeRoute">—</div>
-      <div class="outcome-sub" id="outcomeSub">—</div>
+      <div class="outcome-route" id="outcomeRoute">: </div>
+      <div class="outcome-sub" id="outcomeSub">: </div>
       <div class="outcome-badges" id="outcomeBadges"></div>
     </div>
 
@@ -636,14 +636,14 @@
 
   <footer>
     <span>AirCounsel Systems</span>
-    <span id="footerTime">—</span>
+    <span id="footerTime">: </span>
     <span>Adaptive Engine</span>
   </footer>
 
 </div>
 
 <!-- ═══════════════════════════════════════════════
-     ADAPTIVE VOICE + INTAKE ENGINE — NO IMPORTS
+     ADAPTIVE VOICE + INTAKE ENGINE: NO IMPORTS
      ═══════════════════════════════════════════════ -->
 <script id="aircounsel-core">
 (function () {
@@ -776,8 +776,8 @@
     const label  = document.getElementById('jobLabel');
     toggle.classList.toggle('on', _jobOffer);
     label.textContent = _jobOffer
-      ? 'Yes — confirmed UK job offer'
-      : 'No — client has no job offer';
+      ? 'Yes: confirmed UK job offer'
+      : 'No: client has no job offer';
   };
 
   /* ── PROFILE EVALUATOR ── */
@@ -871,11 +871,11 @@
     }
 
     if (data.risk === 'high') {
-      entries.push({ msg: '> RISK FLAG: HIGH — escalate for review', style: 'danger', d });
+      entries.push({ msg: '> RISK FLAG: HIGH: escalate for review', style: 'danger', d });
     } else if (data.risk === 'medium') {
-      entries.push({ msg: '> RISK FLAG: MEDIUM — monitor conditions', style: 'warn', d });
+      entries.push({ msg: '> RISK FLAG: MEDIUM: monitor conditions', style: 'warn', d });
     } else if (data.risk === 'low') {
-      entries.push({ msg: '> RISK FLAG: LOW — proceed', style: 'ok', d });
+      entries.push({ msg: '> RISK FLAG: LOW: proceed', style: 'ok', d });
     }
     d += 600;
 
@@ -907,7 +907,7 @@
 
     if (data.hasJobOffer && data.visaType === 'Skilled Worker' && data.documents === 'complete') {
       return {
-        route:  'Skilled Worker Route — Strong Viability',
+        route:  'Skilled Worker Route: Strong Viability',
         sub:    'Employment sponsorship confirmed. Documentation complete. Pathway clear for application.',
         voice:  'Skilled worker route viable. Proceed to application.',
         badges: [
@@ -920,7 +920,7 @@
 
     if (data.hasJobOffer) {
       return {
-        route:  'Skilled Worker Route — Conditional',
+        route:  'Skilled Worker Route: Conditional',
         sub:    'Employment signal detected. Further document verification or sponsor check required.',
         voice:  'Skilled worker pathway identified. Conditional on documentation.',
         badges: [
@@ -932,7 +932,7 @@
 
     if (data.visaType === 'Student') {
       return {
-        route:  'Student Route — Assess Conditions',
+        route:  'Student Route: Assess Conditions',
         sub:    'Student pathway under review. Sponsor confirmation and CAS number required.',
         voice:  'Student route under review. Sponsor confirmation required.',
         badges: [
@@ -944,7 +944,7 @@
 
     if (data.visaType === 'Asylum') {
       return {
-        route:  'Protection Pathway — Specialist Assessment',
+        route:  'Protection Pathway: Specialist Assessment',
         sub:    'Asylum claim indicated. Refer to specialist protection team for full assessment.',
         voice:  'Protection pathway indicated. Specialist assessment required.',
         badges: [

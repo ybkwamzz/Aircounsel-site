@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prepare Before Your Consultation — Structured UK Immigration Enquiry Preparation | AirCounsel</title>
+<title>Prepare Before Your Consultation | Structured UK Immigration Enquiry Preparation | AirCounsel</title>
 <meta name="description" content="Organise your UK immigration chronology, key dates, and document checklist before approaching an SRA or IAA authorised professional.">
 <style>
   :root { --paper:#FAF8F5; --card:#FFFFFF; --navy:#161E2E; --body:#2C3444; --muted:#5A6475; --stone:#D8D3C8; --stone-bg:#F1EFEA; --bronze:#8C6D3F; --green:#1E7E52; }
@@ -51,7 +51,7 @@
 
   <!-- STEP 01 -->
   <section class="step-card">
-    <div class="step-num">STEP 01 — SUBJECT &amp; CONFLICT-SHIELD HEADER</div>
+    <div class="step-num">STEP 01: SUBJECT &amp; CONFLICT-SHIELD HEADER</div>
     <h2>What do you need help preparing for?</h2>
     <label>Your Full Name (or Sponsoring Company Name)</label>
     <input id="pName" placeholder="e.g. Dr. Amina Al-Hassan or Meridian BioLabs UK Ltd">
@@ -68,7 +68,7 @@
 
   <!-- STEP 02 -->
   <section class="step-card">
-    <div class="step-num">STEP 02 — ORGANISE YOUR DATES &amp; AVAILABLE DOCUMENTS</div>
+    <div class="step-num">STEP 02: ORGANISE YOUR DATES &amp; AVAILABLE DOCUMENTS</div>
     <h2>Important dates &amp; document readiness checklist</h2>
     <p style="font-size:13.5px;color:var(--muted);margin-top:0">Data Minimisation Notice: Do not upload raw passport scans on this page. Simply tick which documents you currently have ready to show your chosen solicitor.</p>
     <label>Current Visa Expiry Date or Target Travel/Start Date</label>
@@ -94,7 +94,7 @@
 
   <!-- STEP 03 & 04 -->
   <section class="step-card">
-    <div class="step-num">STEP 03 &amp; 04 — GENERATE PREPARATION RECORD &amp; CONTROLLED ROUTING CONSENT</div>
+    <div class="step-num">STEP 03 &amp; 04: GENERATE PREPARATION RECORD &amp; CONTROLLED ROUTING CONSENT</div>
     <h2>Review &amp; choose how to use your preparation record</h2>
     <label class="chk-item" style="background:#FFF;border:1px solid var(--stone)">
       <input type="checkbox" id="pMandate" checked>
@@ -146,8 +146,8 @@ document.getElementById('genRecordBtn').onclick = async () => {
   const box = document.getElementById('recordOutput');
   box.style.display = 'block';
   box.innerHTML = `
-    <div class="kicker">STEP 03 — YOUR FACTUAL PREPARATION RECORD (REF: ${enqId})</div>
-    <h3 style="margin:6px 0 12px;color:var(--navy)">Structured Consultation Summary — Ready for Authorised Practitioner Review</h3>
+    <div class="kicker">STEP 03: YOUR FACTUAL PREPARATION RECORD (REF: ${enqId})</div>
+    <h3 style="margin:6px 0 12px;color:var(--navy)">Structured Consultation Summary: Ready for Authorised Practitioner Review</h3>
     <p style="font-size:13.5px;margin:4px 0"><strong>Applicant / Entity:</strong> ${name} &nbsp;|&nbsp; <strong>Category:</strong> ${route} &nbsp;|&nbsp; <strong>Timeline:</strong> ${urgency}</p>
     <p style="font-size:13.5px;margin:4px 0"><strong>Conflict-Check Counterparty / Sponsor:</strong> ${sponsor}</p>
     <p style="font-size:13.5px;margin:8px 0 4px"><strong>Documents Confirmed Ready (${checked.length}):</strong> ${checked.join(' · ') || 'None ticked'}</p>
