@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8">
+    <title>Contact Us, Error Resolution &amp; Institutional Support | AirCounsel STRATA™</title>
+    <style>
+      :root { --paper:#FAF8F5; --card:#FFFFFF; --navy:#161E2E; --body:#2C3444; --muted:#5A6475; --stone:#D8D3C8; --stone-bg:#F1EFEA; --bronze:#8C6D3F; }
+      * { box-sizing:border-box; }
+      body { background:var(--paper); color:var(--body); font-family:ui-sans-serif,system-ui,sans-serif; margin:0; line-height:1.68; }
+      .topbar { background:var(--navy); color:#F3EFE6; padding:14px 28px; font-size:12px; font-family:ui-monospace,monospace; display:flex; justify-content:space-between; border-bottom:2px solid var(--bronze); }
+      .topbar a { color:#DFC288; text-decoration:none; margin-left:18px; }
+      .wrap { max-width:1040px; margin:0 auto; padding:36px 28px 80px; }
+      .breadcrumbs { font-size:13px; color:var(--muted); margin-bottom:24px; padding-bottom:12px; border-bottom:1px solid var(--stone); }
+      .breadcrumbs a { color:var(--navy); text-decoration:underline; }
+      h1 { color:var(--navy); font-size:32px; margin:8px 0 12px; }
+      h2 { color:var(--navy); font-size:21px; border-bottom:1px solid var(--stone); padding-bottom:8px; margin-top:42px; }
+      .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin:20px 0; }
+      .card { background:var(--card); border:1px solid var(--stone); border-top:3px solid var(--navy); padding:18px 20px; }
+      .card h3 { margin:0 0 6px; color:var(--navy); font-size:15.5px; }
+      .card p { margin:0; font-size:13.5px; color:var(--muted); }
+      table { width:100%; border-collapse:collapse; background:var(--card); margin-top:14px; }
+      th,td { border:1px solid var(--stone); padding:12px 14px; text-align:left; vertical-align:top; }
+      th { background:var(--stone-bg); color:var(--navy); font-size:13.5px; }
+      code { font-family:ui-monospace,monospace; background:var(--stone-bg); color:var(--navy); padding:2px 6px; border-radius:3px; font-weight:700; }
+      input,select,textarea { width:100%; padding:10px 12px; border:1px solid var(--stone); border-radius:4px; font-size:14px; margin-top:6px; background:#FFF; }
+      button { background:var(--navy); color:#FFF; border:none; padding:12px 20px; border-radius:4px; font-weight:700; cursor:pointer; margin-top:14px; }
+    </style></head><body>
+    <header class="topbar">
+      <span>AIRCOUNSEL STRATA™ // CONTACT, ERROR RESOLUTION &amp; INSTITUTIONAL GUIDANCE</span>
+      <div><a href="/workspace.html">V5.0 Workspace</a><a href="/specsheet.html">Specsheet</a><a href="/onboard.html">Onboarding</a></div>
+    </header>
+    <main class="wrap">
+      <nav class="breadcrumbs"><a href="https://aircounsel.uk">Home</a> &rsaquo; <a href="/">Institutional Core</a> &rsaquo; Contact Us &amp; Error Resolution Directory</nav>
+      <h1>Contact Us, Error Resolution &amp; Operational Guidance</h1>
+      <p>How to resolve system status codes, verify regulatory boundaries, or contact the appropriate AirCounsel team.</p>
+
+      <h2>1. Who to Contact by Subject (UKRI-Style Routing Directory)</h2>
+      <div class="grid">
+        <div class="card"><h3>Applicants &amp; Preparation</h3><p>Questions regarding your Factual Enquiry Preparation Record, revoking practice access, or selecting a backup firm.</p></div>
+        <div class="card"><h3>SRA &amp; IAA Practices</h3><p>Onboarding verification, joining the Authorised Provider Panel, designated practitioner presence, and COLP audits.</p></div>
+        <div class="card"><h3>Data Protection &amp; Security</h3><p>UK GDPR Article 28 enquiries, special-category data minimisation, and 24-hour security incident reporting.</p></div>
+        <div class="card"><h3>Technical &amp; OpenAPI</h3><p>Webhook signatures, sandbox API keys, and deterministic state-machine integration support.</p></div>
+      </div>
+
+      <h2>2. Directive Error Code Reference Manual (What Went Wrong &amp; How to Fix It)</h2>
+      <p>Every operational block in AirCounsel STRATA returns a deterministic reference code so applicants and practitioners know the exact corrective step:</p>
+      <table>
+        <thead><tr><th style="width:150px">Error Code</th><th style="width:38%">Cause &amp; Operational Context</th><th>Directive Action (What To Do Now)</th></tr></thead>
+        <tbody>
+        <tr id="AC-ERR-101">
+          <td><code>AC-ERR-101</code><br><span style="font-size:11.5px;color:#5A6475">Applicant</span></td>
+          <td><strong>Enquiry Preparation Mandate Unsigned (CONTRACT-PUB-01)</strong><br><span style="font-size:13.5px;color:#2C3444">You attempted to route a Preparation Record to a practice before confirming the Non-Advice & Data-Sharing Consent Mandate.</span></td>
+          <td style="background:#F8FAF9;border-left:3px solid #161E2E;font-size:13.5px"><strong>What to do:</strong> Tick the 'Confirm Factual Preparation & Single-Practice Sharing Consent' box in Step 04 and click Route Record again.</td>
+        </tr>
+        <tr id="AC-ERR-102">
+          <td><code>AC-ERR-102</code><br><span style="font-size:11.5px;color:#5A6475">Applicant</span></td>
+          <td><strong>Input Blocked by 55-Gate Security Sanitiser</strong><br><span style="font-size:13.5px;color:#2C3444">A text field in your enquiry contained formatting characters resembling code, scripts, or external server links.</span></td>
+          <td style="background:#F8FAF9;border-left:3px solid #161E2E;font-size:13.5px"><strong>What to do:</strong> Remove any URLs, angle brackets (< >), or code symbols from your free-text chronology and resubmit.</td>
+        </tr>
+        <tr id="AC-ERR-201">
+          <td><code>AC-ERR-201</code><br><span style="font-size:11.5px;color:#5A6475">Solicitor / Practice</span></td>
+          <td><strong>Practice Regulator Licence or Liability Contracts Pending</strong><br><span style="font-size:13.5px;color:#2C3444">Your practice is currently in Synthetic Sandbox Mode because SRA/IAA register verification or CONTRACT-FIRM-01 / CONTRACT-DPA-01 signature is incomplete.</span></td>
+          <td style="background:#F8FAF9;border-left:3px solid #161E2E;font-size:13.5px"><strong>What to do:</strong> Complete SRA/IAA licence verification and sign both canonical agreements via /onboard or POST /api/v1/contracts/sign.</td>
+        </tr>
+        <tr id="AC-ERR-202">
+          <td><code>AC-ERR-202</code><br><span style="font-size:11.5px;color:#5A6475">Solicitor / Practice</span></td>
+          <td><strong>Golden Matrix Role Capability Denied (Propose-Only / Read-Only Actor)</strong><br><span style="font-size:13.5px;color:#2C3444">An LLM Agent (ActorKind.LLM_AGENT), Coordinator, or Read-Only Auditor attempted to attest or release client evidence.</span></td>
+          <td style="background:#F8FAF9;border-left:3px solid #161E2E;font-size:13.5px"><strong>What to do:</strong> Switch your active Principal in the workspace topbar to SOLICITOR (fee_earner) or PARTNER (senior_reviewer) before attesting evidence.</td>
+        </tr>
+        <tr id="AC-ERR-301">
+          <td><code>AC-ERR-301</code><br><span style="font-size:11.5px;color:#5A6475">Solicitor / Practice</span></td>
+          <td><strong>Supersession Sign-Off Invalidation</strong><br><span style="font-size:13.5px;color:#2C3444">A newer document version (v2) was uploaded after v1 was approved, automatically invalidating v1's attestation.</span></td>
+          <td style="background:#F8FAF9;border-left:3px solid #161E2E;font-size:13.5px"><strong>What to do:</strong> Open the 3-Axis Split-Pane Inspector on the latest version (v2) and record a fresh byte-pinned SHA-256 attestation.</td>
+        </tr>
+        <tr id="AC-ERR-302">
+          <td><code>AC-ERR-302</code><br><span style="font-size:11.5px;color:#5A6475">Solicitor / Practice</span></td>
+          <td><strong>UK GDPR Article 9 / Privilege Precondition Unresolved at Handoff</strong><br><span style="font-size:13.5px;color:#2C3444">Supervision handoff was attempted while Special-Category Data had art9_condition set to NONE_REQUIRED or Privilege set to PENDING.</span></td>
+          <td style="background:#F8FAF9;border-left:3px solid #161E2E;font-size:13.5px"><strong>What to do:</strong> Select a valid UK GDPR Article 9(2) condition (e.g., Legal Claims) and complete the Legal Professional Privilege review before handoff.</td>
+        </tr>
+        <tr id="AC-ERR-401">
+          <td><code>AC-ERR-401</code><br><span style="font-size:11.5px;color:#5A6475">Both (Applicant & Practice)</span></td>
+          <td><strong>Primary Practice Declined (Conflict or Capacity) | Access Revoked</strong><br><span style="font-size:13.5px;color:#2C3444">The selected practice declined the introduction due to a conflict of interest or capacity limit. Their access token has been permanently revoked.</span></td>
+          <td style="background:#F8FAF9;border-left:3px solid #161E2E;font-size:13.5px"><strong>What to do:</strong> If you pre-selected a Backup Practice, your record has already been routed to Choice #2 automatically. Otherwise, select another online practice.</td>
+        </tr></tbody>
+      </table>
+
+      <h2>3. Log a Direct Enquiry or Request Assistance</h2>
+      <div class="card" style="max-width:640px;margin-top:16px">
+        <label style="font-size:13px;font-weight:700;color:var(--navy)">Your Role</label>
+        <select id="sRole"><option value="APPLICANT">Individual / Sponsor Preparing an Enquiry</option><option value="SRA_IAA_PRACTICE">SRA / IAA Regulated Practice or Solicitor</option><option value="AUDITOR_TECH">COLP / Technical Auditor</option></select>
+        <label style="font-size:13px;font-weight:700;color:var(--navy);display:block;margin-top:12px">Contact Email or LinkedIn URL</label>
+        <input id="sEmail" placeholder="name@practice.co.uk">
+        <label style="font-size:13px;font-weight:700;color:var(--navy);display:block;margin-top:12px">Related Error Code (Optional)</label>
+        <input id="sErr" placeholder="e.g. AC-ERR-201 or General Enquiry">
+        <label style="font-size:13px;font-weight:700;color:var(--navy);display:block;margin-top:12px">How can we assist?</label>
+        <textarea id="sMsg" rows="4" placeholder="Describe your question or concern..."></textarea>
+        <button id="sBtn">Submit Recorded Enquiry &rarr;</button>
+        <div id="sOut" style="margin-top:12px;font-family:ui-monospace,monospace;font-size:13px;color:var(--navy)"></div>
+      </div>
+    </main>
+    <script>
+      document.getElementById('sBtn').onclick = async () => {
+        const r = await fetch('https://aircounsel-strata-core-production.up.railway.app/api/v1/public/support-ticket', {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({
+            actor_role: document.getElementById('sRole').value,
+            email_or_contact: document.getElementById('sEmail').value || 'unprovided',
+            error_code_ref: document.getElementById('sErr').value || 'NONE',
+            message: document.getElementById('sMsg').value || 'Enquiry'
+          })
+        });
+        const d = await r.json();
+        document.getElementById('sOut').textContent = '✓ Recorded: Reference ' + d.ticket_id + ' (' + d.sla + ')';
+      };
+    </script></body></html>

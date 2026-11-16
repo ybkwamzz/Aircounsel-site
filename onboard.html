@@ -1,0 +1,67 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><title>AirCounsel STRATA™ // Zero-Call Self-Serve Onboarding</title>
+    <style>
+      body{background:#07080E;color:#F3EFE6;font-family:ui-sans-serif,system-ui,sans-serif;padding:42px 24px;max-width:760px;margin:0 auto;line-height:1.6}
+      .kicker{font-family:monospace;color:#C6A86A;font-size:12px;letter-spacing:0.14em;text-transform:uppercase}
+      .card{background:#101520;border:1px solid rgba(198,168,106,0.3);border-radius:10px;padding:28px;margin-top:20px;box-shadow:0 16px 40px rgba(0,0,0,0.5)}
+      label{display:block;font-size:12px;font-family:monospace;color:#DFC288;margin:14px 0 6px;text-transform:uppercase}
+      input,select{width:100%;padding:11px 12px;background:#0B0E16;border:1px solid #1E293B;border-radius:6px;color:#FFF;font-size:14px;box-sizing:border-box}
+      button{margin-top:22px;width:100%;padding:13px;background:#C6A86A;color:#07080E;border:none;border-radius:6px;font-weight:700;font-size:14px;cursor:pointer}
+      pre{background:#0B0E16;border:1px solid #2FB37D;padding:14px;border-radius:6px;color:#2FB37D;overflow-x:auto;font-size:12.5px}
+    </style></head><body>
+    <div class='kicker'>AUTONOMOUS TENANT PROVISIONING · ZERO MEETINGS REQUIRED</div>
+    <h1 style='margin:6px 0 8px'>AirCounsel STRATA™ | Instant Self-Serve Onboarding</h1>
+    <p style='color:#9AA3B5;font-size:14px'>Provision your firm's isolated V5.0 tenant, API key, and 6-gate intake widget in 30 seconds. Human calls are only required if your practice uses a bespoke legacy on-premise database.</p>
+    <div class='card'>
+      <label>1. Practice / Corporate Legal Name</label>
+      <input id='fn' placeholder='e.g. Chancery Gate Chambers LLP (Synthetic Demo)' value=''>
+      <label>2. Companies House / SRA Registration Number</label>
+      <input id='rn' placeholder='e.g. 00000000'>
+      <label>3. Practitioner Notification Email</label>
+      <input id='em' type='email' placeholder='partner@firm.co.uk'>
+      <label>4. Provisioning Tier</label>
+      <select id='tr'>
+        <option value='14_DAY_FREE_PILOT'>14-Day Free Autonomous Pilot (Full 6-Gate + V2 Evidence Access)</option>
+        <option value='STARTER_500'>Starter Institutional Retainer (£500/mo | Up to 50 enquiries/mo)</option>
+        <option value='GROWTH_900'>Growth Institutional Retainer (£900/mo | Up to 150 enquiries/mo)</option>
+        <option value='API_DEV_49'>Developer API Key (£49/mo | Sanitiser + V2 Evidence Endpoints)</option>
+      </select>
+      <label>5. Architecture &amp; Deployment Mode</label>
+      <select id='im'>
+        <option value='STANDARD_WEB_AND_EVIDENCE'>Standard Cloud / Website Intake + V5.0 Workspace (Instant Auto-Provision)</option>
+        <option value='BESPOKE_ONPREM_LEGACY'>Bespoke Legacy On-Premise Server (Escalate to Founder via LinkedIn / Call)</option>
+      </select>
+      <button id='goBtn'>Provision Tenant &amp; Mint Live Credentials →</button>
+      <div id='out' style='margin-top:20px'></div>
+    </div>
+    <script>
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('firm')) document.getElementById('rn').value = p.get('firm');
+      document.getElementById('goBtn').onclick = async () => {
+        const res = await fetch('https://aircounsel-strata-core-production.up.railway.app/api/v1/public/self-serve-onboard', {
+          method: 'POST', headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            firm_name: document.getElementById('fn').value || 'UK Practice',
+            registry_no: document.getElementById('rn').value || 'ch-0001',
+            contact_email: document.getElementById('em').value || 'partner@firm.co.uk',
+            selected_tier: document.getElementById('tr').value,
+            integration_mode: document.getElementById('im').value
+          })
+        });
+        const d = await res.json();
+        if (d.status === 'AUTO_PROVISIONED_ACTIVE') {
+          document.getElementById('out').innerHTML = `
+            <h3 style='color:#2FB37D;margin:0 0 8px'>✓ Synthetic Sandbox Tenant Provisioned (Live PII Locked Until SRA Register Verification)</h3>
+            <pre>TENANT ID : ${d.provisioned_tenant_id}
+API KEY   : ${d.issued_api_key}
+HMAC      : ${d.receipt_hmac.slice(0,32)}...</pre>
+            <p style='font-size:13px;color:#DFC288'>Copy-Paste 1-Line Website Intake Widget:</p>
+            <pre>${d.embed_snippet.replace(/</g,'&lt;')}</pre>
+            <a href='${d.workspace_url}' style='display:inline-block;margin-top:10px;color:#C6A86A;font-family:monospace'>Open Your Live V5.0 Workspace →</a>`;
+        } else {
+          document.getElementById('out').innerHTML = `
+            <h3 style='color:#DFC288;margin:0 0 8px'>⚠ Escalated to Founder Engineering Queue</h3>
+            <p style='font-size:13px;color:#9AA3B5'>Your bespoke architecture requires direct engineering sign-off. Your request has been logged (${d.onboarding_id}).</p>
+            <a href='https://calendly.com/kwamehjuma/30min' target='_blank' style='color:#C6A86A;margin-right:16px'>Book 10-Min Engineering Call →</a>`;
+        }
+      };
+    </script></body></html>

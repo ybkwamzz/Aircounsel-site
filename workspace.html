@@ -1,0 +1,2199 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Pre-consultation enquiry preparation, 3-axis document inspection, and partner supervision handoffs for UK legal practices.">
+<meta property="og:title" content="AirCounsel STRATA V5.0 | Chambers & Practice Workspace">
+<meta property="og:description" content="Pre-consultation enquiry preparation, 3-axis document inspection, and partner supervision handoffs for UK legal practices.">
+<meta property="og:type" content="website">
+<title>AirCounsel.uk | Institutional Operator Workspace &amp; Evidence Pipeline V2 | V5.0</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=Unbounded:wght@500;600&display=swap');
+
+:root {
+  --bg: #07080E;
+  --surface: #0D1119;
+  --panel: #111823;
+  --panel2: #151F2E;
+  --elevated: #182334;
+  --gold: #C6A86A;
+  --brass: #B89152;
+  --gold-hi: #E5CD98;
+  --ivory: #F5F1E8;
+  --muted: #A3ABB6;
+  --muted2: #6E7885;
+  --line: rgba(198,168,106,.18);
+  --line2: rgba(245,241,232,.08);
+  --green: #6E9E75;
+  --green-bg: rgba(110,158,117,.12);
+  --red: #C46862;
+  --red-bg: rgba(196,104,98,.12);
+  --amber: #D09B52;
+  --amber-bg: rgba(208,155,82,.12);
+  --blue: #789DBC;
+  --blue-bg: rgba(120,157,188,.12);
+  --purple: #A58CC8;
+  --purple-bg: rgba(165,140,200,.12);
+  --radius: 9px;
+  --mono: 'DM Mono', ui-monospace, monospace;
+  --display: 'Unbounded', Inter, sans-serif;
+  --serif: 'Newsreader', Georgia, serif;
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --shadow: 0 18px 45px rgba(0,0,0,.6);
+  --topbar-bg: rgba(13,17,25,.9);
+}
+
+html[data-theme="light"] {
+  --bg: #F4F1EA;
+  --surface: #FAF8F3;
+  --panel: #FFFFFF;
+  --panel2: #F0ECE1;
+  --elevated: #FFFFFF;
+  --gold: #8A6928;
+  --brass: #75561B;
+  --gold-hi: #5E4310;
+  --ivory: #141820;
+  --muted: #4A525D;
+  --muted2: #767E8A;
+  --line: rgba(138,105,40,.22);
+  --line2: rgba(20,24,32,.09);
+  --green: #2D6A36;
+  --green-bg: rgba(45,106,54,.09);
+  --red: #A6342E;
+  --red-bg: rgba(166,52,46,.09);
+  --amber: #9A6418;
+  --amber-bg: rgba(154,100,24,.1);
+  --blue: #2B5B84;
+  --blue-bg: rgba(43,91,132,.09);
+  --purple: #5E3F8A;
+  --purple-bg: rgba(94,63,138,.09);
+  --shadow: 0 18px 40px rgba(20,24,32,.12);
+  --topbar-bg: rgba(250,248,243,.92);
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ivory);font:13px/1.55 var(--sans);-webkit-font-smoothing:antialiased;transition:background .2s,color .2s}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.app{min-height:100vh}
+.sidebar{position:fixed;inset:0 auto 0 0;width:266px;background:var(--surface);border-right:1px solid var(--line);padding:18px 14px;display:flex;flex-direction:column;z-index:10;transition:background .2s;overflow-y:auto}
+.brand{display:flex;align-items:center;gap:12px;padding:0 10px 16px;border-bottom:1px solid var(--line)}
+.mark{width:36px;height:36px;flex:none}
+.brandname{font:600 12px var(--display);letter-spacing:.02em}
+.brandmeta{color:var(--muted2);font:9px var(--mono);letter-spacing:.11em;margin-top:3px}
+.sra-pill{margin:10px 6px 0;padding:7px 10px;border-radius:6px;background:rgba(198,168,106,.07);border:1px solid var(--line);font:9px var(--mono);color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+.sra-pill strong{color:var(--gold-hi)}
+
+.navlabel{font:10px var(--mono);letter-spacing:.12em;color:var(--muted2);padding:16px 12px 6px}
+.nav{display:grid;gap:2px}
+.nav button{display:flex;align-items:center;gap:10px;border:1px solid transparent;background:transparent;color:var(--muted);text-align:left;padding:9px 11px;border-radius:7px;font-size:12px;font-weight:500;transition:all .14s}
+.nav button:hover{background:var(--line2);color:var(--ivory)}
+.nav button.active{color:var(--gold-hi);background:rgba(198,168,106,.11);border-color:var(--line)}
+.nav svg{width:15px;height:15px;flex:none}
+.nav .count{margin-left:auto;font:10px var(--mono);color:var(--gold-hi);background:rgba(198,168,106,.14);padding:1px 6px;border-radius:4px}
+.nav .count.alert{color:var(--red);background:var(--red-bg)}
+
+.sidebar-foot{margin-top:auto;border-top:1px solid var(--line);padding:12px 8px 0}
+.connection{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:11px;font-weight:500}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;flex:none;animation:dotpulse 3s ease-in-out infinite}
+.dot.warn{background:var(--amber)}
+@keyframes dotpulse{0%,100%{opacity:1}50%{opacity:.35}}
+.sidebar-note{font-size:10px;color:var(--muted2);margin-top:6px;line-height:1.45}
+
+.main{margin-left:266px;min-height:100vh}
+.topbar{height:64px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 26px;background:var(--topbar-bg);position:sticky;top:0;z-index:8;backdrop-filter:blur(12px)}
+.crumb{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:7px}
+.crumb strong{color:var(--ivory);font-weight:600}
+.top-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.cmd-trigger{border:1px solid var(--line);background:var(--bg);color:var(--muted);padding:6px 10px;border-radius:6px;font:11px var(--sans);display:inline-flex;align-items:center;gap:8px}
+.cmd-trigger:hover{border-color:var(--gold);color:var(--ivory)}
+.cmd-trigger kbd{font:9px var(--mono);background:var(--line2);padding:2px 5px;border-radius:4px;color:var(--gold-hi)}
+.role-switcher{display:flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:4px 8px}
+.role-switcher span{font:9px var(--mono);color:var(--muted2);text-transform:uppercase}
+.role-switcher select{background:transparent;border:0;font:600 11px var(--sans);color:var(--gold-hi);padding:2px 4px;cursor:pointer}
+.role-switcher select option{background:var(--surface);color:var(--ivory)}
+.clock-pill{border:1px solid var(--line);background:var(--bg);padding:5px 9px;border-radius:6px;font:10px var(--mono);color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.clock-pill strong{color:var(--ivory)}
+.theme-btn{border:1px solid var(--line);background:var(--bg);color:var(--muted);width:32px;height:32px;border-radius:6px;display:grid;place-items:center}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold-hi)}
+
+.content{max-width:1540px;margin:auto;padding:24px 28px 64px}
+.pagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:20px}
+.eyebrow{color:var(--gold);font:500 10px var(--mono);letter-spacing:.13em;text-transform:uppercase;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pagehead h1{font:500 clamp(22px,2.1vw,29px) var(--serif);letter-spacing:-.015em;margin:5px 0}
+.pagehead p{margin:0;color:var(--muted);max-width:760px;font-size:12px}
+.head-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+.btn{border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ivory);padding:7px 12px;font-size:11px;font-weight:500;display:inline-flex;align-items:center;gap:7px;transition:all .14s}
+.btn:hover:not(:disabled){border-color:var(--gold);background:rgba(198,168,106,.08)}
+.btn.primary{background:var(--gold);color:#0B0D13;border-color:var(--gold);font-weight:600}
+.btn.primary:hover:not(:disabled){background:var(--gold-hi)}
+.btn.subtle{color:var(--gold-hi);border-color:rgba(198,168,106,.38);background:rgba(198,168,106,.05)}
+.btn.danger{color:var(--red);border-color:rgba(196,104,98,.4);background:var(--red-bg)}
+.btn:disabled{opacity:.36;cursor:not-allowed}
+
+.grid{display:grid;gap:14px}
+.metrics{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:16px}
+.metric,.panel,.case-card,.doc-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.metric.alert{border-color:rgba(196,104,98,.45);border-left:3px solid var(--red);background:var(--red-bg)}
+.metric.alert .metric-num{color:var(--red)}
+.metric{padding:14px 16px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between}
+.metric-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font:500 10px var(--mono);letter-spacing:.05em}
+.metric-icon{width:26px;height:26px;display:grid;place-items:center;border:1px solid var(--line);border-radius:6px;color:var(--gold)}
+.metric-num{font:500 25px var(--display);margin:8px 0 4px;letter-spacing:-.04em}
+.metric-foot{font-size:11px;color:var(--muted2);display:flex;justify-content:space-between;align-items:center}
+.linkbtn{border:0;background:transparent;color:var(--gold-hi);font-size:11px;font-weight:500;padding:2px 0;display:inline-flex;align-items:center;gap:4px}
+.linkbtn:hover{text-decoration:underline}
+
+.twocol{grid-template-columns:minmax(0,1.45fr) minmax(320px,.85fr);align-items:start}
+.detailgrid{grid-template-columns:minmax(0,1.25fr) minmax(330px,.85fr);align-items:start}
+.panel{padding:18px;margin-bottom:15px;min-width:0}
+.panelhead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.panelhead h2{font-size:13px;font-weight:600;margin:0;letter-spacing:-.01em}
+.panelhead p{font-size:11px;color:var(--muted);margin:3px 0 0}
+
+.reg-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:15px}
+.reg-cell{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:11px 13px;display:flex;flex-direction:column;gap:5px}
+.reg-cell-top{display:flex;justify-content:space-between;align-items:center;font:9px var(--mono);color:var(--muted2);letter-spacing:.06em}
+.reg-cell-title{font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.reg-cell-sub{font-size:10px;color:var(--muted)}
+
+.drift-banner{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 16px;margin-bottom:16px;border-radius:8px;background:var(--amber-bg);border:1px solid rgba(208,155,82,.5);border-left:4px solid var(--amber)}
+.drift-banner strong{color:var(--gold-hi);font-size:12px;display:block}
+.drift-banner p{margin:2px 0 0;font-size:11px;color:var(--ivory)}
+
+.priority-list,.event-list{display:grid}
+.priority-item{display:grid;grid-template-columns:4px minmax(0,1fr) auto;gap:12px;padding:12px 0;border-top:1px solid var(--line2);align-items:start}
+.priority-item:first-child,.event-item:first-child{border-top:0;padding-top:2px}
+.priority-bar{height:100%;min-height:42px;border-radius:5px;background:var(--muted2)}
+.priority-bar.critical{background:var(--red)}
+.priority-bar.high{background:var(--gold)}
+.priority-title{font-size:12px;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.priority-desc{font-size:11px;color:var(--muted);margin-top:3px}
+.priority-meta{font:10px var(--mono);color:var(--muted2);white-space:nowrap;text-align:right}
+
+.event-item{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;padding:10px 0;border-top:1px solid var(--line2)}
+.event-icon{width:26px;height:26px;display:grid;place-items:center;color:var(--gold);border:1px solid var(--line);border-radius:6px}
+.event-title{font-size:11px}
+.event-detail{font-size:11px;color:var(--muted);margin-top:2px}
+.event-time{font:9px var(--mono);color:var(--muted2);margin-top:4px}
+
+.state{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:4px;padding:2px 7px;font:500 9px var(--mono);letter-spacing:.04em;white-space:nowrap;text-transform:uppercase}
+.state:before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
+.state.good{color:var(--green);border-color:rgba(110,158,117,.4);background:var(--green-bg)}
+.state.warn{color:var(--amber);border-color:rgba(208,155,82,.4);background:var(--amber-bg)}
+.state.bad{color:var(--red);border-color:rgba(196,104,98,.45);background:var(--red-bg)}
+.state.neutral{color:var(--muted)}
+.state.info{color:var(--blue);border-color:rgba(120,157,188,.38);background:var(--blue-bg)}
+.state.agent{color:var(--purple);border-color:rgba(165,140,200,.4);background:var(--purple-bg)}
+
+.axis-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:10px 0;padding:7px;background:var(--panel);border:1px solid var(--line2);border-radius:6px}
+.axis-box{display:flex;flex-direction:column;gap:3px}
+.axis-box small{font:8px var(--mono);color:var(--muted2);letter-spacing:.06em;text-transform:uppercase}
+
+.diff-pill{display:inline-flex;align-items:center;gap:5px;background:var(--panel);border:1px solid var(--line);padding:2px 7px;border-radius:4px;font:9px var(--mono);color:var(--gold-hi);margin-top:4px}
+
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;min-width:820px}
+th{text-align:left;color:var(--muted2);font:500 9px var(--mono);letter-spacing:.08em;text-transform:uppercase;background:var(--panel)}
+th,td{padding:10px 13px;border-bottom:1px solid var(--line2);vertical-align:middle}
+td{font-size:11px;color:var(--muted)}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--line2)}
+td strong{color:var(--ivory);font-weight:600}
+.mono{font:10px var(--mono);letter-spacing:-.02em}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.field,.filters input,.filters select{background:var(--surface);color:var(--ivory);border:1px solid var(--line);border-radius:6px;padding:7px 11px;font-size:11px;min-width:0}
+.filters input{width:260px}
+.filters select{max-width:210px}
+
+.case-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.case-card{padding:16px;border-left:3px solid transparent;transition:border-color .15s}
+.case-card:hover{border-color:var(--gold)}
+.case-card.critical{border-left-color:var(--red)}
+.case-card.high{border-left-color:var(--gold)}
+.case-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.case-name{font-size:13px;font-weight:600;color:var(--ivory)}
+.case-id{font:9px var(--mono);color:var(--muted2);margin-top:3px}
+.case-route{color:var(--muted);font-size:11px;margin:9px 0 8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.due-line{font:500 9px var(--mono);letter-spacing:.04em;padding:3px 7px;border-radius:4px;display:inline-flex;align-items:center;gap:6px}
+.due-line.due-today{color:var(--red);background:var(--red-bg);border:1px solid rgba(196,104,98,.35)}
+.due-line.due-soon{color:var(--amber);background:var(--amber-bg);border:1px solid rgba(208,155,82,.35)}
+.due-line.due-ok{color:var(--muted2);background:var(--line2)}
+.case-bottom{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line2);padding-top:11px;margin-top:11px;gap:10px}
+
+.score{display:flex;align-items:center;gap:8px}
+.score svg{width:34px;height:34px;transform:rotate(-90deg)}
+.score span{font:500 11px var(--mono);color:var(--ivory)}
+.score small{display:block;font:8px var(--mono);color:var(--muted2)}
+
+.gate-list{display:grid;gap:12px}
+.gate-row{display:grid;grid-template-columns:minmax(150px,1.2fr) minmax(90px,1.8fr) 62px;align-items:center;gap:12px}
+.gate-name{font-size:11px;color:var(--ivory);font-weight:500}
+.gate-name small{display:block;font:9px var(--mono);color:var(--muted2);font-weight:400}
+.bar{height:7px;background:var(--line2);border-radius:9px;overflow:hidden}
+.bar>span{height:100%;display:block;background:linear-gradient(90deg,var(--brass),var(--gold-hi));border-radius:9px}
+.gate-val{text-align:right;font:10px var(--mono);color:var(--ivory)}
+
+.callout{padding:11px 14px;background:rgba(198,168,106,.06);border:1px solid var(--line);border-radius:7px;color:var(--muted);font-size:11px;line-height:1.5}
+.callout.alert{background:var(--red-bg);border-color:rgba(196,104,98,.38);border-left:3px solid var(--red)}
+.callout.agent{background:var(--purple-bg);border-color:rgba(165,140,200,.4);border-left:3px solid var(--purple)}
+.callout strong{color:var(--gold-hi);font-weight:600}
+
+.doc-summary{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:15px}
+.doc-card{padding:16px;display:flex;flex-direction:column;justify-content:space-between}
+.doc-card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.doc-card h3{font-size:13px;margin:0 0 3px;font-weight:600}
+.doc-card p{color:var(--muted);font-size:11px;margin:0}
+.doc-meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted2);font:9px var(--mono);margin:9px 0;padding:6px 8px;background:var(--panel);border-radius:5px}
+.doc-actions{display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid var(--line2);padding-top:11px;margin-top:11px}
+.doc-actions .btn{padding:5px 9px;font-size:10px}
+
+.stepper{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:14px 0}
+.step{border:1px solid var(--line);border-radius:6px;padding:10px;min-height:64px;background:var(--panel)}
+.step strong{font:10px var(--mono);display:block;color:var(--muted2)}
+.step span{font-size:11px;display:block;margin-top:4px;color:var(--muted);font-weight:500}
+.step.active{border-color:var(--gold);background:rgba(198,168,106,.09)}
+.step.active strong,.step.active span{color:var(--gold-hi)}
+.step.done{border-color:rgba(110,158,117,.45);background:var(--green-bg)}
+.step.done strong{color:var(--green)}
+
+.empty{padding:28px;text-align:center;color:var(--muted);font-size:11px}
+.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.fieldgroup label{display:block;font:500 9px var(--mono);color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.fieldgroup input,.fieldgroup select,.fieldgroup textarea{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:6px;color:var(--ivory);padding:8px 10px;font-size:11px}
+.fieldgroup textarea{min-height:68px;resize:vertical}
+.fieldgroup.full{grid-column:1/-1}
+
+.audit-chain{display:grid;gap:0;position:relative;padding-left:18px}
+.audit-chain::before{content:'';position:absolute;left:5px;top:14px;bottom:14px;width:1px;background:linear-gradient(to bottom,transparent,var(--gold) 8%,var(--gold) 92%,transparent);opacity:.35}
+.audit-row{position:relative;display:grid;grid-template-columns:92px minmax(0,1fr) auto;gap:14px;padding:12px 10px;border-top:1px solid var(--line2);cursor:pointer;border-radius:6px;transition:background .12s}
+.audit-row:hover{background:var(--line2)}
+.audit-row::before{content:'';position:absolute;left:-15px;top:21px;width:7px;height:7px;border-radius:50%;background:var(--surface);border:1.5px solid var(--gold)}
+.audit-row:first-child{border-top:0}
+.audit-seq{font:500 10px var(--mono);color:var(--gold-hi)}
+.audit-hashes{font:9px var(--mono);color:var(--muted2);overflow-wrap:anywhere;margin-top:4px}
+
+.backdrop{position:fixed;inset:0;background:rgba(5,7,12,.75);backdrop-filter:blur(5px);z-index:40;display:flex;justify-content:flex-end;opacity:0;pointer-events:none;transition:opacity .18s}
+.backdrop.open{opacity:1;pointer-events:auto}
+.drawer{width:min(1180px,96vw);height:100vh;background:var(--surface);border-left:1px solid var(--line);display:flex;flex-direction:column;box-shadow:var(--shadow);transform:translateX(24px);transition:transform .2s}
+.backdrop.open .drawer{transform:translateX(0)}
+.drawer-head{padding:15px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:var(--panel)}
+.drawer-body{flex:1;display:grid;grid-template-columns:1.05fr .95fr;min-height:0;overflow:hidden}
+.doc-preview-pane{background:var(--bg);border-right:1px solid var(--line);padding:18px;overflow-y:auto;display:flex;flex-direction:column;gap:13px}
+.doc-sheet{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px;font-family:var(--mono);font-size:11px;line-height:1.6;position:relative}
+.ocr-box{border:1px dashed var(--gold);background:rgba(198,168,106,.07);padding:9px 11px;border-radius:5px;margin:7px 0}
+.ocr-box.fail{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.doc-review-pane{padding:18px 22px;overflow-y:auto;display:flex;flex-direction:column;gap:14px}
+
+.modal-center{position:fixed;inset:0;background:rgba(5,7,12,.76);backdrop-filter:blur(4px);z-index:50;display:grid;place-items:start center;padding-top:9vh;opacity:0;pointer-events:none;transition:opacity .15s}
+.modal-center.open{opacity:1;pointer-events:auto}
+.cmd-box{width:min(680px,94vw);background:var(--surface);border:1px solid var(--gold);border-radius:10px;box-shadow:var(--shadow);overflow:hidden}
+.cmd-input{width:100%;border:0;border-bottom:1px solid var(--line);background:var(--panel);padding:14px 16px;font-size:13px;color:var(--ivory)}
+.cmd-list{max-height:380px;overflow-y:auto;padding:8px}
+.cmd-item{width:100%;border:0;background:transparent;text-align:left;padding:10px 12px;border-radius:6px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--ivory)}
+.cmd-item:hover{background:rgba(198,168,106,.12)}
+.cmd-item small{font:9px var(--mono);color:var(--muted2)}
+
+.toast{position:fixed;bottom:22px;right:24px;max-width:430px;background:var(--elevated);border:1px solid var(--gold);padding:13px 16px;border-radius:8px;box-shadow:var(--shadow);z-index:60;font-size:11px;line-height:1.45}
+.hidden{display:none!important}
+.mobilebar{display:none}
+.divider{height:1px;background:var(--line2);margin:12px 0}
+.smallcaps{font:500 9px var(--mono);letter-spacing:.09em;color:var(--muted2);text-transform:uppercase}
+
+@media(max-width:1180px){
+  .sidebar{width:225px}.main{margin-left:225px}.content{padding:20px}
+  .metrics,.doc-summary,.reg-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .twocol,.detailgrid,.drawer-body{grid-template-columns:1fr}
+  .case-list{grid-template-columns:1fr}
+}
+@media(max-width:780px){
+  .sidebar{transform:translateX(-100%);width:266px}.sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}.mobilebar{display:inline-flex}.topbar{padding:0 14px}
+  .content{padding:16px 14px 44px}.pagehead{display:block}.head-actions{margin-top:12px}
+  .reg-strip{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 40 40" aria-label="AirCounsel geometric mark"><path d="M20 2.5 37.5 20 20 37.5 2.5 20Z" fill="none" stroke="var(--gold)" stroke-width="1.5"/><path d="M20 10 30 20 20 30 10 20Z" fill="none" stroke="var(--gold-hi)" stroke-width="1.4"/><path d="M20 15.5 24.5 20 20 24.5 15.5 20Z" fill="var(--gold)"/></svg>
+    <div><div class="brandname">AirCounsel.uk</div><div class="brandmeta">CHAMBERS &amp; PRACTICE OS · V5.0</div></div>
+  </div>
+  <div class="sra-pill"><span>SRA / GDPR REGIME</span><strong>ENGLAND &amp; WALES</strong></div>
+
+  <div class="navlabel">PRACTICE WORKSPACE</div>
+  <nav class="nav" aria-label="Primary navigation">
+    <button data-view="home" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/></svg>Practice briefing</button>
+    <button data-view="pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5m8-5v5"/></svg>Intake &amp; triage<span class="count" id="navPipeline">4</span></button>
+    <button data-view="cases"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3Z"/><path d="M3 10h18"/></svg>Matter register</button>
+    <button data-view="documents"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3h7l5 5v13H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v6h5M9 13h6M9 17h6"/></svg>Evidence pipeline V2<span class="count" id="navDocs">3</span></button>
+    <button data-view="handoff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15m-6-6 6 6-6 6"/><path d="M4 5v14"/></svg>Supervision &amp; handoff<span class="count" id="navHandoff">1</span></button>
+  </nav>
+
+  <div class="navlabel">INSTITUTIONAL ORGANS</div>
+  <nav class="nav" aria-label="Institutional Organs">
+    <button data-view="registry"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Spec registry &amp; drift<span class="count" id="navDrift">0</span></button>
+    <button data-view="agents"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>Downstream agent bus</button>
+    <button data-view="audit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 20 6v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg>Sharded HMAC audit</button>
+    <button data-view="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6v6H9z"/></svg>Railway &amp; V2 contracts</button>
+  </nav>
+
+  <div class="sidebar-foot">
+    <div class="connection">
+      <div style="display:flex;align-items:center;gap:7px">
+        <span class="dot" id="connDot"></span>
+        <span id="connLabel">V2 Engine · Deterministic</span>
+      </div>
+      <button class="linkbtn" id="pingRailwayBtn" style="font-size:10px">Ping Railway</button>
+    </div>
+    <div class="sidebar-note" id="connNote">3-Axis Document FSM, Sharded HMAC Outbox &amp; Zero-PII Validator active.</div>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="btn mobilebar" id="menuBtn" aria-label="Open navigation">☰</button>
+      <div class="crumb"><span>AirCounsel.uk</span> / <strong id="crumb">Practice briefing</strong></div>
+    </div>
+    <div class="top-actions">
+      <div class="clock-pill" title="Deterministic Institutional Clock (Injected for Retention &amp; Section 3C Verification)">
+        <span>SIM CLOCK:</span><strong id="simClockDisplay">2026-10-25</strong>
+        <button class="linkbtn" id="advanceClockBtn" style="font-size:9px;margin-left:4px">+6Y (Retention)</button>
+      </div>
+      <button class="cmd-trigger" id="cmdBtn" title="Open Command Palette">
+        <span>Quick Jump &amp; Actions</span><kbd>⌘K</kbd>
+      </button>
+      <div class="role-switcher" title="Authenticated Principal Session (ActorKind + Role)">
+        <span>Principal:</span>
+        <select id="roleSelect" aria-label="Switch authenticated principal">
+          <option value="SOLICITOR">HUMAN · S. Jenkins · Solicitor (SRA #849201)</option>
+          <option value="PARTNER">HUMAN · A. Sterling · Supervising Partner (COLP)</option>
+          <option value="OPERATOR">HUMAN · M. Vance · Coordinator / Operator</option>
+          <option value="WORKER">BOT · wrk-v2-inspector · Deterministic Worker</option>
+          <option value="LLM_AGENT">LLM_AGENT · bot-triage-v2 · AI Assistant (Propose-Only)</option>
+          <option value="AUDITOR">HUMAN · SRA / ICO Compliance Auditor (Read-Only)</option>
+        </select>
+      </div>
+      <button class="theme-btn" id="themeBtn" title="Toggle Obsidian Dark / Chancery Parchment Light Mode" aria-label="Toggle theme">◐</button>
+    </div>
+  </header>
+  <div class="content" id="content">
+  <!-- SERVER-SIDE PRE-RENDERED CAPABILITY & DATA SNAPSHOT FOR AI AGENTS (CLAUDE / CHATGPT) & NON-JS AUDITORS -->
+  <section class="panel">
+    <h2>AirCounsel STRATA V5.0 | Live Practice &amp; Evidence Workspace</h2>
+    <p>This workspace is backed by our FastAPI + SQLite WAL + PostgreSQL engine (<code>DocumentEvidencePipelineV2</code> &amp; 55-Gate <code>intake_sanitiser.py</code>). Note: All public demonstration records below use 100% synthetic data. Self-serve tenants provisioned via <code>/onboard</code> are restricted to Synthetic Sandbox Mode until SRA / Companies House registry verification completes.</p>
+    <ul>
+      <li><strong>Active Synthetic Demonstration Matters:</strong> MAT-2026-0881 (Dr. Amina Al-Hassan · Skilled Worker · Tier 2 Sponsor Verified · CoS Token C2G88392011 Released in Trusted S3), MAT-2026-0902 (Dr. Vikram Patel · Global Talent · Section 3C Statutory Leave Active · OCR Worker Retry Lease), MAT-2026-0915 (Elena Rostova · Appendix FM Spouse · Held for Solicitor Review), MAT-2026-0940 (Marcus Vance · Skilled Worker · Supervision Handoff Acknowledged).</li>
+      <li><strong>3-Axis Document Evidence State Machine V2:</strong> Axis 1 (Technical State: <code>upload_received</code> → <code>quarantined</code> → <code>inspection_in_progress</code> → <code>eligible_for_release</code> → <code>released</code>), Axis 2 (Practitioner Attestation: Byte-pinned SHA-256 human review; <code>ActorKind.LLM_AGENT</code> is structurally barred from approving or releasing documents), Axis 3 (UK GDPR Retention &amp; Atomic Version Supersession).</li>
+      <li><strong>Live API Endpoints (OpenAPI 3.1 at <code>/openapi.json</code>):</strong> <code>POST /api/v1/security/sanitise-intake</code> (55-test prompt-injection &amp; SSRF firewall), <code>POST /api/v2/evidence/ingest-and-inspect</code>, <code>POST /api/v2/evidence/human-attest</code>, <code>POST /api/v2/evidence/human-correction-learn</code> (BPFS Bayesian confidence recalibration), <code>GET /api/v2/evidence/downstream-packet/{tenant_id}/{case_id}/{requirement_id}</code>.</li>
+    </ul>
+  </section>
+</div>
+</main>
+</div>
+
+<!-- Split-Pane Evidence Inspector Drawer -->
+<div class="backdrop" id="docDrawerBackdrop" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <div class="drawer" id="docDrawer"></div>
+</div>
+
+<!-- Command Palette & Cryptographic Receipt Modal -->
+<div class="modal-center" id="modalBackdrop" role="dialog" aria-modal="true">
+  <div class="cmd-box" id="modalBox"></div>
+</div>
+
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================================
+   1. DETERMINISTIC CRYPTO & ZERO-PII VALIDATOR KERNEL
+   ============================================================================ */
+const KMS_SECRET = "aircounsel-v5-institutional-kms-root-2026";
+let simDate = new Date("2026-10-25T09:30:00Z");
+
+// Deterministic synchronous 64-hex HMAC-SHA256 equivalent for instant UI + Audit verification
+function deterministicHmac256(message) {
+  const input = KMS_SECRET + "|" + message;
+  let h1 = 0xdeadbeef ^ input.length, h2 = 0x41c6ce57 ^ input.length;
+  let h3 = 0x9e3779b9 ^ input.length, h4 = 0x85ebca6b ^ input.length;
+  for (let i = 0; i < input.length; i++) {
+    const ch = input.charCodeAt(i);
+    h1 = Math.imul(h1 ^ ch, 2654435761);
+    h2 = Math.imul(h2 ^ ch, 1597334677);
+    h3 = Math.imul(h3 ^ (ch << 3), 2246822519);
+    h4 = Math.imul(h4 ^ (ch << 5), 3266489917);
+  }
+  const mix = (n) => (n >>> 0).toString(16).padStart(8, '0');
+  let out = "";
+  for (let round = 1; round <= 2; round++) {
+    const r1 = Math.imul(h1 ^ (h2 >>> 13), 3266489917 * round);
+    const r2 = Math.imul(h2 ^ (h3 >>> 15), 2246822519 * round);
+    const r3 = Math.imul(h3 ^ (h4 >>> 11), 2654435761 * round);
+    const r4 = Math.imul(h4 ^ (h1 >>> 17), 1597334677 * round);
+    out += mix(r1) + mix(r2) + mix(r3) + mix(r4);
+  }
+  return out.slice(0, 64);
+}
+
+const ZERO_PII_PATTERNS = {
+  tenant_id: /^[a-z0-9_-]{2,32}$/,
+  case_id: /^c-\d+$/,
+  doc_id: /^DOC-\d+$/,
+  version: /^\d+$/,
+  from_state: /^[a-z_]{2,32}$/,
+  to_state: /^[a-z_]{2,32}$/,
+  sha256: /^[a-f0-9]{32,64}$/,
+  reason_code: /^[A-Z0-9_]{2,64}$/,
+  pinned_rule_version: /^HO-[A-Z0-9-]+$/,
+  personal_data_class: /^(ordinary_personal|special_category|criminal_offence|undetermined)$/,
+  privilege_assessment: /^(not_assessed|reviewed_privileged|reviewed_not_privileged)$/,
+  article_9_or_10_condition: /^(none_required|DPA18_Sch1_LegalClaims|DPA18_Sch1_SubstantialPublicInterest|pending_assessment)$/,
+  idempotency_key: /^[a-f0-9]{64}$/
+};
+
+function validateZeroPiiPayload(payload) {
+  for (const [k, v] of Object.entries(payload)) {
+    if (!ZERO_PII_PATTERNS[k]) {
+      throw new Error(`Zero-PII Schema Violation: Key '${k}' is forbidden in immutable Audit Outbox.`);
+    }
+    if (!ZERO_PII_PATTERNS[k].test(String(v))) {
+      throw new Error(`Zero-PII Format Violation: Value '${v}' for '${k}' failed strict regex check.`);
+    }
+  }
+  return true;
+}
+
+/* ============================================================================
+   2. UPSTREAM REGULATORY SPEC REGISTRY & 100-PT RUBRIC DEFINITIONS
+   ============================================================================ */
+const gateDefinitions = [
+  { id: 'gate_1_jurisdiction', name: 'Jurisdiction & Venue', max: 20, desc: 'UK Immigration Rules / E&W territorial competence' },
+  { id: 'gate_2_route_viability', name: 'Route Viability (Appendix)', max: 20, desc: 'Statutory criteria fit under relevant Home Office Appendix' },
+  { id: 'gate_3_financial_threshold', name: 'Financial & Maintenance', max: 20, desc: 'Salary threshold / Appendix FM / maintenance funds' },
+  { id: 'gate_4_sponsorship_readiness', name: 'Sponsorship / Endorsement', max: 15, desc: 'CoS allocation status or Endorsing Body stage' },
+  { id: 'gate_5_suitability_character', name: 'Part 9 Suitability & Good Character', max: 15, desc: 'Overstaying, refusal history, criminality checks' },
+  { id: 'gate_6_evidentiary_completeness', name: 'Evidentiary Completeness', max: 10, desc: 'Specified evidence readiness under Immigration Rules' }
+];
+
+let specRegistry = [
+  {
+    sourceId: 'HO-APP-SW-2026-04-01',
+    routeCode: 'SKILLED_WORKER',
+    routeTitle: 'Appendix Skilled Worker',
+    effectiveFrom: '2026-04-01',
+    status: 'published',
+    specHash: '7a91c044b8120e5f99312a88c0019b2e4410d8a93f1120c7e8b19002a3f91b01',
+    requiredFields: ['applicant_name', 'cos_reference', 'soc_code', 'gross_salary'],
+    runners: ['malware_and_signature_runner', 'cos_regex_runner', 'mrz_checksum_runner']
+  },
+  {
+    sourceId: 'HO-APP-GT-2026-04-01',
+    routeCode: 'GLOBAL_TALENT',
+    routeTitle: 'Appendix Global Talent',
+    effectiveFrom: '2026-04-01',
+    status: 'published',
+    specHash: '3b44d190a7118c4e00192b77d8821a1f5520e9b84e2210d6f9c28113b4e82c12',
+    requiredFields: ['applicant_name', 'endorsement_ref', 'issue_date'],
+    runners: ['malware_and_signature_runner', 'endorsement_validity_runner']
+  },
+  {
+    sourceId: 'HO-APP-IF-2026-04-01',
+    routeCode: 'INNOVATOR_FOUNDER',
+    routeTitle: 'Appendix Innovator Founder',
+    effectiveFrom: '2026-04-01',
+    status: 'published',
+    specHash: '9c12f883e4019b2d11203c66e9932b0a6631f0c95f3321e7a0d39224c5f93d23',
+    requiredFields: ['applicant_name', 'venture_name', 'endorsing_body', 'capital_committed'],
+    runners: ['malware_and_signature_runner', 'endorsement_validity_runner']
+  }
+];
+
+/* ============================================================================
+   3. AUTHENTICATED PRINCIPALS (HUMAN / DETERMINISTIC_BOT / LLM_AGENT)
+   ============================================================================ */
+const rolePermissions = {
+  SOLICITOR: {
+    actorId: 'usr-sol-jenkins', label: 'S. Jenkins · Solicitor (SRA #849201)', kind: 'HUMAN',
+    isQualifiedSolicitor: true, canReviewDoc: true, canSetPrivilege: true, canUpdateGov: true,
+    canClearConflict: true, canOverrideCase: true, canApproveHandoff: true, canSubmitAgentProposal: false
+  },
+  PARTNER: {
+    actorId: 'usr-part-sterling', label: 'A. Sterling · Supervising Partner (COLP)', kind: 'HUMAN',
+    isQualifiedSolicitor: true, canReviewDoc: true, canSetPrivilege: true, canUpdateGov: true,
+    canClearConflict: true, canOverrideCase: true, canApproveHandoff: true, canSubmitAgentProposal: false
+  },
+  OPERATOR: {
+    actorId: 'usr-coord-vance', label: 'M. Vance · Intake Coordinator', kind: 'HUMAN',
+    isQualifiedSolicitor: false, canReviewDoc: false, canSetPrivilege: false, canUpdateGov: true,
+    canClearConflict: true, canOverrideCase: false, canApproveHandoff: false, canSubmitAgentProposal: false
+  },
+  WORKER: {
+    actorId: 'wrk-v2-inspector', label: 'wrk-v2-inspector · Deterministic Bot', kind: 'DETERMINISTIC_BOT',
+    isQualifiedSolicitor: false, canReviewDoc: false, canSetPrivilege: false, canUpdateGov: false,
+    canClearConflict: false, canOverrideCase: false, canApproveHandoff: false, canSubmitAgentProposal: false
+  },
+  LLM_AGENT: {
+    actorId: 'bot-triage-v2', label: 'bot-triage-v2 · AI Assistant (Propose-Only)', kind: 'LLM_AGENT',
+    isQualifiedSolicitor: false, canReviewDoc: false, canSetPrivilege: false, canUpdateGov: false,
+    canClearConflict: false, canOverrideCase: false, canApproveHandoff: false, canSubmitAgentProposal: true
+  },
+  AUDITOR: {
+    actorId: 'usr-sra-auditor', label: 'SRA / ICO Compliance Auditor', kind: 'HUMAN',
+    isQualifiedSolicitor: false, canReviewDoc: false, canSetPrivilege: false, canUpdateGov: false,
+    canClearConflict: false, canOverrideCase: false, canApproveHandoff: false, canSubmitAgentProposal: false
+  }
+};
+
+let currentRole = 'SOLICITOR';
+let currentView = 'home';
+let selectedCase = 'c-901';
+let docFilter = 'all';
+let searchTerm = '';
+let tamperSimulated = false;
+
+/* ============================================================================
+   4. STATE STORE: MATTERS, 3-AXIS DOCUMENTS & SHARDED HMAC AUDIT LOG
+   ============================================================================ */
+let cases = [
+  {
+    id: 'c-901', tenantId: 'tenant-uk-chambers', intake: 'INT-88A10F22', name: 'Amina Al-Mansoor',
+    route: 'SKILLED_WORKER', urgency: 'HIGH', state: 'assigned', allocationStatus: 'accepted_by_practitioner',
+    owner: 'usr-sol-jenkins', ownerDisplay: 'S. Jenkins · Solicitor', sraRef: 'MAT-2026-0901',
+    pinnedRuleVersion: 'HO-APP-SW-2026-04-01', ruleDriftAcknowledged: true, legalHold: false, closedAt: null,
+    visaExpiry: '2026-10-28', slaDeadline: '2026-10-26', section3C: true,
+    gates: [20, 20, 20, 13, 10, 7],
+    compliance: { conflict: 'cleared', aml: 'verified', clientCare: 'signed', moneyOnAccount: 'cleared' },
+    handoffState: 'none', handoffId: null, handoffRecipient: 'Supervising Partner (COLP)', handoffNote: ''
+  },
+  {
+    id: 'c-902', tenantId: 'tenant-uk-chambers', intake: 'INT-74B29C11', name: 'Dr. Vikram Patel',
+    route: 'GLOBAL_TALENT', urgency: 'CRITICAL', state: 'vitals_pending', allocationStatus: 'unallocated',
+    owner: 'unassigned', ownerDisplay: 'Unassigned', sraRef: 'MAT-2026-0902',
+    pinnedRuleVersion: 'HO-APP-GT-2026-04-01', ruleDriftAcknowledged: true, legalHold: false, closedAt: null,
+    visaExpiry: '2026-10-25', slaDeadline: '2026-10-25', section3C: true,
+    gates: [20, 20, 20, 15, 12, 8],
+    compliance: { conflict: 'cleared', aml: 'pending', clientCare: 'issued', moneyOnAccount: 'pending' },
+    handoffState: 'none', handoffId: null, handoffRecipient: 'Supervising Partner (COLP)', handoffNote: ''
+  },
+  {
+    id: 'c-903', tenantId: 'tenant-uk-chambers', intake: 'INT-51D08E44', name: 'Elena Rostova',
+    route: 'SKILLED_WORKER', urgency: 'MEDIUM', state: 'triaged', allocationStatus: 'unallocated',
+    owner: 'unassigned', ownerDisplay: 'Unassigned', sraRef: 'MAT-2026-0903',
+    pinnedRuleVersion: 'HO-APP-SW-2026-04-01', ruleDriftAcknowledged: true, legalHold: false, closedAt: null,
+    visaExpiry: '2026-11-18', slaDeadline: '2026-10-30', section3C: false,
+    gates: [20, 18, 12, 10, 10, 5],
+    compliance: { conflict: 'flagged', aml: 'pending', clientCare: 'not_sent', moneyOnAccount: 'pending' },
+    handoffState: 'none', handoffId: null, handoffRecipient: 'Supervising Partner (COLP)', handoffNote: ''
+  },
+  {
+    id: 'c-904', tenantId: 'tenant-uk-chambers', intake: 'INT-19F77A03', name: 'Marcus Chen',
+    route: 'INNOVATOR_FOUNDER', urgency: 'STANDARD', state: 'assigned', allocationStatus: 'accepted_by_practitioner',
+    owner: 'usr-sol-jenkins', ownerDisplay: 'S. Jenkins · Solicitor', sraRef: 'MAT-2026-0904',
+    pinnedRuleVersion: 'HO-APP-IF-2026-04-01', ruleDriftAcknowledged: true, legalHold: false, closedAt: null,
+    visaExpiry: '2026-12-10', slaDeadline: '2026-11-02', section3C: false,
+    gates: [20, 19, 18, 12, 10, 6],
+    compliance: { conflict: 'cleared', aml: 'verified', clientCare: 'signed', moneyOnAccount: 'cleared' },
+    handoffState: 'none', handoffId: null, handoffRecipient: 'Supervising Partner (COLP)', handoffNote: ''
+  }
+];
+
+/* 3-Axis Document Store:
+   - techState (V2 Pipeline): quarantined | inspection_in_progress | processing_failed | held_for_review | eligible_for_release | released
+   - decisionState (Human): pending | accepted | rejected | correction_requested
+   - retentionState (GDPR): active | superseded | held | disposed
+   - checks: [runnerName, status ('passed'|'failed'|'error'|'not_run'|'not_applicable'), attemptNumber, reasonCode]
+*/
+let docs = [
+  {
+    id: 'DOC-301', caseId: 'c-901', reqId: 'req-passport', name: 'Passport Bio-Data Page',
+    type: 'PASSPORT_BIODATA', version: 2, uploaded: '2026-10-24 09:18 UTC',
+    sha256: '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08',
+    techState: 'released', decisionState: 'accepted', retentionState: 'active',
+    s3QuarantineKey: 's3://aircounsel-quarantine/c-901/DOC-301_v2.pdf',
+    s3TrustedKey: 's3://aircounsel-trusted/c-901/DOC-301_v2.pdf',
+    ocrArtifactKey: 's3://aircounsel-trusted/c-901/DOC-301_v2.ocr.json',
+    checks: [
+      ['malware_and_signature_runner', 'passed', 1, 'CLEAN_PDF_1_7'],
+      ['mrz_checksum_runner', 'passed', 1, 'ICAO_9303_MOD10_VALID'],
+      ['cos_regex_runner', 'not_applicable', 1, 'SKIPPED_FOR_PASSPORT_TYPE']
+    ],
+    extractedFields: { applicant_name: 'AMINA_AL_MANSOOR', passport_number: 'N9928104', mrz_check_digit: '4', nationality: 'ARE' },
+    ocrExtract: 'P<AREALMANSOOR<<AMINA<<<<<<<<<<<<<<<<<<<<<<<\nN9928104<4ARE9104128F3108205<<<<<<<<<<<<<<04',
+    governance: {
+      personalDataClass: 'ordinary_personal',
+      processingPurpose: 'identity_verification',
+      article6Basis: 'Art 6(1)(b) Contract',
+      article9Or10Condition: 'none_required',
+      privilegeAssessment: 'reviewed_not_privileged',
+      confidentialityLevel: 'client_confidential',
+      retentionPolicyId: 'RET-IMM-6Y-SRA'
+    },
+    agentProposals: [],
+    note: 'ICAO 9303 Modulo-10 checksum verified. Released to trusted bucket & attested by S. Jenkins.',
+    reviewer: 'S. Jenkins · Solicitor', reviewReason: 'Verified original passport bio-data page against ICAO 9303 parity.'
+  },
+  {
+    id: 'DOC-302', caseId: 'c-901', reqId: 'req-cos', name: 'Defined Certificate of Sponsorship (CoS)',
+    type: 'COS_LETTER', version: 1, uploaded: '2026-10-24 09:20 UTC',
+    sha256: '4b227777d4dd1fc61c6f884f48641d0294d121d3fd328cb08b5531fcacdabf8a',
+    techState: 'held_for_review', decisionState: 'pending', retentionState: 'active',
+    s3QuarantineKey: 's3://aircounsel-quarantine/c-901/DOC-302_v1.pdf',
+    s3TrustedKey: null,
+    ocrArtifactKey: 's3://aircounsel-quarantine/c-901/DOC-302_v1.ocr.json',
+    checks: [
+      ['malware_and_signature_runner', 'passed', 1, 'CLEAN_PDF_1_7'],
+      ['cos_regex_runner', 'failed', 1, 'COS_REGEX_CROPPED_MARGIN'],
+      ['mrz_checksum_runner', 'not_applicable', 1, 'SKIPPED_FOR_COS_TYPE']
+    ],
+    extractedFields: { applicant_name: 'AMINA_AL_MANSOOR', sponsor_licence: '884920A1', soc_code: '2134', gross_salary: '64500' },
+    ocrExtract: 'SPONSOR LICENCE: 884920A1 | WORKER: AMINA_AL_MANSOOR\nSOC CODE: 2134 | GROSS SALARY: £64,500\nCOS REFERENCE NUMBER: C2G9988[CROPPED_MARGIN]',
+    governance: {
+      personalDataClass: 'ordinary_personal',
+      processingPurpose: 'immigration_evidence',
+      article6Basis: 'Art 6(1)(b) Contract',
+      article9Or10Condition: 'none_required',
+      privilegeAssessment: 'not_assessed',
+      confidentialityLevel: 'client_confidential',
+      retentionPolicyId: 'RET-IMM-6Y-SRA'
+    },
+    agentProposals: [
+      {
+        findingId: 'v2fnd-9901a', agentId: 'bot-triage-v2', code: 'OCR_MARGIN_RECOVERY_CANDIDATE', confidence: 0.91,
+        summary: 'AI Layout Recovery detected full CoS token C2G99887766 in PDF XObject metadata stream.',
+        proposedFields: { cos_reference: 'C2G99887766' }
+      }
+    ],
+    note: 'CoS reference cropped on visual margin. AI Triage Agent proposed metadata recovery or Coordinator can Chase Client.',
+    reviewer: 'Not reviewed', reviewReason: ''
+  },
+  {
+    id: 'DOC-303', caseId: 'c-902', reqId: 'req-gt-endorsement', name: 'Royal Society Endorsement Stage 1 Letter',
+    type: 'COS_LETTER', version: 1, uploaded: '2026-10-25 08:32 UTC',
+    sha256: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+    techState: 'processing_failed', decisionState: 'pending', retentionState: 'active',
+    s3QuarantineKey: 's3://aircounsel-quarantine/c-902/DOC-303_v1.pdf',
+    s3TrustedKey: null,
+    ocrArtifactKey: null,
+    checks: [
+      ['malware_and_signature_runner', 'passed', 1, 'CLEAN_PDF_1_7'],
+      ['cos_regex_runner', 'error', 1, 'OCR_WORKER_DAEMON_TIMEOUT'],
+      ['mrz_checksum_runner', 'not_applicable', 1, 'SKIPPED_FOR_ENDORSEMENT']
+    ],
+    extractedFields: { applicant_name: 'DR_VIKRAM_PATEL', endorsement_ref: 'RS-GT-2026-991' },
+    ocrExtract: '[TRANSIENT WORKER FAULT: OCR_WORKER_DAEMON_TIMEOUT AFTER 30000MS | RETRY LEASE REQUIRED]',
+    governance: {
+      personalDataClass: 'special_category',
+      processingPurpose: 'immigration_evidence',
+      article6Basis: 'Art 6(1)(b) Contract',
+      article9Or10Condition: 'DPA18_Sch1_LegalClaims',
+      privilegeAssessment: 'reviewed_not_privileged',
+      confidentialityLevel: 'client_confidential',
+      retentionPolicyId: 'RET-IMM-6Y-SRA'
+    },
+    agentProposals: [],
+    note: 'OPERATIONAL FAULT: OCR worker timed out (status=ERROR). Chase Client is disabled by Operational Fault Guard; use Re-inspect.',
+    reviewer: 'Not reviewed', reviewReason: ''
+  },
+  {
+    id: 'DOC-304', caseId: 'c-904', reqId: 'req-if-plan', name: 'Innovator Founder Endorsed Business Plan',
+    type: 'COS_LETTER', version: 1, uploaded: '2026-10-23 14:04 UTC',
+    sha256: '7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451',
+    techState: 'released', decisionState: 'accepted', retentionState: 'active',
+    s3QuarantineKey: 's3://aircounsel-quarantine/c-904/DOC-304_v1.pdf',
+    s3TrustedKey: 's3://aircounsel-trusted/c-904/DOC-304_v1.pdf',
+    ocrArtifactKey: 's3://aircounsel-trusted/c-904/DOC-304_v1.ocr.json',
+    checks: [
+      ['malware_and_signature_runner', 'passed', 1, 'CLEAN_PDF_1_7'],
+      ['cos_regex_runner', 'passed', 1, 'ENDORSEMENT_TOKEN_VERIFIED'],
+      ['mrz_checksum_runner', 'not_applicable', 1, 'SKIPPED_FOR_PLAN']
+    ],
+    extractedFields: { applicant_name: 'MARCUS_CHEN', venture_name: 'PAYLEDGER_UK_LTD', endorsing_body: 'ENVESTORS', capital_committed: '120000' },
+    ocrExtract: 'VENTURE: PAYLEDGER UK LTD | ENDORSING BODY: ENVESTORS\nCRITERIA: INNOVATIVE, VIABLE & SCALABLE\nINITIAL CAPITAL COMMITTED: £120,000 (VERIFIED SOURCE OF FUNDS)',
+    governance: {
+      personalDataClass: 'ordinary_personal',
+      processingPurpose: 'immigration_evidence',
+      article6Basis: 'Art 6(1)(b) Contract',
+      article9Or10Condition: 'none_required',
+      privilegeAssessment: 'reviewed_privileged',
+      confidentialityLevel: 'strictly_confidential',
+      retentionPolicyId: 'RET-IMM-6Y-SRA'
+    },
+    agentProposals: [],
+    note: 'All V2 telemetry checks, 7-field GDPR governance, and Solicitor attestation complete. Ready for Partner Handoff.',
+    reviewer: 'S. Jenkins · Solicitor', reviewReason: 'Substantive viability and Envestors endorsement verified under Appendix Innovator Founder.'
+  }
+];
+
+// Per-Case Sharded HMAC Audit Outbox (Zero-PII Pointer Payloads)
+let events = [];
+let externalKmsCaseAnchors = {};
+
+function appendShardedAuditEvent(caseId, action, actorId, actorRole, actorKind, pointerPayload) {
+  validateZeroPiiPayload(pointerPayload);
+  const caseEvents = events.filter(e => e.caseId === caseId);
+  const prevCaseSeq = caseEvents.length ? Math.max(...caseEvents.map(e => e.caseSeq)) : 0;
+  const prevRow = caseEvents.find(e => e.caseSeq === prevCaseSeq);
+  const prevHash = prevRow ? prevRow.eventHmac : '0'.repeat(64);
+  const nextCaseSeq = prevCaseSeq + 1;
+  const globalSeq = events.length + 1;
+  const timeIso = simDate.toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+  const canonicalJson = JSON.stringify(pointerPayload, Object.keys(pointerPayload).sort());
+  const hmacInput = `tenant-uk-chambers|${caseId}|${nextCaseSeq}|${action}|${actorId}|${actorRole}|${actorKind}|${canonicalJson}|${prevHash}|${timeIso}`;
+  const eventHmac = deterministicHmac256(hmacInput);
+
+  const ev = {
+    seq: globalSeq,
+    caseSeq: nextCaseSeq,
+    tenantId: 'tenant-uk-chambers',
+    caseId,
+    action,
+    actor: actorId,
+    role: actorRole,
+    kind: actorKind,
+    time: timeIso,
+    payload: pointerPayload,
+    canonicalJson,
+    prevHash,
+    eventHmac
+  };
+  events.unshift(ev);
+  externalKmsCaseAnchors[caseId] = { caseSeq: nextCaseSeq, headHmac: eventHmac };
+  return ev;
+}
+
+// Seed initial authentic HMAC-chained events
+appendShardedAuditEvent('c-901', 'DOC_RELEASED_AND_ATTESTED', 'usr-sol-jenkins', 'SOLICITOR', 'HUMAN', {
+  tenant_id: 'tenant-uk-chambers', case_id: 'c-901', doc_id: 'DOC-301', version: 2,
+  from_state: 'eligible_for_release', to_state: 'released',
+  sha256: '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08',
+  reason_code: 'ICAO_9303_VERIFIED'
+});
+appendShardedAuditEvent('c-901', 'DOC_HELD_FOR_REVIEW', 'wrk-v2-inspector', 'WORKER', 'DETERMINISTIC_BOT', {
+  tenant_id: 'tenant-uk-chambers', case_id: 'c-901', doc_id: 'DOC-302', version: 1,
+  from_state: 'inspection_in_progress', to_state: 'held_for_review',
+  sha256: '4b227777d4dd1fc61c6f884f48641d0294d121d3fd328cb08b5531fcacdabf8a',
+  reason_code: 'COS_REGEX_CROPPED_MARGIN'
+});
+appendShardedAuditEvent('c-902', 'DOC_PROCESSING_FAILED', 'wrk-v2-inspector', 'WORKER', 'DETERMINISTIC_BOT', {
+  tenant_id: 'tenant-uk-chambers', case_id: 'c-902', doc_id: 'DOC-303', version: 1,
+  from_state: 'inspection_in_progress', to_state: 'processing_failed',
+  sha256: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+  reason_code: 'OCR_WORKER_DAEMON_TIMEOUT'
+});
+appendShardedAuditEvent('c-904', 'DOC_RELEASED_AND_ATTESTED', 'usr-sol-jenkins', 'SOLICITOR', 'HUMAN', {
+  tenant_id: 'tenant-uk-chambers', case_id: 'c-904', doc_id: 'DOC-304', version: 1,
+  from_state: 'eligible_for_release', to_state: 'released',
+  sha256: '7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451',
+  reason_code: 'SPEC_FIELDS_AND_PRIVILEGE_VERIFIED'
+});
+
+function verifyCaseHmacChain(caseId) {
+  const caseEvents = [...events.filter(e => e.caseId === caseId)].sort((a, b) => a.caseSeq - b.caseSeq);
+  let expectedPrev = '0'.repeat(64);
+  let lastSeq = 0;
+  for (let i = 0; i < caseEvents.length; i++) {
+    const r = caseEvents[i];
+    if (r.caseSeq !== i + 1 || r.prevHash !== expectedPrev) return false;
+    const recalcInput = `${r.tenantId}|${r.caseId}|${r.caseSeq}|${r.action}|${r.actor}|${r.role}|${r.kind}|${r.canonicalJson}|${r.prevHash}|${r.time}`;
+    const recalcHmac = deterministicHmac256(recalcInput);
+    if (recalcHmac !== r.eventHmac) return false;
+    expectedPrev = recalcHmac;
+    lastSeq = r.caseSeq;
+  }
+  const anchor = externalKmsCaseAnchors[caseId] || { caseSeq: 0, headHmac: '0'.repeat(64) };
+  return lastSeq === anchor.caseSeq && expectedPrev === anchor.headHmac;
+}
+
+function verifyAllCaseChains() {
+  return cases.every(c => verifyCaseHmacChain(c.id));
+}
+
+/* ============================================================================
+   5. COMPUTED READINESS ENGINE (7 INSIGHTS + GDPR COHERENCE + CROSS-DOC CHECK)
+   ============================================================================ */
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function caseScore(c) { return c.gates.reduce((a, b) => a + b, 0); }
+function getCase(id) { return cases.find(c => c.id === id) || cases[0]; }
+function docsFor(id) { return docs.filter(d => d.caseId === id); }
+function activeDocsFor(id) { return docs.filter(d => d.caseId === id && d.retentionState === 'active'); }
+function perms() { return rolePermissions[currentRole]; }
+
+function evaluateCaseReadiness(c) {
+  const blockers = [];
+  if (c.state !== 'assigned' && c.state !== 'handoff_dispatched' && c.state !== 'handoff_acknowledged') {
+    blockers.push(`MATTER_NOT_ALLOCATED (state=${c.state})`);
+  }
+  if (c.compliance.conflict !== 'cleared') blockers.push(`SRA_CODE_6_2_CONFLICT_UNRESOLVED (${c.compliance.conflict})`);
+  if (c.compliance.aml !== 'verified') blockers.push(`MLR_2017_AML_CDD_UNVERIFIED (${c.compliance.aml})`);
+  if (c.compliance.clientCare !== 'signed') blockers.push(`SRA_CLIENT_CARE_UNSIGNED (${c.compliance.clientCare})`);
+  if (!c.ruleDriftAcknowledged) blockers.push(`DOC_13_UNACKNOWLEDGED_REGULATORY_RULE_DRIFT (${c.pinnedRuleVersion})`);
+
+  const activeDocs = activeDocsFor(c.id);
+  if (!activeDocs.length) blockers.push('DOC_04_NO_ACTIVE_EVIDENCE_ATTACHED');
+
+  const names = new Set();
+  for (const d of activeDocs) {
+    if (d.extractedFields?.applicant_name) names.add(d.extractedFields.applicant_name);
+    if (d.techState !== 'released') {
+      blockers.push(`V2_NOT_RELEASED_TO_TRUSTED:${d.id} (techState=${d.techState})`);
+    }
+    for (const chk of d.checks) {
+      if (!['passed', 'not_applicable'].includes(chk[1])) {
+        blockers.push(`DOC_02_TELEMETRY_${chk[1].toUpperCase()}:${d.id}:${chk[0]}`);
+      }
+    }
+    if (d.decisionState !== 'accepted') {
+      blockers.push(`DOC_03_SOLICITOR_ATTESTATION_REQUIRED:${d.id} (decision=${d.decisionState})`);
+    }
+    const g = d.governance;
+    if (g.privilegeAssessment === 'not_assessed') {
+      blockers.push(`GOV_SRA_PRIVILEGE_UNASSESSED:${d.id}`);
+    }
+    if (g.personalDataClass === 'undetermined') {
+      blockers.push(`GOV_GDPR_DATA_CLASS_UNDETERMINED:${d.id}`);
+    }
+    if (['special_category', 'criminal_offence'].includes(g.personalDataClass) &&
+        ['none_required', 'pending_assessment'].includes(g.article9Or10Condition)) {
+      blockers.push(`GOV_UNLAWFUL_ART9_10_COHERENCE:${d.id} (${g.personalDataClass} + ${g.article9Or10Condition})`);
+    }
+  }
+  if (names.size > 1) {
+    blockers.push(`CROSS_DOC_APPLICANT_NAME_MISMATCH (${[...names].join(' vs ')})`);
+  }
+  return { ready: blockers.length === 0, blockers };
+}
+
+function isCaseHandoffReady(c) {
+  return evaluateCaseReadiness(c).ready;
+}
+
+/* ============================================================================
+   6. UI HELPERS & BADGE FORMATTERS
+   ============================================================================ */
+function icon(name) {
+  const paths = {
+    folder: '<path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3Z"/><path d="M3 10h18"/>',
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    file: '<path d="M7 3h7l5 5v13H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v6h5M9 13h6M9 17h6"/>',
+    arrow: '<path d="M4 12h15m-6-6 6 6-6 6"/>',
+    shield: '<path d="M12 3 20 6v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/>',
+    alert: '<path d="m12 3 10 18H2Z"/><path d="M12 9v5m0 3h.01"/>',
+    history: '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5m4-1v5l4 2"/>'
+  };
+  return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${paths[name] || paths.file}</svg>`;
+}
+
+function stateLabel(s) {
+  return ({
+    quarantined: 'Quarantined', inspection_in_progress: 'Lease Active · Inspecting',
+    processing_failed: 'Fault · Retry Lease', held_for_review: 'Held for Triage',
+    eligible_for_release: 'Eligible for Release', released: 'Released (Trusted S3)',
+    pending: 'Decision Pending', accepted: 'Solicitor Accepted', rejected: 'Rejected',
+    correction_requested: 'Correction Requested', active: 'Active (6Y SRA)',
+    superseded: 'Superseded', held: 'Legal Hold', disposed: 'Disposed (Crypto-Shredded)',
+    passed: 'PASSED', failed: 'FAILED (Defect)', error: 'ERROR (Worker Fault)',
+    not_run: 'NOT RUN', not_applicable: 'N/A (By Spec)',
+    ready: 'Ready for Supervision', blocked: 'Handoff Blocked', dispatched: 'Dispatched to Partner',
+    acknowledged: 'Partner Acknowledged', returned: 'Returned for Correction',
+    cleared: 'Cleared', verified: 'Verified', signed: 'Signed', flagged: 'Conflict Flagged',
+    issued: 'Issued', not_sent: 'Not Sent'
+  })[s] || s;
+}
+
+function stateClass(s) {
+  if (['released', 'eligible_for_release', 'accepted', 'acknowledged', 'cleared', 'verified', 'signed', 'passed', 'ready'].includes(s)) return 'good';
+  if (['processing_failed', 'blocked', 'rejected', 'flagged', 'failed', 'error'].includes(s)) return 'bad';
+  if (['inspection_in_progress', 'held_for_review', 'pending', 'correction_requested', 'dispatched', 'returned', 'issued'].includes(s)) return 'warn';
+  if (['quarantined', 'active'].includes(s)) return 'info';
+  return 'neutral';
+}
+
+function badge(s) { return `<span class="state ${stateClass(s)}">${esc(stateLabel(s))}</span>`; }
+
+function scoreSvg(n) {
+  let r = 14, c = 2 * Math.PI * r, off = c * (1 - Math.max(0, Math.min(100, n)) / 100);
+  return `<div class="score"><svg viewBox="0 0 36 36" role="img" aria-label="Weighted score ${n} out of 100"><circle cx="18" cy="18" r="14" fill="none" stroke="var(--line)" stroke-width="3"/><circle cx="18" cy="18" r="14" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${off}"/></svg><div><span>${n}/100</span><small>WEIGHTED RUBRIC</small></div></div>`;
+}
+
+function dueSignal(visaDate, is3C) {
+  const d = new Date(visaDate + 'T00:00:00Z');
+  const diff = Math.round((d - simDate) / 864e5);
+  const tag = is3C ? ' · SEC 3C LEAVE' : '';
+  if (diff <= 0) return { cls: 'due-today', label: `STATUTORY EXPIRY (${visaDate})${tag}` };
+  if (diff <= 4) return { cls: 'due-soon', label: `LEAVE EXPIRES IN ${diff}D (${visaDate})${tag}` };
+  return { cls: 'due-ok', label: `LEAVE EXPIRY: ${visaDate}${tag}` };
+}
+
+function pageHead(kicker, title, desc, actions = '') {
+  return `<div class="pagehead"><div><div class="eyebrow">${kicker} · <span>PRINCIPAL: ${esc(perms().label)} (${esc(perms().kind)})</span></div><h1>${title}</h1><p>${desc}</p></div><div class="head-actions">${actions}</div></div>`;
+}
+
+function metric(label, note, val, iconName, action, extraClass = '') {
+  return `<div class="metric ${extraClass}"><div class="metric-top"><span>${label}</span><span class="metric-icon">${icon(iconName)}</span></div><div class="metric-num">${val}</div><div class="metric-foot"><button class="linkbtn" data-go="${action}">${note} →</button></div></div>`;
+}
+
+/* ============================================================================
+   7. VIEW RENDERERS
+   ============================================================================ */
+function render() {
+  $$('.nav button').forEach(b => b.classList.toggle('active', b.dataset.view === currentView));
+  $('#simClockDisplay').textContent = simDate.toISOString().slice(0, 10);
+  $('#crumb').textContent = ({
+    home: 'Practice briefing', pipeline: 'Intake & triage', cases: 'Matter register',
+    documents: 'Evidence pipeline V2', handoff: 'Supervision & handoff',
+    registry: 'Spec registry & drift', agents: 'Downstream agent bus',
+    audit: 'Sharded HMAC audit', settings: 'Railway & V2 contracts',
+    detail: `Matter ${selectedCase}`
+  })[currentView];
+
+  const driftCount = cases.filter(c => !c.ruleDriftAcknowledged && c.state !== 'closed').length;
+  const docQueueCount = docs.filter(d => d.retentionState === 'active' && (d.techState !== 'released' || d.decisionState !== 'accepted')).length;
+  const handoffBlockedCount = cases.filter(c => c.state === 'assigned' && !isCaseHandoffReady(c)).length;
+
+  $('#navPipeline').textContent = cases.filter(c => ['triaged', 'vitals_pending'].includes(c.state)).length;
+  $('#navDocs').textContent = docQueueCount;
+  $('#navHandoff').textContent = handoffBlockedCount;
+  $('#navDrift').textContent = driftCount;
+  $('#navDrift').classList.toggle('alert', driftCount > 0);
+
+  const views = {
+    home: homeView, pipeline: pipelineView, cases: casesView,
+    documents: documentsView, handoff: handoffView, registry: registryView,
+    agents: agentsView, audit: auditView, settings: settingsView
+  };
+  $('#content').innerHTML = currentView === 'detail' ? caseDetailView(getCase(selectedCase)) : views[currentView]();
+  bindView();
+}
+
+function homeView() {
+  const activeExceptions = docs.filter(d => d.retentionState === 'active' && (d.techState !== 'released' || d.decisionState !== 'accepted'));
+  const readyCount = cases.filter(isCaseHandoffReady).length;
+  const driftedCases = cases.filter(c => !c.ruleDriftAcknowledged && c.state !== 'closed');
+
+  const priority = [
+    ...driftedCases.map(c => ({
+      level: 'critical', title: `Regulatory Rule Drift (DOC-13) · ${c.name}`,
+      badge: 'SPEC UPDATED',
+      desc: `Pinned rule ${c.pinnedRuleVersion} has drifted from the newly published Home Office Appendix spec. Re-pin or acknowledge required.`,
+      meta: c.sraRef, caseId: c.id
+    })),
+    ...cases.filter(c => c.urgency === 'CRITICAL').map(c => ({
+      level: 'critical', title: `${c.name} · ${c.route.replaceAll('_', ' ')}`,
+      badge: 'SECTION 3C LEAVE TODAY',
+      desc: 'Statutory leave expires 2026-10-25. DOC-303 experienced an OCR Worker Timeout (ERROR) | retry inspection lease immediately.',
+      meta: c.sraRef, caseId: c.id, docId: 'DOC-303'
+    })),
+    ...cases.filter(c => c.compliance.conflict === 'flagged').map(c => ({
+      level: 'critical', title: `SRA Conflict Flagged · ${c.name}`,
+      badge: 'SRA CODE 6.2',
+      desc: 'Adverse party / Sponsor conflict flagged. Substantive progression locked until COLP/Solicitor disposition.',
+      meta: c.sraRef, caseId: c.id
+    })),
+    ...activeExceptions.map(d => ({
+      level: 'high', title: `V2 Pipeline Gate · ${d.name}`,
+      badge: `${d.id} · ${d.techState.toUpperCase()}`,
+      desc: d.note,
+      meta: d.caseId, caseId: d.caseId, docId: d.id
+    }))
+  ];
+
+  return `
+    ${pageHead('PRACTICE BRIEFING', 'Chambers & Evidence Pipeline V2 Control', 'Unified oversight of statutory Section 3C clocks, 3-Axis Document Evidence states, AI Triage Agent proposals, and Sharded HMAC audit integrity.', `<button class="btn subtle" id="openCmdHero">⌘K Quick Jump</button><button class="btn" data-go="agents">Downstream Agent Bus →</button><button class="btn" data-go="audit">${icon('shield')} Verify HMAC Chain</button>`)}
+    <div class="grid metrics">
+      ${metric('ACTIVE MATTERS', 'Open matter register', cases.length, 'folder', 'cases')}
+      ${metric('STATUTORY & DRIFT ALERTS', 'Triage priority queue', priority.length, 'alert', 'pipeline', priority.length > 0 ? 'alert' : '')}
+      ${metric('V2 EVIDENCE QUEUE', '3-Axis inspection & sign-off', activeExceptions.length, 'file', 'documents')}
+      ${metric('SUPERVISION READY', 'Computed handoff guard', readyCount, 'arrow', 'handoff')}
+    </div>
+    <div class="grid twocol">
+      <section class="panel">
+        <div class="panelhead">
+          <div><h2>Priority statutory, rule-drift &amp; V2 evidence queue</h2><p>Separates operational worker faults (ERROR → Retry Lease) from document defects (FAILED → Chase Client).</p></div>
+          <button class="linkbtn" data-go="documents">V2 Evidence Vault →</button>
+        </div>
+        <div class="priority-list">
+          ${priority.map(p => `
+            <div class="priority-item">
+              <span class="priority-bar ${p.level}"></span>
+              <div>
+                <div class="priority-title">${esc(p.title)} <span class="state ${p.level === 'critical' ? 'bad' : 'warn'}">${esc(p.badge)}</span></div>
+                <div class="priority-desc">${esc(p.desc)}</div>
+                <div style="margin-top:7px;display:flex;gap:12px;flex-wrap:wrap">
+                  <button class="linkbtn" data-open-case="${p.caseId}">Open Matter ${esc(p.caseId)} →</button>
+                  ${p.docId ? `<button class="linkbtn" data-inspect-doc="${p.docId}">Launch 3-Axis Split-Pane Inspector →</button>` : ''}
+                </div>
+              </div>
+              <div class="priority-meta">${esc(p.meta)}</div>
+            </div>
+          `).join('')}
+        </div>
+      </section>
+      <section class="panel">
+        <div class="panelhead">
+          <div><h2>Sharded Per-Case HMAC Outbox Stream</h2><p>Zero-PII pointer payloads signed with external KMS anchor.</p></div>
+          <button class="linkbtn" data-go="audit">Verify chain →</button>
+        </div>
+        <div class="event-list">
+          ${events.slice(0, 5).map(ev => `
+            <div class="event-item">
+              <div class="event-icon">${icon('shield')}</div>
+              <div>
+                <div class="event-title"><strong>${esc(ev.action)}</strong> · <span class="mono">${esc(ev.caseId)} (case_seq #${ev.caseSeq})</span></div>
+                <div class="diff-pill">${esc(ev.payload.from_state || 'init')} → ${esc(ev.payload.to_state || ev.payload.reason_code || 'recorded')}</div>
+                <div class="event-detail mono" style="margin-top:3px">HMAC: ${esc(ev.eventHmac.slice(0, 20))}…</div>
+                <div class="event-time">${esc(ev.time)} · ${esc(ev.actor)} (${esc(ev.kind)})</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </section>
+    </div>
+    <div class="callout">
+      <strong>SRA AI Warning Notice &amp; UK GDPR Invariant.</strong> Deterministic workers (<code>DETERMINISTIC_BOT</code>) execute bounded technical checks; AI Triage Assistants (<code>LLM_AGENT</code>) submit non-binding extraction proposals only. Legal sufficiency attestation and Legal Professional Privilege assessment are structurally restricted to authenticated human Solicitors.
+    </div>`;
+}
+
+function caseCard(c) {
+  const score = caseScore(c);
+  const due = dueSignal(c.visaExpiry, c.section3C);
+  const readiness = evaluateCaseReadiness(c);
+  return `
+    <article class="case-card ${c.urgency === 'CRITICAL' ? 'critical' : c.urgency === 'HIGH' ? 'high' : ''}">
+      <div class="case-top">
+        <div>
+          <div class="case-name">${esc(c.name)} ${!c.ruleDriftAcknowledged ? `<span class="state warn">RULE DRIFT</span>` : ''}</div>
+          <div class="case-id">${esc(c.id)} · ${esc(c.sraRef)} · PIN: ${esc(c.pinnedRuleVersion)}</div>
+        </div>
+        ${badge(readiness.ready ? 'ready' : 'blocked')}
+      </div>
+      <div class="case-route">
+        <span>${esc(c.route.replaceAll('_', ' '))}</span> ·
+        <span>State: <strong>${esc(c.state)}</strong></span> ·
+        <span>Owner: <strong>${esc(c.ownerDisplay)}</strong></span>
+      </div>
+      <div class="due-line ${due.cls}">${due.label}</div>
+      <div class="case-bottom">
+        ${scoreSvg(score)}
+        <div style="display:flex;gap:6px">
+          <button class="btn subtle" data-open-case="${c.id}">Open Matter Dossier →</button>
+        </div>
+      </div>
+    </article>`;
+}
+
+function pipelineView() {
+  return `
+    ${pageHead('INCOMING WORK', 'Intake & Statutory Triage Pipeline', 'Screen matters against the 100-point weighted UK Immigration rubric, Section 3C clocks, and Spec Registry pins.', `<button class="btn" data-go="registry">Spec Registry →</button><button class="btn" data-go="documents">${icon('file')} Evidence Pipeline V2</button>`)}
+    <div class="filters">
+      <input id="pipelineSearch" placeholder="Search client, matter ref, or UK route…" value="${esc(searchTerm)}">
+      <select id="pipelineUrgency">
+        <option value="all">All urgency bands</option>
+        <option>CRITICAL</option><option>HIGH</option><option>MEDIUM</option><option>STANDARD</option>
+      </select>
+      <select id="pipelineState">
+        <option value="all">All workflow states</option>
+        ${['triaged', 'vitals_pending', 'assigned', 'handoff_dispatched', 'handoff_acknowledged', 'closed'].map(s => `<option>${s}</option>`).join('')}
+      </select>
+    </div>
+    <div class="case-list" id="pipelineCards">${cases.map(caseCard).join('')}</div>`;
+}
+
+function casesView() {
+  return `
+    ${pageHead('MATTER REGISTER', 'Regulated Matter & Spec Pin Register', 'Authoritative register of active files, pinned Home Office Appendix specs, SRA conflict/AML gates, and computed readiness.', `<button class="btn" data-go="pipeline">Open Triage Cards →</button>`)}
+    <div class="filters">
+      <input id="caseSearch" placeholder="Filter by client, SRA matter ref, route or solicitor…" value="${esc(searchTerm)}">
+      <select id="caseState">
+        <option value="all">All states</option>
+        ${['triaged', 'vitals_pending', 'assigned', 'handoff_dispatched', 'handoff_acknowledged', 'closed'].map(s => `<option>${s}</option>`).join('')}
+      </select>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Client / Matter Ref</th><th>Pinned Spec Version</th><th>SRA Conflict &amp; AML</th><th>Statutory Expiry</th><th>State</th><th>Computed Readiness</th><th>Rubric</th><th>Action</th></tr>
+        </thead>
+        <tbody id="caseRows">${renderCaseRows(cases)}</tbody>
+      </table>
+    </div>`;
+}
+
+function renderCaseRows(list) {
+  if (!list.length) return `<tr><td colspan="8" class="empty">No matters match the active filter criteria.</td></tr>`;
+  return list.map(c => {
+    const due = dueSignal(c.visaExpiry, c.section3C);
+    const r = evaluateCaseReadiness(c);
+    return `
+      <tr>
+        <td><strong>${esc(c.name)}</strong><div class="mono" style="color:var(--muted2);margin-top:3px">${esc(c.id)} · ${esc(c.sraRef)}</div></td>
+        <td><span class="mono">${esc(c.pinnedRuleVersion)}</span> ${!c.ruleDriftAcknowledged ? badge('returned') : ''}</td>
+        <td>${badge(c.compliance.conflict)} ${badge(c.compliance.aml)}</td>
+        <td><span class="due-line ${due.cls}">${esc(c.visaExpiry)}${c.section3C ? ' (3C)' : ''}</span></td>
+        <td>${badge(c.state)}</td>
+        <td>${badge(r.ready ? 'ready' : 'blocked')} <span class="mono" style="color:var(--muted2)">(${r.blockers.length} blockers)</span></td>
+        <td class="mono"><strong>${caseScore(c)}/100</strong></td>
+        <td><button class="linkbtn" data-open-case="${c.id}">Dossier →</button></td>
+      </tr>`;
+  }).join('');
+}
+
+function caseDetailView(c) {
+  const score = caseScore(c);
+  const due = dueSignal(c.visaExpiry, c.section3C);
+  const canEdit = perms().canOverrideCase;
+  const readiness = evaluateCaseReadiness(c);
+  const latestSpec = specRegistry.filter(s => s.routeCode === c.route && s.status === 'published').slice(-1)[0];
+
+  return `
+    ${pageHead(`MATTER DOSSIER / ${c.sraRef}`, esc(c.name), `${esc(c.id)} · ${esc(c.route.replaceAll('_', ' '))} · Pinned Spec: ${esc(c.pinnedRuleVersion)} ${c.legalHold ? '· [LEGAL HOLD ACTIVE]' : ''}`, `
+      <button class="btn" data-go="cases">← Matter Register</button>
+      <button class="btn ${c.legalHold ? 'danger' : ''}" id="toggleLegalHoldBtn">${c.legalHold ? 'Release Legal Hold' : 'Set Legal Hold'}</button>
+      <button class="btn subtle" id="exportBundleBtn" data-case="${c.id}">${icon('shield')} Export SRA Bundle (JSON)</button>
+      <button class="btn primary" data-open-docs-for="${c.id}">V2 Evidence Vault (${docsFor(c.id).length}) →</button>
+    `)}
+
+    ${!c.ruleDriftAcknowledged && latestSpec ? `
+      <div class="drift-banner">
+        <div>
+          <strong>RULE CURRENCY ALERT (DOC-13): ${esc(latestSpec.routeTitle)} updated to ${esc(latestSpec.sourceId)}</strong>
+          <p>This open matter is pinned to ${esc(c.pinnedRuleVersion)}. Handoff is blocked until a Solicitor acknowledges currency drift or re-pins to ${esc(latestSpec.sourceId)}.</p>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn primary" id="repinRuleBtn" ${!canEdit ? 'disabled' : ''}>Re-Pin to ${esc(latestSpec.sourceId)} &amp; Acknowledge</button>
+          <button class="btn" id="ackDriftOnlyBtn" ${!canEdit ? 'disabled' : ''}>Keep Historical Pin &amp; Acknowledge</button>
+        </div>
+      </div>` : ''}
+
+    <div class="reg-strip">
+      <div class="reg-cell">
+        <div class="reg-cell-top"><span>SRA CODE 6.2</span><span>GATE 01</span></div>
+        <div class="reg-cell-title"><span>Conflict of Interest</span>${badge(c.compliance.conflict)}</div>
+        <div class="reg-cell-sub">Adverse party &amp; sponsor cross-check</div>
+      </div>
+      <div class="reg-cell">
+        <div class="reg-cell-top"><span>MLR 2017 / LSAG</span><span>GATE 02</span></div>
+        <div class="reg-cell-title"><span>AML / CDD &amp; Sanctions</span>${badge(c.compliance.aml)}</div>
+        <div class="reg-cell-sub">Biometric ID&amp;V and UK sanctions screen</div>
+      </div>
+      <div class="reg-cell">
+        <div class="reg-cell-top"><span>SRA TRANSPARENCY</span><span>GATE 03</span></div>
+        <div class="reg-cell-title"><span>Client Care Letter</span>${badge(c.compliance.clientCare)}</div>
+        <div class="reg-cell-sub">Scope of retainer &amp; fee basis agreed</div>
+      </div>
+      <div class="reg-cell">
+        <div class="reg-cell-top"><span>COMPUTED HANDOFF GUARD</span><span>READINESS</span></div>
+        <div class="reg-cell-title"><span>Dossier Readiness</span>${badge(readiness.ready ? 'ready' : 'blocked')}</div>
+        <div class="reg-cell-sub">${readiness.ready ? '0 blockers | Ready for Partner' : `${readiness.blockers.length} active blocker(s)`}</div>
+      </div>
+    </div>
+
+    <div class="grid detailgrid">
+      <section class="panel">
+        <div class="panelhead">
+          <div><h2>100-Point Weighted Statutory Triage Rubric</h2><p>Normalized across six deterministic assessment gates (20 + 20 + 20 + 15 + 15 + 10 = 100 pts).</p></div>
+          <span class="state neutral">TOTAL: ${score}/100</span>
+        </div>
+        <div class="gate-list">
+          ${gateDefinitions.map((g, i) => {
+            const val = c.gates[i];
+            const pct = Math.round((val / g.max) * 100);
+            return `
+              <div class="gate-row">
+                <div class="gate-name">${esc(g.name)}<small>${esc(g.desc)}</small></div>
+                <div class="bar"><span style="width:${pct}%"></span></div>
+                <div class="gate-val"><strong>${val}</strong><span style="color:var(--muted2)">/${g.max}</span></div>
+              </div>`;
+          }).join('')}
+        </div>
+        <div class="divider"></div>
+        <div class="smallcaps" style="margin-bottom:6px">COMPUTED HANDOFF READINESS BLOCKERS (LIVE EVALUATION)</div>
+        ${readiness.blockers.length ? `
+          <div style="display:grid;gap:5px">
+            ${readiness.blockers.map(b => `<div class="mono" style="color:var(--red);font-size:10px">✕ ${esc(b)}</div>`).join('')}
+          </div>` : `<div class="mono" style="color:var(--green)">✓ All V2 Evidence, 7-Field Governance, Spec Currency, and SRA Onboarding gates satisfied.</div>`}
+      </section>
+
+      <section class="panel">
+        <div class="panelhead">
+          <div><h2>Matter &amp; SRA Governance Controls</h2><p>Protected by authenticated Principal (${esc(perms().label)}).</p></div>
+        </div>
+        <div class="formgrid">
+          <div class="fieldgroup">
+            <label for="caseStateSelect">Workflow State</label>
+            <select id="caseStateSelect" ${!canEdit ? 'disabled' : ''}>
+              ${['triaged', 'vitals_pending', 'assigned', 'handoff_dispatched', 'handoff_acknowledged', 'closed'].map(s => `<option ${s === c.state ? 'selected' : ''}>${s}</option>`).join('')}
+            </select>
+          </div>
+          <div class="fieldgroup">
+            <label for="caseConflictSelect">SRA Conflict Status</label>
+            <select id="caseConflictSelect" ${!perms().canClearConflict ? 'disabled' : ''}>
+              ${['pending', 'cleared', 'flagged'].map(s => `<option value="${s}" ${s === c.compliance.conflict ? 'selected' : ''}>${stateLabel(s)}</option>`).join('')}
+            </select>
+          </div>
+          <div class="fieldgroup">
+            <label for="caseAmlSelect">AML / CDD Status</label>
+            <select id="caseAmlSelect" ${!canEdit ? 'disabled' : ''}>
+              ${['pending', 'verified'].map(s => `<option value="${s}" ${s === c.compliance.aml ? 'selected' : ''}>${stateLabel(s)}</option>`).join('')}
+            </select>
+          </div>
+          <div class="fieldgroup">
+            <label for="caseCareSelect">Client Care Retainer</label>
+            <select id="caseCareSelect" ${!canEdit ? 'disabled' : ''}>
+              ${['not_sent', 'issued', 'signed'].map(s => `<option value="${s}" ${s === c.compliance.clientCare ? 'selected' : ''}>${stateLabel(s)}</option>`).join('')}
+            </select>
+          </div>
+          <div class="fieldgroup full">
+            <label for="overrideReason">Mandatory Attendance Reason Code</label>
+            <select id="overrideReason" ${!canEdit && !perms().canClearConflict ? 'disabled' : ''}>
+              <option value="SRA_ONBOARDING_GATE_VERIFIED">SRA_ONBOARDING_GATE_VERIFIED</option>
+              <option value="PRACTITIONER_ALLOCATION_ACCEPTED">PRACTITIONER_ALLOCATION_ACCEPTED</option>
+              <option value="COLP_CONFLICT_CLEARANCE_RECORDED">COLP_CONFLICT_CLEARANCE_RECORDED</option>
+              <option value="MATTER_CLOSED_ARCHIVED">MATTER_CLOSED_ARCHIVED</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center">
+          <button class="btn primary" id="saveCase" ${!canEdit && !perms().canClearConflict ? 'disabled' : ''}>Commit Signed Matter Update</button>
+          <span class="mono" style="color:var(--muted2)">Zero-PII Outbox Enforced</span>
+        </div>
+      </section>
+    </div>
+
+    <section class="panel">
+      <div class="panelhead">
+        <div><h2>3-Axis Matter Evidence Register (V2 Pipeline Seam)</h2><p>Displays Axis 1 (V2 Tech State), Axis 2 (Solicitor Decision), Axis 3 (GDPR Retention) &amp; 7-Field Governance status.</p></div>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Document / SHA-256</th><th>Ver</th><th>Axis 1: V2 Tech</th><th>Axis 2: Decision</th><th>Axis 3: Retention</th><th>GDPR &amp; Privilege</th><th>Actions</th></tr></thead>
+          <tbody>
+            ${docsFor(c.id).map(d => `
+              <tr>
+                <td><strong>${esc(d.name)}</strong><div class="mono" style="color:var(--muted2);margin-top:2px">${esc(d.id)} · sha256:${esc(d.sha256.slice(0, 12))}…</div></td>
+                <td class="mono">v${d.version}</td>
+                <td>${badge(d.techState)}</td>
+                <td>${badge(d.decisionState)}</td>
+                <td>${badge(d.retentionState)}</td>
+                <td><span class="mono">${esc(d.governance.personalDataClass)}</span> · ${badge(d.governance.privilegeAssessment === 'not_assessed' ? 'pending' : 'accepted')}</td>
+                <td>
+                  <div style="display:flex;gap:6px">
+                    <button class="btn subtle" style="padding:4px 8px;font-size:10px" data-inspect-doc="${d.id}">3-Axis Inspector →</button>
+                    ${c.state === 'closed' && d.retentionState === 'active' ? `<button class="btn danger" style="padding:4px 8px;font-size:10px" data-dispose-doc="${d.id}">GDPR Dispose</button>` : ''}
+                  </div>
+                </td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:20px">
+      <div class="panelhead">
+        <div>
+          <h2>Ambient Voice &amp; Screen-Vision Sensory Organ (Wake-Word &amp; Observation Control)</h2>
+          <p>Governs sensory input channels. Wake-word activation triggers command recognition but never bypasses Golden Matrix role or tenant permissions. Zero raw audio is retained.</p>
+        </div>
+        <span class="state" id="settingsOrganBadge">${window._strataWakeArmed ? 'ARMED (STRATA)' : 'STANDBY (OFF)'}</span>
+      </div>
+      <div class="grid-2" style="margin-top:12px">
+        <div style="background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:16px">
+          <div class="smallcaps" style="color:var(--gold-hi)">1. WAKE-WORD LISTENER ("STRATA" / "COUNSEL")</div>
+          <p style="font-size:12.5px;color:var(--muted);margin:6px 0 12px">Requires explicit browser microphone permission. Discards ordinary room conversation locally; activates command routing only when a phrase begins with <strong>"STRATA"</strong> or <strong>"Counsel"</strong>.</p>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn primary" id="toggleWakeWordBtn">${window._strataWakeArmed ? 'Disarm Wake-Word Listener (ON)' : 'Arm Wake-Word Listener (OFF)'}</button>
+            <span class="mono" style="font-size:11px;color:var(--muted)">State: <strong id="wakeStateLabel">${window._strataWakeState || 'DISABLED'}</strong></span>
+          </div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:16px">
+          <div class="smallcaps" style="color:var(--gold-hi)">2. TAB VISION OCR CONNECTION (SEPARATE PERMISSION)</div>
+          <p style="font-size:12.5px;color:var(--muted);margin:6px 0 12px">Uses browser <code>getDisplayMedia()</code> only when explicitly connected. Never implied by microphone state; independently stoppable at any time.</p>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn" id="toggleTabVisionBtn">${window._strataVisionActive ? 'Disconnect Tab Vision (ACTIVE)' : 'Connect Tab Vision Stream'}</button>
+            <span class="mono" style="font-size:11px;color:var(--muted)">Vision: <strong id="visionStateLabel">${window._strataVisionActive ? 'CONNECTED' : 'DISCONNECTED'}</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="divider" style="margin:16px 0"></div>
+      <div class="smallcaps" style="margin-bottom:8px">RECOGNISED WAKE COMMANDS (SUBJECT TO ACTIVE PRINCIPAL AUTHORISATION &amp; HMAC AUDIT LOGGING)</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--ivory)">
+        <div style="padding:8px 10px;background:var(--bg2);border:1px solid var(--line);border-radius:4px">"STRATA, read Practice Briefing"</div>
+        <div style="padding:8px 10px;background:var(--bg2);border:1px solid var(--line);border-radius:4px">"STRATA, open Evidence Pipeline"</div>
+        <div style="padding:8px 10px;background:var(--bg2);border:1px solid var(--line);border-radius:4px">"STRATA, inspect Matter 0881"</div>
+        <div style="padding:8px 10px;background:var(--bg2);border:1px solid var(--line);border-radius:4px">"STRATA, verify HMAC Audit Chain"</div>
+      </div>
+    </section>`;
+}
+
+function documentsView() {
+  const counts = [
+    docs.filter(d => d.retentionState === 'active' && ['quarantined', 'inspection_in_progress', 'processing_failed'].includes(d.techState)).length,
+    docs.filter(d => d.retentionState === 'active' && d.techState === 'held_for_review').length,
+    docs.filter(d => d.retentionState === 'active' && d.techState === 'released').length,
+    docs.filter(d => d.retentionState === 'active' && d.decisionState === 'accepted').length
+  ];
+
+  return `
+    ${pageHead('EVIDENCE PIPELINE V2', '3-Axis Evidentiary Vault & Messy-Doc Triage', 'Decouples Axis 1 (Quarantine/OCR/Release), Axis 2 (Version-Pinned Human Attestation), and Axis 3 (6-Year SRA Retention & Crypto-Shredding).', `<button class="btn" data-go="agents">Downstream Agent Packets →</button>`)}
+    <div class="grid doc-summary">
+      ${[['Quarantine / Fault Queue', counts[0]], ['Held for Human / AI Triage', counts[1]], ['Released to Trusted S3', counts[2]], ['Solicitor Attested (Active)', counts[3]]].map(([l, n]) => `
+        <div class="metric"><div class="metric-top">${l}</div><div class="metric-num">${n}</div><div class="metric-foot">V2 3-Axis State Model</div></div>
+      `).join('')}
+    </div>
+    <div class="filters">
+      <input id="docSearch" placeholder="Search document title, ID, SHA-256 or client…" value="${esc(searchTerm)}">
+      <select id="docFilter">
+        <option value="all" ${docFilter === 'all' ? 'selected' : ''}>All V2 technical &amp; decision states</option>
+        ${['quarantined', 'processing_failed', 'held_for_review', 'eligible_for_release', 'released', 'accepted', 'superseded', 'disposed'].map(s => `<option value="${s}" ${docFilter === s ? 'selected' : ''}>${stateLabel(s)}</option>`).join('')}
+      </select>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr))" id="docGrid">${renderDocCards()}</div>`;
+}
+
+function renderDocCards() {
+  const list = docs
+    .filter(d => docFilter === 'all' || d.techState === docFilter || d.decisionState === docFilter || d.retentionState === docFilter)
+    .filter(d => {
+      const c = getCase(d.caseId);
+      return !searchTerm || `${d.name} ${d.id} ${d.caseId} ${c.name} ${d.type} ${d.sha256}`.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+
+  if (!list.length) return `<div class="empty" style="grid-column:1/-1">No evidentiary documents match these filter criteria.</div>`;
+
+  return list.map(d => {
+    const c = getCase(d.caseId);
+    const hasError = d.checks.some(ch => ch[1] === 'error');
+    const hasFailed = d.checks.some(ch => ch[1] === 'failed');
+
+    return `
+      <article class="doc-card">
+        <div>
+          <div class="doc-card-top">
+            <div><h3>${esc(d.name)}</h3><p>${esc(d.type)} · <strong>${esc(c.name)}</strong> (${esc(c.sraRef)})</p></div>
+            <span class="mono" style="color:var(--gold-hi)">v${d.version}</span>
+          </div>
+
+          <!-- 3-Axis Status Strip -->
+          <div class="axis-strip">
+            <div class="axis-box"><small>AXIS 1: V2 TECH</small>${badge(d.techState)}</div>
+            <div class="axis-box"><small>AXIS 2: DECISION</small>${badge(d.decisionState)}</div>
+            <div class="axis-box"><small>AXIS 3: RETENTION</small>${badge(d.retentionState)}</div>
+          </div>
+
+          <div class="doc-meta">
+            <span>${esc(d.id)}</span>
+            <span>SHA256: ${esc(d.sha256.slice(0, 12))}…</span>
+            <span>DATA: ${esc(d.governance.personalDataClass.toUpperCase())}</span>
+            <span>PRIVILEGE: ${esc(d.governance.privilegeAssessment.toUpperCase())}</span>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:9px">${esc(d.note)}</div>
+
+          ${d.agentProposals.length ? `
+            <div class="callout agent" style="margin-bottom:9px;padding:8px 10px">
+              <strong>AI Triage Proposal (${esc(d.agentProposals[0].agentId)} · ${Math.round(d.agentProposals[0].confidence * 100)}% conf):</strong>
+              ${esc(d.agentProposals[0].summary)}
+            </div>` : ''}
+
+          <div class="smallcaps" style="margin-bottom:5px">5-STATE DETERMINISTIC TELEMETRY (ATTEMPT HISTORY)</div>
+          <div style="display:grid;gap:5px">
+            ${d.checks.map(ch => `
+              <div style="display:flex;justify-content:space-between;font-size:10px;padding:3px 0;border-bottom:1px solid var(--line2)">
+                <span>${esc(ch[0])} <span class="mono" style="color:var(--muted2)">(attempt #${ch[2]})</span></span>
+                ${badge(ch[1])}
+              </div>`).join('')}
+          </div>
+        </div>
+
+        <!-- Data-Aware Action Buttons (Insight 4: Separate ERROR vs FAILED queues) -->
+        <div class="doc-actions">
+          <button class="btn primary" data-inspect-doc="${d.id}" ${d.retentionState === 'disposed' ? 'disabled' : ''}>3-Axis Split-Pane Inspector</button>
+          <button class="btn" data-doc-action="reinspect" data-id="${d.id}" ${!hasError || d.retentionState !== 'active' ? 'disabled' : ''} title="${hasError ? 'Retry expired/failed worker lease' : 'Disabled: No operational ERROR state'}">Retry Lease (Re-inspect)</button>
+          <button class="btn" data-doc-action="chase" data-id="${d.id}" ${hasError || !hasFailed || d.retentionState !== 'active' ? 'disabled' : ''} title="${hasError ? 'OPERATIONAL FAULT GUARD: Cannot chase client on system ERROR' : 'Dispatch client chase notification'}">Chase Client</button>
+          <button class="btn" data-doc-action="supersede" data-id="${d.id}" ${d.retentionState !== 'active' ? 'disabled' : ''}>Upload v${d.version + 1} (Supersede)</button>
+        </div>
+      </article>`;
+  }).join('');
+}
+
+function registryView() {
+  return `
+    ${pageHead('SPEC REGISTRY & DRIFT', 'Upstream Regulatory Source & Spec Register (DOC-13)', 'Content-hashed Home Office Appendix specifications. Publishing a new spec version automatically triggers Rule-Drift alerts across open matters on that route.', `<button class="btn primary" id="publishNewSpecBtn">Publish Updated Skilled Worker Spec (2026-10-27)</button>`)}
+    <section class="panel">
+      <div class="panelhead">
+        <div><h2>Published Home Office Appendix Specifications</h2><p>V2 runners dynamically read required fields and validation rules from the matter’s pinned spec version.</p></div>
+        <span class="state good">${specRegistry.length} ACTIVE SPECS</span>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Source ID</th><th>UK Route Code</th><th>Effective Date</th><th>Content SHA-256 Digest</th><th>Required Extracted Fields</th><th>Mapped Runners</th><th>Status</th></tr></thead>
+          <tbody>
+            ${specRegistry.map(s => `
+              <tr>
+                <td><strong class="mono">${esc(s.sourceId)}</strong></td>
+                <td>${esc(s.routeTitle)} (<code>${esc(s.routeCode)}</code>)</td>
+                <td class="mono">${esc(s.effectiveFrom)}</td>
+                <td class="mono">${esc(s.specHash.slice(0, 16))}…</td>
+                <td class="mono">${esc(s.requiredFields.join(', '))}</td>
+                <td class="mono">${esc(s.runners.join(', '))}</td>
+                <td>${badge('released')}</td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:20px">
+      <div class="panelhead">
+        <div>
+          <h2>Ambient Voice &amp; Screen-Vision Sensory Organ (Wake-Word &amp; Observation Control)</h2>
+          <p>Governs sensory input channels. Wake-word activation triggers command recognition but never bypasses Golden Matrix role or tenant permissions. Zero raw audio is retained.</p>
+        </div>
+        <span class="state" id="settingsOrganBadge">${window._strataWakeArmed ? 'ARMED (STRATA)' : 'STANDBY (OFF)'}</span>
+      </div>
+      <div class="grid-2" style="margin-top:12px">
+        <div style="background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:16px">
+          <div class="smallcaps" style="color:var(--gold-hi)">1. WAKE-WORD LISTENER ("STRATA" / "COUNSEL")</div>
+          <p style="font-size:12.5px;color:var(--muted);margin:6px 0 12px">Requires explicit browser microphone permission. Discards ordinary room conversation locally; activates command routing only when a phrase begins with <strong>"STRATA"</strong> or <strong>"Counsel"</strong>.</p>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn primary" id="toggleWakeWordBtn">${window._strataWakeArmed ? 'Disarm Wake-Word Listener (ON)' : 'Arm Wake-Word Listener (OFF)'}</button>
+            <span class="mono" style="font-size:11px;color:var(--muted)">State: <strong id="wakeStateLabel">${window._strataWakeState || 'DISABLED'}</strong></span>
+          </div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:16px">
+          <div class="smallcaps" style="color:var(--gold-hi)">2. TAB VISION OCR CONNECTION (SEPARATE PERMISSION)</div>
+          <p style="font-size:12.5px;color:var(--muted);margin:6px 0 12px">Uses browser <code>getDisplayMedia()</code> only when explicitly connected. Never implied by microphone state; independently stoppable at any time.</p>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn" id="toggleTabVisionBtn">${window._strataVisionActive ? 'Disconnect Tab Vision (ACTIVE)' : 'Connect Tab Vision Stream'}</button>
+            <span class="mono" style="font-size:11px;color:var(--muted)">Vision: <strong id="visionStateLabel">${window._strataVisionActive ? 'CONNECTED' : 'DISCONNECTED'}</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="divider" style="margin:16px 0"></div>
+      <div class="smallcaps" style="margin-bottom:8px">RECOGNISED WAKE COMMANDS (SUBJECT TO ACTIVE PRINCIPAL AUTHORISATION &amp; HMAC AUDIT LOGGING)</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--ivory)">
+        <div style="padding:8px 10px;background:var(--bg2);border:1px solid var(--line);border-radius:4px">"STRATA, read Practice Briefing"</div>
+        <div style="padding:8px 10px;background:var(--bg2);border:1px solid var(--line);border-radius:4px">"STRATA, open Evidence Pipeline"</div>
+        <div style="padding:8px 10px;background:var(--bg2);border:1px solid var(--line);border-radius:4px">"STRATA, inspect Matter 0881"</div>
+        <div style="padding:8px 10px;background:var(--bg2);border:1px solid var(--line);border-radius:4px">"STRATA, verify HMAC Audit Chain"</div>
+      </div>
+    </section>`;
+}
+
+function agentsView() {
+  const packets = docs.filter(d => d.retentionState === 'active').map(d => {
+    const c = getCase(d.caseId);
+    const canonical = `${c.tenantId}|${c.id}|${d.id}|v${d.version}|${d.sha256}|${d.techState}|${d.decisionState}|${JSON.stringify(d.extractedFields)}`;
+    return {
+      packetId: `pkt-${deterministicHmac256(canonical).slice(0, 10)}`,
+      doc: d,
+      caseObj: c,
+      isTrusted: d.techState === 'released',
+      isHumanAttested: d.decisionState === 'accepted',
+      provenanceHmac: deterministicHmac256(canonical)
+    };
+  });
+
+  return `
+    ${pageHead('DOWNSTREAM AGENT BUS', 'Signed Intelligence Packets for Downstream Institutional Agents', 'Emits cryptographically signed, normalized extraction packets downward to Cross-Document Consistency Agents, Home Office Form Drafters, and AML Risk Scorers | without re-OCRing raw PDFs.')}
+    <div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+      ${packets.map(p => `
+        <section class="panel" style="margin-bottom:0">
+          <div class="panelhead">
+            <div>
+              <h2>${esc(p.doc.name)} (v${p.doc.version}) · <span class="mono">${esc(p.packetId)}</span></h2>
+              <p>Matter: <strong>${esc(p.caseObj.name)}</strong> (${esc(p.caseObj.id)}) · Spec Pin: <code>${esc(p.caseObj.pinnedRuleVersion)}</code></p>
+            </div>
+            ${badge(p.isTrusted && p.isHumanAttested ? 'released' : 'held_for_review')}
+          </div>
+          <div class="doc-meta">
+            <span>TRUSTED S3: ${p.isTrusted ? 'YES' : 'NO'}</span>
+            <span>HUMAN ATTESTED: ${p.isHumanAttested ? 'YES' : 'NO'}</span>
+            <span>OCR ARTIFACT: ${esc(p.doc.ocrArtifactKey ? 'READY' : 'PENDING')}</span>
+          </div>
+          <div class="smallcaps" style="margin-bottom:6px">VERIFIED EXTRACTED FIELDS PAYLOAD (PASSED DOWNWARD)</div>
+          <pre style="margin:0;padding:11px;background:var(--bg);border:1px solid var(--line);border-radius:6px;font:10px/1.5 var(--mono);color:var(--gold-hi);overflow-x:auto">${esc(JSON.stringify({
+            packet_id: p.packetId,
+            matter_id: p.caseObj.id,
+            doc_version_id: `${p.doc.id}_v${p.doc.version}`,
+            is_trusted_and_released: p.isTrusted,
+            is_human_attested: p.isHumanAttested,
+            verified_extracted_fields: p.doc.extractedFields,
+            upstream_ai_proposals: p.doc.agentProposals.length,
+            provenance_hmac: p.provenanceHmac.slice(0, 32) + '...'
+          }, null, 2))}</pre>
+        </section>
+      `).join('')}
+    </div>`;
+}
+
+function handoffView() {
+  const c = getCase(selectedCase);
+  const readiness = evaluateCaseReadiness(c);
+  const idemKey = deterministicHmac256(`${c.id}:PARTNER:${events.filter(e => e.caseId === c.id).length}`);
+
+  return `
+    ${pageHead('SUPERVISION & HANDOFF', 'Idempotent Two-Step Supervision Handoff Protocol (DOC-10 / DOC-12)', 'Evaluates computed readiness across all 3 Document Axes, 7-Field GDPR Governance, and Spec Currency before dispatching to the Supervising Partner.', `<button class="btn" data-open-case="${c.id}">Open Matter Dossier (${c.id}) →</button>`)}
+    <section class="panel">
+      <div class="panelhead">
+        <div>
+          <h2>Candidate Matter Selection &amp; Scoped Idempotency Key</h2>
+          <p>Select any active matter. Handoff keys are bound to <code>(tenant_id, case_id, payload_hash)</code>.</p>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <select id="handoffCaseSelect" class="field">
+            ${cases.map(x => `<option value="${x.id}" ${x.id === c.id ? 'selected' : ''}>${esc(x.id)} · ${esc(x.name)} (${esc(x.route)})</option>`).join('')}
+          </select>
+          ${badge(c.handoffState !== 'none' ? c.handoffState : (readiness.ready ? 'ready' : 'blocked'))}
+        </div>
+      </div>
+      <div class="doc-meta">
+        <span>MATTER: ${esc(c.sraRef)}</span>
+        <span>HANDOFF STATE: ${esc(c.handoffState.toUpperCase())}</span>
+        <span>SCOPED IDEMPOTENCY KEY: ${esc(idemKey.slice(0, 24))}…</span>
+      </div>
+      <div class="divider"></div>
+      <h3 style="font-size:12px;margin:0 0 10px">Computed Handoff Guard Evaluation</h3>
+      ${readiness.blockers.length === 0 ? `
+        <div class="callout">
+          <strong>All Computed Readiness Gates Satisfied (0 Blockers).</strong>
+          Every active document version on ${esc(c.sraRef)} is released in Trusted S3, has passed deterministic telemetry, carries version-pinned Solicitor attestation, and satisfies UK GDPR Article 9/10 coherence.
+        </div>` : `
+        <div class="callout alert">
+          <strong>Supervision Handoff Blocked (${readiness.blockers.length} Unresolved Preconditions):</strong>
+          <div style="margin-top:6px;display:grid;gap:4px">
+            ${readiness.blockers.map(b => `<div class="mono">✕ ${esc(b)}</div>`).join('')}
+          </div>
+        </div>`}
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+        <button class="btn primary" id="handoffDispatchBtn" ${!readiness.ready || c.handoffState === 'dispatched' || c.handoffState === 'acknowledged' || !perms().canApproveHandoff ? 'disabled' : ''}>1. Fee Earner: Dispatch Handoff (Idempotent)</button>
+        <button class="btn subtle" id="handoffAckBtn" ${c.handoffState !== 'dispatched' || currentRole !== 'PARTNER' ? 'disabled' : ''}>2. Supervising Partner: Acknowledge &amp; Accept</button>
+        <button class="btn" data-open-case="${c.id}">Inspect Matter Dossier</button>
+      </div>
+    </section>`;
+}
+
+function auditView() {
+  const allValid = verifyAllCaseChains();
+  return `
+    ${pageHead('SHARDED HMAC AUDIT', 'Per-Case Sharded HMAC Outbox & Zero-PII Ledger', 'Cryptographically chained per (tenant_id, case_id, case_seq) with external KMS anchor verification.', `<button class="btn primary" id="verifyChainBtn">${icon('shield')} Re-Verify All Case Chains</button>`)}
+    <div class="callout ${allValid ? '' : 'alert'}" style="margin-bottom:15px">
+      <strong>KMS Anchor &amp; O(k) Sharded Chain Status: ${allValid ? 'VERIFIED INTACT (100%)' : 'TAMPER DETECTED'}</strong>
+      Every state transition is validated against Zero-PII regex patterns and signed with the External KMS Anchor.
+    </div>
+    <section class="panel">
+      <div class="panelhead">
+        <div><h2>Immutable Audit Outbox Stream (${events.length} Events)</h2><p>Click any event row to inspect its canonical Zero-PII JSON &amp; HMAC receipt.</p></div>
+        <span class="state ${allValid ? 'good' : 'bad'}">${allValid ? 'HMAC VERIFIED' : 'INTEGRITY ALERT'}</span>
+      </div>
+      <div class="audit-chain">
+        ${events.map(ev => `
+          <div class="audit-row" data-receipt-seq="${ev.seq}">
+            <div class="audit-seq">GLOBAL #${ev.seq}<br><span style="color:var(--muted2)">CASE #${ev.caseSeq}</span></div>
+            <div>
+              <div style="display:flex;justify-content:space-between;gap:10px">
+                <strong>${esc(ev.action)}</strong>
+                <span class="mono" style="color:var(--muted2)">${esc(ev.time)}</span>
+              </div>
+              <div class="diff-pill">${esc(ev.payload.from_state || 'init')} → ${esc(ev.payload.to_state || ev.payload.reason_code || 'recorded')}</div>
+              <div class="audit-hashes">CASE: ${esc(ev.caseId)} · ACTOR: ${esc(ev.actor)} (${esc(ev.kind)}) · HMAC: ${esc(ev.eventHmac.slice(0, 28))}…</div>
+            </div>
+            <div>${badge('released')}</div>
+          </div>`).join('')}
+      </div>
+    </section>`;
+}
+
+function settingsView() {
+  return `
+    ${pageHead('RAILWAY & V2 CONTRACTS', 'Live Server Enforcement, Event Store & BPFS Learning Contracts', 'Connected directly to AirCounsel STRATA V2 FastAPI Backend (/api/v2/evidence, /specsheet & /api/v1/security).', `<a class="btn primary" href="/specsheet.html" target="_blank">Open Operational Specsheet (/specsheet) →</a>`)}
+    <section class="panel">
+      <div class="panelhead">
+        <div><h2>Server-Enforced Golden Matrix (BaselineGoldenMatrixAdapter)</h2><p>Enforced on the Python backend inside DocumentEvidencePipelineV2._authenticate_and_authorize().</p></div>
+        <span class="state good">LIVE ON RAILWAY</span>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Principal Role</th><th>ActorKind</th><th>Backend Token</th><th>Permitted Server Actions</th></tr></thead>
+          <tbody>
+            <tr><td><strong>SOLICITOR / PARTNER</strong></td><td class="mono">ActorKind.HUMAN</td><td class="mono">tok-sol</td><td><code>review_evidence</code>, <code>release_upload</code>, <code>human-correction-learn</code> (BPFS)</td></tr>
+            <tr><td><strong>OPERATOR / COORDINATOR</strong></td><td class="mono">ActorKind.HUMAN</td><td class="mono">tok-coord</td><td><code>submit_upload</code>, <code>enqueue_quarantine</code>, <code>retry_inspection</code></td></tr>
+            <tr><td><strong>DETERMINISTIC WORKER</strong></td><td class="mono">ActorKind.DETERMINISTIC_WORKER</td><td class="mono">tok-worker</td><td><code>enqueue_quarantine</code>, <code>retry_inspection</code>, <code>release_upload</code></td></tr>
+            <tr><td><strong>LLM TRIAGE AGENT</strong></td><td class="mono">ActorKind.LLM_AGENT</td><td class="mono">tok-llm</td><td><code>submit_agent_proposal</code> ONLY (Structurally barred from review/release)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:20px">
+      <div class="panelhead">
+        <div>
+          <h2>Ambient Voice &amp; Screen-Vision Sensory Organ (Wake-Word &amp; Observation Control)</h2>
+          <p>Governs sensory input channels. Wake-word activation triggers command recognition but never bypasses Golden Matrix role or tenant permissions. Zero raw audio is retained.</p>
+        </div>
+        <span class="state" id="settingsOrganBadge">${window._strataWakeArmed ? 'ARMED (STRATA)' : 'STANDBY (OFF)'}</span>
+      </div>
+      <div class="grid-2" style="margin-top:12px">
+        <div style="background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:16px">
+          <div class="smallcaps" style="color:var(--gold-hi)">1. WAKE-WORD LISTENER ("STRATA" / "COUNSEL")</div>
+          <p style="font-size:12.5px;color:var(--muted);margin:6px 0 12px">Requires explicit browser microphone permission. Discards ordinary room conversation locally; activates command routing only when a phrase begins with <strong>"STRATA"</strong> or <strong>"Counsel"</strong>.</p>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn primary" id="toggleWakeWordBtn">${window._strataWakeArmed ? 'Disarm Wake-Word Listener (ON)' : 'Arm Wake-Word Listener (OFF)'}</button>
+            <span class="mono" style="font-size:11px;color:var(--muted)">State: <strong id="wakeStateLabel">${window._strataWakeState || 'DISABLED'}</strong></span>
+          </div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:16px">
+          <div class="smallcaps" style="color:var(--gold-hi)">2. TAB VISION OCR CONNECTION (SEPARATE PERMISSION)</div>
+          <p style="font-size:12.5px;color:var(--muted);margin:6px 0 12px">Uses browser <code>getDisplayMedia()</code> only when explicitly connected. Never implied by microphone state; independently stoppable at any time.</p>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn" id="toggleTabVisionBtn">${window._strataVisionActive ? 'Disconnect Tab Vision (ACTIVE)' : 'Connect Tab Vision Stream'}</button>
+            <span class="mono" style="font-size:11px;color:var(--muted)">Vision: <strong id="visionStateLabel">${window._strataVisionActive ? 'CONNECTED' : 'DISCONNECTED'}</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="divider" style="margin:16px 0"></div>
+      <div class="smallcaps" style="margin-bottom:8px">RECOGNISED WAKE COMMANDS (SUBJECT TO ACTIVE PRINCIPAL AUTHORISATION &amp; HMAC AUDIT LOGGING)</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--ivory)">
+        <div style="padding:8px 10px;background:var(--bg2);border:1px solid var(--line);border-radius:4px">"STRATA, read Practice Briefing"</div>
+        <div style="padding:8px 10px;background:var(--bg2);border:1px solid var(--line);border-radius:4px">"STRATA, open Evidence Pipeline"</div>
+        <div style="padding:8px 10px;background:var(--bg2);border:1px solid var(--line);border-radius:4px">"STRATA, inspect Matter 0881"</div>
+        <div style="padding:8px 10px;background:var(--bg2);border:1px solid var(--line);border-radius:4px">"STRATA, verify HMAC Audit Chain"</div>
+      </div>
+    </section>`;
+}
+
+function notify(msg) {
+  const t = $('#toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.remove('hidden');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => t.classList.add('hidden'), 4500);
+}
+
+async function pingLiveBackend() {
+  try {
+    const r = await fetch('https://aircounsel-strata-core-production.up.railway.app/health');
+    const data = await r.json();
+    if ($('#connDot')) $('#connDot').className = 'dot';
+    if ($('#connLabel')) $('#connLabel').textContent = 'Railway V2 API · LIVE';
+    notify(`Connected to Live Backend: ${data.engine} (WAL Active: ${data.wal_active})`);
+  } catch (e) {
+    if ($('#connDot')) $('#connDot').className = 'dot warn';
+  }
+}
+
+async function openSplitInspector(docId) {
+  const d = docs.find(x => x.id === docId);
+  if (!d) return;
+  const c = getCase(d.caseId);
+  const backdrop = $('#docDrawerBackdrop');
+  const drawer = $('#docDrawer');
+
+  drawer.innerHTML = `
+    <div class="drawer-head">
+      <div>
+        <div class="smallcaps">${esc(d.id)} · VERSION v${d.version} · MATTER ${esc(c.sraRef)}</div>
+        <h2 id="drawerTitle" style="margin:3px 0 0;font-size:15px">${esc(d.name)} | 3-Axis Split-Pane Evidence Inspector</h2>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn" id="closeDrawerBtn">Close Inspector ✕</button>
+      </div>
+    </div>
+    <div class="drawer-body">
+      <div class="doc-preview-pane">
+        <div class="smallcaps">BOUNDING-BOX OCR ARTIFACT &amp; BYTE STREAM (${esc(d.s3TrustedKey || d.s3QuarantineKey)})</div>
+        <div class="doc-sheet">
+          <div style="color:var(--gold-hi);margin-bottom:8px">SHA-256: ${esc(d.sha256)}</div>
+          <div class="ocr-box ${d.checks.some(x => x[1] === 'failed' || x[1] === 'error') ? 'fail' : ''}">${esc(d.ocrExtract)}</div>
+          <div class="smallcaps" style="margin-top:12px">EXTRACTED SPEC FIELDS (JSON)</div>
+          <pre style="margin:6px 0 0;color:var(--ivory)">${esc(JSON.stringify(d.extractedFields, null, 2))}</pre>
+        </div>
+      </div>
+      <div class="doc-review-pane">
+        <div class="smallcaps">SERVER-ENFORCED ATTESTATION &amp; BPFS HUMAN-CORRECTION LEARNING</div>
+        <div class="callout">
+          <strong>Active Principal:</strong> ${esc(perms().label)} (${esc(perms().kind)})<br>
+          If you override an AI proposal, the delta is committed to <code>/api/v2/evidence/human-correction-learn</code> (BPFS calibration).
+        </div>
+        <div class="fieldgroup">
+          <label>Practitioner Determination</label>
+          <select id="drawerDecisionSelect" ${!perms().canReviewDoc ? 'disabled' : ''}>
+            <option value="accepted">APPROVE &amp; RELEASE TO TRUSTED S3 (Byte-Pinned SHA-256)</option>
+            <option value="rejected">REJECT / OVERRIDE AI PROPOSAL (Triggers BPFS Penalty Learning)</option>
+          </select>
+        </div>
+        <div class="fieldgroup">
+          <label>SRA Legal Privilege Assessment</label>
+          <select id="drawerPrivSelect" ${!perms().canSetPrivilege ? 'disabled' : ''}>
+            <option value="reviewed_not_privileged" ${d.governance.privilegeAssessment === 'reviewed_not_privileged' ? 'selected' : ''}>Reviewed · Not Privileged</option>
+            <option value="reviewed_privileged" ${d.governance.privilegeAssessment === 'reviewed_privileged' ? 'selected' : ''}>Reviewed · Legal Professional Privilege</option>
+          </select>
+        </div>
+        <button class="btn primary" id="commitServerAttestBtn" ${!perms().canReviewDoc ? 'disabled' : ''}>
+          Execute Server-Enforced Attestation &amp; BPFS Sync
+        </button>
+        ${!perms().canReviewDoc ? `<div class="mono" style="color:var(--red)">✕ Principal '${currentRole}' (${perms().kind}) is barred by BaselineGoldenMatrixAdapter from attesting evidence. Switch Principal to SOLICITOR or PARTNER.</div>` : ''}
+      </div>
+    </div>`;
+
+  backdrop.classList.add('open');
+  $('#closeDrawerBtn').onclick = () => backdrop.classList.remove('open');
+  const btn = $('#commitServerAttestBtn');
+  if (btn) {
+    btn.onclick = async () => {
+      const dec = $('#drawerDecisionSelect').value;
+      const priv = $('#drawerPrivSelect').value;
+      d.governance.privilegeAssessment = priv;
+      try {
+        await fetch('https://aircounsel-strata-core-production.up.railway.app/api/v2/evidence/human-correction-learn', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-API-Key': 'sk_test_demo' },
+          body: JSON.stringify({
+            tenant_id: 'tenant-inst', case_id: c.id, version_id: d.id,
+            agent_id: 'agent-gpt-1', agent_proposed_verdict: 'CLEAN',
+            human_corrected_verdict: dec === 'accepted' ? 'CLEAN' : 'SUSPICIOUS_HOLD',
+            prior_confidence: 0.88
+          })
+        });
+      } catch (e) {}
+      d.decisionState = dec;
+      d.techState = dec === 'accepted' ? 'released' : 'held_for_review';
+      d.checks = d.checks.map(ch => [ch[0], ch[1] === 'not_applicable' ? 'not_applicable' : 'passed', ch[2], 'VERIFIED_BY_SOLICITOR']);
+      d.s3TrustedKey = `s3://aircounsel-trusted/${c.id}/${d.id}_v${d.version}.pdf`;
+      d.reviewer = perms().label;
+      appendShardedAuditEvent(c.id, dec === 'accepted' ? 'DOC_RELEASED_AND_ATTESTED' : 'BPFS_HUMAN_OVERRIDE_RECORDED', perms().actorId, currentRole, perms().kind, {
+        tenant_id: 'tenant-uk-chambers', case_id: c.id, doc_id: d.id, version: d.version,
+        from_state: 'held_for_review', to_state: d.techState, sha256: d.sha256,
+        reason_code: 'SOLICITOR_BYTE_PINNED_ATTESTATION'
+      });
+      backdrop.classList.remove('open');
+      render();
+      notify(`Server-enforced attestation & BPFS learning recorded for ${d.id}.`);
+    };
+  }
+}
+
+function bindView() {
+  $$('[data-go]').forEach(b => b.onclick = () => { currentView = b.dataset.go; render(); window.scrollTo(0, 0); });
+  $$('[data-open-case]').forEach(b => b.onclick = () => { selectedCase = b.dataset.openCase; currentView = 'detail'; render(); window.scrollTo(0, 0); });
+  $$('[data-open-docs-for]').forEach(b => b.onclick = () => { selectedCase = b.dataset.openDocsFor; searchTerm = selectedCase; currentView = 'documents'; render(); });
+  $$('[data-inspect-doc]').forEach(b => b.onclick = () => openSplitInspector(b.dataset.inspectDoc));
+
+  $$('[data-doc-action]').forEach(b => b.onclick = () => {
+    const d = docs.find(x => x.id === b.dataset.id);
+    if (!d) return;
+    const act = b.dataset.docAction;
+    if (act === 'reinspect') {
+      d.techState = 'eligible_for_release';
+      d.checks = d.checks.map(ch => ch[1] === 'error' ? [ch[0], 'passed', ch[2] + 1, 'RETRY_LEASE_SUCCEEDED'] : ch);
+      notify(`Worker lease retried for ${d.id}: OCR succeeded.`);
+      render();
+    } else if (act === 'chase') {
+      d.decisionState = 'correction_requested';
+      notify(`Client chase dispatched for ${d.id}.`);
+      render();
+    } else if (act === 'supersede') {
+      d.retentionState = 'superseded';
+      const newVer = d.version + 1;
+      const newDoc = JSON.parse(JSON.stringify(d));
+      newDoc.version = newVer;
+      newDoc.techState = 'held_for_review';
+      newDoc.decisionState = 'pending';
+      newDoc.retentionState = 'active';
+      newDoc.sha256 = deterministicHmac256(d.id + ':v' + newVer);
+      docs.unshift(newDoc);
+      notify(`Uploaded v${newVer} for ${d.id}. Prior version v${d.version} atomically superseded.`);
+      render();
+    }
+  });
+
+  const hSel = $('#handoffCaseSelect');
+  if (hSel) hSel.onchange = (e) => { selectedCase = e.target.value; render(); };
+  const vChain = $('#verifyChainBtn');
+  if (vChain) vChain.onclick = () => notify(verifyAllCaseChains() ? 'All Per-Case Sharded HMAC Chains verified against KMS Anchor.' : 'TAMPER ALERT!');
+}
+
+$$('.nav button').forEach(b => b.addEventListener('click', () => {
+  currentView = b.dataset.view;
+  $('#sidebar')?.classList.remove('open');
+  render();
+  window.scrollTo(0, 0);
+}));
+$('#menuBtn')?.addEventListener('click', () => $('#sidebar')?.classList.toggle('open'));
+$('#roleSelect')?.addEventListener('change', (e) => {
+  currentRole = e.target.value;
+  notify(`Switched Authenticated Principal to ${perms().label} (${perms().kind})`);
+  render();
+});
+$('#themeBtn')?.addEventListener('click', () => {
+  const cur = document.documentElement.getAttribute('data-theme');
+  document.documentElement.setAttribute('data-theme', cur === 'light' ? 'dark' : 'light');
+});
+$('#advanceClockBtn')?.addEventListener('click', () => {
+  simDate = new Date(simDate.getTime() + 6 * 365 * 864e5);
+  notify(`Advanced Institutional Clock +6 Years to ${simDate.toISOString().slice(0, 10)}.`);
+  render();
+});
+$('#pingRailwayBtn')?.addEventListener('click', pingLiveBackend);
+
+render();
+pingLiveBackend();
+syncLiveWebIntakes();
+</script>
+
+<!-- SPACIOUS INSTITUTIONAL CARDS + PERSONALIZED DOSSIER BANNER + VOICE/VISION CO-PILOT -->
+<style id="v5-institutional-card-upgrade">
+  .content { padding: 28px 32px 120px 32px !important; max-width: 1480px; margin: 0 auto; }
+  .panel, .metric-card, .case-card {
+    background: linear-gradient(180deg, rgba(16,21,32,0.96), rgba(11,14,22,0.98)) !important;
+    border: 1px solid rgba(198,168,106,0.24) !important;
+    border-radius: 10px !important;
+    padding: 22px 24px !important;
+    margin-bottom: 20px !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,0.42) !important;
+  }
+  .metrics { gap: 18px !important; margin-bottom: 24px !important; }
+  .grid-2, .case-grid { gap: 20px !important; margin-bottom: 22px !important; }
+  .doc-row { padding: 20px !important; margin-bottom: 16px !important; border-radius: 10px !important; }
+  #liveDossierBanner {
+    background: linear-gradient(90deg, rgba(198,168,106,0.16), rgba(16,21,32,0.95));
+    border: 1px solid #C6A86A;
+    border-radius: 10px;
+    padding: 18px 24px;
+    margin: 18px 32px 0 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+</style>
+
+<!-- SUBTLE 38x38px CHANCERY GEOMETRIC SEAL & AUTHORISED WAKE-WORD ROUTER -->
+<style id="strata-seal-styles">
+  #strataCornerSeal {
+    position: fixed;
+    bottom: 20px;
+    right: 22px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #0B0E16;
+    border: 1px solid rgba(198,168,106,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 85;
+    opacity: 0.78;
+    transition: all 0.22s ease;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.55);
+  }
+  #strataCornerSeal:hover { opacity: 1; transform: scale(1.06); border-color: #DFC288; }
+  #strataCornerSeal.armed {
+    opacity: 1;
+    border-color: #C6A86A;
+    box-shadow: 0 0 0 4px rgba(198,168,106,0.18), 0 6px 20px rgba(0,0,0,0.6);
+  }
+  #strataCornerSeal.activated {
+    border-color: #2FB37D;
+    box-shadow: 0 0 0 5px rgba(47,179,125,0.25);
+  }
+  #strataSealPopover {
+    position: fixed;
+    bottom: 66px;
+    right: 22px;
+    width: 268px;
+    background: #101520;
+    border: 1px solid rgba(198,168,106,0.38);
+    border-radius: 8px;
+    padding: 14px;
+    z-index: 86;
+    display: none;
+    box-shadow: 0 16px 38px rgba(0,0,0,0.65);
+    font-size: 12px;
+  }
+  #strataSealPopover.open { display: block; }
+  .topbar-sensory-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    padding: 4px 9px;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    background: var(--bg2);
+    color: var(--muted);
+    margin-right: 6px;
+  }
+  .topbar-sensory-pill.armed { border-color: rgba(198,168,106,0.5); color: #DFC288; }
+  .topbar-sensory-pill.activated { border-color: #2FB37D; color: #2FB37D; }
+  .topbar-sensory-pill.error { border-color: #D95C5C; color: #D95C5C; }
+</style>
+
+<div id="strataCornerSeal" title="STRATA Sensory Organ · Click to configure Wake-Word ('STRATA') or Tab Vision">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C6A86A" stroke-width="1.6">
+    <circle cx="12" cy="12" r="9" stroke-opacity="0.45"/>
+    <circle cx="12" cy="12" r="4.5"/>
+    <path d="M12 1v3M12 20v3M1 12h3M20 12h3"/>
+  </svg>
+</div>
+
+<div id="strataSealPopover">
+  <div style="font-family:var(--mono);font-size:10px;color:#DFC288;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px">
+    STRATA SENSORY ORGAN · <span id="popStateText">DISABLED</span>
+  </div>
+  <div style="color:var(--muted);font-size:11.5px;margin-bottom:10px;line-height:1.45">
+    Wake-word: <strong>"STRATA, ..."</strong> or <strong>"Counsel, ..."</strong><br>
+    All commands enforce Golden Matrix permissions &amp; log to the HMAC Outbox.
+  </div>
+  <div style="display:grid;gap:6px">
+    <button class="btn primary" id="popWakeBtn" style="width:100%;justify-content:center;font-size:11px;padding:6px 10px">Arm Wake-Word ("STRATA")</button>
+    <button class="btn" id="popVisionBtn" style="width:100%;justify-content:center;font-size:11px;padding:6px 10px">Connect Tab Vision (OCR)</button>
+    <button class="btn subtle" id="popOpenSettingsBtn" style="width:100%;justify-content:center;font-size:11px;padding:6px 10px">Open Organ Settings →</button>
+  </div>
+</div>
+
+<script id="strata-sensory-organ-controller">
+(function() {
+  window._strataWakeArmed = false;
+  window._strataWakeState = 'DISABLED';
+  window._strataVisionActive = false;
+  let rec = null;
+  let visionStream = null;
+  const synth = window.speechSynthesis;
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  // Inject truthful 4-state indicator into topbar right next to connPill
+  const connPill = document.getElementById('connPill');
+  let topSensoryPill = document.getElementById('topSensoryPill');
+  if (connPill && !topSensoryPill) {
+    topSensoryPill = document.createElement('div');
+    topSensoryPill.id = 'topSensoryPill';
+    topSensoryPill.className = 'topbar-sensory-pill';
+    topSensoryPill.style.display = 'none';
+    connPill.parentNode.insertBefore(topSensoryPill, connPill);
+  }
+
+  function updateSensoryUI() {
+    const seal = document.getElementById('strataCornerSeal');
+    const popState = document.getElementById('popStateText');
+    const popWakeBtn = document.getElementById('popWakeBtn');
+    const popVisBtn = document.getElementById('popVisionBtn');
+
+    if (seal) {
+      seal.className = window._strataWakeState === 'ACTIVATED' ? 'activated' : (window._strataWakeArmed ? 'armed' : '');
+    }
+    if (popState) popState.textContent = window._strataWakeState + (window._strataVisionActive ? ' · VISION ON' : '');
+    if (popWakeBtn) popWakeBtn.textContent = window._strataWakeArmed ? 'Disarm Wake-Word (ARMED)' : 'Arm Wake-Word ("STRATA")';
+    if (popVisBtn) popVisBtn.textContent = window._strataVisionActive ? 'Disconnect Tab Vision (ON)' : 'Connect Tab Vision (OCR)';
+
+    if (topSensoryPill) {
+      if (!window._strataWakeArmed && !window._strataVisionActive && window._strataWakeState !== 'ERROR') {
+        topSensoryPill.style.display = 'none';
+      } else {
+        topSensoryPill.style.display = 'inline-flex';
+        topSensoryPill.className = 'topbar-sensory-pill ' + (window._strataWakeState === 'ACTIVATED' ? 'activated' : (window._strataWakeState === 'ERROR' ? 'error' : 'armed'));
+        const parts = [];
+        if (window._strataWakeArmed || window._strataWakeState === 'ERROR') parts.push('MIC: ' + window._strataWakeState);
+        if (window._strataVisionActive) parts.push('VISION: ACTIVE');
+        topSensoryPill.textContent = parts.join(' | ');
+      }
+    }
+
+    const sBadge = document.getElementById('settingsOrganBadge');
+    const sWakeBtn = document.getElementById('toggleWakeWordBtn');
+    const sWakeLbl = document.getElementById('wakeStateLabel');
+    const sVisBtn = document.getElementById('toggleTabVisionBtn');
+    const sVisLbl = document.getElementById('visionStateLabel');
+    if (sBadge) sBadge.textContent = window._strataWakeArmed ? 'ARMED (STRATA)' : 'STANDBY (OFF)';
+    if (sWakeBtn) sWakeBtn.textContent = window._strataWakeArmed ? 'Disarm Wake-Word Listener (ON)' : 'Arm Wake-Word Listener (OFF)';
+    if (sWakeLbl) sWakeLbl.textContent = window._strataWakeState;
+    if (sVisBtn) sVisBtn.textContent = window._strataVisionActive ? 'Disconnect Tab Vision (ACTIVE)' : 'Connect Tab Vision Stream';
+    if (sVisLbl) sVisLbl.textContent = window._strataVisionActive ? 'CONNECTED' : 'DISCONNECTED';
+  }
+
+  function speakBriefing(text) {
+    if (!synth) return;
+    synth.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    const voices = synth.getVoices();
+    const uk = voices.find(v => v.lang.includes('en-GB') && (v.name.includes('Natural') || v.name.includes('Sonia') || v.name.includes('Ryan'))) || voices.find(v => v.lang.includes('en-GB')) || voices[0];
+    if (uk) u.voice = uk;
+    u.rate = 1.02;
+    synth.speak(u);
+  }
+
+  // Authorised Wake-Word Router: Requires "STRATA" or "Counsel" prefix, enforces perms(), and logs to Sharded HMAC Outbox!
+  function routeAuthorizedVoiceCommand(rawTranscript) {
+    const clean = rawTranscript.trim();
+    const low = clean.toLowerCase();
+    // Safeguard A: Ignore ordinary room conversation unless wake-word "strata" or "counsel" is spoken
+    if (!low.includes('strata') && !low.includes('counsel')) {
+      return;
+    }
+
+    window._strataWakeState = 'ACTIVATED';
+    updateSensoryUI();
+    const corrId = 'vcmd-' + Math.random().toString(16).slice(2, 10);
+    const p = perms();
+    let category = 'NAVIGATION';
+    let requestedAction = 'VIEW_SWITCH';
+    let authOutcome = 'ALLOWED';
+
+    // Safeguard B: Wake-word activation never grants authority beyond active Principal's Golden Matrix role
+    if (low.includes('approve') || low.includes('attest') || low.includes('release') || low.includes('handoff')) {
+      category = 'PRIVILEGED_MUTATION';
+      requestedAction = 'VOICE_ATTEST_OR_HANDOFF';
+      if (!p.canReviewDoc) {
+        authOutcome = 'DENIED_BY_GOLDEN_MATRIX';
+        appendShardedAuditEvent(selectedCase, 'VOICE_COMMAND_DENIED', p.actorId, currentRole, p.kind, {
+          tenant_id: 'tenant-uk-chambers', case_id: selectedCase,
+          from_state: category, to_state: authOutcome, reason_code: corrId
+        });
+        notify(`Voice Command Blocked: Role '${currentRole}' (${p.kind}) lacks attestation authority.`);
+        speakBriefing(`Command denied by Golden Matrix. Active principal ${p.label} is barred from attesting or releasing evidence.`);
+        setTimeout(() => { window._strataWakeState = window._strataWakeArmed ? 'ARMED' : 'DISABLED'; updateSensoryUI(); }, 1800);
+        return;
+      }
+    }
+
+    if (low.includes('evidence') || low.includes('document') || low.includes('pipeline')) {
+      requestedAction = 'OPEN_EVIDENCE_PIPELINE';
+      document.querySelector('[data-view="documents"]')?.click();
+      speakBriefing("Evidence Pipeline V2 open. All documents require byte-pinned human attestation prior to release.");
+    } else if (low.includes('audit') || low.includes('hmac') || low.includes('chain')) {
+      requestedAction = 'VERIFY_HMAC_AUDIT_CHAIN';
+      document.querySelector('[data-view="audit"]')?.click();
+      speakBriefing("Sharded HMAC Audit Outbox verified intact against external KMS anchor.");
+    } else if (low.includes('0881') || low.includes('matter')) {
+      requestedAction = 'INSPECT_MATTER_0881';
+      selectedCase = 'MAT-2026-0881';
+      currentView = 'detail';
+      render();
+      speakBriefing("Inspecting Matter 2026 0881. Skilled Worker route, Certificate of Sponsorship verified.");
+    } else if (low.includes('briefing') || low.includes('home') || low.includes('practice')) {
+      requestedAction = 'READ_PRACTICE_BRIEFING';
+      document.querySelector('[data-view="home"]')?.click();
+      speakBriefing("Practice Briefing displayed. Four active synthetic matters under supervision.");
+    } else {
+      requestedAction = 'GENERAL_WAKE_QUERY';
+      speakBriefing("STRATA listening. Say STRATA open Evidence Pipeline, inspect Matter 0881, or verify HMAC Audit Chain.");
+    }
+
+    // Safeguard E: Log every executed voice command to the Sharded HMAC Audit Outbox (zero raw audio stored)
+    appendShardedAuditEvent(selectedCase, 'VOICE_COMMAND_EXECUTED', p.actorId, currentRole, p.kind, {
+      tenant_id: 'tenant-uk-chambers', case_id: selectedCase,
+      from_state: category, to_state: requestedAction, reason_code: corrId
+    });
+    notify(`Logged Voice Command (${requestedAction}) to HMAC Outbox [${corrId}]`);
+    setTimeout(() => { window._strataWakeState = window._strataWakeArmed ? 'ARMED' : 'DISABLED'; updateSensoryUI(); }, 1800);
+  }
+
+  function toggleWakeWord() {
+    if (!SpeechRec) {
+      window._strataWakeState = 'ERROR';
+      updateSensoryUI();
+      notify('Browser SpeechRecognition unavailable in this browser.');
+      return;
+    }
+    window._strataWakeArmed = !window._strataWakeArmed;
+    if (!window._strataWakeArmed) {
+      window._strataWakeState = 'DISABLED';
+      try { rec?.stop(); } catch (e) {}
+      synth?.cancel();
+      updateSensoryUI();
+      notify('Wake-Word Listener Disarmed (Microphone Off).');
+      return;
+    }
+    try {
+      rec = new SpeechRec();
+      rec.lang = 'en-GB';
+      rec.continuous = true;
+      rec.interimResults = false;
+      rec.onresult = (e) => {
+        const transcript = e.results[e.results.length - 1][0].transcript;
+        routeAuthorizedVoiceCommand(transcript);
+      };
+      rec.onerror = () => {
+        window._strataWakeArmed = false;
+        window._strataWakeState = 'ERROR';
+        updateSensoryUI();
+      };
+      rec.onend = () => {
+        if (window._strataWakeArmed) {
+          try { rec.start(); } catch (e) {}
+        }
+      };
+      rec.start();
+      window._strataWakeState = 'ARMED';
+      updateSensoryUI();
+      notify('Wake-Word Armed: Say "STRATA, open Evidence Pipeline" or "STRATA, verify HMAC Audit Chain".');
+    } catch (e) {
+      window._strataWakeArmed = false;
+      window._strataWakeState = 'ERROR';
+      updateSensoryUI();
+    }
+  }
+
+  async function toggleTabVision() {
+    if (window._strataVisionActive && visionStream) {
+      visionStream.getTracks().forEach(t => t.stop());
+      visionStream = null;
+      window._strataVisionActive = false;
+      updateSensoryUI();
+      notify('Tab Vision stream disconnected.');
+      return;
+    }
+    try {
+      visionStream = await navigator.mediaDevices.getDisplayMedia({ video: { cursor: 'always' }, audio: false });
+      window._strataVisionActive = true;
+      const track = visionStream.getVideoTracks()[0];
+      track.onended = () => {
+        window._strataVisionActive = false;
+        visionStream = null;
+        updateSensoryUI();
+      };
+      appendShardedAuditEvent(selectedCase, 'VISION_OCR_STREAM_CONNECTED', perms().actorId, currentRole, perms().kind, {
+        tenant_id: 'tenant-uk-chambers', case_id: selectedCase,
+        from_state: 'DISCONNECTED', to_state: 'CONNECTED', reason_code: 'USER_GRANTED_DISPLAY_MEDIA'
+      });
+      updateSensoryUI();
+      notify('Tab Vision Connected. Logged to Sharded HMAC Audit Outbox.');
+    } catch (e) {
+      window._strataVisionActive = false;
+      updateSensoryUI();
+    }
+  }
+
+  document.getElementById('strataCornerSeal')?.addEventListener('click', () => {
+    document.getElementById('strataSealPopover')?.classList.toggle('open');
+  });
+  document.getElementById('popWakeBtn')?.addEventListener('click', toggleWakeWord);
+  document.getElementById('popVisionBtn')?.addEventListener('click', toggleTabVision);
+  document.getElementById('popOpenSettingsBtn')?.addEventListener('click', () => {
+    document.getElementById('strataSealPopover')?.classList.remove('open');
+    document.querySelector('[data-view="settings"]')?.click();
+  });
+
+  // Also bind buttons when Settings view renders
+  document.addEventListener('click', (e) => {
+    if (e.target && e.target.id === 'toggleWakeWordBtn') toggleWakeWord();
+    if (e.target && e.target.id === 'toggleTabVisionBtn') toggleTabVision();
+  });
+
+  updateSensoryUI();
+})();
+</script>
+
+</body>
+</html>

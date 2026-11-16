@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirCounsel STRATA™ V5.0 | Technical Architecture, OpenAPI Contract &amp; Governance Specsheet</title>
+<style>
+  :root {
+    --paper: #FAF8F5;
+    --card: #FFFFFF;
+    --navy: #161E2E;
+    --body: #2C3444;
+    --muted: #5A6475;
+    --stone: #D8D3C8;
+    --stone-bg: #F1EFEA;
+    --bronze: #8C6D3F;
+    --dark-diagram: #101520;
+    --ivory: #F3EFE6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--body);
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+  }
+  .topbar-inst {
+    background: var(--navy);
+    color: var(--ivory);
+    padding: 14px 28px;
+    font-size: 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: 0.08em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--bronze);
+  }
+  .topbar-inst a { color: #DFC288; text-decoration: none; margin-left: 18px; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 36px 28px 80px; }
+  .breadcrumbs {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--stone);
+  }
+  .breadcrumbs a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
+  .kicker {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--bronze);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  h1 {
+    color: var(--navy);
+    font-size: 32px;
+    line-height: 1.22;
+    margin: 8px 0 16px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  h2 {
+    color: var(--navy);
+    font-size: 21px;
+    border-bottom: 1px solid var(--stone);
+    padding-bottom: 8px;
+    margin-top: 42px;
+    margin-bottom: 16px;
+  }
+  p, li { color: var(--body); font-size: 15px; }
+  .meta-strip {
+    background: var(--stone-bg);
+    border: 1px solid var(--stone);
+    border-left: 4px solid var(--navy);
+    padding: 14px 18px;
+    font-size: 13.5px;
+    color: var(--navy);
+    margin: 20px 0 32px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 18px;
+    margin: 20px 0;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--stone);
+    border-radius: 6px;
+    padding: 22px;
+  }
+  .card h3 {
+    margin: 0 0 8px;
+    color: var(--navy);
+    font-size: 16px;
+    border-bottom: 1px solid var(--stone-bg);
+    padding-bottom: 6px;
+  }
+  .card p { margin: 0; font-size: 14px; color: var(--body); }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: var(--stone-bg);
+    color: var(--navy);
+    border: 1px solid var(--stone);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 12.5px;
+  }
+  /* Selective dark architectural surface for system diagram comprehension */
+  .arch-diagram {
+    background: var(--dark-diagram);
+    color: var(--ivory);
+    border: 1px solid var(--navy);
+    border-radius: 6px;
+    padding: 20px 24px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    line-height: 1.55;
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+  table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 14px; background: var(--card); }
+  th, td { border: 1px solid var(--stone); padding: 11px 14px; text-align: left; vertical-align: top; }
+  th { background: var(--stone-bg); color: var(--navy); font-weight: 700; }
+  .ukri-routing {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .route-box {
+    background: var(--card);
+    border: 1px solid var(--stone);
+    padding: 18px 20px;
+    border-top: 3px solid var(--navy);
+  }
+  .route-box h4 { margin: 0 0 6px; color: var(--navy); font-size: 15px; }
+  .route-box p { margin: 0 0 10px; font-size: 13.5px; color: var(--muted); }
+  .route-box a { color: var(--navy); font-weight: 600; font-size: 13.5px; text-decoration: underline; text-underline-offset: 3px; }
+</style>
+</head>
+<body>
+<header class="topbar-inst">
+  <span>AIRCOUNSEL STRATA™ // INSTITUTIONAL DOCUMENTATION &amp; INTERFACE SPECIFICATION</span>
+  <div>
+    <a href="/workspace.html">Practice Workspace (V5.0)</a>
+    <a href="/onboard.html">Self-Serve Provisioning</a>
+    <a href="https://aircounsel-strata-core-production.up.railway.app/openapi.json">OpenAPI 3.1 JSON</a>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="breadcrumbs">
+    <a href="https://aircounsel.uk">Home</a> &rsaquo; <a href="/">Institutional Core</a> &rsaquo; Technical, OpenAPI &amp; UK GDPR Governance Specsheet (V5.0)
+  </nav>
+
+  <div class="kicker">DOCUMENT REF: AC-SPEC-2026-V5 · PUBLIC BLACK-BOX INTERFACE CONTRACT</div>
+  <h1>AirCounsel STRATA™ | Operational Specsheet, OpenAPI Contract &amp; Data Governance</h1>
+
+  <div class="meta-strip">
+    <strong>Regulatory Positioning Notice:</strong> AirCounsel STRATA is deterministic legal-operations infrastructure designed to <em>support</em> UK legal practices in meeting their supervision and governance obligations under the SRA Standards and Regulations and UK GDPR. The Solicitors Regulation Authority (SRA) does not certify or endorse software vendors. Internal gate weights and heuristic thresholds remain air-gapped on the server.
+  </div>
+
+  <h2>1. Core System Capabilities &amp; Architectural Invariants</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>1.1 Propose-Only AI Boundary</h3>
+      <p>Deterministic code decides; AI only proposes. Principals authenticated with <code>ActorKind.LLM_AGENT</code> may attach structured field-extraction proposals (<code>v2_ev_agent_proposals</code>) but are structurally barred at the database kernel from calling <code>record_human_review()</code> or <code>release_document()</code>.</p>
+    </div>
+    <div class="card">
+      <h3>1.2 Byte-Pinned Human Attestation</h3>
+      <p>Before any evidence transitions to <code>RELEASED</code> in Trusted storage, an authenticated human practitioner (<code>ActorKind.HUMAN</code>, role <code>fee_earner</code> or <code>senior_reviewer</code>) must attest to the exact SHA-256 digest (<code>expected_sha256 == version.sha256</code>). Uploading v2 atomically supersedes v1 and invalidates prior sign-off.</p>
+    </div>
+    <div class="card">
+      <h3>1.3 55-Gate Deterministic Intake Sanitiser</h3>
+      <p>Inbound web and voice enquiries pass through 55 deterministic checks (blocking prompt injection, SSRF, template injection, null bytes, and homoglyphs) and evaluate 6 practice qualification gates (Route Fit, Eligibility, Immigration History, Fee Capacity, Jurisdiction, and Section 3C Urgency).</p>
+    </div>
+    <div class="card">
+      <h3>1.4 Sharded HMAC Audit &amp; Sensory Organ</h3>
+      <p>State transitions and authorised voice/vision commands emit Zero-PII pointer events chained by <code>(tenant_id, case_id, case_seq)</code>, signed via keyed HMAC-SHA256 (<code>ExternalKMSAnchor</code>), and protected by database <code>BEFORE UPDATE/DELETE</code> immutability triggers.</p>
+    </div>
+  </div>
+
+  <div class="arch-diagram">
+[Inbound Enquiry / Document / Wake-Word Command]
+       │
+       ▼
+┌──────────────────────────────────────────────────────────┐
+│ 1. DETERMINISTIC FIREWALL &amp; GOLDEN MATRIX AUTHORISER     │
+│    • 55-Gate Sanitiser + Zero-PII Outbox Regex Validator │
+│    • BaselineGoldenMatrixAdapter (Role &amp; Tenant Guard)   │
+└───────────────────────────┬──────────────────────────────┘
+                            ▼
+┌──────────────────────────────────────────────────────────┐
+│ 2. 3-AXIS DOCUMENT FSM &amp; SHARDED KMS HMAC OUTBOX         │
+│    • Axis 1: Quarantine → Inspection → Eligible → Release│
+│    • Axis 2: Propose-Only AI vs. Byte-Pinned Solicitor   │
+│    • Axis 3: 6-Year SRA Statutory Retention Lock         │
+└──────────────────────────────────────────────────────────┘</div>
+
+  <h2>2. OpenAPI 3.1 Endpoint Contract Summary (Live Schema at <code>/openapi.json</code>)</h2>
+  <table>
+    <thead><tr><th>Method &amp; Route</th><th>Authentication</th><th>Input Contract</th><th>Deterministic Output &amp; Guardrails</th></tr></thead>
+    <tbody>
+      <tr><td><code>GET /health</code></td><td>Public</td><td>None</td><td><code>{"status":"ok","engine":"AirCounsel STRATA V2","wal_active":true}</code></td></tr>
+      <tr><td><code>POST /api/v1/security/sanitise-intake</code></td><td><code>X-API-Key</code></td><td>JSON enquiry payload</td><td>Sanitised JSON + <code>_meta.payload_hash</code> (SHA-256) or HTTP 400 on threat</td></tr>
+      <tr><td><code>POST /webhook/law-firm-intake</code></td><td>CORS / Public</td><td>Web intake payload</td><td>6-gate qualification score + live case injection into <code>/workspace</code></td></tr>
+      <tr><td><code>POST /api/v2/evidence/ingest-and-inspect</code></td><td><code>X-API-Key</code></td><td><code>tenant_id, case_id, requirement_id, raw_bytes_b64</code></td><td>Quarantine lease, EICAR/polyglot script check, spec regex extraction</td></tr>
+      <tr><td><code>POST /api/v2/evidence/human-attest-strict</code></td><td><code>X-API-Key</code> + <code>session_token</code></td><td><code>version_id, expected_sha256, session_token, decision</code></td><td>Verifies <code>ActorKind.HUMAN</code> &amp; tenant match (blocks LLM/Auditor with 403)</td></tr>
+      <tr><td><code>POST /api/v2/handoff/dispatch-governed</code></td><td><code>X-API-Key</code> + <code>session_token</code></td><td><code>case_id, idempotency_key, art9_condition, privilege_assessment</code></td><td>Enforces UK GDPR Art 9 coherence, document release, &amp; idempotency</td></tr>
+      <tr><td><code>POST /api/v2/evidence/dispose</code></td><td><code>X-API-Key</code> + <code>session_token</code></td><td><code>version_id, simulated_current_date_iso</code></td><td>Enforces +6Y SRA retention lock (HTTP 409 if within retention window)</td></tr>
+      <tr><td><code>POST /api/v2/evidence/human-correction-learn</code></td><td><code>X-API-Key</code></td><td><code>version_id, agent_proposed_verdict, human_corrected_verdict</code></td><td>Commits practitioner override to <code>v2_bpfs_correction_ledger</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. Methodology for Modelled Practice Efficiency Estimates</h2>
+  <p>References in our institutional briefings to an estimated <strong>~22% uninstructed consultation rate</strong> and <strong>6–10 hours per week of recoverable fee-earner capacity</strong> are <strong>modelled practice estimates</strong> derived from the following operational parameters:</p>
+  <ul>
+    <li><strong>Uninstructed Consultation Drag (~22% Modelled Estimate):</strong> Models a specialist immigration practice handling 25 inbound enquiries per week in which 5 to 6 consultations do not convert to instruction due to pre-existing statutory blockers (e.g., Appendix Skilled Worker going-rate shortfall, absence of a Home Office Sponsor Licence, or undisclosed adverse immigration history).</li>
+    <li><strong>Recoverable Fee-Earner Capacity (6–10 Hours/Week Modelled Estimate):</strong> Models 5.5 uninstructed consultations/week &times; 45 minutes (4.1 hours) plus 12 active matters &times; 25 minutes/week of manual document chasing and pre-supervision verification (5.0 hours) = ~9.1 hours/week per fee earner at an illustrative cost rate of £275/hour.</li>
+  </ul>
+
+  <h2>4. Onboarding Verification Gate &amp; Synthetic Data Restriction</h2>
+  <p>To safeguard special-category personal data (UK GDPR Article 9) and criminal-offence data (Article 10):</p>
+  <ul>
+    <li><strong>Stage 1 | Self-Serve Sandbox Provisioning (<code>/onboard</code>):</strong> Mints a <strong>Synthetic-Data Sandbox Key</strong> (<code>sk_sandbox_...</code>, status <code>SANDBOX_PROVISIONED_SRA_PENDING</code>) verified against our database on every call and rate-limited per IP. Unverified tenants are restricted to synthetic test payloads.</li>
+    <li><strong>Stage 2 | Production Activation:</strong> Live production credentials for client PII are issued only after verification of the practice's <strong>SRA Number / IAA (OISC) Registration / Companies House Number</strong> and execution of our UK GDPR Article 28 Data Processing Addendum.</li>
+  </ul>
+
+  <h2>5. UK GDPR Article 28 Data Processing, Sub-Processors &amp; Security Contact</h2>
+  <table>
+    <thead><tr><th>Governance Dimension</th><th>Institutional Specification</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Data Protection Roles</strong></td><td>The Law Firm / Practice acts as <strong>Data Controller</strong>; AirCounsel STRATA acts as <strong>Data Processor</strong> under UK GDPR Article 28 controller-processor terms.</td></tr>
+      <tr><td><strong>Authorised Sub-Processors</strong></td><td>1. <strong>Railway Corp.</strong> (Cloud application compute &amp; managed PostgreSQL persistence)<br>2. <strong>Cloudflare / GitHub Pages</strong> (Static documentation delivery &amp; DNS routing)<br>3. <strong>Resend / Transactional SMTP</strong> (System notification dispatch | zero document storage)<br>4. <strong>Optional Propose-Only LLM Provider</strong> (Disabled by default in deterministic mode; zero training on tenant data)</td></tr>
+      <tr><td><strong>Data Location &amp; Retention</strong></td><td>Encrypted in transit (TLS 1.3) and at rest (AES-256). Enforces a statutory 6-year SRA retention lock prior to automated disposal. Ambient voice wake-word processing retains zero raw audio.</td></tr>
+      <tr><td><strong>Security &amp; Breach Contact</strong></td><td>Data Protection &amp; Security Officer: <code>kwameh@aircounsel.uk</code> (24-hour incident notification SLA).</td></tr>
+    </tbody>
+  </table>
+
+  <h2>6. Institutional Routing &amp; Verification</h2>
+  <div class="ukri-routing">
+    <div class="route-box">
+      <h4>Practice Workspace (V5.0)</h4>
+      <p>Inspect the 3-Axis Document State Machine, Matter Register, and Sharded HMAC Audit Outbox.</p>
+      <a href="/workspace.html">Open V5.0 Workspace &rarr;</a>
+    </div>
+    <div class="route-box">
+      <h4>Self-Serve Sandbox Onboarding</h4>
+      <p>Provision an isolated synthetic-data practice tenant and test API credentials in 30 seconds.</p>
+      <a href="/onboard.html">Provision Sandbox Tenant &rarr;</a>
+    </div>
+    <div class="route-box">
+      <h4>Institutional Research Hub</h4>
+      <p>Read our briefings on Comparative Advantage, SRA AI Governance, and Skilled Worker readiness.</p>
+      <a href="https://aircounsel.uk/insights.html">View Research Briefings &rarr;</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>
