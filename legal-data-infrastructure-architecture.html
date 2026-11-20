@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Trustworthy Legal-Data Infrastructure: Temporal Modelling, AKN 3.1, FRBR &amp; Causal Ledgers | AirCounsel</title>
+<meta name="description" content="Why scraping laws into flat vector databases fails: how AirCounsel models the 4 dimensions of legal time, FRBR expressions, OASIS Akoma Ntoso 3.1, LegalRuleML, and closed-loop causal ledgers.">
+<link rel="canonical" href="https://aircounsel.uk/legal-data-infrastructure-architecture.html">
+<meta property="og:title" content="Building Trustworthy Legal-Data Infrastructure | AirCounsel Architecture Monograph">
+<meta property="og:description" content="Preserving identity, authority, provenance, licensing, and the 4 dimensions of time across statutory and evidentiary legal systems.">
+<meta property="og:image" content="https://aircounsel.uk/gifs/four-dimensions-legal-time.gif">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Building Trustworthy Legal-Data Infrastructure: Temporal Modelling, AKN 3.1, FRBR and Causal Ledgers",
+  "datePublished": "2026-11-20",
+  "author": {"@type": "Person", "name": "Kwameh J. Dande"},
+  "publisher": {"@type": "Organization", "name": "AirCounsel", "url": "https://aircounsel.uk"}
+}
+</script>
+<style>
+  :root { --paper:#FAF8F5; --card:#FFFFFF; --navy:#161E2E; --body:#2C3444; --muted:#5A6475; --stone:#D8D3C8; --stone-bg:#F1EFEA; --bronze:#8C6D3F; --green:#1E7E52; }
+  * { box-sizing:border-box; }
+  body { background:var(--paper); color:var(--body); font-family:ui-sans-serif,system-ui,-apple-system,sans-serif; margin:0; line-height:1.74; }
+  .topbar { background:var(--navy); color:#F3EFE6; padding:14px 28px; font-size:12px; font-family:ui-monospace,monospace; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--bronze); }
+  .topbar a { color:#DFC288; text-decoration:none; margin-left:18px; }
+  .wrap { max-width:920px; margin:0 auto; padding:38px 24px 88px; }
+  .breadcrumbs { font-size:13px; color:var(--muted); margin-bottom:22px; padding-bottom:10px; border-bottom:1px solid var(--stone); }
+  .breadcrumbs a { color:var(--navy); text-decoration:underline; }
+  .kicker { font-family:ui-monospace,monospace; color:var(--bronze); font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; }
+  h1 { color:var(--navy); font-size:32px; line-height:1.22; margin:8px 0 14px; }
+  h2 { color:var(--navy); font-size:21px; border-bottom:1px solid var(--stone); padding-bottom:6px; margin-top:40px; }
+  h3 { color:var(--navy); font-size:17px; margin-top:24px; }
+  .meta { background:var(--stone-bg); border:1px solid var(--stone); border-left:4px solid var(--navy); padding:13px 16px; font-family:ui-monospace,monospace; font-size:12px; color:var(--navy); margin-bottom:26px; }
+  table { width:100%; border-collapse:collapse; background:var(--card); margin:18px 0; font-size:13.5px; }
+  th, td { border:1px solid var(--stone); padding:10px 13px; text-align:left; vertical-align:top; }
+  th { background:var(--stone-bg); color:var(--navy); font-weight:700; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin:20px 0; }
+  .card { background:var(--card); border:1px solid var(--stone); border-top:3px solid var(--navy); padding:18px 20px; border-radius:4px; }
+  .card h4 { margin:0 0 6px; color:var(--navy); font-size:15px; }
+  .card p { margin:0; font-size:13.5px; color:var(--body); }
+  code { font-family:ui-monospace,monospace; background:var(--stone-bg); color:var(--navy); padding:2px 6px; border-radius:3px; font-size:12.5px; }
+  blockquote { background:var(--card); border:1px solid var(--stone); border-left:4px solid var(--navy); padding:14px 18px; margin:22px 0; font-style:italic; color:var(--navy); }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <span>AIRCOUNSEL // ARCHITECTURE, STANDARDS &amp; LEGAL DATA GOVERNANCE</span>
+  <div>
+    <a href="/changes.html">Statutory Delta Index</a>
+    <a href="/workspace.html">V5.0 Workspace</a>
+    <a href="/specsheet.html">Technical Specsheet</a>
+    <a href="/insights.html">Research Index</a>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/insights.html">Institutional Research</a> &rsaquo; Trustworthy Legal-Data Infrastructure &amp; Temporal Modelling</nav>
+  <div class="kicker">RESEARCH MONOGRAPH : REF AC-ARCH-2026-11-20 · STANDARDS &amp; CAUSAL LEDGERS</div>
+  <h1>Building Trustworthy Legal-Data Infrastructure: Why Flat Scraping Fails and How Temporal Causal Ledgers Preserve Legal Meaning</h1>
+  <div class="meta">PUBLISHED: 20 NOVEMBER 2026 &nbsp;|&nbsp; AUTHOR: KWAMEH J. DANDE &nbsp;|&nbsp; STANDARDS: FRBR · OASIS AKN 3.1 · ELI/ECLI · LEGALRULEML</div>
+
+  <figure style="margin:24px 0 30px;background:#FFFFFF;border:1px solid #D8D3C8;border-radius:6px;padding:12px;box-shadow:0 8px 24px rgba(22,30,46,0.06);">
+    <img src="/gifs/four-dimensions-legal-time.gif" alt="The Four Dimensions of Time in Legal Infrastructure" style="width:100%;height:auto;display:block;border-radius:4px;">
+    <figcaption style="font-family:ui-monospace,monospace;font-size:11.5px;color:#5A6475;margin-top:8px;text-align:center">
+      TEMPORAL LEGAL ARCHITECTURE : VALIDITY TIME  |  EVENT TIME  |  PUBLICATION TIME  |  SYSTEM-RECORDED TIME
+    </figcaption>
+  </figure>
+
+  <p>A search engine can locate a document. A flat database can store it. A probabilistic language model can summarise its prose. Yet none of those operations, by itself, establishes that a legal instrument is authoritative, complete, applicable to a specific cohort, or legally in force on the date that matters.</p>
+  <p>Across the legal technology market, most tools treat legal information and client intake as flat text waiting to be scraped or summarised by a chatbot. That contrarian gap is why we architected <strong>AirCounsel STRATA</strong> not as a conversational wrapper, but as a <strong>temporally pinned, provenance-preserving causal ledger</strong>.</p>
+
+  <h2>1. The Seven-Layer Legal-Data Infrastructure Stack</h2>
+  <p>Evaluating legal infrastructure by raw document count obscures seven distinct engineering responsibilities. A platform can maintain cryptographic hashes while ingesting from an unauthoritative mirror, or index millions of pages while collapsing temporal validity:</p>
+  <table>
+    <thead><tr><th>Layer</th><th>Engineering Responsibility</th><th>AirCounsel STRATA Enforcement</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Source Authority &amp; Licensing</strong></td><td>Who published the material, and what computational/redistribution rights apply (e.g. Open Justice vs. Transactional Licence)?</td><td>Strict hostname allowlisting (<code>gov.uk</code>, <code>legislation.gov.uk</code>) paired with per-source licensing metadata.</td></tr>
+      <tr><td><strong>2. Acquisition &amp; 8-State Ingestion</strong></td><td>Were pagination, schedules, and update feeds captured transactionally without promoting partial crawls?</td><td>8-state ingestion FSM (<code>DISCOVERED &rarr; FETCHED &rarr; PARSED &rarr; STRUCTURALLY_VALIDATED &rarr; SEMANTICALLY_VALIDATED &rarr; COMMITTED | QUARANTINED</code>).</td></tr>
+      <tr><td><strong>3. Validation &amp; Integrity</strong></td><td>Has the captured binary or OCR artifact silently mutated since acquisition?</td><td>Byte-pinned SHA-256 digests + per-case sharded HMAC audit chains (<code>kms-2026-v1</code>).</td></tr>
+      <tr><td><strong>4. Identity &amp; Representation</strong></td><td>Distinguishing the abstract legal work from point-in-time expressions and digital manifestations.</td><td>FRBR-aligned model bridging UK CLML, <strong>OASIS Akoma Ntoso 3.1</strong> (approved Oct 2026), ELI, and ECLI.</td></tr>
+      <tr><td><strong>5. Four-Dimensional Time</strong></td><td>Which provision version applied on a specific historical or transitional cutoff date?</td><td>Separates Legal Validity Time, Event Time, Publication Time, and System-Recorded Time.</td></tr>
+      <tr><td><strong>6. Normative Rules &amp; Drift</strong></td><td>Connecting statutory text to formal obligations, thresholds, and unapplied amendments.</td><td><strong>LegalRuleML</strong>-inspired spec registry with automated Rule-Drift alerts on open matters.</td></tr>
+      <tr><td><strong>7. Containment &amp; Causal Attribution</strong></td><td>Ensuring downstream retrieval and AI triage never override human legal judgement.</td><td><code>ActorKind.LLM_AGENT</code> locked in a propose-only kernel sandbox; 30-day causal ledger attribution.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>2. Standards Convergence: FRBR, Akoma Ntoso 3.1 (OASIS 2026), ELI/ECLI &amp; LegalRuleML</h2>
+  <p>Attempting to force every jurisdiction into a single rigid database schema fails because common-law statutes, EU directives, and judicial precedents obey different structural grammars. Instead, trustworthy infrastructure separates four complementary standards:</p>
+  <div class="card-grid">
+    <div class="card">
+      <h4>FRBR &amp; Legislation.gov.uk CLML</h4>
+      <p>Separates the <strong>Legal Work</strong> (the Act) from the <strong>Enacted Expression</strong>, the <strong>Revised Point-in-Time Expression</strong> (by date and territorial extent, e.g. England &amp; Wales vs. Scotland), and the <strong>Manifestation</strong> (XML/HTML/PDF), while surfacing <em>unapplied effects</em>.</p>
+    </div>
+    <div class="card">
+      <h4>Akoma Ntoso 3.1 (OASIS Standard, Oct 2026)</h4>
+      <p>Provides the machine-readable document vocabulary across legislative schedules, annexes, and judicial decisions without erasing jurisdiction-specific terminology.</p>
+    </div>
+    <div class="card">
+      <h4>ELI &amp; ECLI Identifiers</h4>
+      <p>Persistent URI identification and RDFa/JSON-LD metadata synchronisation for legislation (ELI) and court decisions (<code>ECLI:Country:Court:Year:Number</code>).</p>
+    </div>
+    <div class="card">
+      <h4>OASIS LegalRuleML</h4>
+      <p>Moves beyond raw text to represent formal legal norms: the subject, precondition, statutory threshold, obligation/permission, and temporal scope linked to the source provision.</p>
+    </div>
+  </div>
+
+  <h2>3. The Hardest Problem: The Four Dimensions of Legal Time</h2>
+  <p>Conventional software stores a flat <code>current_text</code> and <code>last_updated</code> column. In regulated practice (such as UK immigration law across the 2024, 2025, and 2026 Statements of Changes), flat storage produces false results because a single statutory question involves four distinct timelines:</p>
+  <table>
+    <thead><tr><th>Temporal Dimension</th><th>Definition</th><th>Why Flat Databases &amp; Standard AI RAG Fail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Legal Validity Time</strong></td><td>The exact window during which a rule or transitional threshold applies to a defined cohort.</td><td>An applicant whose first Skilled Worker CoS was assigned before 4 April 2024 is governed by transitional rules until 2030, not the post-July 2025 £41,700 threshold.</td></tr>
+      <tr><td><strong>2. Legal Event Time</strong></td><td>When the legislative or judicial act occurred (e.g. Royal Assent, HC Statement laid before Parliament, commencement order).</td><td>Provisions within the same Act or Statement of Changes frequently commence on different dates.</td></tr>
+      <tr><td><strong>3. Publication &amp; Consolidation Time</strong></td><td>When the publisher released the update or incorporated it into consolidated text.</td><td>A change may be legally enacted while remaining an <em>unapplied effect</em> in consolidated text; systems must flag unresolved change exposure.</td></tr>
+      <tr><td><strong>4. System-Recorded Time</strong></td><td>When our infrastructure captured, validated, and pinned the specification to a matter.</td><td>Enables forensic reconstruction of both <em>what the law required on Date T</em> and <em>what the firm's system knew on Date T</em>.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>4. Why This Powers AirCounsel's Contrarian Practice Infrastructure</h2>
+  <blockquote>Most legal software operates on optimistic snapshots: bolt a flat web form onto a billing ledger, mark an email as "Sent", and hope nothing drifts. When revenue or conversion drops 30 days later, a flat database cannot tell you why.</blockquote>
+  <p>By building AirCounsel on top of a temporally pinned specification registry, a frequency-thresholded <strong>Signal Lab</strong> (using exact Clopper-Pearson and Wilson bounds), and a closed-loop causal ledger, UK immigration and regulated practices gain three capabilities unavailable in legacy tools:</p>
+  <ul>
+    <li><strong>Pre-Consultation Cohort Precision:</strong> Applicant preparation records (<code>aircounsel.uk/prepare.html</code>) and statutory rule diffs (<code>aircounsel.uk/changes.html</code>) align facts against the exact 2024, 2025, or 2026 statutory cohort before a solicitor's calendar is committed.</li>
+    <li><strong>Kernel-Level AI Containment:</strong> Language models never hold operational credentials. Every evidentiary check and rule-drift alert requires byte-pinned human practitioner attestation.</li>
+    <li><strong>30-Day Causal Attribution:</strong> Because every gate evaluation, denial event, and statutory spec version is hash-chained, Managing Partners can trace financial and operational performance back to the exact rule change or intake bottleneck.</li>
+  </ul>
+</main>
+</body>
+</html>
