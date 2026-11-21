@@ -3,45 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Building Trustworthy Legal-Data Infrastructure: Temporal Modelling, AKN 3.1, FRBR &amp; Causal Ledgers | AirCounsel</title>
-<meta name="description" content="Why scraping laws into flat vector databases fails: how AirCounsel models the 4 dimensions of legal time, FRBR expressions, OASIS Akoma Ntoso 3.1, LegalRuleML, and closed-loop causal ledgers.">
+<title>Global Legal-Data Infrastructure, Ingestion Contracts &amp; Provenance-Preserving Law | AirCounsel Research Dossier</title>
+<meta name="description" content="A 10-part technical research dossier examining global legal-data infrastructure, OASIS Akoma Ntoso 3.1, FRBR point-in-time versioning, Legal Data Hunter ingestion contracts, and 4D temporal causal ledgers.">
 <link rel="canonical" href="https://aircounsel.uk/legal-data-infrastructure-architecture.html">
-<meta property="og:title" content="Building Trustworthy Legal-Data Infrastructure | AirCounsel Architecture Monograph">
-<meta property="og:description" content="Preserving identity, authority, provenance, licensing, and the 4 dimensions of time across statutory and evidentiary legal systems.">
+<meta property="og:title" content="Global Legal-Data Infrastructure &amp; Provenance-Preserving Law | AirCounsel Research Dossier">
+<meta property="og:description" content="Preserving legal identity, source authority, ingestion completeness, licensing, and 4-dimensional temporal validity across statutory and judicial systems.">
 <meta property="og:image" content="https://aircounsel.uk/gifs/four-dimensions-legal-time.gif">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Building Trustworthy Legal-Data Infrastructure: Temporal Modelling, AKN 3.1, FRBR and Causal Ledgers",
+  "headline": "Global Legal-Data Infrastructure, Ingestion Contracts and the Case for Provenance-Preserving Law",
   "datePublished": "2026-11-20",
   "author": {"@type": "Person", "name": "Kwameh J. Dande"},
   "publisher": {"@type": "Organization", "name": "AirCounsel", "url": "https://aircounsel.uk"}
 }
 </script>
 <style>
-  :root { --paper:#FAF8F5; --card:#FFFFFF; --navy:#161E2E; --body:#2C3444; --muted:#5A6475; --stone:#D8D3C8; --stone-bg:#F1EFEA; --bronze:#8C6D3F; --green:#1E7E52; }
+  :root { --paper:#FAF8F5; --card:#FFFFFF; --navy:#161E2E; --body:#2C3444; --muted:#5A6475; --stone:#D8D3C8; --stone-bg:#F1EFEA; --bronze:#8C6D3F; --green:#1E7E52; --amber:#9A5B13; }
   * { box-sizing:border-box; }
-  body { background:var(--paper); color:var(--body); font-family:ui-sans-serif,system-ui,-apple-system,sans-serif; margin:0; line-height:1.74; }
-  .topbar { background:var(--navy); color:#F3EFE6; padding:14px 28px; font-size:12px; font-family:ui-monospace,monospace; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--bronze); }
+  body { background:var(--paper); color:var(--body); font-family:ui-sans-serif,system-ui,-apple-system,sans-serif; margin:0; line-height:1.75; }
+  .topbar { background:var(--navy); color:#F3EFE6; padding:14px 28px; font-size:12px; font-family:ui-monospace,monospace; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--bronze); flex-wrap:wrap; gap:10px; }
   .topbar a { color:#DFC288; text-decoration:none; margin-left:18px; }
-  .wrap { max-width:920px; margin:0 auto; padding:38px 24px 88px; }
+  .wrap { max-width:960px; margin:0 auto; padding:38px 24px 96px; }
   .breadcrumbs { font-size:13px; color:var(--muted); margin-bottom:22px; padding-bottom:10px; border-bottom:1px solid var(--stone); }
   .breadcrumbs a { color:var(--navy); text-decoration:underline; }
   .kicker { font-family:ui-monospace,monospace; color:var(--bronze); font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; }
   h1 { color:var(--navy); font-size:32px; line-height:1.22; margin:8px 0 14px; }
-  h2 { color:var(--navy); font-size:21px; border-bottom:1px solid var(--stone); padding-bottom:6px; margin-top:40px; }
-  h3 { color:var(--navy); font-size:17px; margin-top:24px; }
+  h2 { color:var(--navy); font-size:21px; border-bottom:1px solid var(--stone); padding-bottom:6px; margin-top:44px; }
+  h3 { color:var(--navy); font-size:17px; margin-top:26px; }
   .meta { background:var(--stone-bg); border:1px solid var(--stone); border-left:4px solid var(--navy); padding:13px 16px; font-family:ui-monospace,monospace; font-size:12px; color:var(--navy); margin-bottom:26px; }
-  table { width:100%; border-collapse:collapse; background:var(--card); margin:18px 0; font-size:13.5px; }
+  table { width:100%; border-collapse:collapse; background:var(--card); margin:18px 0 24px; font-size:13.5px; }
   th, td { border:1px solid var(--stone); padding:10px 13px; text-align:left; vertical-align:top; }
   th { background:var(--stone-bg); color:var(--navy); font-weight:700; }
-  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin:20px 0; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:16px; margin:20px 0; }
   .card { background:var(--card); border:1px solid var(--stone); border-top:3px solid var(--navy); padding:18px 20px; border-radius:4px; }
   .card h4 { margin:0 0 6px; color:var(--navy); font-size:15px; }
   .card p { margin:0; font-size:13.5px; color:var(--body); }
   code { font-family:ui-monospace,monospace; background:var(--stone-bg); color:var(--navy); padding:2px 6px; border-radius:3px; font-size:12.5px; }
+  pre { background:var(--navy); color:#F3EFE6; padding:16px 18px; border-radius:5px; overflow-x:auto; font-family:ui-monospace,monospace; font-size:12.5px; line-height:1.55; border-left:4px solid var(--bronze); }
+  pre code { background:transparent; color:inherit; padding:0; }
   blockquote { background:var(--card); border:1px solid var(--stone); border-left:4px solid var(--navy); padding:14px 18px; margin:22px 0; font-style:italic; color:var(--navy); }
+  .callout { background:#F2F9F5; border:1px solid #B7DFC9; border-left:4px solid var(--green); padding:15px 18px; margin:20px 0; font-size:14px; }
 </style>
 </head>
 <body>
@@ -51,14 +54,15 @@
     <a href="/changes.html">Statutory Delta Index</a>
     <a href="/workspace.html">V5.0 Workspace</a>
     <a href="/specsheet.html">Technical Specsheet</a>
+    <a href="/comparative-advantage-legal-practices.html">Comparative Advantage</a>
     <a href="/insights.html">Research Index</a>
   </div>
 </header>
 <main class="wrap">
-  <nav class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/insights.html">Institutional Research</a> &rsaquo; Trustworthy Legal-Data Infrastructure &amp; Temporal Modelling</nav>
-  <div class="kicker">RESEARCH MONOGRAPH : REF AC-ARCH-2026-11-20 · STANDARDS &amp; CAUSAL LEDGERS</div>
-  <h1>Building Trustworthy Legal-Data Infrastructure: Why Flat Scraping Fails and How Temporal Causal Ledgers Preserve Legal Meaning</h1>
-  <div class="meta">PUBLISHED: 20 NOVEMBER 2026 &nbsp;|&nbsp; AUTHOR: KWAMEH J. DANDE &nbsp;|&nbsp; STANDARDS: FRBR · OASIS AKN 3.1 · ELI/ECLI · LEGALRULEML</div>
+  <nav class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/insights.html">Institutional Research</a> &rsaquo; Global Legal-Data Infrastructure &amp; Provenance Dossier</nav>
+  <div class="kicker">RESEARCH SYNTHESIS : REF AC-ARCH-2026-11-20 · TECHNICAL ARCHITECTURE &amp; REPOSITORY AUDIT</div>
+  <h1>Global Legal-Data Infrastructure, Ingestion Contracts, and the Case for Provenance-Preserving Law</h1>
+  <div class="meta">PUBLISHED: 20 NOVEMBER 2026 &nbsp;|&nbsp; AUTHOR: KWAMEH J. DANDE &nbsp;|&nbsp; SCOPE: AKN 3.1 · FRBR · ELI/ECLI · LEGALRULEML · INGESTION AUDIT</div>
 
   <figure style="margin:24px 0 30px;background:#FFFFFF;border:1px solid #D8D3C8;border-radius:6px;padding:12px;box-shadow:0 8px 24px rgba(22,30,46,0.06);">
     <img src="/gifs/four-dimensions-legal-time.gif" alt="The Four Dimensions of Time in Legal Infrastructure" style="width:100%;height:auto;display:block;border-radius:4px;">
@@ -67,65 +71,181 @@
     </figcaption>
   </figure>
 
-  <p>A search engine can locate a document. A flat database can store it. A probabilistic language model can summarise its prose. Yet none of those operations, by itself, establishes that a legal instrument is authoritative, complete, applicable to a specific cohort, or legally in force on the date that matters.</p>
-  <p>Across the legal technology market, most tools treat legal information and client intake as flat text waiting to be scraped or summarised by a chatbot. That contrarian gap is why we architected <strong>AirCounsel STRATA</strong> not as a conversational wrapper, but as a <strong>temporally pinned, provenance-preserving causal ledger</strong>.</p>
+  <p>The central question in legal-information engineering is not simply how to collect and index the world's laws into a single search table. It is how to design interoperable infrastructure that preserves the <strong>identity, authority, provenance, jurisdiction, licensing, and temporal validity</strong> of every legal instrument throughout its lifecycle, and how to prove that downstream systems have retrieved and represented it faithfully.</p>
+  <p>A search engine can locate a document. A flat database can store it. A language model can summarise its prose. Yet none of those operations, by itself, establishes that the retrieved text is authoritative, complete, applicable to a specific cohort, or legally in force on the date that matters.</p>
 
-  <h2>1. The Seven-Layer Legal-Data Infrastructure Stack</h2>
-  <p>Evaluating legal infrastructure by raw document count obscures seven distinct engineering responsibilities. A platform can maintain cryptographic hashes while ingesting from an unauthoritative mirror, or index millions of pages while collapsing temporal validity:</p>
+  <h2>Part I : The Eight-Layer Legal-Data Infrastructure Stack</h2>
+  <p>A conventional scraping platform often normalises legislation, regulations, and court judgments into a flat seven-field schema (<code>_id</code>, <code>_source</code>, <code>_type</code>, <code>title</code>, <code>text</code>, <code>date</code>, <code>url</code>). While useful for basic keyword discovery, flat normalisation discards the properties that govern legal meaning. Trustworthy infrastructure separates eight distinct engineering responsibilities:</p>
   <table>
-    <thead><tr><th>Layer</th><th>Engineering Responsibility</th><th>AirCounsel STRATA Enforcement</th></tr></thead>
+    <thead><tr><th>Layer</th><th>Engineering Responsibility</th><th>Failure Mode Classification</th></tr></thead>
     <tbody>
-      <tr><td><strong>1. Source Authority &amp; Licensing</strong></td><td>Who published the material, and what computational/redistribution rights apply (e.g. Open Justice vs. Transactional Licence)?</td><td>Strict hostname allowlisting (<code>gov.uk</code>, <code>legislation.gov.uk</code>) paired with per-source licensing metadata.</td></tr>
-      <tr><td><strong>2. Acquisition &amp; 8-State Ingestion</strong></td><td>Were pagination, schedules, and update feeds captured transactionally without promoting partial crawls?</td><td>8-state ingestion FSM (<code>DISCOVERED &rarr; FETCHED &rarr; PARSED &rarr; STRUCTURALLY_VALIDATED &rarr; SEMANTICALLY_VALIDATED &rarr; COMMITTED | QUARANTINED</code>).</td></tr>
-      <tr><td><strong>3. Validation &amp; Integrity</strong></td><td>Has the captured binary or OCR artifact silently mutated since acquisition?</td><td>Byte-pinned SHA-256 digests + per-case sharded HMAC audit chains (<code>kms-2026-v1</code>).</td></tr>
-      <tr><td><strong>4. Identity &amp; Representation</strong></td><td>Distinguishing the abstract legal work from point-in-time expressions and digital manifestations.</td><td>FRBR-aligned model bridging UK CLML, <strong>OASIS Akoma Ntoso 3.1</strong> (approved Oct 2026), ELI, and ECLI.</td></tr>
-      <tr><td><strong>5. Four-Dimensional Time</strong></td><td>Which provision version applied on a specific historical or transitional cutoff date?</td><td>Separates Legal Validity Time, Event Time, Publication Time, and System-Recorded Time.</td></tr>
-      <tr><td><strong>6. Normative Rules &amp; Drift</strong></td><td>Connecting statutory text to formal obligations, thresholds, and unapplied amendments.</td><td><strong>LegalRuleML</strong>-inspired spec registry with automated Rule-Drift alerts on open matters.</td></tr>
-      <tr><td><strong>7. Containment &amp; Causal Attribution</strong></td><td>Ensuring downstream retrieval and AI triage never override human legal judgement.</td><td><code>ActorKind.LLM_AGENT</code> locked in a propose-only kernel sandbox; 30-day causal ledger attribution.</td></tr>
+      <tr><td><strong>1. Source Authority</strong></td><td>Who issued the instrument? Is it an official gazette, an authorised reproduction, or a secondary mirror?</td><td><strong>Data Failure:</strong> Collecting from an unauthoritative or superseded mirror.</td></tr>
+      <tr><td><strong>2. Acquisition</strong></td><td>Was the complete resource retrieved, including pagination, schedules, annexes, and attachments?</td><td><strong>Data Failure:</strong> Truncated pagination or missing schedules.</td></tr>
+      <tr><td><strong>3. Ingestion Integrity</strong></td><td>Were incomplete crawls, WAF interstitials (including HTTP 200 challenges), and broken pages quarantined?</td><td><strong>Data Failure:</strong> Partial crawls advancing freshness checkpoints.</td></tr>
+      <tr><td><strong>4. Structural Validation</strong></td><td>Does the parsed output conform to its formal schema before reaching persistent storage?</td><td><strong>Data Failure:</strong> Logging validation warnings while still writing invalid records.</td></tr>
+      <tr><td><strong>5. Identity &amp; Provenance</strong></td><td>Can the legal work, expression, manifestation, byte digest, and transformation lineage be verified?</td><td><strong>Data Failure:</strong> Treating a mutable URL or OCR text as an immutable primary source.</td></tr>
+      <tr><td><strong>6. Temporal &amp; Jurisdictional Modelling</strong></td><td>Which provision version applies, when, across which territorial extent, and to which transitional cohort?</td><td><strong>Legal-Context Failure:</strong> Applying current consolidated text to a historical or transitional event.</td></tr>
+      <tr><td><strong>7. Relationships &amp; Indexing</strong></td><td>How do amending Acts, commencement orders, unapplied effects, and judicial citations alter legal state?</td><td><strong>Legal-Context Failure:</strong> Missing an unapplied amendment or subsequent overruling judgment.</td></tr>
+      <tr><td><strong>8. Retrieval &amp; Answer Fidelity</strong></td><td>Did the downstream system retrieve the exact passage and represent its legal holding faithfully?</td><td><strong>Reasoning Failure:</strong> Real source citation paired with an invented quote or misstated holding.</td></tr>
     </tbody>
   </table>
 
-  <h2>2. Standards Convergence: FRBR, Akoma Ntoso 3.1 (OASIS 2026), ELI/ECLI &amp; LegalRuleML</h2>
-  <p>Attempting to force every jurisdiction into a single rigid database schema fails because common-law statutes, EU directives, and judicial precedents obey different structural grammars. Instead, trustworthy infrastructure separates four complementary standards:</p>
+  <h2>Part II : Empirical Case Study : Shared Scraper Frameworks (Legal Data Hunter)</h2>
+  <p>To examine how these eight layers behave in practice, we inspected the open-source collection repository of <strong>Legal Data Hunter</strong> (<code>worldwidelaw/legal-sources</code>), which coordinates 960+ collection scripts across 110+ countries on top of a shared Python abstraction (<code>common/base_scraper.py</code>, <code>common/validators.py</code>, and <code>common/storage.py</code>).</p>
+  <p>Using a shared base class across hundreds of jurisdiction-specific adapters is a sound architectural pattern for standardising rate limiting, status tracking (<code>status.yaml</code>), and deduplicated JSONL storage. However, it also concentrates structural risk: any weakness in the base ingestion contract propagates across the entire collection fleet.</p>
+  <p>Furthermore, distinguishing between <em>mutable legislation</em> (upsert with version tracking) and <em>append-only case law</em> is a necessary start, but insufficient as a complete legal model: earlier legislative versions must remain historically queryable by point-in-time date, and while a published court judgment's text is immutable, its precedential authority mutates whenever a subsequent decision distinguishes, follows, or overrules it. <strong>Document immutability does not imply legal-relationship immutability.</strong></p>
+
+  <h2>Part III : Source-Code Inspection Findings &amp; Reclassification</h2>
+  <p>An inspection of <code>common/base_scraper.py</code>, <code>common/validators.py</code>, <code>common/storage.py</code>, and individual source adapters establishes three primary ingestion-contract findings and several important source-level nuances:</p>
+
+  <h3>Finding 1 : Non-Atomic Checkpoint Advancement on Partial Bootstrap Runs</h3>
+  <p>In <code>common/base_scraper.py</code>, the <code>bootstrap()</code> execution loop catches exceptions occurring during collection and records them in run statistics and the status object. However, the completion block subsequently flushes storage, updates <code>last_bootstrap</code> and <code>last_run</code>, appends to <code>run_history</code>, and saves <code>status.yaml</code> without making checkpoint advancement conditional on zero collection errors or verified source completeness. Any downstream scheduler or consumer that treats <code>last_run</code> as a verified freshness watermark cannot distinguish a complete crawl from a partial crawl that encountered mid-stream exceptions.</p>
+
+  <h3>Finding 2 : Schema Validation Operates as a Warning Log Rather Than a Write Gate</h3>
+  <p>In <code>bootstrap()</code>, records are passed to <code>SchemaValidator.validate(record)</code>:</p>
+  <pre><code>is_valid, errors = self.validator.validate(record)
+if not is_valid:
+    logger.warning(f"Validation errors for {record.get('_id', '?')}: {errors}")</code></pre>
+  <p>After logging the warning, execution continues directly into storage persistence, allowing structurally invalid records to be written. Across the three primary execution paths, validation enforcement is asymmetric:</p>
+  <table>
+    <thead><tr><th>Execution Path</th><th>Observed Validation Behaviour</th></tr></thead>
+    <tbody>
+      <tr><td><code>bootstrap()</code></td><td>Calls <code>self.validator.validate(record)</code>, logs a warning on failure, and continues writing the record to storage.</td></tr>
+      <tr><td><code>update()</code></td><td>No corresponding <code>SchemaValidator</code> call on incremental updates.</td></tr>
+      <tr><td><code>bootstrap_fast()</code></td><td>No corresponding <code>SchemaValidator</code> call on concurrent batch runs.</td></tr>
+    </tbody>
+  </table>
+  <p>Having a validator class in the repository is not equivalent to enforcing a validated write gate.</p>
+
+  <h3>Finding 3 : Coverage-Gap Telemetry Does Not Gate Completion State</h3>
+  <p>The codebase has evolved to include explicit coverage-gap telemetry (<code>record_coverage_gap()</code>, <code>clear_coverage_gap()</code>, and <code>_report_coverage_gaps()</code>), persisting gap records into <code>status.yaml</code>. While this is a meaningful operational improvement over silent page loss, the presence of unresolved <code>coverage_gaps</code> still does not block the completion logic from advancing <code>last_run</code>.</p>
+
+  <h3>Finding 4 : Multi-Jurisdictional HTTP 200 WAF Challenges &amp; Active Remediations</h3>
+  <p>Government legal portals frequently fail in ways that defeat transport-level HTTP status checks. Two documented examples in the repository illustrate why <code>HTTP 200 OK</code> never guarantees valid legal content:</p>
+  <ul>
+    <li><strong>Indonesia : Bank Indonesia (<code>sources/ID/BI/bootstrap.py</code>, Issue #1470):</strong> The former <code>jdih.bi.go.id</code> endpoint returned an F5/BIG-IP rejection page with an <code>HTTP 200</code> status code to requests outside Indonesia, causing earlier scraper runs to interpret the interstitial as an empty page and report a 0-record crawl. The current <code>ID/BI</code> adapter remediates this by inspecting the response body for explicit rejection markers and raising an exception.</li>
+    <li><strong>Poland : SAOS vs. Common Courts Portal (<code>sources/PL/SAOS/bootstrap.py</code> &amp; <code>PL/CommonCourts</code> Issue #1838):</strong> The repository maintains separate Polish judicial adapters. <code>PL/SAOS</code> queries the SAOS public API with pagination, incremental modification-date filtering, and explicit exceptions on repeated page failure. Separately, <code>PL/CommonCourts</code> (<em>Portal Orzeczen Sadow Powszechnych</em>, <code>orzeczenia.ms.gov.pl</code>, logged under Issue #1838 on 12 October 2026) is blocked because every path returns an F5 Shape/BIG-IP ASM JavaScript challenge as <code>HTTP 200</code> (<code>window["bobcmn"]</code>, <code>/TSPD/</code> cookies).</li>
+    <li><strong>Additional Active Codebase Improvements:</strong> Recent commits also introduced <code>_coerce_specs()</code> in <code>common/validators.py</code> to support bare-string field definitions, fixed silent PDF exception swallowing (e.g. <code>US/FINRA-Awards</code> Issue #1827), and added <code>classify_fetch_updates()</code> to distinguish genuine incremental implementations from stubs.</li>
+  </ul>
+
+  <h3>Finding 5 : Reconciling Public Coverage Counters</h3>
+  <p>Evaluating any global legal platform requires distinguishing self-reported marketing counters from verified, complete corpus coverage. On 20 November 2026, inspecting Legal Data Hunter's live web properties reveals three different headline aggregations:</p>
+  <table>
+    <thead><tr><th>Surface Inspected (20 Nov 2026)</th><th>Reported Source Counts</th><th>Reported Document Counts</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Homepage Hero &amp; Coverage Map (<code>legaldatahunter.com</code>)</strong></td><td>3,518 tracked sources (2,194 sources indexed &middot; 1,324 still to hunt &middot; 230+ jurisdictions)</td><td>Headline: <strong>51M legal documents</strong></td></tr>
+      <tr><td><strong>Homepage Category Breakdown (<code>legaldatahunter.com</code>)</strong></td><td>Same homepage view</td><td>44.6M court decisions + 11.4M laws &amp; regulations + 3.7M doctrine &amp; guidance (Category sum: <strong>59.7M</strong>)</td></tr>
+      <tr><td><strong>Live Coverage Dashboard (<code>legaldatahunter.com/coverage</code>)</strong></td><td>3,608 tracked sources (2,321 complete [64.3%] &middot; 1,274 blocked &middot; 13 maintenance &middot; 1,354 listed under Blockers tab)</td><td>Top stats bar: 13,924,498 laws + 66,723,680 cases + 4,539,879 docs (Header sum: <strong>85.19M</strong> alongside 51M sub-banner)</td></tr>
+    </tbody>
+  </table>
+  <p>Whether these divergences stem from asynchronous pipeline counters, overlapping taxonomy tags, or un-deduplicated staging tables, they underscore a core engineering rule: <strong>a tracked or indexed source counter is not equivalent to verified, complete legal coverage.</strong></p>
+
+  <h2>Part IV : The Global Legal-Data Ecosystem &amp; Standards Stack</h2>
+  <p>Six complementary reference initiatives and five formal standards illustrate how different layers of the global legal-data problem have been tackled:</p>
   <div class="card-grid">
     <div class="card">
-      <h4>FRBR &amp; Legislation.gov.uk CLML</h4>
-      <p>Separates the <strong>Legal Work</strong> (the Act) from the <strong>Enacted Expression</strong>, the <strong>Revised Point-in-Time Expression</strong> (by date and territorial extent, e.g. England &amp; Wales vs. Scotland), and the <strong>Manifestation</strong> (XML/HTML/PDF), while surfacing <em>unapplied effects</em>.</p>
+      <h4>1. Legislation.gov.uk (UK National Archives)</h4>
+      <p>The premier reference for point-in-time statutory publishing. Uses an FRBR-derived model separating the <em>Legal Work</em>, <em>Enacted Expression</em>, <em>Revised Point-in-Time Expression</em> (by date and geographical extent), and <em>Manifestation</em> (CLML, AKN, HTML, PDF). Exposes <em>unapplied effects</em> and a paginated Publication Log (20 entries per page), while candidly documenting historical pre-1988/1994 coverage boundaries.</p>
     </div>
     <div class="card">
-      <h4>Akoma Ntoso 3.1 (OASIS Standard, Oct 2026)</h4>
-      <p>Provides the machine-readable document vocabulary across legislative schedules, annexes, and judicial decisions without erasing jurisdiction-specific terminology.</p>
+      <h4>2. OASIS Akoma Ntoso 3.1 (Standard, Oct 2026)</h4>
+      <p>Announced as an OASIS Standard on 13 October 2026 (<em>Akoma Ntoso Version 2.0, Part 2: Specifications, defining AKN 3.1</em>). Expands structured XML containers for schedules, annexes, judicial decisions (<code>witness</code>, <code>court</code>, <code>judgmentSummary</code>), non-Gregorian calendars, and multilingual passages without erasing national drafting conventions.</p>
     </div>
     <div class="card">
-      <h4>ELI &amp; ECLI Identifiers</h4>
-      <p>Persistent URI identification and RDFa/JSON-LD metadata synchronisation for legislation (ELI) and court decisions (<code>ECLI:Country:Court:Year:Number</code>).</p>
+      <h4>3. EUR-Lex, ELI &amp; ECLI</h4>
+      <p><strong>ELI</strong> provides persistent URIs, FRBR-informed metadata (RDFa/JSON-LD), and synchronisation feeds for legislation. <strong>ECLI</strong> (<code>ECLI:Country:Court:Year:Number</code>) standardises judicial decision citations across participating courts, demonstrating that identifier standards still depend on national publisher adoption.</p>
     </div>
     <div class="card">
-      <h4>OASIS LegalRuleML</h4>
-      <p>Moves beyond raw text to represent formal legal norms: the subject, precondition, statutory threshold, obligation/permission, and temporal scope linked to the source provision.</p>
+      <h4>4. WorldLII &amp; AfricanLII</h4>
+      <p>Demonstrate federated legal discovery across independent Legal Information Institutes (BAILII, AustLII, CanLII, SAFLII, Open Law Africa) without forcing nations to surrender custody to a single commercial database. AfricanLII explicitly prohibits unauthorised bulk scraping, provides managed APIs, and flags unverified OCR.</p>
+    </div>
+    <div class="card">
+      <h4>5. CourtListener &amp; Harvard CAP</h4>
+      <p>Free Law Project's <strong>CourtListener</strong> models opinions, dockets, judges, and citation graphs (<em>cites</em>, <em>distinguishes</em>, <em>overrules</em>) across 10M+ opinions. Harvard's <strong>Caselaw Access Project</strong> digitised 40M+ pages into 6.7M+ US cases spanning 360 years (through 2020), illustrating the distinction between a deep historical digitisation archive and a live incremental feed.</p>
+    </div>
+    <div class="card">
+      <h4>6. OASIS LegalRuleML (Standard, Aug 2021)</h4>
+      <p>Approved as an OASIS Standard on 30 August 2021 (<em>LegalRuleML Core Specification v1.0</em>). Moves beyond document markup to model formal legal norms: subjects, preconditions, deontic obligations, permissions, prohibitions, temporal scope, and links back to source statutory provisions.</p>
     </div>
   </div>
 
-  <h2>3. The Hardest Problem: The Four Dimensions of Legal Time</h2>
-  <p>Conventional software stores a flat <code>current_text</code> and <code>last_updated</code> column. In regulated practice (such as UK immigration law across the 2024, 2025, and 2026 Statements of Changes), flat storage produces false results because a single statutory question involves four distinct timelines:</p>
   <table>
-    <thead><tr><th>Temporal Dimension</th><th>Definition</th><th>Why Flat Databases &amp; Standard AI RAG Fail</th></tr></thead>
+    <thead><tr><th>Standard</th><th>Primary Architectural Responsibility</th><th>What It Cannot Establish Alone</th></tr></thead>
     <tbody>
-      <tr><td><strong>1. Legal Validity Time</strong></td><td>The exact window during which a rule or transitional threshold applies to a defined cohort.</td><td>An applicant whose first Skilled Worker CoS was assigned before 4 April 2024 is governed by transitional rules until 2030, not the post-July 2025 £41,700 threshold.</td></tr>
-      <tr><td><strong>2. Legal Event Time</strong></td><td>When the legislative or judicial act occurred (e.g. Royal Assent, HC Statement laid before Parliament, commencement order).</td><td>Provisions within the same Act or Statement of Changes frequently commence on different dates.</td></tr>
-      <tr><td><strong>3. Publication &amp; Consolidation Time</strong></td><td>When the publisher released the update or incorporated it into consolidated text.</td><td>A change may be legally enacted while remaining an <em>unapplied effect</em> in consolidated text; systems must flag unresolved change exposure.</td></tr>
-      <tr><td><strong>4. System-Recorded Time</strong></td><td>When our infrastructure captured, validated, and pinned the specification to a matter.</td><td>Enables forensic reconstruction of both <em>what the law required on Date T</em> and <em>what the firm's system knew on Date T</em>.</td></tr>
+      <tr><td><strong>CLML</strong></td><td>UK-specific statutory markup, point-in-time revisions, and unapplied legislative effects.</td><td>Cross-jurisdictional judicial or civil-law document structures.</td></tr>
+      <tr><td><strong>Akoma Ntoso 3.1</strong></td><td>Interoperable XML structure for legislative, parliamentary, and judicial documents.</td><td>Whether the source publisher was authoritative or the ingestion crawl was complete.</td></tr>
+      <tr><td><strong>ELI / ECLI</strong></td><td>Persistent URI identification and machine-readable metadata for statutes and judgments.</td><td>Whether non-participating courts or historic gazettes are completely indexed.</td></tr>
+      <tr><td><strong>LegalRuleML 1.0</strong></td><td>Formal representation of legal rules, obligations, thresholds, and defeasible logic.</td><td>How a court or regulated practitioner exercises discretionary legal judgement.</td></tr>
     </tbody>
   </table>
 
-  <h2>4. Why This Powers AirCounsel's Contrarian Practice Infrastructure</h2>
-  <blockquote>Most legal software operates on optimistic snapshots: bolt a flat web form onto a billing ledger, mark an email as "Sent", and hope nothing drifts. When revenue or conversion drops 30 days later, a flat database cannot tell you why.</blockquote>
-  <p>By building AirCounsel on top of a temporally pinned specification registry, a frequency-thresholded <strong>Signal Lab</strong> (using exact Clopper-Pearson and Wilson bounds), and a closed-loop causal ledger, UK immigration and regulated practices gain three capabilities unavailable in legacy tools:</p>
+  <h2>Part V : Four-Dimensional Time, Provenance, Licensing &amp; Answer Fidelity</h2>
+  <h3>1. The Four Dimensions of Legal Time</h3>
+  <p>Consider an Act where an amendment is enacted on 1 January 2025, commences on 1 April 2025, and is published in a revised consolidation on 15 April 2025. To answer what the law required on 20 February 2025, infrastructure must model four distinct temporal axes:</p>
   <ul>
-    <li><strong>Pre-Consultation Cohort Precision:</strong> Applicant preparation records (<code>aircounsel.uk/prepare.html</code>) and statutory rule diffs (<code>aircounsel.uk/changes.html</code>) align facts against the exact 2024, 2025, or 2026 statutory cohort before a solicitor's calendar is committed.</li>
-    <li><strong>Kernel-Level AI Containment:</strong> Language models never hold operational credentials. Every evidentiary check and rule-drift alert requires byte-pinned human practitioner attestation.</li>
-    <li><strong>30-Day Causal Attribution:</strong> Because every gate evaluation, denial event, and statutory spec version is hash-chained, Managing Partners can trace financial and operational performance back to the exact rule change or intake bottleneck.</li>
+    <li><strong>Dimension 1 : Legal Validity Time (Valid Time):</strong> The exact window during which a provision or transitional cohort rule legally applies.</li>
+    <li><strong>Dimension 2 : Legal Event Time:</strong> When the underlying legislative or judicial act occurred (Royal Assent, Statement of Changes laid before Parliament, commencement order, repeal).</li>
+    <li><strong>Dimension 3 : Publication &amp; Consolidation Time (Availability Time):</strong> When the authority released the text or consolidated an amendment (tracking <em>unapplied effects</em> prior to consolidation).</li>
+    <li><strong>Dimension 4 : System-Recorded Time (Transaction Time):</strong> When the platform ingested, validated, and cryptographically pinned the specification.</li>
   </ul>
+
+  <h3>2. Provenance &amp; The Computational Licensing Registry</h3>
+  <p>A SHA-256 digest proves that a captured binary has not mutated since acquisition; it does not prove that the source was authoritative or that the operator holds legal rights to index or train AI models on it. Crucially, <strong>publicly readable legal data is not automatically unrestricted for commercial indexing or computational analysis.</strong></p>
+  <p>For example, The National Archives' <strong>Open Justice Licence (v2.0)</strong> for <em>Find Case Law</em> permits reading and quoting judgments, but explicitly excludes <em>computational analysis of the licensed material and compiling a search engine index</em>; re-users must apply for a separate <strong>Transactional / Computational Analysis Licence</strong>. Similarly, AfricanLII restricts unauthorised bulk harvesting. Every ingested record therefore requires both a 10-field provenance envelope and an explicit licensing registry covering retrieval, bulk download, commercial use, computational analysis, search indexing, redistribution, and attribution.</p>
+
+  <h3>3. Reference Integrity vs. Passage &amp; Answer Fidelity</h3>
+  <p>As highlighted in recent engineering discussions (including Dean Hoffman's critique of "Nothing invented" claims), returning a genuine URL to a real case eliminates fabricated case citations, but does not prevent a language model from inventing a quotation, citing a dissenting opinion as the holding, or applying an outdated provision. Trustworthy retrieval separates four verification checks:</p>
+  <table>
+    <thead><tr><th>Verification Tier</th><th>Engineering Question</th><th>Required Evidence Artifact</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Reference Integrity</strong></td><td>Does the cited instrument or judgment exist at an authoritative source?</td><td>Verified URI, publisher identity, ECLI/ELI, and source SHA-256 hash.</td></tr>
+      <tr><td><strong>2. Passage Integrity</strong></td><td>Does the exact section or paragraph contain the quoted words?</td><td>Passage-level evidence object with character offsets and exact verbatim span check.</td></tr>
+      <tr><td><strong>3. Interpretation Integrity</strong></td><td>Does the summary accurately reflect the court's holding rather than a party's submission or dissent?</td><td>Structural section tagging (e.g. AKN 3.1 <code>judgmentBody</code> vs. dissent) and human practitioner review.</td></tr>
+      <tr><td><strong>4. Applicability Integrity</strong></td><td>Was that provision in force for this jurisdiction, territorial extent, and statutory cohort date?</td><td>4D temporal validity query and cohort applicability gate.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Part VI : Unified Reference Architecture &amp; The 9-State Ingestion FSM</h2>
+  <p>Rather than forcing common-law statutes, civil codes, EU directives, and African regional gazettes into a single rigid substantive schema, we propose a <strong>Federated Common Core with Jurisdiction-Specific Extensions</strong> (bridging UK CLML, EU ELI/ECLI/AKN 3.1, and local court identifiers into a typed Temporal Legal Knowledge Graph).</p>
+  <p>At the acquisition boundary, every resource must traverse a strict <strong>9-State Ingestion Finite State Machine</strong>:</p>
+  <table>
+    <thead><tr><th>Ingestion State</th><th>Contractual Requirement</th></tr></thead>
+    <tbody>
+      <tr><td><code>DISCOVERED</code></td><td>Resource URI and native identifier catalogued from feed, sitemap, or gazette index.</td></tr>
+      <tr><td><code>FETCHED</code></td><td>Complete transport response captured; verified free of HTTP 200 WAF/CAPTCHA interstitials.</td></tr>
+      <tr><td><code>PARSED</code></td><td>Content extracted; OCR length/encoding checks verified without silent exception swallowing.</td></tr>
+      <tr><td><code>STRUCTURALLY_VALIDATED</code></td><td>Record passes mandatory schema validation gate (hard write-block on failure).</td></tr>
+      <tr><td><code>SEMANTICALLY_VALIDATED</code></td><td>Jurisdiction, temporal metadata, and required provision identifiers verified.</td></tr>
+      <tr><td><code>RECONCILED</code></td><td>Pagination totals and expected feed inventories matched against source catalogue.</td></tr>
+      <tr><td><code>COMMITTED</code></td><td>Immutable raw snapshot hash, transformed record, and checkpoint atomically persisted.</td></tr>
+      <tr><td><code>INCOMPLETE</code></td><td>Run experienced unresolved coverage gaps or partial page failures; checkpoint frozen.</td></tr>
+      <tr><td><code>QUARANTINED</code></td><td>Failed validation or licensing check; isolated from downstream search and AI retrieval.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <strong>Core Invariant:</strong> An <code>INCOMPLETE</code> or <code>QUARANTINED</code> state must never silently transition to <code>COMMITTED</code> or advance the freshness checkpoint watermark. Furthermore, retrieval must surface an explicit <strong>Unresolved Legal Change Exposure</strong> metric whenever an indexed provision has an unapplied amendment or pending commencement order.
+  </div>
+
+  <h2>Part VII : How This Connects to AirCounsel STRATA &amp; UK Immigration Law</h2>
+  <p>Global legal-data collection and regulated law-firm practice infrastructure are distinct systems, yet they rely on the exact same engineering physics: <strong>a downstream system must never silently convert upstream uncertainty or incomplete data into apparent legal certainty.</strong></p>
+  <p>Rather than boiling the ocean, UK immigration law provides the ideal high-complexity proving ground for this architecture:</p>
+  <ul>
+    <li><strong>Overlapping Primary, Secondary &amp; Sub-Statutory Rules:</strong> The Immigration Act 1971, UK Borders Act 2007, Statutory Instruments, and frequent HC Statements of Changes to the Immigration Rules.</li>
+    <li><strong>Multi-Cohort Temporal Validity:</strong> Skilled Worker and Appendix FM applications require deterministic point-in-time evaluation across pre-4 April 2024 transitional cohorts, post-22 July 2025 salary thresholds, and 2026 rule updates (tracked live in <a href="/changes.html"><code>aircounsel.uk/changes.html</code></a>).</li>
+    <li><strong>Kernel-Level AI Containment &amp; Evidentiary Ledgers:</strong> Inside <a href="/workspace.html">AirCounsel STRATA V5.0</a>, <code>ActorKind.LLM_AGENT</code> is structurally barred at the database kernel from mutating case state or emitting visa eligibility opinions (preserving s.84 Immigration and Asylum Act 1999 and SRA Code 6.2 compliance), while every document and gate decision is byte-pinned into a 30-day causal attribution ledger.</li>
+  </ul>
+
+  <h2>Part VIII : Five-Workstream Research Programme</h2>
+  <table>
+    <thead><tr><th>Workstream</th><th>Technical Deliverable</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Standards Matrix</strong></td><td>Field-by-field specification comparison of OASIS AKN 3.1, UK CLML, ELI, ECLI, and LegalRuleML 1.0, identifying required interoperability extensions.</td></tr>
+      <tr><td><strong>2. Ingestion Contract Audit</strong></td><td>Versioned audit of shared scraper pipelines separating confirmed checkpoint/validation defects, remediated WAF adapters, and runtime freshness verification.</td></tr>
+      <tr><td><strong>3. Comparative Publishing Study</strong></td><td>Empirical comparison of UK (<code>legislation.gov.uk</code> PiT XML), Poland (SAOS API vs. <code>orzeczenia.ms.gov.pl</code> WAF challenges), and Indonesia (<code>ID/BI</code> geo-WAF mitigations).</td></tr>
+      <tr><td><strong>4. Temporal Knowledge Graph</strong></td><td>Canonical entity-relationship schema modelling Legal Work, Expression, Manifestation, Provision, Judgment, Legal Event, and typed temporal edges.</td></tr>
+      <tr><td><strong>5. Verification Benchmark</strong></td><td>Reproducible test suite measuring completeness, provenance lineage, point-in-time reconstruction, passage-level quote fidelity, and unresolved change exposure.</td></tr>
+    </tbody>
+  </table>
 </main>
 </body>
 </html>
